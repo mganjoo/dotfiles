@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+CONFIG_FILENAME="install.conf.json"
+DOTBOT_DIR="dotbot"
+DOTBOT_BIN="bin/dotbot"
+WORKING_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Change to dotfiles directory.
+cd "$WORKING_DIR"
+
+# Initialize dotbot directory.
+git submodule update --init --recursive "$DOTBOT_DIR"
+
+# Bootstrap dotfiles.
+"$WORKING_DIR/$DOTBOT_DIR/$DOTBOT_BIN" -d "$WORKING_DIR" -c "$CONFIG_FILENAME" $@
