@@ -67,5 +67,10 @@ set listchars=tab:▸\ ,trail:·
 set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
 
+" == Additional settings == {{{1
+for fpath in split(globpath('~/.vim/settings', '*.vim'), '\n')
+  exe 'source' fpath
+endfor
+
 " == Epilogue == {{{1
 " vim: foldmethod=marker
