@@ -73,6 +73,12 @@ execute "set background=".s:theme
 set t_Co=256
 silent! colorscheme solarized
 
+" == Enhancements == {{{1
+" Use ag instead of grep, if available
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
 " == Additional settings == {{{1
 for fpath in split(globpath('~/.vim/settings', '*.vim'), '\n')
   exe 'source' fpath
