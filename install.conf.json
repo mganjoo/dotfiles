@@ -5,6 +5,7 @@
     {
         "shell": [
             ["mkdir -p ~/.vim-backup ~/.vim-swap", "Creating vim temporary directories"]
+            ["touch ~/.gitconfig_local", "Creating local .gitconfig override"]
         ]
     },
     {
@@ -12,6 +13,7 @@
             "~/.dotfiles": "",
             "~/.gitconfig": "gitconfig",
             "~/.gitignore_global": "gitignore_global",
+            "~/.agignore": "gitignore_global",
             "~/.vim": "vim",
             "~/.vimrc": "vimrc",
             "~/.gvimrc": "gvimrc",
