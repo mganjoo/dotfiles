@@ -1,0 +1,62 @@
+[color]
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[alias]
+	amend = commit --amend
+	last = diff HEAD^
+	uncommit = reset --soft HEAD^
+	filelog = log -u
+	changes = log --pretty=shortf --name-status
+	shortlog = log --pretty=shortlog
+	simple = log --pretty=simple
+	oneline = log --topo-order --pretty=oneline
+	brief = log --topo-order --pretty=brief
+[format]
+	pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B
+[pretty]
+	shortlog = format:%C(yellow)%h%C(reset) %C(cyan)%cr%C(reset) %cn %Cgreen%s%Creset
+	simple = format: * %s
+	oneline = format:%C(yellow)%h%C(reset) %s%Cgreen(%cr) %C(auto)%d%C(reset)
+	brief = format:%C(yellow)%h%C(reset) %s%n%C(blue)(%ar%C(reset) by %C(cyan)%an)%C(auto)%d%C(reset)%n
+[merge]
+	summary = true
+	verbosity = 1
+	tool = vimdiff
+[apply]
+	whitespace = nowarn
+[branch]
+	autosetupmerge = true
+[push]
+	default = tracking
+[core]
+	autocrlf = false
+	editor = vim
+	quotepath = false
+	excludesfile = ~/.gitignore
+[advice]
+	statusHints = false
+[diff]
+	mnemonicprefix = true
+	tool = vimdiff
+[rerere]
+	enabled = true
+[difftool]
+	prompt = false
+[rebase]
+	autosquash = true
+[mergetool]
+	prompt = false
+	keepBackup = false
+	keepTemporaries = false
+[include]
+	path = ~/.gitconfig_local
+
+# vim: ft=gitconfig
