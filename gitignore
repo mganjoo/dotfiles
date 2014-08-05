@@ -1,0 +1,68 @@
+### Global .gitignore file, placed in ~/ directory.
+
+## OSX
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+## Windows
+Thumbs.db
+Desktop.ini
+
+## Tags
+TAGS
+tags
+
+## cscope
+cscope.out
+cscope.in.out
+cscope.po.out
+
+## Vim
+.*.sw[a-z]
+*.un~
+Session.vim
+
+## SASS
+.sass-cache
+
+## MATLAB
+*.m~
+
+# Python
+*.pyc
+.rope-project
+
+## *.Rdata files
+*.Rdata
+
+## Xcode
+*/build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.xccheckout
+
+## LaTeX build files
+*.aux
+*.out
+*.fdb_latexmk
+*.bbl
+*.bcf
+*.blg
+*.fls
+*.synctex.gz
+*.synctex.gz(busy)
+*.run.xml
