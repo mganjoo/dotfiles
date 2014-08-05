@@ -4,7 +4,9 @@
     },
     {
         "link": {
-            "~/.dotfiles": ""
+            "~/.dotfiles": "",
+            "~/.zsh": "zsh",
+            "~/.zshrc": "zshrc"
         }
     },
     {
