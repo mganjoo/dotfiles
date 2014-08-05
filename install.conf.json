@@ -11,7 +11,7 @@
         "link": {
             "~/.dotfiles": "",
             "~/.gitconfig": "gitconfig",
-            "~/.gitignore": "gitignore",
+            "~/.gitignore_global": "gitignore_global",
             "~/.vim": "vim",
             "~/.vimrc": "vimrc",
             "~/.zsh": "zsh",

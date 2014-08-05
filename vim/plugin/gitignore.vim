@@ -32,12 +32,10 @@ let g:loaded_gitignore_wildignore = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function s:WildignoreFromGitignore(...)
-  let gitignore = (a:0 && !empty(a:1)) ? fnamemodify(a:1, ':p') : fnamemodify(expand('%'), ':p:h') . '/'
-  let gitignore .= '.gitignore'
-  if filereadable(gitignore)
+function s:WildignoreFromGitignorePath(gitignore)
+  if filereadable(a:gitignore)
     let igstring = ''
-    for oline in readfile(gitignore)
+    for oline in readfile(a:gitignore)
       let line = substitute(oline, '\s|\n|\r', '', "g")
       if line =~ '^#' | con | endif
       if line == ''   | con | endif
@@ -50,18 +48,23 @@ function s:WildignoreFromGitignore(...)
   endif
 endfunction
 
+function s:WildignoreFromGitignore(...)
+  let path = (a:0 && !empty(a:1)) ? fnamemodify(a:1, ':p') : fnamemodify(expand('%'), ':p:h') . '/.gitignore'
+  call <SID>WildignoreFromGitignoreFile(path)
+endfunction
+
 noremap <unique> <script> <Plug>WildignoreFromGitignore <SID>WildignoreFromGitignore
 noremap <SID>WildignoreFromGitignore :call <SID>WildignoreFromGitignore()<CR>
 
 command -nargs=? WildignoreFromGitignore :call <SID>WildignoreFromGitignore(<q-args>)
 
 augroup wildignorefromgitignore_fugitive
-    autocmd!
-    autocmd User Fugitive if exists('b:git_dir') | call <SID>WildignoreFromGitignore(fnamemodify(b:git_dir, ':h')) | endif
+  autocmd!
+  autocmd User Fugitive if exists('b:git_dir') | call <SID>WildignoreFromGitignore(fnamemodify(b:git_dir, ':h')) | endif
 augroup END
 
-" Run conversion on ~/ directory once Vim starts up (loads ~/.gitconfig)
-autocmd VimEnter * call <SID>WildignoreFromGitignore("~/")
+" Run conversion on ~/ directory once Vim starts up (loads ~/.gitignore_global)
+autocmd VimEnter * call <SID>WildignoreFromGitignorePath(fnamemodify("~", ":p") . "/.gitignore_global")
 
 let &cpo = s:save_cpo
 

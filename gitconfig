@@ -40,7 +40,7 @@
 	autocrlf = false
 	editor = vim
 	quotepath = false
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore_global
 [advice]
 	statusHints = false
 [diff]

@@ -1,4 +1,4 @@
-### Global .gitignore file, placed in ~/ directory.
+### Global excludes file, placed in ~/ directory.
 
 ## OSX
 .DS_Store
