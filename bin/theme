@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Read theme from ~/.force_theme, if available.
+if [ -e "$HOME/.force_theme" ]; then
+  read theme < $HOME/.force_theme
+fi
+
+if [ "$theme" = "dark" ] || [ "$theme" = "light" ]; then
+  echo "$theme"
+elif [ `date +%H` -ge 7 ] && [ `date +%H` -le 19 ]; then
+  echo "light"
+else
+  echo "dark"
+fi
