@@ -1,44 +1,46 @@
-### Global excludes file, placed in ~/ directory.
-
-## OSX
+# OSX
 .DS_Store
+.LSOverride
 ._*
 .Spotlight-V100
 .Trashes
 
-## Windows
+# Windows
 Thumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 
-## Tags
+# Tags
 TAGS
 tags
-
-## cscope
 cscope.out
 cscope.in.out
 cscope.po.out
 
-## Vim
-.*.sw[a-z]
+# Vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
 *.un~
 Session.vim
+.netrwhist
+*~
 
-## SASS
+# SASS
 .sass-cache
 
-## MATLAB
+# MATLAB
 *.m~
 
 # Python
-*.pyc
+__pycache__/
+*.py[cod]
 .rope-project
 
-## *.Rdata files
-*.Rdata
+# R
+.Rdata
 
-## Xcode
-*/build/*
+# Xcode
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -48,21 +50,19 @@ Session.vim
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
-profile
+*.xccheckout
 *.moved-aside
 DerivedData
-.idea/
-*.hmap
-*.xccheckout
+*.xcuserstate
 
-## LaTeX build files
+# TeX
 *.aux
 *.out
-*.fdb_latexmk
 *.bbl
 *.bcf
 *.blg
 *.fls
+*.fdb_latexmk
 *.synctex.gz
 *.synctex.gz(busy)
 *.run.xml
