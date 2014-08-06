@@ -121,3 +121,6 @@
 [submodule "zsh/external/zsh-syntax-highlighting"]
 	path = zsh/external/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "tmux/tmux-powerline"]
+	path = tmux/tmux-powerline
+	url = https://github.com/erikw/tmux-powerline.git
