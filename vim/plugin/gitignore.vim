@@ -50,7 +50,7 @@ endfunction
 
 function s:WildignoreFromGitignore(...)
   let path = (a:0 && !empty(a:1)) ? fnamemodify(a:1, ':p') : fnamemodify(expand('%'), ':p:h') . '/.gitignore'
-  call <SID>WildignoreFromGitignoreFile(path)
+  call <SID>WildignoreFromGitignorePath(path)
 endfunction
 
 noremap <unique> <script> <Plug>WildignoreFromGitignore <SID>WildignoreFromGitignore
