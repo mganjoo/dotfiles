@@ -56,8 +56,6 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnips"]
 " === neocomplete === {{{1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-" <TAB>: completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " === syntastic === {{{1
 let g:syntastic_python_checkers = [ 'pyflakes' ]
