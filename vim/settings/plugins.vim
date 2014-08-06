@@ -5,17 +5,6 @@ let g:airline_theme = "solarized"
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
 " === ctrlp.vim === {{{1
 let g:ctrlp_max_files = 0            " No file limit
 let g:ctrlp_clear_cache_on_exit = 0  " Don't clear cache on exit
