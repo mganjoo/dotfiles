@@ -51,7 +51,7 @@ setopt HIST_BEEP               # Beep when accessing non-existent history.
 
 # == Colorizing == {{{1
 
-# Colorizing less {{{2
+# Colorize less {{{2
 export LESS_TERMCAP_mb=$'\E[01;31m'     # Begins blinking.
 export LESS_TERMCAP_md=$'\E[01;31m'     # Begins bold.
 export LESS_TERMCAP_me=$'\E[0m'         # Ends mode.
@@ -60,8 +60,11 @@ export LESS_TERMCAP_so=$'\E[00;47;30m'  # Begins standout-mode.
 export LESS_TERMCAP_ue=$'\E[0m'         # Ends underline.
 export LESS_TERMCAP_us=$'\E[01;32m'     # Begins underline.
 
-# Colorizing grep {{{2
+# Colorize grep {{{2
 export GREP_OPTIONS="--color=auto"
+
+# Colorize ls {{{2
+export CLICOLOR=1
 
 # }}}1
 
