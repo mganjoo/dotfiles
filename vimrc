@@ -1,3 +1,5 @@
+" Vim configuration.
+
 " == Prologue == {{{1
 scriptencoding utf-8      " Enable UTF-8 chars in listchars
 set nocompatible          " Disable compatibility mode
@@ -85,4 +87,4 @@ for fpath in split(globpath('~/.vim/settings', '*.vim'), '\n')
 endfor
 
 " == Epilogue == {{{1
-" vim: foldmethod=marker
+" vim: foldmethod=marker:fen

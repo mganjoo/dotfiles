@@ -1,3 +1,5 @@
+" Settings for various plugins.
+
 " === vim-airline === {{{1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -71,4 +73,4 @@ let g:pymode_rope_completion = 0
 " === markdown === {{{1
 let g:vim_markdown_folding_disabled = 1
 
-" vim: fdm=marker
+" vim: fdm=marker:fen
