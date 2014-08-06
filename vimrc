@@ -86,5 +86,5 @@ for fpath in split(globpath('~/.vim/settings', '*.vim'), '\n')
   exe 'source' fpath
 endfor
 
-" == Epilogue == {{{1
+" == Modeline == {{{1
 " vim: foldmethod=marker:fen
