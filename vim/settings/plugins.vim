@@ -40,7 +40,7 @@ let g:delimitMate_expand_space = 1  " Expand spaces inside delimiters
 let g:delimitMate_autoclose = 1     " Auto-close brackets
 
 " === NERDTree === {{{1
-let NERDTreeChDirMode = 3                    " Change on root change
+let g:NERDTreeChDirMode = 3                  " Change on root change
 let g:nerdtree_tabs_open_on_gui_startup = 0  " Don't open NERDTree tabs
 
 " === vim-signify === {{{1
