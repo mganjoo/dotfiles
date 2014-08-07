@@ -20,18 +20,19 @@ setopt BRACE_CCL          # Allow brace character class list expansion.
 
 # ZLE {{{2
 setopt COMBINING_CHARS    # Handle combining characters specially.
+setopt BEEP               # Beep on error in line editor.
 
 # Input/output {{{2
 setopt NO_CLOBBER         # Don't truncate existing files with '>'.
 setopt RC_QUOTES          # Allow '' to represent ' in single-quoted strings.
 
 # Job control {{{2
-setopt LONG_LIST_JOBS  # List jobs in the long format by default.
-setopt AUTO_RESUME     # Attempt to resume existing jobs first.
-setopt NOTIFY          # Report status of background jobs immediately.
-setopt NO_BG_NICE      # Don't run all background jobs at a lower priority.
-setopt NO_HUP          # Don't kill jobs on shell exit.
-setopt NO_CHECK_JOBS   # Don't report on jobs when shell exits.
+setopt LONG_LIST_JOBS     # List jobs in the long format by default.
+setopt AUTO_RESUME        # Attempt to resume existing jobs first.
+setopt NOTIFY             # Report status of background jobs immediately.
+setopt NO_BG_NICE         # Don't run all background jobs at a lower priority.
+setopt NO_HUP             # Don't kill jobs on shell exit.
+setopt NO_CHECK_JOBS      # Don't report on jobs when shell exits.
 
 # History {{{2
 setopt BANG_HIST               # Treat the '!' character specially during expansion.
@@ -80,6 +81,13 @@ SAVEHIST=10000              # Max number of history events to save.
 
 source ${0:h}/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+# }}}1
+
+# == Editor == {{{1
+
+# / and = are not considered part of a word.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # }}}1
 
