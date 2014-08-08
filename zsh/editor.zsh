@@ -64,11 +64,14 @@ prepend-echo() {
 # == Load widgets == {{{1
 
 autoload -Uz edit-command-line
+autoload -Uz url-quote-magic
+
 zle -N edit-command-line
 zle -N expand-dot-to-parent-directory-path
 zle -N expand-or-complete-with-indicator
 zle -N prepend-sudo
 zle -N prepend-echo
+zle -N self-insert url-quote-magic  # Activate url-quote-magic on all entries
 
 # == Key bindings == {{{1
 
