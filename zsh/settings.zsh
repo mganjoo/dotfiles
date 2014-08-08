@@ -77,17 +77,19 @@ SAVEHIST=10000              # Max number of history events to save.
 
 # }}}1
 
-# == Syntax highlighting == {{{1
-
-source ${0:h}/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-
-# }}}1
-
 # == Editor == {{{1
 
 # / and = are not considered part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+# }}}1
+
+# == Plugins == {{{1
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'  # Case insensitive.
 
 # }}}1
 

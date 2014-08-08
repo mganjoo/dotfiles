@@ -125,3 +125,6 @@
 [submodule "tmux/tmux-powerline"]
 	path = tmux/tmux-powerline
 	url = https://github.com/erikw/tmux-powerline.git
+[submodule "zsh/external/zsh-history-substring-search"]
+	path = zsh/external/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git

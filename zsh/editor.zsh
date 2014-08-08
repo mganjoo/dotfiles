@@ -13,8 +13,8 @@ zmodload zsh/terminfo
 
 # == Array of key mappings == {{{1
 
-typeset -A key_code
-key_code=(
+typeset -A keycode
+keycode=(
   'Backspace' "^?"
   'Delete'    "^[[3~"
   'Home'      "$terminfo[khome]"
@@ -76,11 +76,11 @@ bindkey -d  # Reset to default key bindings.
 bindkey -v  # Set to vi mode.
 
 # Motion keys.
-bindkey -M viins "$key_code[Home]" beginning-of-line
-bindkey -M viins "$key_code[End]" end-of-line
+bindkey -M viins "$keycode[Home]" beginning-of-line
+bindkey -M viins "$keycode[End]" end-of-line
 bindkey -M viins '^a' beginning-of-line
 bindkey -M viins '^e' end-of-line
-bindkey -M viins "$key_code[Delete]" delete-char
+bindkey -M viins "$keycode[Delete]" delete-char
 
 # Kill till start of line (don't use annoying vi-equivalent).
 bindkey -M viins '^u' backward-kill-line
@@ -136,11 +136,19 @@ else
   bindkey -M viins '^r' history-incremental-search-backward
 fi
 
-# TODO: add history search from history search plugin
+# History substring search (from zsh-history-substring-search plugin).
+bindkey -M emacs "^p" history-substring-search-up
+bindkey -M emacs "^n" history-substring-search-down
+bindkey -M vicmd "k" history-substring-search-up
+bindkey -M vicmd "j" history-substring-search-down
+for keymap in 'emacs' 'viins'; do
+  bindkey -M "$keymap" "$keycode[Up]" history-substring-search-up
+  bindkey -M "$keymap" "$keycode[Down]" history-substring-search-down
+done
 
 # == Epilogue == {{{1
 
 # Unset the variables used in the file.
-unset key key_code
+unset key keycode keymap
 
 # vim: fdm=marker
