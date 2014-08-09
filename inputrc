@@ -1,0 +1,41 @@
+# == Configuration ==
+
+# Use vi key bindings
+set editing-mode vi
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# List all matches in case multiple possible completions are possible
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Do not autocomplete hidden files unless the pattern begins with a dot
+set match-hidden-files off
+
+# Show all autocomplete results at once
+set page-completions off
+
+# Ask to show items if there are more than 200 matches
+set completion-query-items 200
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# Do smarter completion when cursor is in the middle of the word
+set skip-completed-text on
+
+# Allow UTF-8 input and output
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# == Key bindings ==
+
+# Search for completions using currently typed prefix
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+"\C-n": history-search-forward
+"\C-p": history-search-backward
