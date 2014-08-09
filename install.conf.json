@@ -17,6 +17,7 @@
             "~/.git.scmbrc": "git.scmbrc",
             "~/.scm_breeze": "scm_breeze",
             "~/.agignore": "gitignore_global",
+            "~/.ctags": "ctags",
             "~/.inputrc": "inputrc",
             "~/.editrc": "editrc",
             "~/.pentadactylrc": "pentadactylrc",
