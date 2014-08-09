@@ -77,10 +77,20 @@ SAVEHIST=10000              # Max number of history events to save.
 
 # }}}1
 
-# == Editor == {{{1
+# == Editor and viewers == {{{1
 
 # / and = are not considered part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+export LESS='-F -g -i -M -R -S -w -X -z-4'
+
+# Set the Less input preprocessor.
+if (( $+commands[lesspipe.sh] )); then
+  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+fi
 
 # }}}1
 
