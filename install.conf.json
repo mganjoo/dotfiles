@@ -6,6 +6,7 @@
         "shell": [
             ["mkdir -p ~/.vim-backup ~/.vim-swap", "Creating vim temporary directories"],
             ["touch ~/.gitconfig_local", "Creating local .gitconfig override"]
+            ["touch ~/.pentadactylrc.custom", "Creating local .pentadactylrc override"]
         ]
     },
     {
@@ -14,6 +15,8 @@
             "~/.gitconfig": "gitconfig",
             "~/.gitignore_global": "gitignore_global",
             "~/.agignore": "gitignore_global",
+            "~/.pentadactylrc": "pentadactylrc",
+            "~/.pentadactyl": "pentadactyl",
             "~/.tmux.conf": "tmux.conf",
             "~/.tmux-powerlinerc": "tmux-powerlinerc",
             "~/.tmux": "tmux",
