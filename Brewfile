@@ -32,6 +32,8 @@ install python
 
 # Vim
 install vim --with-lua --override-system-vi
+
+# note: requires Xcode
 install macvim --with-lua
 
 # Diff tools
@@ -61,7 +63,6 @@ cask install alfred --appdir=/Applications
 cask install appcleaner
 cask install bartender
 cask install flux
-cask install growl-fork
 cask install growlnotify
 cask install slate
 cask install textexpander
