@@ -20,9 +20,10 @@ git submodule update --init --recursive
 if [[ $OSTYPE == darwin* ]]; then
 
   # Install Homebrew if not available.
-  [ command -v  brew >/dev/null 2>&1 ] || \
-    { _log_output "Installing Homebrew..."
-      ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" }
+  if ! command -v  brew >/dev/null 2>&1; then
+    _log_output "Installing Homebrew..."
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+  fi
 
   # Install Homebrew bundle.
   _log_output "Installing Homebrew packages..."
