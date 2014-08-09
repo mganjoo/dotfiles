@@ -14,6 +14,8 @@
             "~/.dotfiles": "",
             "~/.gitconfig": "gitconfig",
             "~/.gitignore_global": "gitignore_global",
+            "~/.git.scmbrc": "git.scmbrc",
+            "~/.scm_breeze": "scm_breeze",
             "~/.agignore": "gitignore_global",
             "~/.inputrc": "inputrc",
             "~/.editrc": "editrc",

@@ -5,7 +5,12 @@ done
 
 # == Plugins ==
 
-# Load plugins (at the end of .zshrc). Order matters.
+# Load scm_breeze plugin (exclude 'design' function)
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] \
+  && source "$HOME/.scm_breeze/scm_breeze.sh"
+unset -f design
+
+# Load ZSH plugins (at the end of .zshrc). Order matters.
 local plugins=( \
   'zsh-syntax-highlighting' \
   'zsh-history-substring-search' \
