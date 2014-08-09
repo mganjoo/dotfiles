@@ -6,7 +6,8 @@
         "shell": [
             ["mkdir -p ~/.vim-backup ~/.vim-swap", "Creating vim temporary directories"],
             ["touch ~/.gitconfig_local", "Creating local .gitconfig override"],
-            ["touch ~/.pentadactylrc.custom", "Creating local .pentadactylrc override"]
+            ["touch ~/.pentadactylrc.custom", "Creating local .pentadactylrc override"],
+            ["mkdir -p ~/.hydra.local", "Creating hydra override directory"]
         ]
     },
     {
