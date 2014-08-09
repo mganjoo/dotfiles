@@ -20,8 +20,8 @@ install bash
 install zsh
 install terminal-notifier
 install ~/.dotfiles/brew/Formula/watch-color.rb
-install xclip
 install watchman
+install tree
 
 # Tmux
 install tmux
@@ -33,10 +33,6 @@ install python
 # Vim
 install vim --with-lua --override-system-vi
 install macvim --with-lua
-
-# Utilities
-install tree
-install xclip
 
 # Diff tools
 install colordiff
