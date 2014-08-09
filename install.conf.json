@@ -35,7 +35,8 @@
             "~/.vimrc": "vimrc",
             "~/.gvimrc": "gvimrc",
             "~/.zsh": "zsh",
-            "~/.zshrc": "zshrc"
+            "~/.zshrc": "zshrc",
+            "~/.zshenv": "zshenv"
         }
     }
 ]
