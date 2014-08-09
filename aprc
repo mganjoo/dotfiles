@@ -1,0 +1,26 @@
+AwesomePrint.defaults = {
+  :indent => 2,
+  :sort_keys => true,
+  :color => {
+    :args       => :greenish,
+    :array      => :cyanish,
+    :bigdecimal => :blue,
+    :class      => :yellow,
+    :date       => :greenish,
+    :falseclass => :red,
+    :fixnum     => :blue,
+    :float      => :blue,
+    :hash       => :cyanish,
+    :keyword    => :cyan,
+    :method     => :purpleish,
+    :nilclass   => :red,
+    :string     => :yellowish,
+    :struct     => :cyanish,
+    :symbol     => :cyanish,
+    :time       => :greenish,
+    :trueclass  => :green,
+    :variable   => :cyanish
+  }
+}
+
+# vim: ft=ruby
