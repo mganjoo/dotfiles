@@ -16,6 +16,7 @@
             "~/.gitignore_global": "gitignore_global",
             "~/.git.scmbrc": "git.scmbrc",
             "~/.fzf": "fzf",
+            "~/.haskeline": "haskeline",
             "~/.scm_breeze": "scm_breeze",
             "~/.agignore": "gitignore_global",
             "~/.ctags": "ctags",
