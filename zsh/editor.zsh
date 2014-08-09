@@ -1,7 +1,7 @@
 # == Prologue == {{{1
 
 # Ignore this file on dumb terminals.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ "$TERM" == 'dumb' || ! $- =~ i ]]; then
   return
 fi
 
@@ -25,53 +25,15 @@ keycode=(
   'Right'     "$terminfo[kcuf1]"
 )
 
-# == Custom ZLE widgets == {{{1
-
-# Expand ... to ../..
-expand-dot-to-parent-directory-path() {
-  if [[ $LBUFFER = *.. ]]; then
-    LBUFFER+='/..'
-  else
-    LBUFFER+='.'
-  fi
-}
-
-# Displays an indicator when completing.
-expand-or-complete-with-indicator() {
-  local indicator
-  zstyle -s ':editor:info:completing' format 'indicator'
-  print -Pn "$indicator"
-  zle expand-or-complete
-  zle redisplay
-}
-
-# Inserts 'sudo ' at the beginning of the line.
-prepend-sudo() {
-  if [[ "$BUFFER" != su(do|)\ * ]]; then
-    BUFFER="sudo $BUFFER"
-    (( CURSOR += 5 ))
-  fi
-}
-
-# Inserts 'echo ' at the beginning of the line.
-prepend-echo() {
-  if [[ "$BUFFER" != echo\ * ]]; then
-    BUFFER="echo $BUFFER"
-    (( CURSOR += 5 ))
-  fi
-}
-
 # == Load widgets == {{{1
 
+# Enable command line editing through an external editor.
 autoload -Uz edit-command-line
-autoload -Uz url-quote-magic
-
 zle -N edit-command-line
-zle -N expand-dot-to-parent-directory-path
-zle -N expand-or-complete-with-indicator
-zle -N prepend-sudo
-zle -N prepend-echo
-zle -N self-insert url-quote-magic  # Activate url-quote-magic on all entries
+
+# Activate url-quote-magic on all entries.
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 # == Key bindings == {{{1
 
@@ -129,29 +91,29 @@ bindkey -M vicmd 'u' undo
 bindkey -M vicmd '^r' redo
 
 # History search.
-if (( $+widgets[history-incremental-pattern-search-backward] )); then
-  bindkey -M vicmd '?' history-incremental-pattern-search-backward
-  bindkey -M vicmd '/' history-incremental-pattern-search-forward
-  bindkey -M viins '^r' history-incremental-pattern-search-backward
-else
-  bindkey -M vicmd '?' history-incremental-search-backward
-  bindkey -M vicmd '/' history-incremental-search-forward
-  bindkey -M viins '^r' history-incremental-search-backward
-fi
+bindkey -M vicmd '?' history-incremental-pattern-search-backward
+bindkey -M vicmd '/' history-incremental-pattern-search-forward
+
+# History search using fzf.
+bindkey '^r' fzf-history-widget
+
+# Change into the selected directory.
+bindkey '\ec' fzf-cd-widget
+
+# Paste the selected file path(s) into the command line
+bindkey '^t' fzf-file-widget
 
 # History substring search (from zsh-history-substring-search plugin).
-bindkey -M emacs "^p" history-substring-search-up
-bindkey -M emacs "^n" history-substring-search-down
+bindkey -M viins "^p" history-substring-search-up
+bindkey -M viins "^n" history-substring-search-down
 bindkey -M vicmd "k" history-substring-search-up
 bindkey -M vicmd "j" history-substring-search-down
-for keymap in 'emacs' 'viins'; do
-  bindkey -M "$keymap" "$keycode[Up]" history-substring-search-up
-  bindkey -M "$keymap" "$keycode[Down]" history-substring-search-down
-done
+bindkey -M viins "$keycode[Up]" history-substring-search-up
+bindkey -M viins "$keycode[Down]" history-substring-search-down
 
 # == Epilogue == {{{1
 
 # Unset the variables used in the file.
-unset key keycode keymap
+unset key keycode
 
 # vim: fdm=marker

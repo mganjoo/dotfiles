@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+/usr/bin/ruby --disable-gems $HOME/.fzf/fzf "$@"

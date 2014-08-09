@@ -5,7 +5,7 @@
     {
         "shell": [
             ["mkdir -p ~/.vim-backup ~/.vim-swap", "Creating vim temporary directories"],
-            ["touch ~/.gitconfig_local", "Creating local .gitconfig override"]
+            ["touch ~/.gitconfig_local", "Creating local .gitconfig override"],
             ["touch ~/.pentadactylrc.custom", "Creating local .pentadactylrc override"]
         ]
     },
@@ -15,6 +15,7 @@
             "~/.gitconfig": "gitconfig",
             "~/.gitignore_global": "gitignore_global",
             "~/.git.scmbrc": "git.scmbrc",
+            "~/.fzf": "fzf",
             "~/.scm_breeze": "scm_breeze",
             "~/.agignore": "gitignore_global",
             "~/.ctags": "ctags",

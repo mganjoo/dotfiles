@@ -6,15 +6,17 @@ done
 # == Plugins ==
 
 # Load scm_breeze plugin (exclude 'design' function)
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] \
-  && source "$HOME/.scm_breeze/scm_breeze.sh"
-unset -f design
+if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
+  if [ -s "~/.scm_breeze/scm_breeze.sh" ]; then
+    source "~/.scm_breeze/scm_breeze.sh"
+    unset -f design
+  fi
+fi
 
 # Load ZSH plugins (at the end of .zshrc). Order matters.
-local plugins=( \
-  'zsh-syntax-highlighting' \
-  'zsh-history-substring-search' \
-  )
-for plugin in $plugins; do
-  source ${0:h}/external/$plugin/$plugin.zsh
+for plugin in \
+  "zsh-syntax-highlighting" \
+  "zsh-history-substring-search"
+do
+  source ~/.zsh/external/$plugin/$plugin.zsh
 done
