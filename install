@@ -7,8 +7,28 @@ readonly CONFIG_FILENAME="install.conf.json"
 # Change to dotfiles directory.
 cd "$WORKING_DIR"
 
-# Initialize dotbot directory.
-git submodule update --init --recursive "$DOTBOT_DIRNAME"
+_log_output() {
+  tput bold
+  echo $1
+  tput sgr0
+}
+
+# Initialize submodules.
+_log_output "Installing submodules..."
+git submodule update --init --recursive
+
+if [[ $OSTYPE == darwin* ]]; then
+
+  # Install Homebrew if not available.
+  [ command -v  brew >/dev/null 2>&1 ] || \
+    { _log_output "Installing Homebrew..."
+      ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" }
+
+  # Install Homebrew bundle.
+  _log_output "Installing Homebrew packages..."
+  brew bundle
+
+fi
 
 # Bootstrap dotfiles.
 "$WORKING_DIR/$DOTBOT_DIRNAME/bin/dotbot" -d "$WORKING_DIR" -c "$CONFIG_FILENAME" $@
