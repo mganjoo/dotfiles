@@ -64,7 +64,6 @@ cask install appcleaner
 cask install bartender
 cask install flux
 cask install growlnotify
-cask install slate
 cask install textexpander
 cask install the-unarchiver
 cask install xtrafinder
@@ -75,7 +74,6 @@ cask install iterm2
 
 # Organizer
 cask install fantastical
-cask install clear
 cask install evernote
 cask install skitch
 
