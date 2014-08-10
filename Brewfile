@@ -1,5 +1,8 @@
 ## == Packages ==
 
+# Dotfiles sync tool
+install thoughtbot/formulae/rcm
+
 # Version control
 install git
 install hub
@@ -19,7 +22,7 @@ install readline
 install bash
 install zsh
 install terminal-notifier
-install ~/.dotfiles/brew/Formula/watch-color.rb
+install visionmedia-watch
 install watchman
 install tree
 
@@ -33,7 +36,7 @@ install python
 # Vim
 install vim --with-lua --override-system-vi
 
-# note: requires Xcode
+# Note: requires Xcode
 install macvim --with-lua
 
 # Diff tools
@@ -43,7 +46,7 @@ install wdiff
 # Search
 install peco/peco/peco
 
-# == Taps ==
+## == Taps ==
 
 tap homebrew/versions
 
