@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
+# Print "dark" or "light" based on time of day. This output can be used
+# in other theme scripts (iTerm, vim, tmux etc.)
 
-# Read theme from ~/.force_theme, if available.
+# Sunrise and sunset times (these are completely arbitrary for now)
+local SUNRISE=7
+local SUNSET=19
+
+# Read theme from ~/.force_theme, if available.  Create this file, with
+# contents either "dark" or "light", to override time-of-day based theme.
 if [ -e "$HOME/.force_theme" ]; then
   read theme < $HOME/.force_theme
 fi
 
 if [ "$theme" = "dark" ] || [ "$theme" = "light" ]; then
   echo "$theme"
-elif [ `date +%H` -ge 7 ] && [ `date +%H` -le 19 ]; then
+elif [ `date +%H` -ge $SUNRISE ] && [ `date +%H` -le $SUNSET ]; then
   echo "light"
 else
   echo "dark"
