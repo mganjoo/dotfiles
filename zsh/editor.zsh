@@ -5,9 +5,6 @@ if [[ "$TERM" == 'dumb' || ! $- =~ i ]]; then
   return
 fi
 
-# Disable START/STOP signals (some terminals capture ^S and ^Q).
-stty -ixon
-
 # Load terminfo to get key codes for special keys
 zmodload zsh/terminfo
 
@@ -93,9 +90,7 @@ bindkey -M vicmd '^r' redo
 # History search.
 bindkey -M vicmd '?' history-incremental-pattern-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-forward
-
-# History search using fzf.
-bindkey '^r' fzf-history-widget
+bindkey -M vicmd '^r' history-incremental-pattern-search-backward
 
 # Change into the selected directory.
 bindkey '\ec' fzf-cd-widget

@@ -10,6 +10,12 @@ setopt CDABLE_VARS        # Treat `cd var' as `cd ~var' when var is a variable.
 
 # Completion {{{2
 setopt AUTO_NAME_DIRS     # Automatically create named directories for vars.
+setopt COMPLETE_IN_WORD   # Complete from both ends of a word.
+setopt ALWAYS_TO_END      # Move cursor to the end of a completed word.
+setopt AUTO_MENU          # Show completion menu on a succesive tab press.
+setopt AUTO_LIST          # Automatically list choices on ambiguous completion.
+setopt AUTO_PARAM_SLASH   # If completed parameter is a directory, add a trailing slash.
+setopt NO_MENU_COMPLETE   # Do not autoselect the first completion entry.
 
 # Scripts and functions {{{2
 setopt MULTIOS            # Allow multiple input and output redirections.
@@ -17,6 +23,7 @@ setopt MULTIOS            # Allow multiple input and output redirections.
 # Expansion and globbing {{{2
 setopt EXTENDED_GLOB      # Enable extended glob matching.
 setopt BRACE_CCL          # Allow brace character class list expansion.
+setopt NO_CASE_GLOB       # Make globbing case insensitive.
 
 # ZLE {{{2
 setopt COMBINING_CHARS    # Handle combining characters specially.
@@ -25,6 +32,8 @@ setopt BEEP               # Beep on error in line editor.
 # Input/output {{{2
 setopt NO_CLOBBER         # Don't truncate existing files with '>'.
 setopt RC_QUOTES          # Allow '' to represent ' in single-quoted strings.
+setopt NO_FLOW_CONTROL    # Disable start/stop characters (^s and ^q).
+setopt PATH_DIRS          # Perform path search even on command names with slashes.
 
 # Job control {{{2
 setopt LONG_LIST_JOBS     # List jobs in the long format by default.
