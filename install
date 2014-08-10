@@ -25,11 +25,13 @@ if [[ $OSTYPE == darwin* ]]; then
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   fi
 
-  # Install Homebrew bundle.
+  # Install Homebrew packages.
   _log_output "Installing Homebrew packages..."
+  # TODO: replace by script-based installation
   brew bundle
 
 fi
 
 # Bootstrap dotfiles.
+# TODO: replace by rcm
 "$WORKING_DIR/$DOTBOT_DIRNAME/bin/dotbot" -d "$WORKING_DIR" -c "$CONFIG_FILENAME" $@
