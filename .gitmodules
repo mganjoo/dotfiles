@@ -125,9 +125,9 @@
 [submodule "zsh/external/zsh-history-substring-search"]
 	path = zsh/external/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "scm_breeze"]
-	path = scm_breeze
-	url = git://github.com/ndbroadbent/scm_breeze.git
-[submodule "fzf"]
-	path = fzf
+[submodule "util/fzf"]
+	path = util/fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "util/scm_breeze"]
+	path = util/scm_breeze
+	url = git://github.com/ndbroadbent/scm_breeze.git

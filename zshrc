@@ -7,10 +7,8 @@ done
 
 # Load scm_breeze plugin (exclude 'design' function)
 if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
-  if [ -s "~/.scm_breeze/scm_breeze.sh" ]; then
-    source "~/.scm_breeze/scm_breeze.sh"
-    unset -f design
-  fi
+  source "~/.util/scm_breeze/scm_breeze.sh"
+  unset -f design
 fi
 
 # Load ZSH plugins (at the end of .zshrc). Order matters.

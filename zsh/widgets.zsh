@@ -49,7 +49,7 @@ __fsel() {
   command find * -path '*/\.*' -prune \
     -o -type f -print \
     -o -type d -print \
-    -o -type l -print 2> /dev/null | ~/.dotfiles/bin/fzf -m | while read item; do
+    -o -type l -print 2> /dev/null | ~/.bin/fzf -m | while read item; do
     printf '%q ' "$item"
   done
   echo
@@ -63,7 +63,7 @@ if [ -n "$TMUX_PANE" -a ${FZF_TMUX:-1} -ne 0 -a ${LINES:-40} -gt 15 ]; then
     else
       height="-l $height"
     fi
-    tmux split-window $height "zsh -c 'source ~/.fzf.zsh; tmux send-keys -t $TMUX_PANE \"\$(__fsel)\"'"
+    tmux split-window $height "zsh -c 'tmux send-keys -t $TMUX_PANE \"\$(__fsel)\"'"
   }
 else
   fzf-file-widget() {
@@ -76,14 +76,14 @@ zle -N fzf-file-widget
 # Change directory widget.
 fzf-cd-widget() {
   cd "${$(set -o nonomatch; command find * -path '*/\.*' -prune \
-          -o -type d -print 2> /dev/null | ~/.dotfiles/bin/fzf):-.}"
+          -o -type d -print 2> /dev/null | ~/.bin/fzf):-.}"
   zle reset-prompt
 }
 zle -N fzf-cd-widget
 
 # History widget.
 fzf-history-widget() {
-  LBUFFER=$(fc -l 1 | ~/.dotfiles/bin/fzf +s +m -n..,1,2.. | sed "s/ *[0-9*]* *//")
+  LBUFFER=$(fc -l 1 | ~/.bin/fzf +s +m -n..,1,2.. | sed "s/ *[0-9*]* *//")
   zle redisplay
 }
 zle -N fzf-history-widget
