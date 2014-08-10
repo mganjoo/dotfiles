@@ -12,14 +12,13 @@
     },
     {
         "link": {
-            "~/.dotfiles": "",
             "~/.gitconfig": "gitconfig",
             "~/.gitignore_global": "gitignore_global",
             "~/.git.scmbrc": "git.scmbrc",
             "~/.fzf": "fzf",
             "~/.haskeline": "haskeline",
             "~/.scm_breeze": "scm_breeze",
-            "~/.agignore": "gitignore_global",
+            "~/.agignore": "agignore",
             "~/.aprc": "aprc",
             "~/.pryrc": "pryrc",
             "~/.gemrc": "gemrc",
