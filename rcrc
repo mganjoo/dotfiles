@@ -1,0 +1,5 @@
+DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
+EXCLUDES="Brewfile README.md brew iterm scripts"
+SYMLINK_DIRS="fzf hydra pentadactyl scm_breeze tmux vim zsh"
+
+# vim: ft=sh

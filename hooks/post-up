@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Make vim backup directory
+mkdir -p ~/.vim-backup ~/.vim-swap
+
+# Make empty custom pentadactylrc file, should be overwritten
+touch ~/.pentadactylrc.custom
