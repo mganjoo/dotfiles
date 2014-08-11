@@ -228,7 +228,10 @@ if (( $+commands[curl] )); then
   alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
 fi
 
-# Miscellaneous
+# fasd
+alias v='f -t -e vim -b viminfo'
+
+# == Miscellaneous ==
 
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'

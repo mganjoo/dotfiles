@@ -10,6 +10,7 @@ path=(
 )
 
 manpath=(
+  $HOME/.man
   /usr/local/share/man
   /usr/share/man
   /opt/X11/share/man

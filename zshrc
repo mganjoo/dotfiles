@@ -1,8 +1,8 @@
-# == User customizations ==
-if [ -d $HOME/.zsh.before/ ]; then
-  if [ "$(ls -A $HOME/.zsh.before/)" ]; then
-    for config_file ($HOME/.zsh.before/*.zsh) source $config_file
-  fi
+# == Pre-load user customizations ==
+if [ -d ~/.zsh.before/ ]; then
+  for config_file (~/.zsh.before/*.zsh); do
+    source $config_file
+  done
 fi
 
 # == Modularized configuration ==
@@ -32,18 +32,16 @@ prompt 'mganjoo'
 
 # == Plugins ==
 
-# scm_breeze plugin (exclude 'design' function)
-if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
-  source "$HOME/.util/scm_breeze/scm_breeze.sh"
-  unset -f design
+# virtualenvwrapper
+if (( $+commands[virtualenvwrapper.sh] )); then
+  export WORKON_HOME="$HOME/.virtualenvs"
+  export PROJECT_HOME="$HOME/workspace"
+  VIRTUAL_ENV_DISABLE_PROMPT=1
+  source $commands[virtualenvwrapper.sh]
 fi
 
-# virtualenvwrapper
-if (( $+commands[virtualenvwrapper_lazy.sh] )); then
-  export WORKON_HOME="$HOME/.virtualenvs"
-  VIRTUAL_ENV_DISABLE_PROMPT=1
-  source $commands[virtualenvwrapper_lazy.sh]
-fi
+# fasd
+eval "$(fasd --init auto)"
 
 # zsh-users plugins (order of loading matters)
 for plugin in \
@@ -53,9 +51,9 @@ do
   source ~/.zsh/external/$plugin/$plugin.zsh
 done
 
-# == User customizations ==
-if [ -d $HOME/.zsh.after/ ]; then
-  if [ "$(ls -A $HOME/.zsh.after/)" ]; then
-    for config_file ($HOME/.zsh.after/*.zsh) source $config_file
-  fi
+# == Post-load user customizations ==
+if [ -d ~/.zsh.after/ ]; then
+  for config_file (~/.zsh.after/*.zsh); do
+    source $config_file
+  done
 fi

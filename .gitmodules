@@ -128,9 +128,6 @@
 [submodule "util/fzf"]
 	path = util/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "util/scm_breeze"]
-	path = util/scm_breeze
-	url = git://github.com/ndbroadbent/scm_breeze.git
 [submodule "zsh/external/zsh-completions"]
 	path = zsh/external/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
