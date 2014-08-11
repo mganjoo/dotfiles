@@ -5,14 +5,6 @@ if [ -d $HOME/.zsh.before/ ]; then
   fi
 fi
 
-# == Plugins to laod before main config ==
-
-# scm_breeze plugin (exclude 'design' function)
-if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
-  source "$HOME/.util/scm_breeze/scm_breeze.sh"
-  unset -f design
-fi
-
 # == Modularized configuration ==
 
 # Source large configuration modules.
@@ -38,7 +30,13 @@ autoload -Uz promptinit
 promptinit
 prompt 'mganjoo'
 
-# == Plugins to laod after main config ==
+# == Plugins ==
+
+# scm_breeze plugin (exclude 'design' function)
+if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
+  source "$HOME/.util/scm_breeze/scm_breeze.sh"
+  unset -f design
+fi
 
 # virtualenvwrapper
 if (( $+commands[virtualenvwrapper_lazy.sh] )); then
