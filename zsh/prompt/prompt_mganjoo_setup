@@ -1,12 +1,34 @@
 # Custom prompt defnition.
 
 +vi-git-status() {
+  local ahead behind remote
+  local -a gitstatus
+
+  # Are we on a remote-tracking branch?
+  remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+      --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+
+  if [[ -n ${remote} ]]; then
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
+    (( $ahead )) && hook_com[branch]="${hook_com[branch]} %F{green}+$ahead%f"
+    (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}+$behind%f"
+  fi
+
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2>/dev/null) ]]; then
     hook_com[unstaged]=' %F{red}●%f'
   fi
 }
 
++vi-git-stash() {
+  local -a stashes
+
+  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+    stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
+    hook_com[misc]+=" %F{magenta}(${stashes} stashed)%f"
+  fi
+}
 prompt_mganjoo_precmd() {
   setopt LOCAL_OPTIONS NO_XTRACE NO_KSH_ARRAYS
 
@@ -47,15 +69,16 @@ prompt_mganjoo_setup() {
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr ' %F{green}●%f'
   zstyle ':vcs_info:*' unstagedstr ' %F{yellow}●%f'
-  zstyle ':vcs_info:*' formats ' on %F{green}%b%f%c%u'
-  zstyle ':vcs_info:*' actionformats ' on %F{green}%b%f%c%u (%F{cyan}%a%f)'
-  zstyle ':vcs_info:git*+set-message:*' hooks git-status
+  zstyle ':vcs_info:*' formats ' on %F{blue}%b%f%c%u%m'
+  zstyle ':vcs_info:*' actionformats ' on %F{blue}%b%f%c%u (%F{cyan}%a%f)%m'
+  zstyle ':vcs_info:git*+set-message:*' hooks git-status git-stash
 
   PROMPT='%F{yellow}%m%f${vcs_info_msg_0_}
 %F{cyan}${prompt_pwd}%f ${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
 }
 
 prompt_mganjoo_setup "$@"
+
+# vim: ft=zsh
