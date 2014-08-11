@@ -1,5 +1,9 @@
-# Add zsh-completions to $fpath.
-fpath=("~/.zsh/external/zsh-completions/src" $fpath)
+# Add zsh-completions and local completions to $fpath.
+fpath=(
+  "~/.zsh/completion"
+  "~/.zsh/external/zsh-completions/src"
+  $fpath
+)
 
 # Load the completion system.
 autoload -Uz compinit
