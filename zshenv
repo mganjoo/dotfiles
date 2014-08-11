@@ -16,6 +16,11 @@ manpath=(
   $manpath
 )
 
+# Load any prior path environment customizations.
+if [ -f "$HOME/.zshenv.before" ]; then
+  source $HOME/.zshenv.before
+fi
+
 # Note: additional paths from path_helper (on OS X) are already in path.
 
 # Ensure unique values in path and manpath.
