@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+watch -i 2 "git -c color.status=always --no-pager status -sb $*"
