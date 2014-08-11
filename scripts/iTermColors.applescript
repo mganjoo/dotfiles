@@ -1,6 +1,7 @@
+-- Set theme of all open iTerm windows and tmux sessions.
 if application "iTerm" is running then
 tell application "iTerm"
-  set tint to do shell script "~/.dotfiles/bin/theme"
+  set tint to do shell script "~/.bin/theme"
   try
     repeat with t in terminals
       tell t

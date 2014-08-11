@@ -6,7 +6,7 @@ export TMUX_POWERLINE_DEBUG_MODE_ENABLED="false"
 # Use patched font symbols.
 export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
 # The theme to use.
-export TMUX_POWERLINE_THEME="`~/.dotfiles/bin/theme`-theme"
+export TMUX_POWERLINE_THEME="`~/.bin/theme`-theme"
 # Overlay dirctory to look for themes.
 export TMUX_POWERLINE_DIR_USER_THEMES="~/.tmux/tmux-powerline-themes"
 # Overlay dirctory to look for segments.

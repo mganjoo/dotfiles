@@ -1,7 +1,8 @@
+-- Set theme of currently open iTerm window.
 set activeAppPath to (path to frontmost application as text)
 if "iTerm" is in activeAppPath then
   tell application "iTerm"
-    set tint to do shell script "~/.dotfiles/bin/theme"
+    set tint to do shell script "~/.bin/theme"
     set t to current terminal
     try
       get t

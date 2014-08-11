@@ -2,7 +2,7 @@
 
 path=(
   $HOME/bin
-  $HOME/.dotfiles/bin
+  $HOME/.bin
   /usr/local/bin
   /usr/{bin,sbin}
   /{bin,sbin}
