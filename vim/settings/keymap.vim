@@ -18,7 +18,7 @@ set pastetoggle=<F6>
 
 " == Bindings to source vim files == {{{1
 nnoremap <silent> <Leader>vv :source ~/.vimrc<CR>
-nnoremap <silent> <Leader>va :source ~/.vim/plugin/settings/theme.vim<CR>
+nnoremap <silent> <Leader>va :source ~/.vim/settings/theme.vim<CR>
 
 " == Bindings to show panels == {{{1
 nnoremap <silent> <Leader>u :GundoToggle<CR>

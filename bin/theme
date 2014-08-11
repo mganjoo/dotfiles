@@ -3,8 +3,8 @@
 # in other theme scripts (iTerm, vim, tmux etc.)
 
 # Sunrise and sunset times (these are completely arbitrary for now)
-local SUNRISE=7
-local SUNSET=19
+SUNRISE=7
+SUNSET=19
 
 # Read theme from ~/.force_theme, if available.  Create this file, with
 # contents either "dark" or "light", to override time-of-day based theme.

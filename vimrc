@@ -69,12 +69,6 @@ set listchars=tab:▸\ ,trail:·
 set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
 
-" == Theme == {{{1
-let s:theme = substitute(system("~/.bin/theme"), "\n", "", "")
-execute "set background=".s:theme
-set t_Co=256
-silent! colorscheme solarized
-
 " == Enhancements == {{{1
 " Use ag instead of grep, if available
 if executable("ag")
