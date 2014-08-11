@@ -90,7 +90,7 @@ bindkey -M vicmd '^r' redo
 # History search.
 bindkey -M vicmd '?' history-incremental-pattern-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-forward
-bindkey -M vicmd '^r' history-incremental-pattern-search-backward
+bindkey -M viins '^r' history-incremental-pattern-search-backward
 
 # Change into the selected directory.
 bindkey -M viins '\ec' fzf-cd-widget
