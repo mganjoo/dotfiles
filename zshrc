@@ -1,9 +1,29 @@
+# == User customizations ==
+if [ -d $HOME/.zsh.before/ ]; then
+  if [ "$(ls -A $HOME/.zsh.before/)" ]; then
+    for config_file ($HOME/.zsh.before/*.zsh) source $config_file
+  fi
+fi
+
+# == Plugins to laod before main config ==
+
+# scm_breeze plugin (exclude 'design' function)
+if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
+  source "$HOME/.util/scm_breeze/scm_breeze.sh"
+  unset -f design
+fi
+
 # == Modularized configuration ==
 
 # Source large configuration modules.
 for config_file (~/.zsh/*.zsh); do
   source $config_file
 done
+
+# Load file with sensitive information that shouldn't be checked in
+if [ -e ~/.secrets ]; then
+  source ~/.secrets
+fi
 
 # == Appearance ==
 
@@ -18,17 +38,13 @@ autoload -Uz promptinit
 promptinit
 prompt 'mganjoo'
 
-# == Plugins ==
+# == Plugins to laod after main config ==
 
 # virtualenvwrapper
-if (( $+commands[virtualenvwrapper.sh] )); then
-  source $commands[virtualenvwrapper.sh]
-fi
-
-# scm_breeze plugin (exclude 'design' function)
-if [[ "$TERM" != 'dumb' && $- =~ i ]]; then
-  source "$HOME/.util/scm_breeze/scm_breeze.sh"
-  unset -f design
+if (( $+commands[virtualenvwrapper_lazy.sh] )); then
+  export WORKON_HOME="$HOME/.virtualenvs"
+  VIRTUAL_ENV_DISABLE_PROMPT=1
+  source $commands[virtualenvwrapper_lazy.sh]
 fi
 
 # zsh-users plugins (order of loading matters)
@@ -38,3 +54,10 @@ for plugin in \
 do
   source ~/.zsh/external/$plugin/$plugin.zsh
 done
+
+# == User customizations ==
+if [ -d $HOME/.zsh.after/ ]; then
+  if [ "$(ls -A $HOME/.zsh.after/)" ]; then
+    for config_file ($HOME/.zsh.after/*.zsh) source $config_file
+  fi
+fi

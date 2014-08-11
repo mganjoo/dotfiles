@@ -14,15 +14,24 @@ alias cdb='cd -'
 alias ZZ='exit'
 alias :q='exit'
 
-# Show human friendly numbers and colors
+# Show human friendly numbers.
 alias df='df -h'
-alias ll='ls -alGh'
-alias ls='ls -Gh'
+alias ls='ls -h'
 alias du='du -h -d 2'
+
+# Long form ls with hidden info.
+alias la="${aliases[ll]:-ls -lah} -a"
 
 # show me files matching "ls grep"
 alias lsg='ll | grep'
 alias lsp='ll | peco'
+
+# Being careful on most commands
+alias cp="${aliases[cp]:-cp} -i"
+alias ln="${aliases[ln]:-ln} -i"
+alias mkdir="${aliases[mkdir]:-mkdir} -p"
+alias mv="${aliases[mv]:-mv} -i"
+alias rm="${aliases[rm]:-rm} -i"
 
 # Alias Editing
 alias ae='vi ~/.zsh/aliases.zsh' # alias edit
@@ -217,8 +226,18 @@ alias tkt='tmux kill-session -t'
 # Zmv
 alias zmv="noglob zmv -W"
 
+# File Download
+if (( $+commands[curl] )); then
+  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
+fi
+
+# Miscellaneous
+
+# Serves a directory via HTTP.
+alias http-serve='python -m SimpleHTTPServer'
+
 # List 10 most used commands (or -n <number>)
-alias hist_stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+alias hist-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
 # List Java versions available
 if [[ "$(uname)" == "Darwin" ]]; then

@@ -21,6 +21,10 @@ prompt_mganjoo_precmd() {
 
   # Get VCS information.
   vcs_info
+
+  # Get Python information.
+  python-info
+
 }
 
 prompt_mganjoo_setup() {

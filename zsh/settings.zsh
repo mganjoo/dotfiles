@@ -34,6 +34,7 @@ setopt NO_CLOBBER         # Don't truncate existing files with '>'.
 setopt RC_QUOTES          # Allow '' to represent ' in single-quoted strings.
 setopt NO_FLOW_CONTROL    # Disable start/stop characters (^s and ^q).
 setopt PATH_DIRS          # Perform path search even on command names with slashes.
+setopt CORRECT            # Correct commands.
 
 # Job control {{{2
 setopt LONG_LIST_JOBS     # List jobs in the long format by default.
