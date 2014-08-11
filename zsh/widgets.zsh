@@ -87,3 +87,9 @@ fzf-history-widget() {
   zle redisplay
 }
 zle -N fzf-history-widget
+
+zmodload -i zsh/parameter
+insert-last-command-output() {
+  LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+}
+zle -N insert-last-command-output

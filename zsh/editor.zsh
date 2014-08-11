@@ -93,10 +93,10 @@ bindkey -M vicmd '/' history-incremental-pattern-search-forward
 bindkey -M vicmd '^r' history-incremental-pattern-search-backward
 
 # Change into the selected directory.
-bindkey '\ec' fzf-cd-widget
+bindkey -M viins '\ec' fzf-cd-widget
 
 # Paste the selected file path(s) into the command line
-bindkey '^t' fzf-file-widget
+bindkey -M viins '^t' fzf-file-widget
 
 # History substring search (from zsh-history-substring-search plugin).
 bindkey -M viins "^p" history-substring-search-up
@@ -105,6 +105,9 @@ bindkey -M vicmd "k" history-substring-search-up
 bindkey -M vicmd "j" history-substring-search-down
 bindkey -M viins "$keycode[Up]" history-substring-search-up
 bindkey -M viins "$keycode[Down]" history-substring-search-down
+
+# Output of last command.
+bindkey -M viins "^x^l" insert-last-command-output
 
 # == Epilogue == {{{1
 

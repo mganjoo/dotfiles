@@ -75,6 +75,9 @@ export GREP_OPTIONS="--color=auto"
 
 # Colorize ls {{{2
 export CLICOLOR=1
+if [[ "$OSTYPE" == darwin* ]]; then
+  export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+fi
 
 # }}}1
 
