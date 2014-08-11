@@ -149,7 +149,7 @@ zle -N fzf-cd-widget
 
 # History widget.
 fzf-history-widget() {
-  LBUFFER=$(fc -l 1 | ~/.bin/fzf +s +m -n..,1,2.. | sed "s/ *[0-9*]* *//")
+  LBUFFER=$(fc -l 1 | ~/.bin/fzf +s +m -n..,1,2.. | perl -p -i -e 's/ *[0-9*]* *//; s/\\n/\n/g; s/\\t/\t/g')
   zle redisplay
 }
 zle -N fzf-history-widget
