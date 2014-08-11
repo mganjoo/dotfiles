@@ -22,6 +22,6 @@ git_branch_delete_force_alias="gbX"
 
 # == Shell command wrapping ==
 shell_command_wrapping_enabled="true"
-scmb_wrapped_shell_commands="vim emacs gedit cat rm cp mv ln cd"
+scmb_wrapped_shell_commands=""
 
 # vim: ft=sh

@@ -20,25 +20,22 @@ alias ls='ls -h'
 alias du='du -h -d 2'
 
 # Long form ls with hidden info.
-alias la='${aliases[ll]:-ls -lah} -a'
+alias la="${aliases[ll]:-ls -lah} -a"
 
 # show me files matching "ls grep"
 alias lsg='ll | grep'
 alias lsp='ll | peco'
 
 # Being careful on most commands
-alias cp='${aliases[cp]:-cp} -i'
-alias ln='${aliases[ln]:-ln} -i'
-alias mkdir='${aliases[mkdir]:-mkdir} -p'
-alias mv='${aliases[mv]:-mv} -i'
-alias rm='${aliases[rm]:-rm} -i'
+alias cp="${aliases[cp]:-cp} -i"
+alias ln="${aliases[ln]:-ln} -i"
+alias mkdir="${aliases[mkdir]:-mkdir} -p"
+alias mv="${aliases[mv]:-mv} -i"
+alias rm="${aliases[rm]:-rm} -i"
 
 # Alias Editing
 alias ae='vi ~/.zsh/aliases.zsh' # alias edit
 alias ar='source ~/.zsh/aliases.zsh'  # alias reload
-
-# .zshrc reloading
-alias zr='source ~/.zshrc'
 
 # Git
 alias g='git'
