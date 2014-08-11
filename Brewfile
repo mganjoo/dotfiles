@@ -6,6 +6,7 @@ install thoughtbot/formulae/rcm
 # Version control
 install git
 install hub
+install git-extras
 
 # Programming tools
 install ag
