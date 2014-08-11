@@ -229,7 +229,7 @@ if (( $+commands[curl] )); then
 fi
 
 # fasd
-alias v='f -t -e vim -b viminfo'
+alias v='LANG=c f -t -e vim -b viminfo'
 
 # == Miscellaneous ==
 
