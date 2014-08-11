@@ -22,6 +22,7 @@ My configuration files.
 
         # On Ubuntu
         sudo apt-add-repository ppa:martin-frost/thoughtbot-rcm
+        sudo apt-get update
         sudo apt-get install rcm
 
 5. Install Git submodules for repository:
@@ -42,7 +43,10 @@ My configuration files.
 
 1. Set ZSH as the default shell:
 
+        # On OS X
         chsh -s $(brew --prefix)/bin/zsh
+        # On Ubuntu
+        chsh -s /bin/zsh
 
   Before running this command, add the path to the Homebrew ZSH to
   `/etc/shells`.

@@ -5,6 +5,72 @@ if [[ "$TERM" == 'dumb' || ! $- =~ i ]]; then
   return
 fi
 
+# Set indicators depending on the current editor state.
+function editor-info {
+  unset editor_info
+  typeset -gA editor_info
+
+  if [[ "$KEYMAP" == 'vicmd' ]]; then
+    zstyle -s ':prompt:indicator:keymap:command' format 'REPLY'
+    editor_info[keymap]="$REPLY"
+  else
+    zstyle -s ':prompt:indicator:keymap:insert' format 'REPLY'
+    editor_info[keymap]="$REPLY"
+  fi
+  unset REPLY
+
+  # Cause prompt to be redisplayed using new styles.
+  zle reset-prompt
+  zle -R
+}
+zle -N editor-info
+
+# Insert a call to editor-info in all the basic widgets.
+
+zle-keymap-select() {
+  zle editor-info
+}
+zle -N zle-keymap-select
+
+zmodload zsh/terminfo
+zle-line-init() {
+  echoti smkx
+  zle editor-info
+}
+zle -N zle-line-init
+
+zle-line-finish() {
+  echoti rmkx
+  zle editor-info
+}
+zle -N zle-line-finish
+
+overwrite-mode() {
+  zle .overwrite-mode
+  zle editor-info
+}
+zle -N overwrite-mode
+
+vi-insert() {
+  zle .vi-insert
+  zle editor-info
+}
+zle -N vi-insert
+
+vi-insert-bol() {
+  zle .vi-insert-bol
+  zle editor-info
+}
+zle -N vi-insert-bol
+
+vi-replace() {
+  zle .vi-replace
+  zle editor-info
+}
+zle -N vi-replace
+
+# == Custom widgets ==
+
 # Expand ... to ../..
 expand-dot-to-parent-directory-path() {
   if [[ $LBUFFER = *.. ]]; then

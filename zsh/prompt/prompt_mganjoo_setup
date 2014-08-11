@@ -1,0 +1,35 @@
+# Custom prompt defnition.
+
+prompt_mganjoo_precmd() {
+  setopt LOCAL_OPTIONS NO_XTRACE NO_KSH_ARRAYS
+
+  # Obtain current working directory.
+  local pwd="${PWD/#$HOME/~}"
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    prompt_pwd="$MATCH"
+    unset MATCH
+  else
+    prompt_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+  fi
+}
+
+prompt_mganjoo_setup() {
+  setopt LOCAL_OPTIONS NO_XTRACE NO_KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load information for prompt.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling dynamic information before each command.
+  add-zsh-hook precmd prompt_mganjoo_precmd
+
+  # Set prompt styles.
+  zstyle ':prompt:indicator:keymap:insert' format '%B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
+  zstyle ':prompt:indicator:keymap:command' format '❯❯❯'
+
+  PROMPT='%F{yellow}%m%f
+%F{cyan}${prompt_pwd}%f ${editor_info[keymap]} '
+
+}
+
+prompt_mganjoo_setup "$@"
