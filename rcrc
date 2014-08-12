@@ -1,5 +1,5 @@
 DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
-EXCLUDES="Brewfile README.md"
+EXCLUDES="Brewfile Formula README.md"
 SYMLINK_DIRS="tmux util vim zsh"
 
 # vim: ft=sh
