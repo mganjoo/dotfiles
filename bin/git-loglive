@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-watch -i 2 "git --no-pager log --graph --color \
+watch -ctn 2 "git --no-pager log --graph --color \
   --topo-order --pretty=one --decorate --abbrev-commit $*"
