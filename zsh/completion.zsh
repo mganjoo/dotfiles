@@ -1,7 +1,7 @@
 # Add zsh-completions and local completions to $fpath.
 fpath=(
-  "~/.zsh/completion"
-  "~/.zsh/external/zsh-completions/src"
+  "$HOME/.zsh/completion"
+  "$HOME/.zsh/external/zsh-completions/src"
   $fpath
 )
 
