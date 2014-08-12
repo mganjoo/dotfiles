@@ -23,8 +23,8 @@ install readline
 install bash
 install zsh
 install terminal-notifier
-install visionmedia-watch
-install watchman
+install ~/.dotfiles/Formula/watch-color
+install fswatch
 install tree
 
 # Tmux
