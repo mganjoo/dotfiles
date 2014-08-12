@@ -12,12 +12,12 @@
     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
     (( $ahead )) && hook_com[branch]="${hook_com[branch]} %F{green}+$ahead%f"
-    (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}+$behind%f"
+    (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}-$behind%f"
   fi
 
   # Check for untracked files or updated submodules since vcs_info does not.
   if [[ -n $(git ls-files --other --exclude-standard 2>/dev/null) ]]; then
-    hook_com[unstaged]=' %F{red}●%f'
+    hook_com[unstaged]="${hook_com[unstaged]} %F{red}●%f"
   fi
 }
 
@@ -25,8 +25,7 @@
   local -a stashes
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-    stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
-    hook_com[misc]+=" %F{magenta}(${stashes} stashed)%f"
+    hook_com[misc]+=" %F{magenta}✭%f"
   fi
 }
 prompt_mganjoo_precmd() {
