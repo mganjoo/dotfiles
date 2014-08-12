@@ -5,3 +5,6 @@ mkdir -p ~/.vim-backup ~/.vim-swap
 
 # Make empty custom pentadactylrc file, should be overwritten
 touch ~/.pentadactylrc.custom
+
+# Make empty directory for tmuxifier layouts
+mkdir -p ~/.tmuxifier-layouts

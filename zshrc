@@ -43,6 +43,11 @@ fi
 # fasd
 eval "$(fasd --init auto)"
 
+# tmuxifier
+export PATH="$HOME/.util/tmuxifier/bin:$PATH"
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
+eval "$(tmuxifier init -)"
+
 # zsh-users plugins (order of loading matters)
 for plugin in \
   "zsh-syntax-highlighting" \

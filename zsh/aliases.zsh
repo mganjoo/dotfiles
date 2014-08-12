@@ -220,6 +220,10 @@ alias tat='tmux attach -t'
 alias tk='tmux kill-session'
 alias tkt='tmux kill-session -t'
 
+# Tmuxifier
+alias txs='tmuxifier s'
+alias txes='tmuxifier es'
+
 # Zmv
 alias zmv="noglob zmv -W"
 

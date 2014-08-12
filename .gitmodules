@@ -131,3 +131,6 @@
 [submodule "zsh/external/zsh-completions"]
 	path = zsh/external/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "util/tmuxifier"]
+	path = util/tmuxifier
+	url = https://github.com/jimeh/tmuxifier.git
