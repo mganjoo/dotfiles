@@ -187,7 +187,7 @@ alias gwX='git rm -rf'
 
 # Log
 alias gl='git log --topo-order'
-alias glg='git log --topo-order --graph --pretty=one --abbrev-commit'
+alias glg='git log --topo-order --graph --pretty=one --abbrev-commit --decorate'
 alias gls='git log --topo-order --stat'
 alias gld='git log --topo-order --stat --patch --full-diff'
 alias glo='git oneline'
