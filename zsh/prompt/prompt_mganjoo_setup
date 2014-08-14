@@ -41,7 +41,11 @@ prompt_mganjoo_precmd() {
   fi
 
   # Get VCS information.
-  vcs_info
+  if [[ "$NO_GIT_IN_PROMPT" -ne "1" ]]; then
+    vcs_info
+  else
+    vcs_info_msg_0_=""
+  fi
 
   # Get Python information.
   python-info
