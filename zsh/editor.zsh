@@ -43,6 +43,9 @@ bindkey -M viins "$keycode[End]" end-of-line
 bindkey -M viins '^a' beginning-of-line
 bindkey -M viins '^e' end-of-line
 bindkey -M viins "$keycode[Delete]" delete-char
+bindkey -M viins "$keycode[Backspace]" backward-delete-char
+bindkey -M viins "$keycode[Left]" backward-char
+bindkey -M viins "$keycode[Right]" forward-char
 
 # Kill till start of line (don't use annoying vi-equivalent).
 bindkey -M viins '^u' backward-kill-line
