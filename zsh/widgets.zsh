@@ -120,32 +120,11 @@ __fsel() {
   done
   echo
 }
-if [ -n "$TMUX_PANE" -a ${FZF_TMUX:-1} -ne 0 -a ${LINES:-40} -gt 15 ]; then
-  fzf-file-widget() {
-    local height
-    height=${FZF_TMUX_HEIGHT:-40%}
-    if [[ $height =~ %$ ]]; then
-      height="-p ${height%\%}"
-    else
-      height="-l $height"
-    fi
-    tmux split-window $height "zsh -c 'tmux send-keys -t $TMUX_PANE \"\$(__fsel)\"'"
-  }
-else
-  fzf-file-widget() {
-    LBUFFER="${LBUFFER}$(__fsel)"
-    zle redisplay
-  }
-fi
-zle -N fzf-file-widget
-
-# Change directory widget.
-fzf-cd-widget() {
-  cd "${$(set -o nonomatch; command find * -path '*/\.*' -prune \
-          -o -type d -print 2> /dev/null | ~/.bin/fzf):-.}"
-  zle reset-prompt
+fzf-file-widget() {
+  LBUFFER="${LBUFFER}$(__fsel)"
+  zle redisplay
 }
-zle -N fzf-cd-widget
+zle -N fzf-file-widget
 
 # History widget.
 fzf-history-widget() {

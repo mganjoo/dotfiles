@@ -95,9 +95,6 @@ bindkey -M vicmd '?' history-incremental-pattern-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-forward
 bindkey -M viins '^r' fzf-history-widget
 
-# Change into the selected directory.
-bindkey -M viins '\ec' fzf-cd-widget
-
 # Paste the selected file path(s) into the command line
 bindkey -M viins '^t' fzf-file-widget
 
