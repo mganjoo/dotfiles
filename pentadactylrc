@@ -21,8 +21,8 @@ set findcase=smart
 set! browser.tabs.drawInTitlebar=false
 " Don't show tabs
 set showtabline=never
-" Set font size for hints
-highlight Hint font: bold 13px "Droid Sans Mono", monospace !important; margin: -.2ex; padding: 0 0 0 1px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .9); color: black;
+" Set color scheme
+colorscheme feline
 
 " == Key bindings ==
 
