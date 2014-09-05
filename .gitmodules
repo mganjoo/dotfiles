@@ -134,3 +134,6 @@
 [submodule "util/tmuxifier"]
 	path = util/tmuxifier
 	url = https://github.com/jimeh/tmuxifier.git
+[submodule "vim/bundle/Vim-R-plugin"]
+	path = vim/bundle/Vim-R-plugin
+	url = https://github.com/vim-scripts/Vim-R-plugin.git
