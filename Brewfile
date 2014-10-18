@@ -72,6 +72,7 @@ cask install textexpander
 cask install the-unarchiver
 cask install xtrafinder
 cask install xquartz
+cask install mjolnir
 
 # Developer
 cask install iterm2
