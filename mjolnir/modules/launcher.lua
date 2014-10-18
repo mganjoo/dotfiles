@@ -30,7 +30,7 @@ local function sortedscreens()
   return screens
 end
 
-local function launchandarrangeapps()
+local function launchandarrangeapps(applist)
 
   alert.show("Launching apps...", 2)
   local success = true
@@ -85,16 +85,14 @@ local function launchandarrangeapps()
 
 end
 
-function launcher.init()
-  if applist ~= nil then
-    -- Set up keybindings.
-    fnutils.each(applist, function(e)
-      hotkey.bind(mash, e.key, function() application.launchorfocus(e.app) end)
-    end)
+function launcher.initbindings(applist, mash)
+  -- Set up keybindings.
+  fnutils.each(applist, function(e)
+    hotkey.bind(mash, e.key, function() application.launchorfocus(e.app) end)
+  end)
 
-    -- Set up layout configuration hotkey.
-    hotkey.bind(mash, "x", launchandarrangeapps)
-  end
+  -- Set up layout configuration hotkey.
+  hotkey.bind(mash, "x", function() launchandarrangeapps(applist) end)
 end
 
 return launcher

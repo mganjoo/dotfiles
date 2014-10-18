@@ -4,35 +4,22 @@ local home = os.getenv("HOME")
 -- Load packages.
 local alert       = require("mjolnir.alert")
 local pathtools   = require("shared/pathtools")
-local pathwatcher = require("mjolnir._asm.pathwatcher")
-
--- Watch paths for changes.
-local watchpaths = {
-  "/.mjolnir/",
-  "/.mjolnir.local"
-}
-for _, p in ipairs(watchpaths) do
-  pathwatcher.new(home .. p, mjolnir.reload):start()
-end
+local arrange     = require("modules/arrange")
+local launcher    = require("modules/launcher")
 
 -- Load machine-specific configuration file (with constants etc.).
 pathtools.addtopath(home .. "/.mjolnir.local/?.lua", true)
 configfile = package.searchpath("config", package.path)
-if configfile ~= nil then dofile(configfile) end
+if configfile ~= nil then
+  config = dofile(configfile)
+end
 
--- Configure mash keys.
-mash = {"cmd", "ctrl", "alt"}
-
--- Configure which modules are to be loaded.
-local modules = {
-  "arrange",
-  "launcher"
-}
-for _, m in ipairs(modules) do
-  local name = "modules/" .. m
-  local mod = require(name)
-  mod.init()
+-- Initialize key bindings.
+local mash = {"cmd", "ctrl", "alt"}
+arrange.initbindings(mash)
+if config ~= nil then
+  launcher.initbindings(config.applist, mash)
 end
 
 -- Finish loading.
-alert.show("Mjolnir started.", 2)
+alert.show("Window manager started.", 2)

@@ -92,7 +92,7 @@ local function bottomrightquarter()
   )
 end
 
-function arrange.init()
+function arrange.initbindings(mash)
   hotkey.bind(mash, '1', grid.maximize_window)
   hotkey.bind(mash, '2', lefthalf)
   hotkey.bind(mash, '3', tophalf)
