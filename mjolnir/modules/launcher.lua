@@ -1,15 +1,21 @@
 -- Configure launcher for various applications. --
 
-require "ext.grid.init"
-require "ext.appfinder.init"
-retry = import("util/retry")
-tableutil = import("util/tableutil")
+local application = require("mjolnir.application")
+local grid        = require("mjolnir.bg.grid")
+local appfinder   = require("mjolnir.cmsj.appfinder")
+local fnutils     = require("mjolnir.fnutils")
+local hotkey      = require("mjolnir.hotkey")
+local alert       = require("mjolnir.alert")
+local screen      = require("mjolnir.screen")
+local window      = require("mjolnir.window")
+local retry       = require("shared/retry")
+local tableutil   = require("shared/tableutil")
 
 -- TODO: document the applist table.
 
 local launcher = {}
 
-local FULL_FRAME = { x = 0, y = 0, w = ext.grid.GRIDWIDTH, h = ext.grid.GRIDHEIGHT }
+local FULL_FRAME = { x = 0, y = 0, w = grid.GRIDWIDTH, h = grid.GRIDHEIGHT }
 
 local function errormessage(appname, msg)
   return string.format("%s: %s", appname, msg)
@@ -26,7 +32,7 @@ end
 
 local function launchandarrangeapps()
 
-  hydra.alert "Launching apps..."
+  alert.show("Launching apps...", 2)
   local success = true
   local oldw = window.focusedwindow()
 
@@ -36,7 +42,7 @@ local function launchandarrangeapps()
 
   fnutils.each(applist, function(e)
     application.launchorfocus(e.app)
-    local a = ext.appfinder.app_from_name(e.app)
+    local a = appfinder.app_from_name(e.app)
 
     if not e.fullscreen and e.layout == nil then
       error(errormessage(e.app, "no layout specification provided"))
@@ -50,7 +56,7 @@ local function launchandarrangeapps()
         local winisfull = win:isfullscreen()
         if e.fullscreen then
           if not winisfull then
-            ext.grid.set(win, FULL_FRAME, screens[screenidx])
+            grid.set(win, FULL_FRAME, screens[screenidx])
             win:setfullscreen(true)
           end
           win:setfullscreen(true)
@@ -58,23 +64,23 @@ local function launchandarrangeapps()
           if winisfull then
             win:setfullscreen(false)
           end
-          ext.grid.set(win, e.layout, screens[screenidx])
+          grid.set(win, e.layout, screens[screenidx])
         end
       else
-        hydra.alert(errormessage(e.app, "could not acquire main window"))
+        alert.show(errormessage(e.app, "could not acquire main window"), 2)
         success = false
       end
     else
-      hydra.alert(errormessage(e.app, "could not get app with specified name"))
+      alert.show(errormessage(e.app, "could not get app with specified name"), 2)
       success = false
     end
   end)
   if oldw ~= nil then oldw:focus() end
 
   if success then
-    hydra.alert "Finished launching apps."
+    alert.show("Finished launching apps.", 2)
   else
-    hydra.alert "Some apps didn't load correctly; try again."
+    alert.show("Some apps didn't load correctly; try again.", 2)
   end
 
 end
