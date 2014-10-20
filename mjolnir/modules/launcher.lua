@@ -25,7 +25,7 @@ local function sortedscreens()
   -- Sort screens by left x.
   local screens = screen.allscreens()
   table.sort(screens, function(a, b)
-    return a:frame_including_dock_and_menu().x < b:frame_including_dock_and_menu().x
+    return a:fullframe().x < b:fullframe().x
   end)
   return screens
 end
@@ -35,7 +35,6 @@ local function launchandarrangeapps(applist)
   alert.show("Launching apps...", 2)
   local success = true
   local oldw = window.focusedwindow()
-
   -- Refresh monitor table.
   local screens = sortedscreens()
   local screencount = tableutil.tablesize(screens)
