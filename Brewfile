@@ -54,6 +54,7 @@ tap homebrew/versions
 ## == Casks ==
 
 tap caskroom/cask
+tap caskroom/versions
 install brew-cask
 
 # Essential
