@@ -48,6 +48,11 @@ export PATH="$HOME/.util/tmuxifier/bin:$PATH"
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
 eval "$(tmuxifier init -)"
 
+# run-help
+unalias run-help
+autoload run-help
+HELPDIR=$(brew --prefix)/share/zsh/help
+
 # zsh-users plugins (order of loading matters)
 for plugin in \
   "zsh-syntax-highlighting" \

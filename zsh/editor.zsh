@@ -109,6 +109,9 @@ bindkey -M viins "$keycode[Down]" history-substring-search-down
 # Output of last command.
 bindkey -M viins "^x^l" insert-last-command-output
 
+# run-help
+bindkey -M viins '\eh' run-help
+
 # == Epilogue == {{{1
 
 # Unset the variables used in the file.
