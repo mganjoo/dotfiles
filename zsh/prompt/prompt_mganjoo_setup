@@ -78,7 +78,7 @@ prompt_mganjoo_setup() {
 
   PROMPT='%F{yellow}%m%f${vcs_info_msg_0_}
 %F{cyan}${prompt_pwd}%f ${editor_info[keymap]} '
-  RPROMPT=''
+  RPROMPT='%F{red}%(?..[%?])%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
