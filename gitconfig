@@ -20,7 +20,7 @@
 	oneline = log --topo-order --pretty=oneline
 	brief = log --topo-order --pretty=brief
 [format]
-	pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B
+	pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ad (%ar)%C(reset)%n%+B
 [pretty]
 	shortlog = format:%C(yellow)%h%C(reset) %C(cyan)%cr%C(reset) %cn %Cgreen%s%Creset
 	simple = format: * %s
@@ -30,6 +30,7 @@
 	summary = true
 	verbosity = 1
 	tool = vimdiff
+	conflictstyle = diff3
 [apply]
 	whitespace = nowarn
 [branch]
@@ -56,6 +57,8 @@
 	prompt = false
 	keepBackup = false
 	keepTemporaries = false
+[log]
+	date = local
 [include]
 	path = ~/.gitconfig_local
 
