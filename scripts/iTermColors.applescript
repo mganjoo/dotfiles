@@ -36,7 +36,10 @@ tell application "iTerm"
   end try
 
   # Reload tmux configuration
-  set tmuxscript to "/usr/local/bin/tmux source-file ~/.tmux-colors-" & tint & ".conf || true"
+  set tmuxscript to "~/.dotfiles/bin/tmux-set-theme || true"
   do shell script tmuxscript
+
+  set vimscript to "~/.dotfiles/bin/vim-set-theme || true"
+  do shell script vimscript
 end tell
 end if

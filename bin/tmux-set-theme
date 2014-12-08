@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Set tmux colors based on time of day.
 
-tmux source-file ~/.tmux/tmux-colors-`~/.bin/theme`.conf >/dev/null 2>&1
+/usr/local/bin/tmux source-file ~/.tmux/tmux-colors-`~/.bin/theme`.conf >/dev/null 2>&1
