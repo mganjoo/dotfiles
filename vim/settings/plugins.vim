@@ -8,9 +8,14 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 
 " == ctrlp.vim == {{{1
-let g:ctrlp_max_files = 0            " No file limit
-let g:ctrlp_clear_cache_on_exit = 0  " Don't clear cache on exit
-let g:ctrlp_by_filename = 1          " Default to filename search
+let g:ctrlp_max_files = 0                     " No file limit
+let g:ctrlp_use_caching = 1                   " Use caching
+let g:ctrlp_clear_cache_on_exit = 0           " Don't clear cache on exit
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' " Cache directory
+let g:ctrlp_by_filename = 1                   " Default to filename search
+let g:ctrlp_root_markers = ['.ci', '.git', '.svn', '.hg'] " .ci is useful
+let g:ctrlp_match_func = { "match": "pymatcher#PyMatch" } " Use faster matcher
+let g:ctrlp_lazy_update = 130                 " Allow more responsive typing
 
 " Use ag for searching, if available; otherwise fall back to find
 if executable("ag")
@@ -18,6 +23,7 @@ if executable("ag")
       \ --ignore .git
       \ --ignore .svn
       \ --ignore .hg
+      \ --ignore .pants.d
       \ -g ""'
 else
   let s:search_command = 'find %s -type f'
@@ -30,9 +36,6 @@ let g:ctrlp_user_command = {
     \ },
   \ 'fallback': s:search_command
   \ }
-
-" Use faster matcher
-let g:ctrlp_match_func = { "match": "pymatcher#PyMatch" }
 
 " == delimitMate == {{{1
 let g:delimitMate_expand_cr = 1     " Create line break when pressing enter
@@ -70,6 +73,9 @@ let g:pymode_rope_completion = 0
 
 " == markdown == {{{1
 let g:vim_markdown_folding_disabled = 1
+
+" == tmux-complete.vim == {{{1
+let g:tmuxcomplete#trigger = ''
 
 " == Modeline == {{{1
 " vim: fdm=marker:fen
