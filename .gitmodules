@@ -140,3 +140,6 @@
 [submodule "vim/bundle/ag.vim"]
 	path = vim/bundle/ag.vim
 	url = https://github.com/rking/ag.vim.git
+[submodule "vim/bundle/tmux-complete.vim"]
+	path = vim/bundle/tmux-complete.vim
+	url = https://github.com/wellle/tmux-complete.vim.git
