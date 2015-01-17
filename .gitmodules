@@ -143,3 +143,6 @@
 [submodule "vim/bundle/tmux-complete.vim"]
 	path = vim/bundle/tmux-complete.vim
 	url = https://github.com/wellle/tmux-complete.vim.git
+[submodule "vim/bundle/vimwiki"]
+	path = vim/bundle/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git
