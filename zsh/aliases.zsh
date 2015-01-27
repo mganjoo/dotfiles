@@ -235,6 +235,9 @@ fi
 # fasd
 alias v='LANG=c f -t -e vim -b viminfo'
 
+# zmv
+alias zmv='zmv -W'
+
 # == Miscellaneous ==
 
 # Serves a directory via HTTP.

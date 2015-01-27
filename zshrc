@@ -40,6 +40,9 @@ if (( $+commands[virtualenvwrapper.sh] )); then
   source $commands[virtualenvwrapper.sh]
 fi
 
+# zmv
+autoload -U zmv
+
 # fasd
 eval "$(fasd --init auto)"
 
