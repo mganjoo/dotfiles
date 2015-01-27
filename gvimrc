@@ -1,5 +1,6 @@
 set guioptions-=rL " Remove left and right scrollbars
 set guioptions-=T  " Remove toolbar
+set clipboard=unnamed " Clipboard sync
 
 " Set fonts and platform-specific stuff
 " TODO: streamline installation of these fonts
