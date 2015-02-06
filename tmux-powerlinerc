@@ -26,26 +26,6 @@ export TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS="5"
 export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
 # }
 
-# mailcount.sh {
-# Mailbox type to use.
-export TMUX_POWERLINE_SEG_MAILCOUNT_MAILBOX_TYPE="gmail"
-# Enter your Gmail username here WITH OUT @gmail.com.( OR @domain)
-export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_USERNAME="$GMAIL_USERNAME"
-# Google password. Recommended to use application specific password.
-# Leave this empty to get password from OS X keychain.
-# For OSX users : MAKE SURE that you add a key to the keychain in the format
-# as follows
-# Keychain Item name : http://<value-you-fill-in-server-variable-below>
-# Account name : <username-below>@<server-below>
-# Password : Your password.
-export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_PASSWORD=""
-# Domain name that will complete your email. For normal GMail users it probably
-# is "gmail.com but can be "foo.tld" for Google Apps users.
-export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_SERVER="$GMAIL_SERVER"
-# How often in minutes to check for new mails.
-export TMUX_POWERLINE_SEG_MAILCOUNT_GMAIL_INTERVAL="1"
-# }
-
 # time.sh {
 # date(1) format for the time.
 export TMUX_POWERLINE_SEG_TIME_FORMAT="%H:%M"

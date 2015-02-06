@@ -27,7 +27,6 @@ fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-		"mailcount 9 7" \
 		"battery 0 7" \
 		"date_day 10 7" \
 		"date 10 7 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
