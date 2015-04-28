@@ -149,3 +149,6 @@
 [submodule "vim/bundle/vim-dispatch"]
 	path = vim/bundle/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "vim/bundle/vim-pants-build"]
+	path = vim/bundle/vim-pants-build
+	url = https://github.com/edma2/vim-pants.git
