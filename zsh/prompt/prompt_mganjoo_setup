@@ -28,6 +28,7 @@
     hook_com[misc]+=" %F{magenta}✭%f"
   fi
 }
+
 prompt_mganjoo_precmd() {
   setopt LOCAL_OPTIONS NO_XTRACE NO_KSH_ARRAYS
 
@@ -41,10 +42,10 @@ prompt_mganjoo_precmd() {
   fi
 
   # Get VCS information.
-  if [[ "$NO_GIT_IN_PROMPT" -ne "1" ]]; then
-    vcs_info
-  else
+  if [[ "$VCS_INFO_PROMPT_DISABLE" -eq "1" ]]; then
     vcs_info_msg_0_=""
+  else
+    vcs_info
   fi
 
   # Get Python information.
@@ -69,6 +70,11 @@ prompt_mganjoo_setup() {
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git hg
+
+  for repo in ${VCS_INFO_PROMPT_IGNORED_REPOS[@]}; do
+    zstyle ':vcs_info:*' disable-patterns "$repo(|/*)"
+  done
+
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr ' %F{green}●%f'
   zstyle ':vcs_info:*' unstagedstr ' %F{yellow}●%f'

@@ -48,7 +48,7 @@ eval "$(fasd --init auto)"
 
 # tmuxifier
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
-eval "$(tmuxifier init -)"
+eval "$($HOME/.util/tmuxifier/bin/tmuxifier init -)"
 
 # run-help
 unalias run-help
