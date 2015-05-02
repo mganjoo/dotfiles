@@ -51,6 +51,9 @@ local function launchandarrangeapps(applist)
 
     if a ~= nil then
       local win = retry.getretrywithtimeout(function() return a:mainwindow() end, 5, 0.1)
+      if win == nil then
+        win = window.focusedwindow()
+      end
       if win ~= nil then
         local winisfull = win:isfullscreen()
         if e.fullscreen then
