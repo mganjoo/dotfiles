@@ -1,10 +1,15 @@
 # Custom prompt defnition.
 
-+vi-git-status() {
-  local ahead behind remote
-  local -a gitstatus
+# Additional methods for git status (not covered by vcs_info).
+# Controlled by environment variables:
+# * VCS_INFO_DISABLE: completely disable calls to vcs_info.
+# * VCS_INFO_GIT_LESS_INFO_REPOS: array of repo names to show less vcs_info in
+#   (this is useful in large repos).
 
-  # Are we on a remote-tracking branch?
+# Check for difference from remote tracking branch, if any.
++vi-git-remote-status() {
+  local ahead behind remote
+
   remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
       --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
@@ -14,19 +19,27 @@
     (( $ahead )) && hook_com[branch]="${hook_com[branch]} %F{green}+$ahead%f"
     (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}-$behind%f"
   fi
+}
 
-  # Check for untracked files or updated submodules since vcs_info does not.
+# Check for untracked files or updated submodules.
++vi-git-unstaged-status() {
   if [[ -n $(git ls-files --other --exclude-standard 2>/dev/null) ]]; then
     hook_com[unstaged]="${hook_com[unstaged]} %F{red}●%f"
   fi
 }
 
-+vi-git-stash() {
+# Check for stashed changes.
++vi-git-stash-status() {
   local -a stashes
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     hook_com[misc]+=" %F{magenta}✭%f"
   fi
+}
+
+# Dummy method that sets the misc message to .
++vi-git-dummy-status() {
+  hook_com[misc]+=" ."
 }
 
 prompt_mganjoo_precmd() {
@@ -42,7 +55,7 @@ prompt_mganjoo_precmd() {
   fi
 
   # Get VCS information.
-  if [[ "$VCS_INFO_PROMPT_DISABLE" -eq "1" ]]; then
+  if [[ "$VCS_INFO_DISABLE" -eq "1" ]]; then
     vcs_info_msg_0_=""
   else
     vcs_info
@@ -50,7 +63,6 @@ prompt_mganjoo_precmd() {
 
   # Get Python information.
   python-info
-
 }
 
 prompt_mganjoo_setup() {
@@ -65,22 +77,31 @@ prompt_mganjoo_setup() {
   add-zsh-hook precmd prompt_mganjoo_precmd
 
   # Set prompt style for keymap.
-  zstyle ':prompt:indicator:keymap:insert' format '%B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
+  zstyle ':prompt:indicator:keymap:insert' format \
+    '%B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
   zstyle ':prompt:indicator:keymap:command' format '❯❯❯'
 
   # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git hg
-
-  for repo in ${VCS_INFO_PROMPT_IGNORED_REPOS[@]}; do
-    zstyle ':vcs_info:*' disable-patterns "$repo(|/*)"
-  done
 
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr ' %F{green}●%f'
   zstyle ':vcs_info:*' unstagedstr ' %F{yellow}●%f'
   zstyle ':vcs_info:*' formats ' on %F{blue}%b%f%c%u%m'
   zstyle ':vcs_info:*' actionformats ' on %F{blue}%b%f%c%u (%F{cyan}%a%f)%m'
-  zstyle ':vcs_info:git*+set-message:*' hooks git-status git-stash
+  zstyle ':vcs_info:git*+set-message:*' hooks \
+    git-unstaged-status \
+    git-stash-status \
+    git-remote-status
+
+  for repo in ${VCS_INFO_GIT_LESS_INFO_REPOS[@]}; do
+    # Disable checking for staged, unstaged and untracked files.
+    zstyle ":vcs_info:*:*:$repo" check-for-changes false
+    zstyle ":vcs_info:git*+set-message:*:$repo" hooks \
+      git-dummy-status \
+      git-stash-status \
+      git-remote-status
+  done
 
   PROMPT='%F{yellow}%m%f${vcs_info_msg_0_}
 %F{cyan}${prompt_pwd}%f ${editor_info[keymap]} '
