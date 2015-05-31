@@ -3,6 +3,11 @@
 " == Prologue == {{{1
 scriptencoding utf-8      " Enable UTF-8 chars in listchars
 set nocompatible          " Disable compatibility mode
+
+if filereadable(expand("~/.vimrc.before"))
+  source ~/.vimrc.before
+endif
+
 let mapleader = ' '       " Change leader key
 let maplocalleader = ','  " Change local leader key
 
