@@ -53,7 +53,9 @@ eval "$($HOME/.util/tmuxifier/bin/tmuxifier init -)"
 # run-help
 unalias run-help
 autoload run-help
-HELPDIR=$(brew --prefix)/share/zsh/help
+if command -v brew > /dev/null 2>&1; then
+  HELPDIR=$(brew --prefix)/share/zsh/help
+fi
 
 # zsh-users plugins (order of loading matters)
 for plugin in \
