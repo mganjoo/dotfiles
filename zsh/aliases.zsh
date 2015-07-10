@@ -119,6 +119,7 @@ alias gmC='git merge --no-commit'
 alias gmF='git merge --no-ff'
 alias gma='git merge --abort'
 alias gmt='git mergetool'
+alias gmm='git merge origin/master'
 
 # Push (p)
 alias gp='git push'
