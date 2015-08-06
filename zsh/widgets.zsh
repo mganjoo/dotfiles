@@ -138,3 +138,9 @@ insert-last-command-output() {
   LBUFFER+="$(eval $history[$((HISTCMD-1))])"
 }
 zle -N insert-last-command-output
+
+pb-backward-kill-line() {
+  zle backward-kill-line
+  print -rn $CUTBUFFER | pbcopy
+}
+zle -N pb-backward-kill-line

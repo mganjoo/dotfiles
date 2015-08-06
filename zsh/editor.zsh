@@ -48,7 +48,7 @@ bindkey -M viins "$keycode[Left]" backward-char
 bindkey -M viins "$keycode[Right]" forward-char
 
 # Kill till start of line (don't use annoying vi-equivalent).
-bindkey -M viins '^u' backward-kill-line
+bindkey -M viins '^u' pb-backward-kill-line
 
 # Expand history on space.
 bindkey -M viins ' ' magic-space
