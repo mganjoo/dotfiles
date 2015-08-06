@@ -8,7 +8,7 @@ fi
 # Generalized diff.
 diff() {
   if (( $+commands[colordiff] )); then
-    command diff --unified "$@" | colordiff --difftype diffu
+    command diff --unified "$@" | colordiff
   elif (( $+commands[git] )); then
     git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
   else
