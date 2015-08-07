@@ -152,3 +152,6 @@
 [submodule "vim/bundle/vim-pants-build"]
 	path = vim/bundle/vim-pants-build
 	url = https://github.com/edma2/vim-pants.git
+[submodule "tmux/plugins/copycat"]
+	path = tmux/plugins/copycat
+	url = https://github.com/tmux-plugins/tmux-copycat
