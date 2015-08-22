@@ -1,7 +1,0 @@
-{
-  "Style": {
-    "Selected": ["on_yellow", "white"],
-    "Matched": ["bold", "underline"],
-    "SavedSelection": ["on_green", "black"]
-  }
-}
