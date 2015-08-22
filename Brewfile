@@ -45,7 +45,7 @@ install colordiff
 install wdiff
 
 # Search
-install peco/peco/peco
+install fpp
 
 ## == Taps ==
 
