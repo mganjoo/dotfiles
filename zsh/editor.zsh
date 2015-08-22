@@ -98,6 +98,9 @@ bindkey -M viins '^r' fzf-history-widget
 # Paste the selected file path(s) into the command line
 bindkey -M viins '^t' fzf-file-widget
 
+# Paste the selected branches into the command line
+bindkey -M viins '^b' fzf-branch-widget
+
 # History substring search (from zsh-history-substring-search plugin).
 bindkey -M viins "^p" history-substring-search-up
 bindkey -M viins "^n" history-substring-search-down

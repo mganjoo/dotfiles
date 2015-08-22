@@ -115,10 +115,7 @@ __fsel() {
   command find * -path '*/\.*' -prune \
     -o -type f -print \
     -o -type d -print \
-    -o -type l -print 2> /dev/null | ~/.bin/fzf -m | while read item; do
-    printf '%q ' "$item"
-  done
-  echo
+    -o -type l -print 2> /dev/null | ~/.bin/fzf -m | tr "\n" " "
 }
 fzf-file-widget() {
   LBUFFER="${LBUFFER}$(__fsel)"
@@ -132,6 +129,16 @@ fzf-history-widget() {
   zle redisplay
 }
 zle -N fzf-history-widget
+
+# Branch widget.
+__bsel() {
+  git for-each-ref --format='%(refname:short)' refs/heads/ 2>/dev/null | ~/.bin/fzf -m | tr "\n" " "
+}
+fzf-branch-widget() {
+  LBUFFER="${LBUFFER}$(__bsel)"
+  zle redisplay
+}
+zle -N fzf-branch-widget
 
 zmodload -i zsh/parameter
 insert-last-command-output() {
