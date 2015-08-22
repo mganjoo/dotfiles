@@ -50,6 +50,9 @@ eval "$(fasd --init auto)"
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
 eval "$($HOME/.util/tmuxifier/bin/tmuxifier init -)"
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # run-help
 autoload run-help
 if command -v brew > /dev/null 2>&1; then
