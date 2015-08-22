@@ -51,7 +51,6 @@ export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
 eval "$($HOME/.util/tmuxifier/bin/tmuxifier init -)"
 
 # run-help
-unalias run-help
 autoload run-help
 if command -v brew > /dev/null 2>&1; then
   HELPDIR=$(brew --prefix)/share/zsh/help
