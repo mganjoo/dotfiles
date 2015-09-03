@@ -44,9 +44,6 @@ install macvim --with-lua
 install colordiff
 install wdiff
 
-# Search
-install fpp
-
 ## == Taps ==
 
 tap homebrew/versions
