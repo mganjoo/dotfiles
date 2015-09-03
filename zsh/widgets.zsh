@@ -109,30 +109,9 @@ prepend-echo() {
 }
 zle -N prepend-echo
 
-# File selection widget.
-__fsel() {
-  set -o nonomatch
-  command find * -path '*/\.*' -prune \
-    -o -type f -print \
-    -o -type d -print \
-    -o -type l -print 2> /dev/null | ~/.bin/fzf -m | tr "\n" " "
-}
-fzf-file-widget() {
-  LBUFFER="${LBUFFER}$(__fsel)"
-  zle redisplay
-}
-zle -N fzf-file-widget
-
-# History widget.
-fzf-history-widget() {
-  LBUFFER=$(fc -l 1 | ~/.bin/fzf +s +m -n..,1,2.. | perl -p -i -e 's/ *[0-9*]* *//; s/\\n/\n/g; s/\\t/\t/g')
-  zle redisplay
-}
-zle -N fzf-history-widget
-
 # Branch widget.
 __bsel() {
-  git for-each-ref --format='%(refname:short)' refs/heads/ 2>/dev/null | ~/.bin/fzf -m | tr "\n" " "
+  git for-each-ref --format='%(refname:short)' refs/heads/ 2>/dev/null | fzf -m | tr "\n" " "
 }
 fzf-branch-widget() {
   LBUFFER="${LBUFFER}$(__bsel)"

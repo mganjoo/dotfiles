@@ -51,6 +51,9 @@ export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
 eval "$($HOME/.util/tmuxifier/bin/tmuxifier init -)"
 
 # fzf
+export FZF_TMUX=0
+export FZF_CTRL_T_COMMAND='(git ls-tree -r --name-only HEAD ||
+  find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # run-help

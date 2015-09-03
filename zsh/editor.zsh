@@ -93,10 +93,6 @@ bindkey -M vicmd '^r' redo
 # History search.
 bindkey -M vicmd '?' history-incremental-pattern-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-forward
-bindkey -M viins '^r' fzf-history-widget
-
-# Paste the selected file path(s) into the command line
-bindkey -M viins '^t' fzf-file-widget
 
 # Paste the selected branches into the command line
 bindkey -M viins '^b' fzf-branch-widget
