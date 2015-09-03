@@ -155,3 +155,6 @@
 [submodule "tmux/plugins/copycat"]
 	path = tmux/plugins/copycat
 	url = https://github.com/tmux-plugins/tmux-copycat
+[submodule "vim/bundle/CamelCaseMotion"]
+	path = vim/bundle/CamelCaseMotion
+	url = https://github.com/bkad/CamelCaseMotion.git
