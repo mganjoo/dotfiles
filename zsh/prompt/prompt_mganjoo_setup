@@ -32,7 +32,7 @@
 +vi-git-stash-status() {
   local -a stashes
 
-  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+  if [[ -n $(git rev-parse -q --verify refs/stash) ]]; then
     hook_com[misc]+=" %F{magenta}✭%f"
   fi
 }
