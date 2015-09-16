@@ -71,6 +71,7 @@ cask install the-unarchiver
 cask install xtrafinder
 cask install xquartz
 cask install mjolnir
+cask install shortcat
 
 # Developer
 cask install iterm2
