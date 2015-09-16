@@ -106,4 +106,7 @@ function arrange.initbindings(mash)
   hotkey.bind(mash, '-', center)
 end
 
+arrange.W = grid.GRIDWIDTH
+arrange.H = grid.GRIDHEIGHT
+
 return arrange
