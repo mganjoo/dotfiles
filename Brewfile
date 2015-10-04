@@ -46,12 +46,12 @@ install wdiff
 
 ## == Taps ==
 
-tap homebrew/versions
+tap Homebrew/homebrew-versions
 
 ## == Casks ==
 
-tap caskroom/cask
-tap caskroom/versions
+tap caskroom/homebrew-cask
+tap caskroom/homebrew-versions
 install brew-cask
 
 # Essential
