@@ -20,7 +20,8 @@ fi
 # == Appearance ==
 
 # Colorize iTerm (on OS X).
-if [[ "$OSTYPE" == darwin* ]]; then
+if [[ "$OSTYPE" == darwin* ]] && [[ "$TERM" != "screen" ]] \
+  && [[  -z "$TMUX"  ]]; then
   osascript ~/.scripts/iTermColorsCurrent.applescript >/dev/null 2>&1
 fi
 
