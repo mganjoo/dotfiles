@@ -3,9 +3,12 @@
 " == vim-airline == {{{1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = "solarized"
 let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_theme = "solarized"
+let g:airline#extensions#tabline#formatter = "unique_tail"
 let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#branch#displayed_head_limit = 20
+let g:airline#extensions#branch#format = 1
 
 " == ctrlp.vim == {{{1
 let g:ctrlp_max_files = 0                     " No file limit
@@ -65,8 +68,6 @@ let g:syntastic_python_checkers = [ 'pyflakes' ]
 let g:syntastic_haskell_checkers = [ 'ghc_mod', 'hlint' ]
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
 
-" == vim-bufferline == {{{1
-let g:bufferline_echo = 0  " Don't echo to command line by default
 
 " == pymode == {{{1
 let g:pymode_rope_completion = 0

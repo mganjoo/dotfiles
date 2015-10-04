@@ -40,9 +40,6 @@
 [submodule "vim/bundle/matchit.zip"]
 	path = vim/bundle/matchit.zip
 	url = https://github.com/benjifisher/matchit.zip.git
-[submodule "vim/bundle/vim-bufferline"]
-	path = vim/bundle/vim-bufferline
-	url = https://github.com/bling/vim-bufferline.git
 [submodule "vim/bundle/cscope_maps"]
 	path = vim/bundle/cscope_maps
 	url = https://github.com/chazy/cscope_maps.git
