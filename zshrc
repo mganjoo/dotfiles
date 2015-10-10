@@ -19,17 +19,15 @@ fi
 
 # == Appearance ==
 
-# Colorize iTerm (on OS X).
-if [[ "$OSTYPE" == darwin* ]] && [[ "$TERM" != "screen" ]] \
-  && [[  -z "$TMUX"  ]]; then
-  osascript ~/.scripts/iTermColorsCurrent.applescript >/dev/null 2>&1
-fi
-
 # Prompt.
 fpath=( ~/.zsh/prompt $fpath )
 autoload -Uz promptinit
 promptinit
 prompt 'mganjoo'
+
+# Base 16 Shell configuration
+BASE16_SHELL="$HOME/.colors/base16-tomorrow.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # == Plugins ==
 

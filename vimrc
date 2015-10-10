@@ -74,6 +74,10 @@ set list        " Show auxiliary characters
 set listchars=tab:▸\ ,trail:·
 set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
+set background=dark
+set t_Co=256
+let base16colorspace=256 " Access colors present in 256 colorspace
+silent! colorscheme base16-tomorrow
 
 " == Enhancements == {{{1
 " Use ag instead of grep, if available

@@ -155,3 +155,6 @@
 [submodule "vim/bundle/CamelCaseMotion"]
 	path = vim/bundle/CamelCaseMotion
 	url = https://github.com/bkad/CamelCaseMotion.git
+[submodule "vim/bundle/base16-vim"]
+	path = vim/bundle/base16-vim
+	url = https://github.com/chriskempson/base16-vim.git

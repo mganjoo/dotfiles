@@ -9,7 +9,6 @@ Pry.prompt = [
 ]
 
 # === Listing config ===
-# Better colors (solarized)
 Pry.config.ls.heading_color = :magenta
 Pry.config.ls.public_method_color = :green
 Pry.config.ls.protected_method_color = :yellow
@@ -18,7 +17,7 @@ Pry.config.ls.protected_method_color = :yellow
 # Configure pry theme
 begin
   require 'pry-theme'
-  Pry.config.theme = "solarized"
+  Pry.config.theme = "zenburn"
 rescue LoadError => err
   puts "Could not load pry-theme"
 end

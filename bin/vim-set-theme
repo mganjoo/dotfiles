@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Set vim colors based on time of day.
-
-for executable in /usr/local/bin/vim /usr/local/bin/mvim; do
-  $executable --serverlist | while read SERVER; do
-    $executable --servername $SERVER --remote-send '<ESC>:source ~/.vim/settings/theme.vim<CR>'
-  done
-done
