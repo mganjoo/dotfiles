@@ -1,5 +1,9 @@
 # == Path variables ==
 
+if [ -x /usr/libexec/path_helper ]; then
+  eval `/usr/libexec/path_helper -s`
+fi
+
 path=(
   $HOME/bin
   $HOME/.bin
@@ -13,7 +17,6 @@ manpath=(
   $HOME/.man
   /usr/local/share/man
   /usr/share/man
-  /opt/X11/share/man
   $manpath
 )
 
@@ -21,8 +24,6 @@ manpath=(
 if [ -f "$HOME/.zshenv.before" ]; then
   source $HOME/.zshenv.before
 fi
-
-# Note: additional paths from path_helper (on OS X) are already in path.
 
 # Ensure unique values in path and manpath.
 typeset -gU path manpath
