@@ -11,9 +11,74 @@ endif
 let mapleader = ' '       " Change leader key
 let maplocalleader = ','  " Change local leader key
 
-" == Pathogen == {{{1
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+" == Plugins == {{{1
+call plug#begin("~/.vim/plugged")
+
+" Editor enhancements
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/neocomplete.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'regedarek/ZoomWin'
+Plug 'tomtom/tcomment_vim'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'bkad/CamelCaseMotion'
+Plug 'tpope/vim-unimpaired'
+Plug 'wellle/tmux-complete.vim'
+Plug 'vim-scripts/bufkill.vim'
+
+" Appearance
+Plug 'bling/vim-airline'
+Plug 'chriskempson/base16-vim'
+
+" Shell
+Plug 'tpope/vim-eunuch'
+
+" Search
+Plug 'rking/ag.vim'
+Plug 'benjifisher/matchit.zip'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'kien/ctrlp.vim'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'tpope/vim-abolish'
+
+" Snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" Tags
+Plug 'chazy/cscope_maps'
+
+" Languages
+Plug 'derekwyatt/vim-scala'
+Plug 'plasticboy/vim-markdown'
+Plug 'pangloss/vim-javascript'
+Plug 'solarnz/thrift.vim'
+Plug 'klen/python-mode', { 'branch': 'develop' }
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+
+" Build tools
+Plug 'edma2/vim-pants'
+Plug 'tpope/vim-dispatch'
+Plug 'jpalardy/vim-slime'
+
+" Unused?
+Plug 'godlygeek/tabular'
+
+" Browsing
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'majutsushi/tagbar'
+Plug 'milkypostman/vim-togglelist'
+
+" Source control
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+
+Plug 'thinca/vim-localrc'
+Plug 'tpope/vim-repeat'
+
+call plug#end()
 
 " == Syntax & Indentation == {{{1
 syntax on                  " Syntax highlighting
