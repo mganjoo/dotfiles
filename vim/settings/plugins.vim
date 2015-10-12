@@ -77,5 +77,9 @@ let g:vim_markdown_folding_disabled = 1
 " == tmux-complete.vim == {{{1
 let g:tmuxcomplete#trigger = ''
 
+" == vimtex == {{{1
+let g:vimtex_view_general_viewer = 'displayline'
+let g:vimtex_view_general_options = '@line @pdf @tex'
+"
 " == Modeline == {{{1
 " vim: fdm=marker:fen

@@ -49,13 +49,14 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'chazy/cscope_maps'
 
 " Languages
-Plug 'derekwyatt/vim-scala'
-Plug 'plasticboy/vim-markdown'
-Plug 'pangloss/vim-javascript'
-Plug 'solarnz/thrift.vim'
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'klen/python-mode', { 'branch': 'develop' }
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " Build tools
 Plug 'edma2/vim-pants'
