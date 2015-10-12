@@ -48,7 +48,7 @@ bindkey -M viins "$keycode[Left]" backward-char
 bindkey -M viins "$keycode[Right]" forward-char
 
 # Kill till start of line (don't use annoying vi-equivalent).
-bindkey -M viins '^u' pb-backward-kill-line
+bindkey -M viins '^u' backward-kill-line
 
 # Expand history on space.
 bindkey -M viins ' ' magic-space
@@ -93,6 +93,9 @@ bindkey -M vicmd '^r' redo
 # History search.
 bindkey -M vicmd '?' history-incremental-pattern-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-forward
+
+# Copy line
+bindkey -M vicmd 'Y' pb-yank-whole-line
 
 # Paste the selected branches into the command line
 bindkey -M viins '^b' fzf-branch-widget

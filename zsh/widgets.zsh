@@ -125,8 +125,8 @@ insert-last-command-output() {
 }
 zle -N insert-last-command-output
 
-pb-backward-kill-line() {
-  zle backward-kill-line
+pb-yank-whole-line() {
+  zle vi-yank-whole-line
   print -rn $CUTBUFFER | pbcopy
 }
-zle -N pb-backward-kill-line
+zle -N pb-yank-whole-line
