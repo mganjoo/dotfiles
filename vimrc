@@ -14,31 +14,31 @@ let maplocalleader = ','  " Change local leader key
 " == Plugins == {{{1
 call plug#begin("~/.vim/plugged")
 
-" Editor enhancements
+" Motions and editing enhancements
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/neocomplete.vim'
-Plug 'tommcdo/vim-exchange'
-Plug 'regedarek/ZoomWin'
-Plug 'tomtom/tcomment_vim'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
 Plug 'bkad/CamelCaseMotion'
+Plug 'godlygeek/tabular'
+Plug 'qpkorr/vim-bufkill'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'wellle/tmux-complete.vim'
-Plug 'vim-scripts/bufkill.vim'
 
 " Appearance
-Plug 'bling/vim-airline'
 Plug 'chriskempson/base16-vim'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
 
-" Shell
+" Shell interaction
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-dispatch'
+Plug 'epeli/slimux'
 
-" Search
+" Search and replace
+Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
-Plug 'FelikZ/ctrlp-py-matcher'
-Plug 'kien/ctrlp.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'tpope/vim-abolish'
 
@@ -50,33 +50,30 @@ Plug 'chazy/cscope_maps'
 
 " Languages
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'edma2/vim-pants', { 'for': 'pants' }
+Plug 'klen/python-mode', { 'branch': 'develop', 'for': 'python' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
-Plug 'klen/python-mode', { 'branch': 'develop' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'lervag/vimtex', { 'for': 'tex' }
 
-" Build tools
-Plug 'edma2/vim-pants'
-Plug 'tpope/vim-dispatch'
-Plug 'jpalardy/vim-slime'
-
-" Unused?
-Plug 'godlygeek/tabular'
+" Autocompletion
+Plug 'Shougo/neocomplete.vim'
+Plug 'wellle/tmux-complete.vim'
 
 " Browsing
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
+Plug 'rizzatti/dash.vim'
+Plug 'regedarek/ZoomWin'
 
 " Source control
-Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 
-Plug 'thinca/vim-localrc'
+" Other dependencies
 Plug 'tpope/vim-repeat'
 
 call plug#end()

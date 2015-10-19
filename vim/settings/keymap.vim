@@ -18,10 +18,8 @@ set pastetoggle=<F6>
 
 " == Bindings to source vim files == {{{1
 nnoremap <silent> <Leader>vv :source ~/.vimrc<CR>
-nnoremap <silent> <Leader>va :source ~/.vim/settings/theme.vim<CR>
 
 " == Bindings to show panels == {{{1
-nnoremap <silent> <Leader>u :GundoToggle<CR>
 nnoremap <silent> <Leader>n :NERDTreeTabsToggle<CR>
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
@@ -45,6 +43,13 @@ nnoremap <leader>gd :Gdiff<CR>
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" == Dash == {{{1
+nmap <silent> <leader>d <Plug>DashSearch
+
+" == Slimux == {{{1
+nmap <C-c><C-c> :SlimuxREPLSendLine<CR>
+vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
 
 " == Modeline == {{{1
 " vim: foldmethod=marker
