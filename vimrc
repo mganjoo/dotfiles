@@ -75,6 +75,10 @@ Plug 'tpope/vim-fugitive'
 
 " Other dependencies
 Plug 'tpope/vim-repeat'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
+" Scripting
+Plug 'tpope/vim-scriptease'
 
 call plug#end()
 
