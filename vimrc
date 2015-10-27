@@ -8,7 +8,7 @@ let mapleader = ' '       " Change leader key
 let maplocalleader = ','  " Change local leader key
 
 " == Plugins == {{{1
-call plug#begin("~/.vim/plugged")
+call plug#begin("~/.vim/external")
 
 " Motions and editing enhancements
 Plug 'Raimondi/delimitMate'
