@@ -148,6 +148,10 @@ if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
+" == Filetype-specific settings == {{{1
+au BufRead,BufNewFile *.mesos set filetype=python
+au BufRead,BufNewFile *.aurora set filetype=python
+
 " == Plugin Settings == {{{1
 
 " == vim-airline == {{{2
@@ -219,6 +223,7 @@ let g:syntastic_cpp_compiler_options = '-std=c++0x'
 
 
 " == pymode == {{{2
+let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 
 " == markdown == {{{2
