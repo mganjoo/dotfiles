@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rm -rf $HOME/.fzf.zsh $HOME/.fzf.bash

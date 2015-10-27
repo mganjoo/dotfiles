@@ -8,3 +8,5 @@ mkdir -p ~/.tmuxifier-layouts
 
 # Install plugins
 vim +PlugInstall +qa
+
+$HOME/.external/fzf/install --completion --key-bindings --no-update-rc
