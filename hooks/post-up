@@ -5,3 +5,6 @@ mkdir -p ~/.vim-backup ~/.vim-swap
 
 # Make empty directory for tmuxifier layouts
 mkdir -p ~/.tmuxifier-layouts
+
+# Install plugins
+vim +PlugInstall +qa
