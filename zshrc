@@ -47,7 +47,7 @@ eval "$(fasd --init auto)"
 
 # tmuxifier
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
-eval "$($HOME/.util/tmuxifier/bin/tmuxifier init -)"
+eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
 
 # fzf
 export FZF_TMUX=0
