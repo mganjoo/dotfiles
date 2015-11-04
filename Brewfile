@@ -77,6 +77,7 @@ cask install shortcat
 
 # Developer
 cask install iterm2
+cask install intellij-idea-ce
 
 # Organizer
 cask install fantastical
