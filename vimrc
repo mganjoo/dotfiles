@@ -54,6 +54,7 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'pantsbuild/vim-pants'
 
 " Autocompletion
 Plug 'Shougo/neocomplete.vim'
