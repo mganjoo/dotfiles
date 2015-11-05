@@ -70,8 +70,6 @@ cask install textexpander
 cask install the-unarchiver
 cask install xtrafinder
 cask install xquartz
-# TODO: remove mjolnir when porting to hammerspoon is complete
-cask install mjolnir
 cask install hammerspoon
 cask install shortcat
 

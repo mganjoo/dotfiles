@@ -1,8 +1,88 @@
 -- == Support functions == {{{1
 
+local function errorMessage(appName, message)
+  return string.format("%s: %s", appName, message)
+end
+
 local function adjustFocusedWindowGrid(fn)
   local win = hs.window.focusedWindow()
   hs.grid.adjustWindow(fn, win)
+end
+
+local function sortedScreens()
+  -- Sort screens by left x.
+  local screens = hs.screen.allScreens()
+  table.sort(screens, function(a, b)
+    return a:fullFrame().x < b:fullFrame().x
+  end)
+  return screens
+end
+
+local function retryWithTimeout(fn, maxAttempts, sleepTime)
+  local x = fn()
+  local attempts = 0
+  while x == nil and attempts < maxAttempts do
+    os.execute("sleep " .. tonumber(sleepTime))
+    x = fn()
+    attempts = attempts + 1
+  end
+  return x
+end
+
+local function launchAndArrangeApps(applist)
+
+  hs.alert.show("Launching apps...", 2)
+
+  local success = true
+  local oldw = hs.window.focusedWindow()
+
+  -- Refresh monitor table.
+  local screens = sortedScreens()
+
+  hs.fnutils.each(applist, function(e)
+    hs.application.launchOrFocus(e.app)
+    local a = hs.application(e.app)
+
+    if not e.fullscreen and e.layout == nil then
+      error(errorMessage(e.app, "no layout specification provided"))
+    end
+
+    local screenidx = math.min(#screens, e.screen)
+
+    if a then
+      local win = retryWithTimeout(function()
+        return a:mainWindow()
+      end, 5, 0.1)
+      if not win then win = a:focusedWindow() end
+      if win then
+        local isFullScreen = win:isFullScreen()
+        if e.fullscreen then
+          if not isFullScreen then
+            hs.grid.set(win, { x = 0, y = 0, w = GRID_WIDTH, h = GRID_HEIGHT }, screens[screenidx])
+          end
+          win:setFullScreen(true)
+        else
+          win:setFullScreen(false)
+          hs.grid.set(win, e.layout, screens[screenidx])
+        end
+      else
+        hs.alert.show(errorMessage(e.app, "could not acquire main window"), 2)
+        success = false
+      end
+    else
+      hs.alert.show(errorMessage(e.app, "could not get app with specified name"), 2)
+      success = false
+    end
+  end)
+
+  if oldw then oldw:focus() end
+
+  if success then
+    hs.alert.show("Finished launching apps.", 2)
+  else
+    hs.alert.show("Some apps didn't load correctly; try again.", 2)
+  end
+
 end
 
 -- == Basic settings == {{{1
@@ -132,7 +212,12 @@ if applistFn then
 end
 
 if applist then
-  -- TODO: arrange windows
+  hs.fnutils.each(applist, function(e)
+    hs.hotkey.bind(mash, e.key, function() hs.application.launchOrFocus(e.app) end)
+  end)
+
+  -- Set up layout configuration hotkey.
+  hs.hotkey.bind(mash, "x", function() launchAndArrangeApps(applist) end)
 end
 
 -- == Final == {{{1
