@@ -203,6 +203,10 @@ end)
 
 -- }}}2
 
+-- == Spotify == {{{1
+
+hs.hotkey.bind(mash, "i", hs.spotify.displayCurrentTrack)
+
 -- == Machine-specific application list == {{{1
 
 local applist
