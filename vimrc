@@ -226,6 +226,8 @@ let g:syntastic_cpp_compiler_options = '-std=c++0x'
 " == pymode == {{{2
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
+let g:pymode_run = 1
+let g:pymode_run_bind = '<leader>r'
 
 " == markdown == {{{2
 let g:vim_markdown_folding_disabled = 1
