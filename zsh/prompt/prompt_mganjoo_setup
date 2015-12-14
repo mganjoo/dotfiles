@@ -8,30 +8,24 @@
 
 # Check for difference from remote tracking branch, if any.
 +vi-git-remote-status() {
-  local ahead behind remote
+  local ahead behind
 
-  remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
-      --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
-
-  if [[ -n ${remote} ]]; then
-    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
-    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
-    (( $ahead )) && hook_com[branch]="${hook_com[branch]} %F{green}+$ahead%f"
-    (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}-$behind%f"
-  fi
+  ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
+  behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
+  (( $ahead )) && hook_com[branch]="${hook_com[branch]} %F{green}+$ahead%f"
+  (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}-$behind%f"
 }
 
-# Check for untracked files or updated submodules.
-+vi-git-unstaged-status() {
-  if [[ -n $(git ls-files --other --exclude-standard 2>/dev/null) ]]; then
-    hook_com[unstaged]="${hook_com[unstaged]} %F{red}●%f"
+# Check for untracked files.
++vi-git-untracked-status() {
+  if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == 'true' ]] && \
+    GIT_DISABLE_STATS=1 git status --porcelain | grep '??' &> /dev/null ; then
+      hook_com[unstaged]="${hook_com[unstaged]} %F{red}●%f"
   fi
 }
 
 # Check for stashed changes.
 +vi-git-stash-status() {
-  local -a stashes
-
   if [[ -n $(git rev-parse -q --verify refs/stash) ]]; then
     hook_com[misc]+=" %F{magenta}✭%f"
   fi
@@ -90,7 +84,7 @@ prompt_mganjoo_setup() {
   zstyle ':vcs_info:*' formats ' on %F{blue}%b%f%c%u%m'
   zstyle ':vcs_info:*' actionformats ' on %F{blue}%b%f%c%u (%F{cyan}%a%f)%m'
   zstyle ':vcs_info:git*+set-message:*' hooks \
-    git-unstaged-status \
+    git-untracked-status \
     git-stash-status \
     git-remote-status
 
