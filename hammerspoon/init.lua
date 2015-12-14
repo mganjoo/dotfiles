@@ -89,6 +89,9 @@ end
 
 local mash = {"cmd", "ctrl", "alt"}
 
+-- == Useful hotkeys == {{{1
+hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
+
 -- == Grid == {{{1
 
 -- Set grid dimensions
