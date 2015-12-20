@@ -60,8 +60,6 @@ cask 'flux'
 cask 'growlnotify'
 cask 'textexpander'
 cask 'the-unarchiver'
-cask 'xtrafinder'
-cask 'xquartz'
 cask 'hammerspoon'
 cask 'shortcat'
 
@@ -70,6 +68,7 @@ cask 'iterm2'
 cask 'intellij-idea-ce'
 cask 'ghc'
 cask 'stack'
+cask 'pandoc'
 
 # Organizer
 cask 'fantastical'
