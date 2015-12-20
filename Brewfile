@@ -1,94 +1,87 @@
 ## == Packages ==
 
+cask_args appdir: 'Applications'
+tap 'caskroom/cask'
+tap 'caskroom/versions'
+tap 'homebrew/versions'
+
 # Dotfiles sync tool
-install thoughtbot/formulae/rcm
+brew 'thoughtbot/formulae/rcm'
 
 # Version control
-install git
-install hub
-install git-extras
+brew 'git'
+brew 'git-extras'
 
 # Programming tools
-install ag
-install ctags
-install cscope
-install homebrew/dupes/grep --default-names
-install lesspipe --syntax-highlighting
-install ant
-install markdown
-install ssh-copy-id
+brew 'ag'
+brew 'ctags'
+brew 'cscope'
+brew 'homebrew/dupes/grep', args: ['default-names']
+brew 'lesspipe', args: ['syntax-highlighting']
+brew 'markdown'
+brew 'ssh-copy-id'
 
 # Terminal
-install readline
-install bash
-install zsh
-install terminal-notifier
-install ~/.dotfiles/Formula/watch-color
-install fswatch
-install tree
+brew 'readline'
+brew 'bash'
+brew 'zsh'
+brew 'terminal-notifier'
+brew '~/.dotfiles/Formula/watch-color'
+brew 'fswatch'
+brew 'tree'
 
 # Tmux
-install tmux
-install reattach-to-user-namespace
+brew 'tmux'
+brew 'reattach-to-user-namespace'
 
 # Python
-install python
+brew 'python'
 
 # Vim
-install vim --with-lua --override-system-vi
+brew 'vim', args: ['with-lua', 'override-system-vi']
 
 # Note: requires Xcode
-install macvim --with-lua
+brew 'macvim', args: ['with-lua']
 
 # Diff tools
-install colordiff
-install wdiff
-
-## == Taps ==
-
-tap homebrew/versions
+brew 'colordiff'
+brew 'wdiff'
 
 ## == Casks ==
 
-tap caskroom/cask
-tap caskroom/versions
-install brew-cask
-
 # Essential
-cask install firefox
-
-# Prerequisites
-cask install silverlight
+cask 'google-chrome', args: { appdir: '/Applications' }
 
 # Mac Utilities
-cask install alfred --appdir=/Applications
-cask install appcleaner
-cask install bartender
-cask install flux
-cask install growlnotify
-cask install textexpander
-cask install the-unarchiver
-cask install xtrafinder
-cask install xquartz
-cask install hammerspoon
-cask install shortcat
+cask 'alfred', args: { appdir: '/Applications' }
+cask 'appcleaner'
+cask 'bartender'
+cask 'flux'
+cask 'growlnotify'
+cask 'textexpander'
+cask 'the-unarchiver'
+cask 'xtrafinder'
+cask 'xquartz'
+cask 'hammerspoon'
+cask 'shortcat'
 
 # Developer
-cask install iterm2
-cask install intellij-idea-ce
+cask 'iterm2'
+cask 'intellij-idea-ce'
+cask 'ghc'
+cask 'stack'
 
 # Organizer
-cask install fantastical
-cask install evernote
-cask install skitch
+cask 'fantastical'
+cask 'evernote'
+cask 'skitch'
 
 # Sharing
-cask install dropbox
+cask 'dropbox'
 
 # Social
-cask install skype
-cask install colloquy
+cask 'skype'
 
 # Media
-cask install spotify
-cask install vlc
+cask 'spotify'
+cask 'vlc'
