@@ -1,6 +1,6 @@
 ## == Packages ==
 
-cask_args appdir: 'Applications'
+cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'homebrew/versions'
