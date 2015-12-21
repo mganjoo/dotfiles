@@ -13,6 +13,7 @@ brew 'git'
 brew 'git-extras'
 
 # Programming tools
+brew 'vim', args: ['with-lua', 'override-system-vi']
 brew 'ag'
 brew 'ctags'
 brew 'cscope'
@@ -25,6 +26,7 @@ brew 'ssh-copy-id'
 brew 'readline'
 brew 'bash'
 brew 'zsh'
+brew 'zsh-completions'
 brew 'terminal-notifier'
 brew 'fswatch'
 brew 'tree'
@@ -33,11 +35,9 @@ brew 'tree'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
 
-# Python
+# Languages
 brew 'python'
-
-# Vim
-brew 'vim', args: ['with-lua', 'override-system-vi']
+brew 'python3'
 
 # Note: requires Xcode
 brew 'macvim', args: ['with-lua']
@@ -64,13 +64,18 @@ cask 'hammerspoon'
 cask 'shortcat'
 
 # Developer
+cask 'r'
+cask 'rstudio'
 cask 'iterm2'
 cask 'intellij-idea-ce'
 
 # Organizer
+cask 'omnifocus'
 cask 'fantastical'
 cask 'evernote'
 cask 'skitch'
+cask 'ynab'
+cask 'vitamin-r'
 
 # Media
 cask 'spotify'
@@ -86,3 +91,6 @@ cask 'pandoc'
 
 # Java
 cask 'java' unless system '/usr/libexec/java_home --failfast'
+
+# TeX
+cask 'mactex'
