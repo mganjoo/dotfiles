@@ -80,7 +80,7 @@ cask 'vlc'
 cask 'skype'
 
 # Haskell
-cask 'ghc'
+cask 'ghc', args: { appdir: '/Applications' }
 cask 'stack'
 cask 'pandoc'
 

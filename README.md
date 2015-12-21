@@ -13,29 +13,22 @@ My configuration files.
 
 3. Install Homebrew (on Mac OS X):
 
-        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-4. Install rcm:
-
-        # On OS X, just install all the packages
-        brew bundle ~/.dotfiles/Brewfile
-
-        # On Ubuntu
-        sudo apt-add-repository ppa:martin-frost/thoughtbot-rcm
-        sudo apt-get update
-        sudo apt-get install rcm
-
-5. Install Git submodules for repository:
-
-        git submodule update --init --recursive
-
-## Installation
-
-1. Clone the repository into the home directory:
+4. Clone the repository into the home directory:
 
         git clone git://github.com/mganjoo/dotfiles.git ~/.dotfiles
 
-2. Install the dotfiles (which also runs the associated hooks):
+5. Install Homebrew packages:
+
+	cd ~/.dotfiles
+        brew bundle
+
+6. Install Git submodules for repository:
+
+        git submodule update --init --recursive
+
+7. Install the dotfiles (which also runs the associated hooks):
 
         RCRC=~/.dotfiles/rcrc rcup
 
@@ -51,3 +44,7 @@ My configuration files.
   Before running this command, add the path to the Homebrew ZSH to
   `/etc/shells`.
 
+# Other install steps (can be automated later):
+
+1. Change Caps Lock key to act as Control key
+2. Install licenses for various brewed casks
