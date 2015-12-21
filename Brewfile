@@ -26,7 +26,6 @@ brew 'readline'
 brew 'bash'
 brew 'zsh'
 brew 'terminal-notifier'
-brew '~/.dotfiles/Formula/watch-color'
 brew 'fswatch'
 brew 'tree'
 
@@ -50,14 +49,15 @@ brew 'wdiff'
 ## == Casks ==
 
 # Essential
+cask 'dropbox'
 cask 'google-chrome', args: { appdir: '/Applications' }
 
 # Mac Utilities
+cask '1password'
 cask 'alfred', args: { appdir: '/Applications' }
 cask 'appcleaner'
 cask 'bartender'
 cask 'flux'
-cask 'growlnotify'
 cask 'textexpander'
 cask 'the-unarchiver'
 cask 'hammerspoon'
@@ -66,21 +66,23 @@ cask 'shortcat'
 # Developer
 cask 'iterm2'
 cask 'intellij-idea-ce'
-cask 'ghc'
-cask 'stack'
-cask 'pandoc'
 
 # Organizer
 cask 'fantastical'
 cask 'evernote'
 cask 'skitch'
 
-# Sharing
-cask 'dropbox'
+# Media
+cask 'spotify'
+cask 'vlc'
 
 # Social
 cask 'skype'
 
-# Media
-cask 'spotify'
-cask 'vlc'
+# Haskell
+cask 'ghc'
+cask 'stack'
+cask 'pandoc'
+
+# Java
+cask 'java' unless system '/usr/libexec/java_home --failfast'

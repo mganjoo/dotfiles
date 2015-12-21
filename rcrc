@@ -1,5 +1,5 @@
 DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
-EXCLUDES="Brewfile Formula README.md update.sh"
+EXCLUDES="Formula README.md update.sh"
 SYMLINK_DIRS="external"
 
 # vim: ft=sh
