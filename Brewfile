@@ -38,6 +38,7 @@ brew 'reattach-to-user-namespace'
 # Languages
 brew 'python'
 brew 'python3'
+brew 'virtualenvwrapper'
 
 # Note: requires Xcode
 brew 'macvim', args: ['with-lua']
@@ -76,6 +77,7 @@ cask 'evernote'
 cask 'skitch'
 cask 'ynab'
 cask 'vitamin-r'
+cask 'microsoft-office'
 
 # Media
 cask 'spotify'
