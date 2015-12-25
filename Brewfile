@@ -38,7 +38,6 @@ brew 'reattach-to-user-namespace'
 # Languages
 brew 'python'
 brew 'python3'
-brew 'virtualenvwrapper'
 
 # Note: requires Xcode
 brew 'macvim', args: ['with-lua']
