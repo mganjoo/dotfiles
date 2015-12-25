@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Make fonts directory
+mkdir -p ~/Library/Fonts
+cp -n ~/.dotfiles/fonts/* ~/Library/Fonts/
+
 # Make vim backup directory
 mkdir -p ~/.vim-backup ~/.vim-swap
 
