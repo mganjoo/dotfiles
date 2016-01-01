@@ -21,7 +21,9 @@ My configuration files.
 
 5. Install Homebrew packages:
 
-	cd ~/.dotfiles
+        cd ~/.dotfiles
+        brew install python python3 ruby
+        rehash
         brew bundle
 
 6. Install Git submodules for repository:
