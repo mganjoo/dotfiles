@@ -224,9 +224,6 @@ alias tkt='tmux kill-session -t'
 alias txs='tmuxifier s'
 alias txes='tmuxifier es'
 
-# Zmv
-alias zmv="noglob zmv -W"
-
 # File Download
 if (( $+commands[curl] )); then
   alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
@@ -236,7 +233,7 @@ fi
 alias v='LANG=c f -t -e vim -b viminfo'
 
 # zmv
-alias zmv='zmv -W'
+alias zmv='noglob zmv'
 
 # == Miscellaneous ==
 
