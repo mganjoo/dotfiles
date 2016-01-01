@@ -5,6 +5,11 @@ tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'homebrew/versions'
 
+# Languages
+brew 'python'
+brew 'python3'
+brew 'ruby'
+
 # Dotfiles sync tool
 brew 'thoughtbot/formulae/rcm'
 
@@ -13,7 +18,7 @@ brew 'git'
 brew 'git-extras'
 
 # Programming tools
-brew 'vim', args: ['with-lua', 'override-system-vi']
+brew 'vim', args: ['with-lua', 'override-system-vi', 'with-python3']
 brew 'ag'
 brew 'ctags'
 brew 'cscope'
@@ -35,12 +40,8 @@ brew 'tree'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
 
-# Languages
-brew 'python'
-brew 'python3'
-
 # Note: requires Xcode
-brew 'macvim', args: ['with-lua']
+brew 'macvim', args: ['with-lua', 'with-python3']
 
 # Diff tools
 brew 'colordiff'
@@ -68,6 +69,7 @@ cask 'r'
 cask 'rstudio'
 cask 'iterm2'
 cask 'intellij-idea-ce'
+cask 'dash'
 
 # Organizer
 cask 'omnifocus'
@@ -95,3 +97,7 @@ cask 'java' unless system '/usr/libexec/java_home --failfast'
 
 # TeX
 cask 'mactex'
+
+# Reading
+cask 'skim'
+cask 'kindle'
