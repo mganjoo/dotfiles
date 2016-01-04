@@ -29,8 +29,9 @@
 [merge]
 	summary = true
 	verbosity = 1
-	tool = vimdiff
-	conflictstyle = diff3
+	tool = fugitive
+[mergetool "fugitive"]
+	cmd = vim -f \"+Gdiff\" \"$MERGED\"
 [apply]
 	whitespace = nowarn
 [branch]
