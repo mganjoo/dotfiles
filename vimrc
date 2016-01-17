@@ -32,7 +32,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'epeli/slimux'
 
 " Search and replace
-Plug 'kien/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'ctrlpvim/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
@@ -46,7 +46,7 @@ Plug 'chazy/cscope_maps'
 
 " Languages
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'edma2/vim-pants', { 'for': 'pants' }
+Plug 'edma2/vim-pants'
 Plug 'klen/python-mode', { 'branch': 'develop', 'for': 'python' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -54,7 +54,7 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'pantsbuild/vim-pants'
+Plug 'pantsbuild/vim-pants', {'dir': g:plug_home.'/vim-pants-syntax'}
 
 " Autocompletion
 Plug 'Shougo/neocomplete.vim'
@@ -207,7 +207,7 @@ let g:nerdtree_tabs_open_on_gui_startup = 0  " Don't open NERDTree tabs
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_sign_overwrite = 1
 
-" == vim-slime == {{{2
+" == Slimux == {{{2
 let g:slime_target = "tmux"
 
 " == UltiSnips == {{{2
