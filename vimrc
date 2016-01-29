@@ -54,7 +54,6 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'pantsbuild/vim-pants', {'dir': g:plug_home.'/vim-pants-syntax'}
 
 " Autocompletion
 Plug 'Shougo/neocomplete.vim'
@@ -152,6 +151,7 @@ endif
 " == Filetype-specific settings == {{{1
 au BufRead,BufNewFile *.mesos set filetype=python
 au BufRead,BufNewFile *.aurora set filetype=python
+au BufRead,BufNewFile BUILD setlocal filetype=pants
 
 " == Plugin Settings == {{{1
 
