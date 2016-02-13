@@ -76,7 +76,6 @@ cask 'omnifocus'
 cask 'fantastical'
 cask 'evernote'
 cask 'skitch'
-cask 'ynab'
 cask 'vitamin-r'
 cask 'microsoft-office'
 
