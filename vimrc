@@ -218,13 +218,15 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 
 " == syntastic == {{{2
-let g:syntastic_python_checkers = [ 'pyflakes' ]
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--ignore=E111,E114'
 let g:syntastic_haskell_checkers = [ 'ghc_mod', 'hlint' ]
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
 
 
 " == pymode == {{{2
 let g:pymode_rope = 0
+let g:pymode_lint = 0
 let g:pymode_rope_completion = 0
 let g:pymode_run = 1
 let g:pymode_run_bind = '<leader>r'
