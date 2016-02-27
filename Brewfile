@@ -100,3 +100,6 @@ cask 'mactex'
 # Reading
 cask 'skim'
 cask 'kindle'
+
+# Power tools
+cask 'tabula'
