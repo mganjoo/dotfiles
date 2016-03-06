@@ -18,7 +18,7 @@ brew 'git'
 brew 'git-extras'
 
 # Programming tools
-brew 'vim', args: ['with-lua', 'override-system-vi', 'with-python3']
+brew 'vim', args: ['with-lua', 'override-system-vi']
 brew 'ag'
 brew 'ctags'
 brew 'cscope'
