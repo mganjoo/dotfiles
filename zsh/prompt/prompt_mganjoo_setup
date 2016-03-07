@@ -1,5 +1,9 @@
 # Custom prompt defnition.
 
+shorten_path() {
+  echo "${${${(@j:/:M)${(@s:/:)1}##.#?}:h}%/}/${1:t}"
+}
+
 # Additional methods for git status (not covered by vcs_info).
 # Controlled by environment variables:
 # * VCS_INFO_DISABLE: completely disable calls to vcs_info.
@@ -12,15 +16,16 @@
 
   ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
   behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
-  (( $ahead )) && hook_com[branch]="${hook_com[branch]} %F{green}+$ahead%f"
-  (( $behind )) && hook_com[branch]="${hook_com[branch]} %F{red}-$behind%f"
+  (( $ahead )) && hook_com[misc]+=" %F{green}+$ahead%f"
+  (( $behind )) && hook_com[misc]+=" %F{red}-$behind%f"
+  return 0
 }
 
 # Check for untracked files.
 +vi-git-untracked-status() {
   if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == 'true' ]] && \
     GIT_DISABLE_STATS=1 git status --porcelain | grep '??' &> /dev/null ; then
-      hook_com[unstaged]="${hook_com[unstaged]} %F{red}●%f"
+      hook_com[unstaged]+=" %F{red}●%f"
   fi
 }
 
@@ -34,6 +39,12 @@
 # Dummy method that sets the misc message to .
 +vi-git-dummy-status() {
   hook_com[misc]+=" ."
+}
+
++vi-git-compact-branch() {
+  if [[ "$hook_com[branch]" =~ "/" ]]; then
+    hook_com[branch]=$(shorten_path "$hook_com[branch]")
+  fi
 }
 
 prompt_human_time() {
@@ -72,7 +83,7 @@ prompt_mganjoo_precmd() {
     unset MATCH
   else
     # Replace each path component with one letter except the last one
-    prompt_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+    prompt_pwd=$(shorten_path "$pwd")
   fi
 
   # VCS
@@ -116,7 +127,8 @@ prompt_mganjoo_setup() {
   zstyle ':vcs_info:git*+set-message:*' hooks \
     git-untracked-status \
     git-stash-status \
-    git-remote-status
+    git-remote-status \
+    git-compact-branch
 
   for repo in ${VCS_INFO_GIT_LESS_INFO_REPOS[@]}; do
     # Disable checking for staged, unstaged and untracked files.
@@ -124,7 +136,8 @@ prompt_mganjoo_setup() {
     zstyle ":vcs_info:git*+set-message:*:$repo" hooks \
       git-dummy-status \
       git-stash-status \
-      git-remote-status
+      git-remote-status \
+      git-compact-branch
   done
 
   zstyle ':prompt:virtualenv' format ' %F{green}(%v)%f'
