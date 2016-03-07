@@ -36,52 +36,82 @@
   hook_com[misc]+=" ."
 }
 
+prompt_human_time() {
+  local tmp=$1
+  local days=$(( tmp / 60 / 60 / 24 ))
+  local hours=$(( tmp / 60 / 60 % 24 ))
+  local minutes=$(( tmp / 60 % 60 ))
+  local seconds=$(( tmp % 60 ))
+  (( $days > 0 )) && echo -n "${days}d "
+  (( $hours > 0 )) && echo -n "${hours}h "
+  (( $minutes > 0 )) && echo -n "${minutes}m "
+  echo "${seconds}s"
+}
+
+timestamp_info() {
+  unset prompt_timestamp
+  typeset -gA prompt_timestamp
+
+  local stop=$EPOCHSECONDS
+  local start=${cmd_timestamp:-$stop}
+  integer elapsed=${stop}-${start}
+  if (($elapsed > ${PROMPT_CMD_MAX_EXEC_TIME:=5})); then
+    prompt_timestamp[elapsed]="%F{yellow}$(prompt_human_time $elapsed)%f "
+  fi
+  prompt_timestamp[datetime]="$(strftime "%H:%M:%S" $stop)"
+}
+
 prompt_mganjoo_precmd() {
   setopt LOCAL_OPTIONS NO_XTRACE NO_KSH_ARRAYS
 
-  # Obtain current working directory.
+  # PWD
   local pwd="${PWD/#$HOME/~}"
   if [[ "$pwd" == (#m)[/~] ]]; then
+    # If path is only / or ~, do nothing else
     prompt_pwd="$MATCH"
     unset MATCH
   else
+    # Replace each path component with one letter except the last one
     prompt_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
   fi
 
-  # Get VCS information.
+  # VCS
   if [[ "$VCS_INFO_DISABLE" -eq "1" ]]; then
     vcs_info_msg_0_=""
   else
     vcs_info
   fi
 
-  # Get Python information.
+  # Python
   python-info
+
+  # Time
+  timestamp_info
+
+  # Reset since preexec isn't always triggered
+  unset cmd_timestamp
+}
+
+prompt_mganjoo_preexec() {
+  cmd_timestamp=$EPOCHSECONDS
 }
 
 prompt_mganjoo_setup() {
   setopt LOCAL_OPTIONS NO_XTRACE NO_KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
-  # Load information for prompt.
+  zmodload zsh/datetime
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
 
-  # Add hook for calling dynamic information before each command.
   add-zsh-hook precmd prompt_mganjoo_precmd
+  add-zsh-hook preexec prompt_mganjoo_preexec
 
-  # Set prompt style for keymap.
-  zstyle ':prompt:indicator:keymap:insert' format \
-    '%B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
-  zstyle ':prompt:indicator:keymap:command' format '❯❯❯'
-
-  # Set vcs_info parameters.
   zstyle ':vcs_info:*' enable git hg
-
   zstyle ':vcs_info:*' check-for-changes true
   zstyle ':vcs_info:*' stagedstr ' %F{green}●%f'
   zstyle ':vcs_info:*' unstagedstr ' %F{yellow}●%f'
-  zstyle ':vcs_info:*' formats ' on %F{blue}%b%f%c%u%m'
+  zstyle ':vcs_info:*' formats ' %F{blue}%b%f%c%u%m'
   zstyle ':vcs_info:*' actionformats ' on %F{blue}%b%f%c%u (%F{cyan}%a%f)%m'
   zstyle ':vcs_info:git*+set-message:*' hooks \
     git-untracked-status \
@@ -99,9 +129,15 @@ prompt_mganjoo_setup() {
 
   zstyle ':prompt:virtualenv' format ' %F{green}(%v)%f'
 
-  PROMPT='%F{yellow}%m%f${vcs_info_msg_0_}${python_info[virtualenv]}
-%F{cyan}${prompt_pwd}%f ${editor_info[keymap]} '
-  RPROMPT='%F{red}%(?..[%?])%f'
+  local prompt_symbol="${PROMPT_SYMBOL:-❯}"
+  zstyle ':prompt:indicator:keymap:insert' format \
+    "%(?.%F{blue}.%B%F{red})${prompt_symbol}%f%b"
+  zstyle ':prompt:indicator:keymap:command' format \
+    "${prompt_symbol}"
+
+  PROMPT='%F{yellow}${prompt_pwd}%f${vcs_info_msg_0_}${python_info[virtualenv]}
+${editor_info[keymap]} '
+  RPROMPT='${prompt_timestamp[elapsed]}${prompt_timestamp[datetime]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
