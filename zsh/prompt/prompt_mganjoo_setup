@@ -144,7 +144,7 @@ prompt_mganjoo_setup() {
 
   zstyle ':prompt:virtualenv' format ' %F{green}(%v)%f'
 
-  local prompt_symbol="${PROMPT_SYMBOL:-❯}"
+  local prompt_symbol="${PROMPT_SYMBOL:-%%}"
   zstyle ':prompt:indicator:keymap:insert' format \
     "%(?.%F{blue}.%B%F{red})${prompt_symbol}%f%b"
   zstyle ':prompt:indicator:keymap:command' format \
