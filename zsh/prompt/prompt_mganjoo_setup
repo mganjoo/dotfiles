@@ -1,14 +1,16 @@
-# Custom prompt defnition.
+# Custom prompt definition.
+
+# Configuration for this prompt:
+# * VCS_INFO_DISABLE: completely disable calls to vcs_info.
+# * VCS_INFO_GIT_LESS_INFO_REPOS: array of repo names to show less vcs_info in
+#   (this is useful in large repos).
+# * PROMPT_CMD_MIN_EXEC_TIME: minimum execution time before showing time elapsed
+#   on next prompt.
+# * PROMPT_SYMBOL: symbol used for prompt.
 
 shorten_path() {
   echo "${${${(@j:/:M)${(@s:/:)1}##.#?}:h}%/}/${1:t}"
 }
-
-# Additional methods for git status (not covered by vcs_info).
-# Controlled by environment variables:
-# * VCS_INFO_DISABLE: completely disable calls to vcs_info.
-# * VCS_INFO_GIT_LESS_INFO_REPOS: array of repo names to show less vcs_info in
-#   (this is useful in large repos).
 
 # Check for difference from remote tracking branch, if any.
 +vi-git-remote-status() {
@@ -66,7 +68,7 @@ timestamp_info() {
   local stop=$EPOCHSECONDS
   local start=${cmd_timestamp:-$stop}
   integer elapsed=${stop}-${start}
-  if (($elapsed > ${PROMPT_CMD_MAX_EXEC_TIME:=5})); then
+  if (($elapsed > ${PROMPT_CMD_MIN_EXEC_TIME:=5})); then
     prompt_timestamp[elapsed]="%F{yellow}$(prompt_human_time $elapsed)%f "
   fi
   prompt_timestamp[datetime]="$(strftime "%H:%M:%S" $stop)"
