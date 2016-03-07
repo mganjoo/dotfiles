@@ -41,7 +41,7 @@ brew 'tmux'
 brew 'reattach-to-user-namespace'
 
 # Note: requires Xcode
-brew 'macvim', args: ['with-lua', 'with-python3']
+brew 'macvim', args: ['with-lua']
 
 # Diff tools
 brew 'colordiff'
