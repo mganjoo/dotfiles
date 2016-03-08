@@ -290,7 +290,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " == Dash == {{{2
-nmap <silent> <leader>d <Plug>DashSearch
+nmap <silent> gK <Plug>DashSearch
 
 " == Slimux == {{{2
 nmap <C-c><C-c> :SlimuxREPLSendLine<CR>
