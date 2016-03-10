@@ -144,6 +144,7 @@ set t_Co=256
 let base16colorspace = 256 " Access colors present in 256 colorspace
 silent! colorscheme base16-tomorrow
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+let g:base16_shell_path = "$HOME/.external/base16-shell"
 
 " == Enhancements == {{{1
 " Use ag instead of grep, if available

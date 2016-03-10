@@ -26,7 +26,7 @@ promptinit
 prompt 'mganjoo'
 
 # Base 16 Shell configuration
-BASE16_SHELL="$HOME/.colors/base16-tomorrow.dark.sh"
+BASE16_SHELL="$HOME/.external/base16-shell/base16-tomorrow.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # == Plugins ==
