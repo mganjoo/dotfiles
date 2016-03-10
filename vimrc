@@ -22,7 +22,8 @@ Plug 'tpope/vim-unimpaired'
 
 " Appearance
 Plug 'chriskempson/base16-vim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 
@@ -142,6 +143,8 @@ set t_Co=256
 let base16colorspace=256 " Access colors present in 256 colorspace
 silent! colorscheme base16-tomorrow
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=0
+
 " == Enhancements == {{{1
 " Use ag instead of grep, if available
 if executable("ag")
@@ -157,6 +160,7 @@ au BufRead,BufNewFile BUILD setlocal filetype=pants
 
 " == vim-airline == {{{2
 let g:airline_powerline_fonts = 1
+let g:airline_theme = "base16_tomorrow"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#formatter = "unique_tail"
