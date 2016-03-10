@@ -19,3 +19,6 @@
 [submodule "tmux/external/copycat"]
 	path = tmux/external/copycat
 	url = https://github.com/tmux-plugins/tmux-copycat
+[submodule "external/base16-shell"]
+	path = external/base16-shell
+	url = https://github.com/mganjoo/base16-shell
