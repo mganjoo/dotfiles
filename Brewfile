@@ -4,6 +4,7 @@ cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'homebrew/versions'
+tap 'neovim/neovim'
 
 # Languages
 brew 'python'
@@ -19,6 +20,7 @@ brew 'git-extras'
 
 # Programming tools
 brew 'vim', args: ['with-lua', 'override-system-vi']
+brew 'neovim'
 brew 'ag'
 brew 'ctags'
 brew 'cscope'
@@ -26,6 +28,7 @@ brew 'homebrew/dupes/grep', args: ['default-names']
 brew 'lesspipe', args: ['syntax-highlighting']
 brew 'markdown'
 brew 'ssh-copy-id'
+brew 'peco'
 
 # Terminal
 brew 'readline'
