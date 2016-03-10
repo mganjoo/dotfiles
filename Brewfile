@@ -7,8 +7,8 @@ tap 'homebrew/versions'
 tap 'neovim/neovim'
 
 # Languages
-brew 'python'
 brew 'python3'
+brew 'python'
 brew 'ruby'
 
 # Dotfiles sync tool
