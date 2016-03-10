@@ -235,6 +235,10 @@ alias v='LANG=c f -t -e vim -b viminfo'
 # zmv
 alias zmv='noglob zmv'
 
+# homebrew
+alias brup="brew update"
+alias brug="brew upgrade"
+
 # == Miscellaneous ==
 
 # Serves a directory via HTTP.
