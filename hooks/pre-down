@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+rm -f $XDG_CONFIG_HOME/nvim/init.vim
+rm -f ${XDG_CONFIG_HOME:=$HOME}/nvim
