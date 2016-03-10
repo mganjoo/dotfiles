@@ -58,6 +58,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 
 " Autocompletion
 Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/deoplete.nvim'
 Plug 'wellle/tmux-complete.vim'
 
 " Browsing
@@ -217,9 +218,13 @@ let g:slime_target = "tmux"
 " == UltiSnips == {{{2
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnips"]
 
-" == neocomplete == {{{2
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
+" == neocomplete & deoplete == {{{2
+if has("nvim")
+  let g:deoplete#enable_at_startup = 1
+else
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+end
 
 " == syntastic == {{{2
 let g:syntastic_python_checkers = ['flake8']
