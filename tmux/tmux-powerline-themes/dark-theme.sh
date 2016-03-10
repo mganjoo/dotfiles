@@ -21,15 +21,15 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 # Format: segment_name background_color foreground_color [non_default_separator]
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info 12 0" \
+		"tmux_session_info 2 0" \
 	)
 fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
 		"battery 18 7" \
-		"date_day 12 0" \
-		"date 12 0 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		"time 12 0 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"date_day 2 0" \
+		"date 2 0 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"time 2 0 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi
