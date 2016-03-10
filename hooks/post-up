@@ -16,5 +16,5 @@ $HOME/.external/fzf/install --completion --key-bindings --no-update-rc
 
 # Neovim configuration
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+ln -fs ~/.vim $XDG_CONFIG_HOME/nvim
+ln -fs ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
