@@ -38,6 +38,9 @@ brew 'zsh-completions'
 brew 'terminal-notifier'
 brew 'fswatch'
 brew 'tree'
+brew 'watch'
+brew 'dropbox-uploader'
+brew 'fasd'
 
 # Tmux
 brew 'tmux'
