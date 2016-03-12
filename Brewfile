@@ -75,7 +75,6 @@ cask 'r'
 cask 'rstudio'
 cask 'iterm2'
 cask 'intellij-idea-ce'
-cask 'dash'
 
 # Organizer
 cask 'omnifocus'
