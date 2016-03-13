@@ -22,8 +22,7 @@ Plug 'tpope/vim-unimpaired'
 
 " Appearance
 Plug 'mganjoo/base16-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 
@@ -140,7 +139,9 @@ set listchars=tab:▸\ ,trail:·
 set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
 set background=dark
-set t_Co=256
+if !has('gui_running')
+  set t_Co=256
+endif
 let base16colorspace = 256 " Access colors present in 256 colorspace
 silent! colorscheme base16-tomorrow
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
@@ -158,15 +159,6 @@ au BufRead,BufNewFile *.aurora set filetype=python
 au BufRead,BufNewFile BUILD setlocal filetype=pants
 
 " == Plugin Settings == {{{1
-
-" == vim-airline == {{{2
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#formatter = "unique_tail"
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#branch#displayed_head_limit = 20
-let g:airline#extensions#branch#format = 1
 
 " == ctrlp.vim == {{{2
 let g:ctrlp_max_files = 0                     " No file limit
