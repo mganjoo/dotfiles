@@ -30,6 +30,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch'
 Plug 'epeli/slimux'
+Plug 'edkolev/tmuxline.vim'
 
 " Search and replace
 Plug 'ctrlpvim/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
@@ -241,6 +242,16 @@ let g:tmuxcomplete#trigger = ''
 " == vimtex == {{{2
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
+
+" == tmuxline.vim == {{{2
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = {
+  \'a': '#S',
+  \'b': '#I.#P',
+  \'win': ['#I', '#W'],
+  \'cwin': ['#I', '#W'],
+  \'x': '%a',
+  \'y': ['%Y-%m-%d', '%R']}
 
 " }}}1
 " == Keymaps == {{{1
