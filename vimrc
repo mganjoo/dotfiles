@@ -23,7 +23,6 @@ Plug 'tpope/vim-unimpaired'
 " Appearance
 Plug 'mganjoo/base16-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 
 " Shell interaction
@@ -218,12 +217,9 @@ else
   let g:neocomplete#enable_smart_case = 1
 end
 
-" == syntastic == {{{2
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--ignore=E111,E114'
-let g:syntastic_haskell_checkers = [ 'ghc_mod', 'hlint' ]
-let g:syntastic_cpp_compiler_options = '-std=c++0x'
-
+" == neomake == {{{2
+let g:neomake_python_enabled_makers = ['flake8']
+au BufWritePost *.py Neomake
 
 " == pymode == {{{2
 let g:pymode_rope = 0
