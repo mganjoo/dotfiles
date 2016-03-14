@@ -95,7 +95,6 @@ set autoread             " Reload files changed outside vim
 set autowrite            " Save before :next, :make etc
 set bs=indent,eol,start  " Allow backspace in insert mode
 set cursorline           " Show line cursor is on
-set encoding=utf-8       " Ensure correct encoding
 set hidden               " For correct behavior of buffers
 set history=5000         " Store lots of :cmdline history
 set number               " Always show line numbers
