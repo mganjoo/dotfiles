@@ -243,11 +243,10 @@ let g:vimtex_view_general_options = '@line @pdf @tex'
 let g:tmuxline_powerline_separators = 0
 let g:tmuxline_preset = {
   \'a': '#S',
-  \'b': '#I.#P',
   \'win': ['#I', '#W'],
   \'cwin': ['#I', '#W'],
-  \'x': '%a',
-  \'y': ['%Y-%m-%d', '%R']}
+  \'x': '#I.#P',
+  \'y': ['%a', '%Y-%m-%d', '%R']}
 
 " }}}1
 " == Keymaps == {{{1
