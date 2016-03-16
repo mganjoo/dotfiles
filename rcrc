@@ -1,5 +1,5 @@
 DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
-EXCLUDES="fonts Formula requirements README.md update.sh"
+EXCLUDES="colors fonts requirements README.md update.sh"
 SYMLINK_DIRS="external"
 
 # vim: ft=sh
