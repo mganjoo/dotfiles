@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-echo "Removing fzf files..."
-rm -f $HOME/.fzf.zsh $HOME/.fzf.bash
