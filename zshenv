@@ -13,13 +13,7 @@ fi
 
 path=(
   $HOME/bin
-  $HOME/.bin
   $path
-)
-
-manpath=(
-  $HOME/.man
-  $manpath
 )
 
 # Additional applications
@@ -31,4 +25,4 @@ if [ -d "$GHC_DOT_APP" ]; then
 fi
 
 # Ensure unique values in path and manpath.
-typeset -gU path manpath
+typeset -gU path
