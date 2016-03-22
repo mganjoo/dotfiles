@@ -1,6 +1,5 @@
 # Add zsh-completions and local completions to $fpath.
 fpath=(
-  "$HOME/.zsh/completion"
   "$HOME/.zsh/external/zsh-completions/src"
   $fpath
 )
@@ -117,4 +116,12 @@ zstyle ':completion:*:ssh:*' tag-order 'hosts:-host:host hosts:-domain:domain ho
 zstyle ':completion:*:ssh:*' group-order users hosts-domain hosts-host users hosts-ipaddr
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
-zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,3))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+
+if command -v brew > /dev/null 2>&1; then
+  local aws_completion_file=$(brew --prefix)/share/zsh/site-functions/_aws
+  if [[ -f "$aws_completion_file" ]]; then
+    source $aws_completion_file
+  fi
+  unset aws_completion_file
+fi
