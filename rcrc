@@ -1,5 +1,5 @@
 DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
-EXCLUDES="colors fonts requirements README.md update.sh"
+EXCLUDES="fonts requirements README.md update.sh"
 SYMLINK_DIRS="external"
 UNDOTTED="bin"
 
