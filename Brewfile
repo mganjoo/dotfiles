@@ -108,3 +108,7 @@ cask 'kindle'
 
 # Power tools
 cask 'tabula'
+
+# Virtualization
+virtualbox
+dockertoolbox
