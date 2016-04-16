@@ -27,7 +27,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Shell interaction
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'benekastah/neomake'
 Plug 'epeli/slimux'
 Plug 'edkolev/tmuxline.vim'
@@ -77,6 +77,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Scripting
 Plug 'tpope/vim-scriptease'
+Plug 'embear/vim-localvimrc'
 
 call plug#end()
 
