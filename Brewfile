@@ -9,7 +9,6 @@ tap 'neovim/neovim'
 # Languages
 brew 'python3'
 brew 'python'
-brew 'ruby'
 
 # Dotfiles sync tool
 brew 'thoughtbot/formulae/rcm'
@@ -41,6 +40,7 @@ brew 'tree'
 brew 'watch'
 brew 'dropbox-uploader'
 brew 'fasd'
+brew 'sshrc'
 
 # Tmux
 brew 'tmux'
@@ -90,6 +90,7 @@ cask 'vlc'
 
 # Social
 cask 'skype'
+cask 'whatsapp'
 
 # Haskell
 cask 'ghc', args: { appdir: '/Applications' }
@@ -110,5 +111,5 @@ cask 'kindle'
 cask 'tabula'
 
 # Virtualization
-virtualbox
-dockertoolbox
+cask 'virtualbox'
+cask 'dockertoolbox'
