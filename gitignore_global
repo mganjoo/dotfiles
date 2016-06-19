@@ -24,6 +24,7 @@ cscope.po.out
 Session.vim
 .netrwhist
 *~
+.lvimrc
 
 # SASS
 .sass-cache
