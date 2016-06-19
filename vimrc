@@ -48,7 +48,7 @@ Plug 'chazy/cscope_maps'
 " Languages
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'edma2/vim-pants'
-Plug 'klen/python-mode', { 'branch': 'develop', 'for': 'python' }
+Plug 'hynek/vim-python-pep8-indent'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -222,14 +222,6 @@ end
 let g:neomake_python_enabled_makers = ['flake8']
 au BufWritePost *.py Neomake
 
-" == pymode == {{{2
-let g:pymode_rope = 0
-let g:pymode_lint = 0
-let g:pymode_doc = 0
-let g:pymode_rope_completion = 0
-let g:pymode_run = 1
-let g:pymode_run_bind = '<leader>r'
-
 " == markdown == {{{2
 let g:vim_markdown_folding_disabled = 1
 
@@ -248,6 +240,9 @@ let g:tmuxline_preset = {
   \'cwin': ['#I', '#W'],
   \'x': '#I.#P',
   \'y': ['%a', '%Y-%m-%d', '%R']}
+
+" == localvimrc == {{{2
+let g:localvimrc_persistent=2
 
 " }}}1
 " == Keymaps == {{{1
