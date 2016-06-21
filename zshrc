@@ -55,6 +55,12 @@ export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# ghc
+export GHC_DOT_APP="/Applications/ghc-7.10.2.app"
+if [ -d "$GHC_DOT_APP" ]; then
+  export PATH="${HOME}/.local/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
+fi
+
 # run-help
 autoload run-help
 if command -v brew > /dev/null 2>&1; then
