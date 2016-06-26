@@ -5,6 +5,13 @@ if [ -d ~/.zsh.before/ ]; then
   done
 fi
 
+if [ -d $HOME/bin/ ]; then
+  path=(
+    $HOME/bin
+    $path
+  )
+fi
+
 # == Modularized configuration ==
 
 # Source large configuration modules.
