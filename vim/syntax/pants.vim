@@ -60,6 +60,7 @@ syntax keyword pantsTarget contained
   \ dependencies
   \ exclude
   \ fancy_pants
+  \ hadoop_binary
   \ jar
   \ jar_library
   \ java_antlr_library
