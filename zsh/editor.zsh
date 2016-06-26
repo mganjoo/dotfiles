@@ -100,14 +100,6 @@ bindkey -M vicmd 'Y' pb-yank-whole-line
 # Paste the selected branches into the command line
 bindkey -M viins '^b' fzf-branch-widget
 
-# History substring search (from zsh-history-substring-search plugin).
-bindkey -M viins "^p" history-substring-search-up
-bindkey -M viins "^n" history-substring-search-down
-bindkey -M vicmd "k" history-substring-search-up
-bindkey -M vicmd "j" history-substring-search-down
-bindkey -M viins "$keycode[Up]" history-substring-search-up
-bindkey -M viins "$keycode[Down]" history-substring-search-down
-
 # Output of last command.
 bindkey -M viins "^x^l" insert-last-command-output
 
@@ -115,8 +107,5 @@ bindkey -M viins "^x^l" insert-last-command-output
 bindkey -M viins '\eh' run-help
 
 # == Epilogue == {{{1
-
-# Unset the variables used in the file.
-unset key keycode
 
 # vim: fdm=marker

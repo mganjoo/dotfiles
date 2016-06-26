@@ -98,3 +98,12 @@ fi
 # zsh-users plugins (order of loading matters)
 source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# History substring search (from zsh-history-substring-search plugin).
+bindkey -M viins "^p" history-substring-search-up
+bindkey -M viins "^n" history-substring-search-down
+bindkey -M vicmd "k" history-substring-search-up
+bindkey -M vicmd "j" history-substring-search-down
+bindkey -M viins "$keycode[Up]" history-substring-search-up
+bindkey -M viins "$keycode[Down]" history-substring-search-down
+
