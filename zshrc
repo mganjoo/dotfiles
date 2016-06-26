@@ -88,17 +88,13 @@ if command -v brew > /dev/null 2>&1; then
   HELPDIR=$(brew --prefix)/share/zsh/help
 fi
 
-# zsh-users plugins (order of loading matters)
-for plugin in \
-  "zsh-syntax-highlighting" \
-  "zsh-history-substring-search"
-do
-  source ~/.zsh/external/$plugin/$plugin.zsh
-done
-
 # == Post-load user customizations ==
 if [ -d ~/.zsh.after/ ]; then
   for config_file (~/.zsh.after/*.zsh); do
     source $config_file
   done
 fi
+
+# zsh-users plugins (order of loading matters)
+source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
