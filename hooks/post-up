@@ -11,7 +11,7 @@ mkdir -p ~/.vim-backup ~/.vim-swap
 mkdir -p ~/.tmuxifier-layouts
 
 # Install plugins
-vim +PlugInstall +qa
+nvim +PlugInstall +qa
 $HOME/.external/fzf/install --completion --key-bindings --no-update-rc
 
 # Neovim configuration
