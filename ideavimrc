@@ -1,0 +1,19 @@
+" == General Settings {{{1
+set number               " Always show line numbers
+set relativenumber       " Use relative numbers by default
+set clipboard=unnamed    " Sync clipboard
+
+" == Search Settings {{{1
+set incsearch   " Find the next match as we type the search
+set hlsearch    " Highlight searches by default
+set ignorecase  " Case insensitive searches
+set smartcase   " Ignore sensitivity setting with uppercase patterns
+
+" == Plugins {{{1
+set surround             " Enable vim-surround support
+
+" == Keymaps {{{1
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR>
+
+" == Epilogue {{{1
+" vim: foldmethod=marker:fen
