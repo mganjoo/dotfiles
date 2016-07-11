@@ -19,6 +19,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'justinmk/vim-sneak'
 
 " Appearance
 Plug 'mganjoo/base16-vim'
@@ -243,6 +244,9 @@ let g:tmuxline_preset = {
 
 " == localvimrc == {{{2
 let g:localvimrc_persistent=2
+
+" == vim-sneak == {{{2
+let g:sneak#streak = 1
 
 " }}}1
 " == Keymaps == {{{1
