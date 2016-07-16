@@ -104,7 +104,7 @@ bindkey -M viins '^b' fzf-branch-widget
 bindkey -M viins "^x^l" insert-last-command-output
 
 # run-help
-bindkey -M viins '\eh' run-help
+bindkey -M viins '^x^h' run-help
 
 # == Epilogue == {{{1
 
