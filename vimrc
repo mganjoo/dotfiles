@@ -31,7 +31,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'benekastah/neomake'
 Plug 'epeli/slimux'
-Plug 'edkolev/tmuxline.vim'
 
 " Search and replace
 Plug 'ctrlpvim/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
