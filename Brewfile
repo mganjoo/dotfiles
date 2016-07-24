@@ -73,7 +73,7 @@ cask 'shortcat'
 # Developer
 cask 'r'
 cask 'rstudio'
-cask 'iterm2'
+cask 'iterm2-beta'
 cask 'intellij-idea-ce'
 
 # Organizer
