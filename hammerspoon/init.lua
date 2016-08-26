@@ -29,7 +29,7 @@ local function retryWithTimeout(fn, maxAttempts, sleepTime)
   return x
 end
 
-local function launchAndArrangeApps(applist)
+local function launchAndArrangeApps(applist, moveFullScreens)
 
   hs.alert.show("Launching apps...", 2)
 
@@ -57,7 +57,11 @@ local function launchAndArrangeApps(applist)
       if win then
         local isFullScreen = win:isFullScreen()
         if e.fullscreen then
-          if not isFullScreen then
+          -- Change to not fullscreen first so they can be moved around
+          if moveFullScreens and isFullScreen then
+            win:setFullScreen(false)
+          end
+          if moveFullScreens or not isFullScreen then
             hs.grid.set(win, { x = 0, y = 0, w = GRID_WIDTH, h = GRID_HEIGHT }, screens[screenidx])
           end
           win:setFullScreen(true)
@@ -224,7 +228,8 @@ if applist then
   end)
 
   -- Set up layout configuration hotkey.
-  hs.hotkey.bind(mash, "x", function() launchAndArrangeApps(applist) end)
+  hs.hotkey.bind(mash, "x", function() launchAndArrangeApps(applist, false) end)
+  hs.hotkey.bind(mash, "z", function() launchAndArrangeApps(applist, true) end)
 end
 
 -- == Final == {{{1
