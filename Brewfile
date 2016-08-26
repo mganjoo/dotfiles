@@ -28,6 +28,7 @@ brew 'lesspipe', args: ['syntax-highlighting']
 brew 'markdown'
 brew 'ssh-copy-id'
 brew 'peco'
+brew 'jq'
 
 # Terminal
 brew 'readline'
