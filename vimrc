@@ -22,9 +22,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'justinmk/vim-sneak'
 
 " Appearance
-Plug 'mganjoo/base16-vim'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'edkolev/tmuxline.vim'
 
 " Shell interaction
 Plug 'tpope/vim-eunuch'
@@ -144,10 +145,8 @@ set background=dark
 if !has('gui_running')
   set t_Co=256
 endif
-let base16colorspace = 256 " Access colors present in 256 colorspace
-silent! colorscheme base16-tomorrow
+silent! colorscheme gruvbox
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-let g:base16_shell_path = "$HOME/.external/base16-shell"
 
 " == Enhancements == {{{1
 " Use ag instead of grep, if available
@@ -232,6 +231,11 @@ let g:tmuxcomplete#trigger = ''
 " == vimtex == {{{2
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
+
+" == lightlin == {{{2
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans'
+      \ }
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
