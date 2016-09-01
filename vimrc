@@ -232,7 +232,7 @@ let g:tmuxcomplete#trigger = ''
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
-" == lightlin == {{{2
+" == lightline == {{{2
 let g:lightline = {
       \ 'colorscheme': 'jellybeans'
       \ }
