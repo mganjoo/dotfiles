@@ -230,7 +230,7 @@ if (( $+commands[curl] )); then
 fi
 
 # fasd
-alias v='LANG=c f -t -e nvim -b viminfo'
+alias v='LANG=c f -t -e vim -b viminfo'
 
 # zmv
 alias zmv='noglob zmv'

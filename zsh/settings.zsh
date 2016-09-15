@@ -92,8 +92,8 @@ SAVEHIST=10000              # Max number of history events to save.
 # / and = are not considered part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
