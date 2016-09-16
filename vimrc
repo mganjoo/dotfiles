@@ -81,6 +81,9 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-scriptease'
 Plug 'embear/vim-localvimrc'
 
+" Organization
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 " == Syntax & Indentation == {{{1
@@ -195,6 +198,7 @@ let g:ctrlp_user_command = {
 let g:delimitMate_expand_cr = 1     " Create line break when pressing enter
 let g:delimitMate_expand_space = 1  " Expand spaces inside delimiters
 let g:delimitMate_autoclose = 1     " Auto-close brackets
+let g:delimitMate_nesting_quotes = ['"', '`'] " Allows for triple quotes
 
 " == NERDTree == {{{2
 let g:NERDTreeChDirMode = 3                  " Change on root change
@@ -251,6 +255,14 @@ let g:localvimrc_persistent=2
 
 " == vim-sneak == {{{2
 let g:sneak#streak = 1
+
+" == vimwiki == {{{2
+let b:work_wiki = {}
+let b:work_wiki.path = "~/wiki/work"
+let b:work_wiki.syntax = "markdown"
+let b:work_wiki.ext = ".md"
+
+let g:vimwiki_list = [b:work_wiki]
 
 " }}}1
 " == Keymaps == {{{1
