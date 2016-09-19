@@ -43,6 +43,9 @@ brew 'dropbox-uploader'
 brew 'fasd'
 brew 'sshrc'
 
+# Libraries
+brew 'boost'
+
 # Tmux
 brew 'tmux'
 brew 'reattach-to-user-namespace'
