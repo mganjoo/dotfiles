@@ -34,7 +34,8 @@ Plug 'benekastah/neomake'
 Plug 'epeli/slimux'
 
 " Search and replace
-Plug 'ctrlpvim/ctrlp.vim' | Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'ctrlpvim/ctrlp.vim' | Plug 'nixprime/cpsm', { 'do': 'PY3=OFF ./install.sh' }
+
 Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
@@ -171,8 +172,7 @@ let g:ctrlp_clear_cache_on_exit = 0           " Don't clear cache on exit
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' " Cache directory
 let g:ctrlp_by_filename = 1                   " Default to filename search
 let g:ctrlp_root_markers = ['.ci', '.git', '.svn', '.hg'] " .ci is useful
-let g:ctrlp_match_func = { "match": "pymatcher#PyMatch" } " Use faster matcher
-let g:ctrlp_lazy_update = 350                 " Allow more responsive typing
+let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }
 
 " Use ag for searching, if available; otherwise fall back to find
 if executable("ag")
