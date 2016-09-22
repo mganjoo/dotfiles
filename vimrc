@@ -256,14 +256,6 @@ let g:localvimrc_persistent=2
 " == vim-sneak == {{{2
 let g:sneak#streak = 1
 
-" == vimwiki == {{{2
-let b:work_wiki = {}
-let b:work_wiki.path = "~/wiki/work"
-let b:work_wiki.syntax = "markdown"
-let b:work_wiki.ext = ".md"
-
-let g:vimwiki_list = [b:work_wiki]
-
 " }}}1
 " == Keymaps == {{{1
 
