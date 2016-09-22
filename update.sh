@@ -6,3 +6,6 @@ git submodule update --remote --recursive
 
 vim +PlugUpgrade +qa
 vim +PlugUpdate +qa
+
+# Remove plug.vim.old if it exists
+rm -f ~/.dotfiles/vim/autoload/plug.vim.old
