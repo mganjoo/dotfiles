@@ -256,6 +256,11 @@ let g:localvimrc_persistent=2
 " == vim-sneak == {{{2
 let g:sneak#streak = 1
 
+" == vimwiki == {{{2
+let b:personal_wiki = { 'path': '~/Dropbox/wiki/personal' }
+let g:vimwiki_list = [b:personal_wiki]
+au BufRead,BufNewFile *.wiki setlocal textwidth=80
+
 " }}}1
 " == Keymaps == {{{1
 
