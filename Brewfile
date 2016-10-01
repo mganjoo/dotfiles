@@ -3,8 +3,8 @@
 cask_args appdir: '/Applications'
 tap 'caskroom/cask'
 tap 'caskroom/versions'
+tap 'caskroom/fonts'
 tap 'homebrew/versions'
-tap 'neovim/neovim'
 
 # Languages
 brew 'python3'
@@ -19,7 +19,6 @@ brew 'git-extras'
 
 # Programming tools
 brew 'vim', args: ['with-lua', 'override-system-vi']
-brew 'neovim'
 brew 'ag'
 brew 'ctags'
 brew 'cscope'
@@ -110,6 +109,5 @@ cask 'mactex'
 # Reading
 cask 'skim'
 
-# Virtualization
-cask 'virtualbox'
-cask 'dockertoolbox'
+# Fonts
+cask 'font-fira-mono'
