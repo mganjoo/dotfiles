@@ -10,7 +10,7 @@ let maplocalleader = ','  " Change local leader key
 " == Plugins == {{{1
 call plug#begin("~/.vim/external")
 
-" Motions and editing enhancements
+" Motion enhancements
 Plug 'Raimondi/delimitMate'
 Plug 'bkad/CamelCaseMotion'
 Plug 'junegunn/vim-easy-align'
@@ -20,17 +20,28 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'justinmk/vim-sneak'
+Plug 'regedarek/ZoomWin'
+Plug 'tpope/vim-repeat'
+
+" Other dependencies
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Appearance
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 
-" Shell interaction
+" UI enhancements
+Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
+Plug 'majutsushi/tagbar'
+Plug 'milkypostman/vim-togglelist'
+
+" External program interaction
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'benekastah/neomake'
 Plug 'epeli/slimux'
+Plug 'rizzatti/dash.vim'
 
 " Search and replace
 Plug 'ctrlpvim/ctrlp.vim' | Plug 'nixprime/cpsm', { 'do': 'PY3=OFF ./install.sh' }
@@ -38,9 +49,6 @@ Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'tpope/vim-abolish'
-
-" Snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Languages
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
@@ -57,24 +65,10 @@ Plug 'edma2/vim-pants'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'wellle/tmux-complete.vim'
-
-" Browsing
-Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
-Plug 'majutsushi/tagbar'
-Plug 'milkypostman/vim-togglelist'
-Plug 'rizzatti/dash.vim'
-Plug 'regedarek/ZoomWin'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Source control
 Plug 'tpope/vim-fugitive'
-
-" Other dependencies
-Plug 'tpope/vim-repeat'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
-" Scripting
-Plug 'tpope/vim-scriptease'
-Plug 'embear/vim-localvimrc'
 
 " Organization
 Plug 'vimwiki/vimwiki'
@@ -132,17 +126,17 @@ set wildmode=list:longest            " List all matches; complete till longest s
 set wildmenu                         " Show a menu of completion options
 
 " == Appearance == {{{1
-set nowrap      " Don't wrap lines
-set linebreak   " Break lines at useful points
-set list        " Show auxiliary characters
-" Note: 'scriptencoding utf-8' must be called for this to work (see top)
-set listchars=tab:▸\ ,trail:·
+set nowrap         " Don't wrap lines
+set linebreak      " Break lines at useful points
+set list           " Show auxiliary characters
 set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
+" Note: 'scriptencoding utf-8' must be called for this to work (see top)
+set listchars=tab:▸\ ,trail:·
+
+" == Theme == {{{1
 set background=dark
-if !has('gui_running')
-  set t_Co=256
-endif
+set t_Co=256
 silent! colorscheme gruvbox
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
@@ -319,7 +313,7 @@ nmap <C-c><C-c> :SlimuxREPLSendLine<CR>
 vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
 
 " == vim-easy-align == {{{2
-xmap ga <Plug>(EasyAlign)
+vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " == CamelCaseMotion == {{{2
