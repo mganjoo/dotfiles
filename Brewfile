@@ -60,11 +60,11 @@ brew 'wdiff'
 
 # Essential
 cask 'dropbox'
-cask 'google-chrome', args: { appdir: '/Applications' }
+cask 'google-chrome'
 
 # Mac Utilities
 cask '1password'
-cask 'alfred', args: { appdir: '/Applications' }
+cask 'alfred'
 cask 'appcleaner'
 cask 'bartender'
 cask 'flux'
@@ -96,8 +96,7 @@ cask 'skype'
 cask 'whatsapp'
 
 # Haskell
-cask 'ghc', args: { appdir: '/Applications' }
-cask 'stack'
+cask 'haskell-platform'
 cask 'pandoc'
 
 # Java
