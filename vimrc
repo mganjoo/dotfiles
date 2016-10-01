@@ -13,7 +13,7 @@ call plug#begin("~/.vim/external")
 " Motions and editing enhancements
 Plug 'Raimondi/delimitMate'
 Plug 'bkad/CamelCaseMotion'
-Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-easy-align'
 Plug 'qpkorr/vim-bufkill'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
@@ -25,7 +25,6 @@ Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'edkolev/tmuxline.vim'
 
 " Shell interaction
 Plug 'tpope/vim-eunuch'
@@ -35,7 +34,6 @@ Plug 'epeli/slimux'
 
 " Search and replace
 Plug 'ctrlpvim/ctrlp.vim' | Plug 'nixprime/cpsm', { 'do': 'PY3=OFF ./install.sh' }
-
 Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
@@ -44,20 +42,16 @@ Plug 'tpope/vim-abolish'
 " Snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-" Tags
-Plug 'chazy/cscope_maps'
-
 " Languages
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'edma2/vim-pants'
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'rodjek/vim-puppet'
+Plug 'rodjek/vim-puppet', { 'for': 'puppet' }
+Plug 'edma2/vim-pants'
 
 " Autocompletion
 Plug 'Shougo/neocomplete.vim'
@@ -166,13 +160,13 @@ au BufRead,BufNewFile BUILD setlocal filetype=pants
 " == Plugin Settings == {{{1
 
 " == ctrlp.vim == {{{2
-let g:ctrlp_max_files = 0                     " No file limit
-let g:ctrlp_use_caching = 1                   " Use caching
-let g:ctrlp_clear_cache_on_exit = 0           " Don't clear cache on exit
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' " Cache directory
-let g:ctrlp_by_filename = 1                   " Default to filename search
+let g:ctrlp_max_files = 0                                 " No file limit
+let g:ctrlp_use_caching = 1                               " Use caching
+let g:ctrlp_clear_cache_on_exit = 0                       " Don't clear cache on exit
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'             " Cache directory
+let g:ctrlp_by_filename = 1                               " Default to filename search
 let g:ctrlp_root_markers = ['.ci', '.git', '.svn', '.hg'] " .ci is useful
-let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }
+let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }   " cpsm is fast!
 
 " Use ag for searching, if available; otherwise fall back to find
 if executable("ag")
@@ -195,9 +189,8 @@ let g:ctrlp_user_command = {
   \ }
 
 " == delimitMate == {{{2
-let g:delimitMate_expand_cr = 1     " Create line break when pressing enter
-let g:delimitMate_expand_space = 1  " Expand spaces inside delimiters
-let g:delimitMate_autoclose = 1     " Auto-close brackets
+let g:delimitMate_expand_cr = 1               " Create line break on enter
+let g:delimitMate_expand_space = 1            " Expand spaces inside delimiters
 let g:delimitMate_nesting_quotes = ['"', '`'] " Allows for triple quotes
 
 " == NERDTree == {{{2
@@ -261,6 +254,16 @@ let b:personal_wiki = { 'path': '~/Dropbox/wiki/personal' }
 let g:vimwiki_list = [b:personal_wiki]
 au BufRead,BufNewFile *.wiki setlocal textwidth=80
 
+let g:hardtime_default_on = 1
+
+" == vim-sneak == {{{2
+nmap gs <Plug>Sneak_s
+nmap gS <Plug>Sneak_S
+xmap gs <Plug>Sneak_s
+xmap gS <Plug>Sneak_S
+omap gs <Plug>Sneak_s
+omap gS <Plug>Sneak_S
+
 " }}}1
 " == Keymaps == {{{1
 
@@ -314,6 +317,13 @@ nmap <silent> gK <Plug>DashSearch
 " == Slimux == {{{2
 nmap <C-c><C-c> :SlimuxREPLSendLine<CR>
 vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
+
+" == vim-easy-align == {{{2
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" == CamelCaseMotion == {{{2
+call camelcasemotion#CreateMotionMappings(',')
 
 " }}}1
 " == Modeline == {{{1
