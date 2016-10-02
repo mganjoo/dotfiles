@@ -224,9 +224,7 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
 " == lightline == {{{2
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans'
-      \ }
+let g:lightline = { 'colorscheme': 'jellybeans' }
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
@@ -248,17 +246,8 @@ let b:personal_wiki = { 'path': '~/Dropbox/wiki/personal' }
 let g:vimwiki_list = [b:personal_wiki]
 au BufRead,BufNewFile *.wiki setlocal textwidth=80
 
-let g:hardtime_default_on = 1
-
-" == vim-sneak == {{{2
-nmap gs <Plug>Sneak_s
-nmap gS <Plug>Sneak_S
-xmap gs <Plug>Sneak_s
-xmap gS <Plug>Sneak_S
-omap gs <Plug>Sneak_s
-omap gS <Plug>Sneak_S
-
 " }}}1
+
 " == Keymaps == {{{1
 
 " == Tab manipulation == {{{2
@@ -318,6 +307,14 @@ nmap ga <Plug>(EasyAlign)
 
 " == CamelCaseMotion == {{{2
 call camelcasemotion#CreateMotionMappings(',')
+
+" == vim-sneak == {{{2
+nmap gs <Plug>Sneak_s
+nmap gS <Plug>Sneak_S
+xmap gs <Plug>Sneak_s
+xmap gS <Plug>Sneak_S
+omap gs <Plug>Sneak_s
+omap gS <Plug>Sneak_S
 
 " }}}1
 " == Modeline == {{{1
