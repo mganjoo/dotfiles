@@ -7,8 +7,8 @@ tap 'caskroom/fonts'
 tap 'homebrew/versions'
 
 # Languages
-brew 'python3'
 brew 'python'
+brew 'python3'
 
 # Dotfiles sync tool
 brew 'thoughtbot/formulae/rcm'
@@ -38,7 +38,6 @@ brew 'terminal-notifier'
 brew 'fswatch'
 brew 'tree'
 brew 'watch'
-brew 'dropbox-uploader'
 brew 'fasd'
 brew 'sshrc'
 
@@ -97,10 +96,13 @@ cask 'whatsapp'
 
 # Haskell
 cask 'haskell-platform'
-cask 'pandoc'
+brew 'pandoc'
 
 # Java
 cask 'java' unless system '/usr/libexec/java_home --failfast'
+
+# Anaconda
+cask 'anaconda'
 
 # TeX
 cask 'mactex'
