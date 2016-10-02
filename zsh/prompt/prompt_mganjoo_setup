@@ -143,6 +143,7 @@ prompt_mganjoo_setup() {
   done
 
   zstyle ':prompt:virtualenv' format ' %F{green}(%v)%f'
+  zstyle ':prompt:condaenv' format ' %F{green}(%v)%f'
 
   local prompt_symbol="${PROMPT_SYMBOL:-%%}"
   zstyle ':prompt:indicator:keymap:insert' format \
@@ -150,7 +151,7 @@ prompt_mganjoo_setup() {
   zstyle ':prompt:indicator:keymap:command' format \
     "${prompt_symbol}"
 
-  PROMPT='%F{yellow}${prompt_pwd}%f${vcs_info_msg_0_}${python_info[virtualenv]}
+  PROMPT='%F{yellow}${prompt_pwd}%f${vcs_info_msg_0_}${python_info[virtualenv]}${python_info[condaenv]}
 ${editor_info[keymap]} '
   RPROMPT='${prompt_timestamp[elapsed]}${prompt_timestamp[datetime]}'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '

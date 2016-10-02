@@ -48,8 +48,11 @@ Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    
 
 # == Plugins ==
 
-# virtualenvwrapper
-if (( $+commands[virtualenvwrapper.sh] )); then
+if [[ -d "$HOME/anaconda3/bin" ]]; then
+  # anaconda
+  export PATH="$HOME/anaconda3/bin:$PATH"
+elif (( $+commands[virtualenvwrapper.sh] )); then
+  # virtualenvwrapper
   export WORKON_HOME="$HOME/.virtualenvs"
   export PROJECT_HOME="$HOME/workspace"
   VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -71,12 +74,6 @@ export FZF_TMUX=0
 export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# ghc
-export GHC_DOT_APP="/Applications/ghc-7.10.2.app"
-if [ -d "$GHC_DOT_APP" ]; then
-  export PATH="${HOME}/.local/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
-fi
 
 # run-help
 autoload run-help

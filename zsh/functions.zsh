@@ -38,15 +38,23 @@ wdiff() {
 python-info() {
   local virtualenv_format
   local virtualenv_formatted
+  local condaenv_format
+  local condaenv_formatted
 
   # Clean up previous $python_info.
   unset python_info
   typeset -gA python_info
 
-  # Format virtualenv.
+  # Format virtualenv and conda environment.
   if [[ -n "$VIRTUAL_ENV" ]]; then
     zstyle -s ':prompt:virtualenv' format 'virtualenv_format'
     zformat -f virtualenv_formatted "$virtualenv_format" "v:${VIRTUAL_ENV:t}"
     python_info[virtualenv]="$virtualenv_formatted"
+  fi
+
+  if [[ -n "$CONDA_PREFIX" ]]; then
+    zstyle -s ':prompt:condaenv' format 'condaenv_format'
+    zformat -f condaenv_formatted "$condaenv_format" "v:${CONDA_PREFIX:t}"
+    python_info[condaenv]="$condaenv_formatted"
   fi
 }
