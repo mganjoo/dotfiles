@@ -58,3 +58,8 @@ python-info() {
     python_info[condaenv]="$condaenv_formatted"
   fi
 }
+
+# Pager for jq.
+jqp() {
+  jq -C "$@" | less -R
+}
