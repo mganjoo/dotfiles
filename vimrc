@@ -30,6 +30,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'edkolev/tmuxline.vim'
 
 " UI enhancements
 Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
@@ -224,7 +225,7 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
 " == lightline == {{{2
-let g:lightline = { 'colorscheme': 'jellybeans' }
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
