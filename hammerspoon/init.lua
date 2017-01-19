@@ -210,9 +210,9 @@ end)
 
 -- }}}2
 
--- == Spotify == {{{1
+-- == iTunes == {{{1
 
-hs.hotkey.bind(mash, "i", hs.spotify.displayCurrentTrack)
+hs.hotkey.bind(mash, "i", hs.itunes.displayCurrentTrack)
 
 -- == Machine-specific application list == {{{1
 
