@@ -112,3 +112,6 @@ cask 'skim'
 
 # Fonts
 cask 'font-fira-mono'
+
+# Keyboard
+cask 'karabiner-elements'
