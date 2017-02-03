@@ -248,7 +248,6 @@ let g:vimwiki_list = [b:personal_wiki]
 au BufRead,BufNewFile *.wiki setlocal textwidth=80
 
 " }}}1
-
 " == Keymaps == {{{1
 
 " == Tab manipulation == {{{2
