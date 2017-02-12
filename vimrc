@@ -30,7 +30,6 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'edkolev/tmuxline.vim'
 
 " UI enhancements
 Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
