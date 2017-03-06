@@ -67,3 +67,6 @@ DerivedData
 *.synctex.gz
 *.synctex.gz(busy)
 *.run.xml
+
+# R
+.Rhistory
