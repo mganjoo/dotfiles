@@ -5,6 +5,7 @@ tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'caskroom/fonts'
 tap 'homebrew/versions'
+tap 'neovim/neovim'
 
 # Languages
 brew 'python'
@@ -77,6 +78,7 @@ cask 'r'
 cask 'rstudio'
 cask 'iterm2-beta'
 cask 'intellij-idea-ce'
+cask 'neovim'
 
 # Organizer
 cask 'omnifocus'
