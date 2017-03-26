@@ -20,6 +20,7 @@ brew 'git-extras'
 
 # Programming tools
 brew 'vim', args: ['with-lua', 'override-system-vi']
+brew 'neovim'
 brew 'ag'
 brew 'ctags'
 brew 'cscope'
@@ -78,7 +79,6 @@ cask 'r'
 cask 'rstudio'
 cask 'iterm2-beta'
 cask 'intellij-idea-ce'
-cask 'neovim'
 
 # Organizer
 cask 'omnifocus'
@@ -94,14 +94,20 @@ cask 'vlc'
 
 # Social
 cask 'skype'
-cask 'whatsapp'
+cask 'franz'
+
+# Java
+cask 'java' unless system '/usr/libexec/java_home --failfast'
+
+# Fonts
+cask 'font-fira-mono'
+
+# Keyboard
+cask 'karabiner-elements'
 
 # Haskell
 cask 'haskell-platform'
 brew 'pandoc'
-
-# Java
-cask 'java' unless system '/usr/libexec/java_home --failfast'
 
 # Anaconda
 cask 'anaconda'
@@ -111,9 +117,3 @@ cask 'mactex'
 
 # Reading
 cask 'skim'
-
-# Fonts
-cask 'font-fira-mono'
-
-# Keyboard
-cask 'karabiner-elements'
