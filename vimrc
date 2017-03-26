@@ -216,6 +216,11 @@ au BufWritePost *.py Neomake
 " == markdown == {{{2
 let g:vim_markdown_folding_disabled = 1
 
+" == python (neovim) == {{{2
+let b:brew_prefix = substitute(system("brew --prefix"), '\n\+$', '', '')
+let g:python_host_prog = b:brew_prefix . "/bin/python"
+let g:python3_host_prog = b:brew_prefix . "/bin/python3"
+
 " == tmux-complete.vim == {{{2
 let g:tmuxcomplete#trigger = ''
 
