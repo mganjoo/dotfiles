@@ -24,6 +24,7 @@ My configuration files.
         cd ~/.dotfiles
         brew install python python3 ruby
         rehash
+        brew tap homebrew/bundle
         brew bundle
 
 6. Install Git submodules for repository:
