@@ -51,6 +51,7 @@ brew 'fasd'
 brew 'sshrc'
 brew 'asciinema'
 brew 'lorem'
+brew 'browser'
 
 # Libraries
 brew 'boost'

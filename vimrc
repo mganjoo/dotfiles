@@ -60,6 +60,7 @@ Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'rodjek/vim-puppet', { 'for': 'puppet' }
 Plug 'edma2/vim-pants'
+Plug 'mustache/vim-mustache-handlebars'
 
 " Autocompletion
 Plug 'Shougo/neocomplete.vim'
