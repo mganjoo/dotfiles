@@ -25,7 +25,7 @@ brew 'git'
 brew 'git-extras'
 
 # Programming tools
-brew 'vim', args: ['with-lua', 'override-system-vi']
+brew 'vim'
 brew 'neovim'
 brew 'the_silver_searcher'
 brew 'ctags'
@@ -60,9 +60,6 @@ brew 'boost'
 brew 'tmux'
 brew 'reattach-to-user-namespace', args: ['with-wrap-pbcopy-and-pbpaste']
 
-# Note: requires Xcode
-brew 'macvim', args: ['with-lua']
-
 # Diff tools
 brew 'colordiff'
 brew 'wdiff'
@@ -92,12 +89,13 @@ mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
 
 # Developer
+mas 'Xcode', id: 497799835
 cask 'dash'
 cask 'r'
 cask 'rstudio'
 cask 'iterm2-beta'
 cask 'intellij-idea-ce'
-mas 'Xcode', id: 497799835
+cask 'macvim'
 cask 'vimr'
 
 # Office
