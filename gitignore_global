@@ -70,3 +70,6 @@ DerivedData
 
 # R
 .Rhistory
+
+# Arcanist
+.arclint
