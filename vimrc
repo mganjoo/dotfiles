@@ -63,7 +63,6 @@ Plug 'edma2/vim-pants'
 Plug 'mustache/vim-mustache-handlebars'
 
 " Autocompletion
-" Plug 'Shougo/neocomplete.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'wellle/tmux-complete.vim'
