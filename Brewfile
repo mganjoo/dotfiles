@@ -38,6 +38,7 @@ brew 'ssh-copy-id'
 brew 'peco'
 brew 'jq'
 brew 'd12frosted/emacs-plus/emacs-plus'
+brew 'emacs'
 
 # Terminal
 brew 'readline'
