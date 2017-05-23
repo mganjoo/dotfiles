@@ -32,7 +32,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 
 " UI enhancements
-Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 
@@ -188,10 +187,6 @@ let g:delimitMate_expand_cr = 1               " Create line break on enter
 let g:delimitMate_expand_space = 1            " Expand spaces inside delimiters
 let g:delimitMate_nesting_quotes = ['"', '`'] " Allows for triple quotes
 
-" == NERDTree == {{{2
-let g:NERDTreeChDirMode = 3                  " Change on root change
-let g:nerdtree_tabs_open_on_gui_startup = 0  " Don't open NERDTree tabs
-
 " == vim-signify == {{{2
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_sign_overwrite = 1
@@ -275,7 +270,6 @@ set pastetoggle=<F6>
 nnoremap <silent> <Leader>vv :source ~/.vimrc<CR>
 
 " == Bindings to show panels == {{{2
-nnoremap <silent> <Leader>n :NERDTreeTabsToggle<CR>
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 
 " == Bindings to enable/disable plugins == {{{2
