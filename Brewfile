@@ -37,6 +37,7 @@ brew 'markdown'
 brew 'ssh-copy-id'
 brew 'peco'
 brew 'jq'
+brew 'd12frosted/emacs-plus/emacs-plus'
 
 # Terminal
 brew 'readline'
@@ -96,7 +97,6 @@ cask 'rstudio'
 cask 'iterm2-beta'
 cask 'intellij-idea-ce'
 cask 'macvim'
-cask 'vimr'
 
 # Office
 mas 'Keynote', id: 409183694
