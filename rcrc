@@ -1,6 +1,6 @@
 DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
 EXCLUDES="fonts requirements README.md update.sh"
-SYMLINK_DIRS="external"
+SYMLINK_DIRS="external emacs.d"
 UNDOTTED="bin"
 
 # vim: ft=sh
