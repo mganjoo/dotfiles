@@ -16,3 +16,6 @@
 [submodule "tmux/external/copycat"]
 	path = tmux/external/copycat
 	url = https://github.com/tmux-plugins/tmux-copycat
+[submodule "emacs.d"]
+	path = emacs.d
+	url = https://github.com/syl20bnr/spacemacs
