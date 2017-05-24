@@ -1,12 +1,13 @@
 # vim: foldmethod=marker:fen
 
-# == Pre-load user customizations == {{{1
+# == Pre-load customizations == {{{1
 if [ -d ~/.zsh.before/ ]; then
   for config_file (~/.zsh.before/*.zsh); do
     source $config_file
   done
 fi
 
+# Add ~/bin to PATH
 if [ -d $HOME/bin/ ]; then
   path=(
     $HOME/bin
@@ -395,73 +396,6 @@ if command -v brew > /dev/null 2>&1; then
   unset aws_completion_file
 fi
 
-# == Functions == {{{1
-
-# Configure version of Java used.
-if [[ "$OSTYPE" == darwin* ]]; then
-  java_use() {
-    export JAVA_HOME=$(/usr/libexec/java_home -v $1)
-  }
-fi
-
-# Generalized diff.
-diff() {
-  if (( $+commands[colordiff] )); then
-    command diff --unified "$@" | colordiff
-  elif (( $+commands[git] )); then
-    git --no-pager diff --color=auto --no-ext-diff --no-index "$@"
-  else
-    command diff --unified "$@"
-  fi
-}
-
-# Word-based diff.
-wdiff() {
-  if (( $+commands[wdiff] )); then
-    command wdiff \
-      --avoid-wraps \
-      --start-delete="$(print -n $FG[red])" \
-      --end-delete="$(print -n $FG[none])" \
-      --start-insert="$(print -n $FG[green])" \
-      --end-insert="$(print -n $FG[none])" \
-      "$@" \
-      | sed 's/^\(@@\( [+-][[:digit:]]*,[[:digit:]]*\)\{2\} @@\)$/;5;6m\10m/g'
-  elif (( $+commands[git] )); then
-    git --no-pager diff --color=auto --no-ext-diff --no-index --color-words "$@"
-  else
-    command wdiff "$@"
-  fi
-}
-
-# Python information.
-python-info() {
-  local virtualenv_format
-  local virtualenv_formatted
-  local condaenv_format
-  local condaenv_formatted
-
-  # Clean up previous $python_info.
-  unset python_info
-  typeset -gA python_info
-
-  # Format virtualenv and conda environment.
-  if [[ -n "$VIRTUAL_ENV" ]]; then
-    zstyle -s ':prompt:virtualenv' format 'virtualenv_format'
-    zformat -f virtualenv_formatted "$virtualenv_format" "v:${VIRTUAL_ENV:t}"
-    python_info[virtualenv]="$virtualenv_formatted"
-  fi
-
-  if [[ -n "$CONDA_PREFIX" ]]; then
-    zstyle -s ':prompt:condaenv' format 'condaenv_format'
-    zformat -f condaenv_formatted "$condaenv_format" "v:${CONDA_PREFIX:t}"
-    python_info[condaenv]="$condaenv_formatted"
-  fi
-}
-
-# Pager for jq.
-jqp() {
-  jq -C "$@" | less -R
-}
 
 # == Settings == {{{1
 
@@ -523,9 +457,9 @@ setopt HIST_SAVE_NO_DUPS       # Do not write a duplicate event to the history f
 setopt HIST_VERIFY             # Do not execute immediately upon history expansion.
 setopt HIST_BEEP               # Beep when accessing non-existent history.
 
-# == Colorizing == {{{2
+# Colorizing {{{2
 
-# Colorize less {{{3
+# Colorize less
 export LESS_TERMCAP_mb=$'\E[01;31m'     # Begins blinking.
 export LESS_TERMCAP_md=$'\E[01;31m'     # Begins bold.
 export LESS_TERMCAP_me=$'\E[0m'         # Ends mode.
@@ -534,52 +468,16 @@ export LESS_TERMCAP_so=$'\E[00;47;30m'  # Begins standout-mode.
 export LESS_TERMCAP_ue=$'\E[0m'         # Ends underline.
 export LESS_TERMCAP_us=$'\E[01;32m'     # Begins underline.
 
-# Colorize ls {{{3
+# Colorize ls
 export CLICOLOR=1
 if [[ "$OSTYPE" == darwin* ]]; then
   export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 fi
 
-# }}}2
-# == History configuration == {{{2
-
-HISTFILE="$HOME/.zhistory"  # Path to the history file.
-HISTSIZE=10000              # Max number of events to store in session.
-SAVEHIST=10000              # Max number of history events to save.
-
-# == Editor and viewers == {{{2
-
-# / and = are not considered part of a word.
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
-
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-export LESS='-F -g -i -M -R -S -w -X -z-4'
-
-# Set the Less input preprocessor.
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-fi
-
-# == Plugins == {{{2
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'  # Case insensitive.
-
-# == Bindings and widgets == {{{2
+# }}}1
+# == Bindings and widgets == {{{1
 
 source ~/.zsh/editor.zsh
-
-# }}}1
-# == Modularized configuration == {{{1
-
-# Load file with sensitive information that shouldn't be checked in
-if [ -e ~/.secrets ]; then
-  source ~/.secrets
-fi
 
 # == Appearance == {{{1
 
@@ -633,12 +531,31 @@ export FZF_TMUX=0
 export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # run-help {{{2
 autoload run-help
 if command -v brew > /dev/null 2>&1; then
   HELPDIR=$(brew --prefix)/share/zsh/help
 fi
+
+# zsh-users plugins (order of loading matters) {{{2
+
+# Set up options
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'  # Case insensitive.
+
+source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# History substring search (from zsh-history-substring-search plugin).
+# TODO: Move to bindings (editor.zsh)
+bindkey -M viins "^p" history-substring-search-up
+bindkey -M viins "^n" history-substring-search-down
+bindkey -M vicmd "k" history-substring-search-up
+bindkey -M vicmd "j" history-substring-search-down
+bindkey -M viins "$keycode[Up]" history-substring-search-up
+bindkey -M viins "$keycode[Down]" history-substring-search-down
 
 # }}}1
 # == Post-load user customizations == {{{1
@@ -648,17 +565,3 @@ if [ -d ~/.zsh.after/ ]; then
     source $config_file
   done
 fi
-
-# zsh-users plugins (order of loading matters) {{{2
-source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-# History substring search (from zsh-history-substring-search plugin). {{{2
-bindkey -M viins "^p" history-substring-search-up
-bindkey -M viins "^n" history-substring-search-down
-bindkey -M vicmd "k" history-substring-search-up
-bindkey -M vicmd "j" history-substring-search-down
-bindkey -M viins "$keycode[Up]" history-substring-search-up
-bindkey -M viins "$keycode[Down]" history-substring-search-down
-
-# }}}1
