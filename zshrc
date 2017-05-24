@@ -3,7 +3,6 @@
 # == Non-interactive plugins == {{{1
 
 # fasd
-
 if (( $+commands[fasd] )); then
   eval "$(fasd --init auto)"
 fi
@@ -231,11 +230,6 @@ alias tkt='tmux kill-session -t'
 # Tmuxifier
 alias txs='tmuxifier s'
 alias txes='tmuxifier es'
-
-# File Download
-if (( $+commands[curl] )); then
-  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
-fi
 
 # fasd
 alias v='LANG=c f -t -e vim -b viminfo'
