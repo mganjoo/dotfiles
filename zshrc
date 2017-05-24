@@ -530,10 +530,8 @@ bindkey -M viins "$keycode[Up]" history-substring-search-up
 bindkey -M viins "$keycode[Down]" history-substring-search-down
 
 # }}}1
-# == Post-load user customizations == {{{1
+# == Source .zshrc_local file == {{{1
 
-if [ -d ~/.zsh.after/ ]; then
-  for config_file (~/.zsh.after/*.zsh); do
-    source $config_file
-  done
+if [ -e ~/.zshrc_local ]; then
+  source ~/.zshrc_local
 fi
