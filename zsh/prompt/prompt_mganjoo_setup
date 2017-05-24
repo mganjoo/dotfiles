@@ -1,5 +1,3 @@
-# Custom prompt definition.
-
 # Configuration for this prompt:
 # * VCS_INFO_DISABLE: completely disable calls to vcs_info.
 # * VCS_INFO_GIT_LESS_INFO_REPOS: array of repo names to show less vcs_info in
