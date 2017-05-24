@@ -1,20 +1,5 @@
 # vim: foldmethod=marker:fen
 
-# == Pre-load customizations == {{{1
-if [ -d ~/.zsh.before/ ]; then
-  for config_file (~/.zsh.before/*.zsh); do
-    source $config_file
-  done
-fi
-
-# Add ~/bin to PATH
-if [ -d $HOME/bin/ ]; then
-  path=(
-    $HOME/bin
-    $path
-  )
-fi
-
 # == Aliases == {{{1
 
 # Add noglob to major commands
@@ -502,35 +487,22 @@ Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    
 Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
 
 # }}}1
-# == Plugins == {{{1
+# == Interactive plugins == {{{1
 
-# anaconda or virtualenv {{{2
-if [[ -d "$HOME/anaconda3/bin" ]]; then
-  # anaconda
-  export PATH="$HOME/anaconda3/bin:$PATH"
-elif (( $+commands[virtualenvwrapper.sh] )); then
-  # virtualenvwrapper
-  export WORKON_HOME="$HOME/.virtualenvs"
-  export PROJECT_HOME="$HOME/workspace"
-  VIRTUAL_ENV_DISABLE_PROMPT=1
-  source $commands[virtualenvwrapper.sh]
+# lesspipe.sh {{{2
+if (( $+commands[lesspipe.sh] )); then
+  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
 fi
-
-# zmv {{{2
-autoload -U zmv
 
 # fasd {{{2
 eval "$(fasd --init auto)"
-
-# tmuxifier {{{2
-export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
-eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
 
 # fzf {{{2
 export FZF_TMUX=0
 export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # run-help {{{2
 autoload run-help
 if command -v brew > /dev/null 2>&1; then

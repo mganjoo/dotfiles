@@ -16,11 +16,6 @@ export VISUAL='vim'
 export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
-# Set the Less input preprocessor.
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-fi
-
 # == Functions == {{{1
 
 # Configure version of Java used.
@@ -88,6 +83,10 @@ python-info() {
 jqp() {
   jq -C "$@" | less -R
 }
+
+# == zmv == {{{1
+
+autoload -U zmv
 
 # == Secrets == {{{1
 
