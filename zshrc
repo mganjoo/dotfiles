@@ -1,4 +1,6 @@
-# == Pre-load user customizations ==
+# vim: foldmethod=marker:fen
+
+# == Pre-load user customizations == {{{1
 if [ -d ~/.zsh.before/ ]; then
   for config_file (~/.zsh.before/*.zsh); do
     source $config_file
@@ -12,7 +14,8 @@ if [ -d $HOME/bin/ ]; then
   )
 fi
 
-# == Modularized configuration ==
+# }}}1
+# == Modularized configuration == {{{1
 
 # Source large configuration modules.
 for config_file (~/.zsh/*.zsh); do
@@ -24,15 +27,16 @@ if [ -e ~/.secrets ]; then
   source ~/.secrets
 fi
 
-# == Appearance ==
+# }}}1
+# == Appearance == {{{1
 
-# Prompt.
+# Prompt {{{2
 fpath=( ~/.zsh/prompt $fpath )
 autoload -Uz promptinit
 promptinit
 prompt 'mganjoo'
 
-# Colors
+# Colors {{{2
 
 RCol='\e[0m'    # Text Reset
 
@@ -46,8 +50,10 @@ Pur='\e[0;35m';     BPur='\e[1;35m';    UPur='\e[4;35m';    IPur='\e[0;95m';    
 Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    BICya='\e[1;96m';   On_Cya='\e[46m';    On_ICya='\e[0;106m';
 Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
 
-# == Plugins ==
+# }}}1
+# == Plugins == {{{1
 
+# anaconda or virtualenv {{{2
 if [[ -d "$HOME/anaconda3/bin" ]]; then
   # anaconda
   export PATH="$HOME/anaconda3/bin:$PATH"
@@ -59,40 +65,42 @@ elif (( $+commands[virtualenvwrapper.sh] )); then
   source $commands[virtualenvwrapper.sh]
 fi
 
-# zmv
+# zmv {{{2
 autoload -U zmv
 
-# fasd
+# fasd {{{2
 eval "$(fasd --init auto)"
 
-# tmuxifier
+# tmuxifier {{{2
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
 eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
 
-# fzf
+# fzf {{{2
 export FZF_TMUX=0
 export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# run-help
+# run-help {{{2
 autoload run-help
 if command -v brew > /dev/null 2>&1; then
   HELPDIR=$(brew --prefix)/share/zsh/help
 fi
 
-# == Post-load user customizations ==
+# }}}1
+# == Post-load user customizations == {{{1
+
 if [ -d ~/.zsh.after/ ]; then
   for config_file (~/.zsh.after/*.zsh); do
     source $config_file
   done
 fi
 
-# zsh-users plugins (order of loading matters)
+# zsh-users plugins (order of loading matters) {{{2
 source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# History substring search (from zsh-history-substring-search plugin).
+# History substring search (from zsh-history-substring-search plugin). {{{2
 bindkey -M viins "^p" history-substring-search-up
 bindkey -M viins "^n" history-substring-search-down
 bindkey -M vicmd "k" history-substring-search-up
@@ -100,3 +108,4 @@ bindkey -M vicmd "j" history-substring-search-down
 bindkey -M viins "$keycode[Up]" history-substring-search-up
 bindkey -M viins "$keycode[Down]" history-substring-search-down
 
+# }}}1
