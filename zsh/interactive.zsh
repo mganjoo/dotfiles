@@ -187,9 +187,6 @@ keycode=(
 
 # == Interactive plugins == {{{1
 
-# fasd {{{2
-eval "$(fasd --init auto)"
-
 # lesspipe.sh {{{2
 if (( $+commands[lesspipe.sh] )); then
   export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
@@ -209,7 +206,6 @@ fi
 
 # zsh-users plugins (order of loading matters) {{{2
 
-# Set up options
 ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'

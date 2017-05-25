@@ -1,21 +1,14 @@
 # vim: foldmethod=marker:fen
 
-# == Non-interactive plugins == {{{1
-
-# fasd
-if (( $+commands[fasd] )); then
-  eval "$(fasd --init auto)"
-fi
-
 # == Aliases == {{{1
 
-# Add noglob to major commands
+# Add noglob so we use references like ^foo
 alias git='noglob git'
 
 # Viewing processes
-alias psa="ps aux"
+alias psa="ps aux | less"
 alias psg="ps aux | grep "
-alias psp="ps aux | peco "
+alias psf="ps aux | fzf -m"
 
 # Moving around
 alias ..='cd ..'
@@ -32,20 +25,17 @@ alias du='du -h -d 2'
 
 # Long form ls with hidden info
 alias ll="ls -lh"
-alias la="${aliases[ll]:-ls -lh} -a"
+alias la="ls -lah"
 
 # show me files matching "ls grep"
-alias lsg='ll | grep'
-alias lsp='ll | peco'
+alias lsg='ll | grep '
+alias lsp='ll | fzf -m'
 
 # Being careful on most commands
-alias cp="${aliases[cp]:-cp} -i"
-alias ln="${aliases[ln]:-ln} -i"
-alias mv="${aliases[mv]:-mv} -i"
-alias rm="${aliases[rm]:-rm} -i"
-
-# Git
-alias g='git'
+alias cp="cp -i"
+alias ln="ln -i"
+alias mv="mv -i"
+alias rm="rm -i"
 
 # Branch (b)
 alias gb='git branch'
@@ -206,7 +196,6 @@ alias gup='git up'
 
 # Common shell functions
 alias less='less -r'
-alias l='less'
 
 # Archive files
 alias guz='tar -zxvf'
@@ -215,7 +204,6 @@ alias buz='tar -jxvf'
 alias bz='tar -jcvf'
 
 # Kill
-alias ka9='killall -9'
 alias k9='kill -9'
 
 # Tmux aliases
@@ -227,7 +215,7 @@ alias tat='tmux attach -t'
 alias tk='tmux kill-session'
 alias tkt='tmux kill-session -t'
 
-# Tmuxifier
+# tmuxifier
 alias txs='tmuxifier s'
 alias txes='tmuxifier es'
 
@@ -237,15 +225,8 @@ alias v='LANG=c f -t -e vim -b viminfo'
 # zmv
 alias zmv='noglob zmv'
 
-# homebrew
-alias brup="brew update"
-alias brug="brew upgrade"
-
 # Serves a directory via HTTP
 alias http-serve='python -m SimpleHTTPServer'
-
-# List 10 most used commands (or -n <number>)
-alias hist-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
 # List Java versions available
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -313,9 +294,16 @@ setopt HIST_VERIFY             # Do not execute immediately upon history expansi
 setopt HIST_BEEP               # Beep when accessing non-existent history.
 
 # }}}1
-# == Interactive stuff (not for dumb terminals) == {{{1
+# == Interactive (not for dumb terminals) == {{{1
 
 source ~/.zsh/interactive.zsh
+
+# == Additional plugins == {{{1
+
+# fasd
+if (( $+commands[fasd] )); then
+  eval "$(fasd --init auto)"
+fi
 
 # == Source .zshrc_local file == {{{1
 
