@@ -313,7 +313,9 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq
    ;; We use symlinks for managing dotfiles, so follow by default.
-   vc-follow-symlinks t))
+   vc-follow-symlinks t
+   ;; No fancy powerline separators.
+   powerline-default-separator 'nil))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
