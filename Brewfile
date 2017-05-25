@@ -27,6 +27,7 @@ brew 'git-extras'
 # Programming tools
 brew 'vim'
 brew 'neovim'
+brew 'macvim'
 brew 'the_silver_searcher'
 brew 'ctags'
 brew 'cscope'
@@ -97,7 +98,6 @@ cask 'r'
 cask 'rstudio'
 cask 'iterm2-beta'
 cask 'intellij-idea-ce'
-cask 'macvim'
 
 # Office
 mas 'Keynote', id: 409183694
