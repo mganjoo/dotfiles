@@ -73,6 +73,7 @@ Plug 'tpope/vim-fugitive'
 
 " Organization
 Plug 'vimwiki/vimwiki'
+Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -136,9 +137,9 @@ set laststatus=2   " Always show the status line
 set listchars=tab:▸\ ,trail:·
 
 " == Theme == {{{1
-set background=dark
+set background=light
 set t_Co=256
-silent! colorscheme gruvbox
+silent! colorscheme solarized
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 " == Enhancements == {{{1
@@ -226,7 +227,7 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
 " == lightline == {{{2
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = { 'colorscheme': 'solarized' }
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
