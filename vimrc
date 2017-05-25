@@ -28,6 +28,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Appearance
 Plug 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 
