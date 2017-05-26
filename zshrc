@@ -62,8 +62,6 @@ alias gcP='git cherry-pick --no-commit'
 alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcs='git show'
-alias gcl='git-commit-lost'
-alias gunc='git uncommit'
 
 # Conflict (C)
 alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
@@ -142,18 +140,14 @@ alias gRm='git remote rename'
 alias gRu='git remote update'
 alias gRp='git remote prune'
 alias gRs='git remote show'
-alias gRb='git-hub-browse'
 
 # Stash (s)
 alias gs='git stash'
 alias gsa='git stash apply'
 alias gsx='git stash drop'
-alias gsX='git-stash-clear-interactive'
 alias gsl='git stash list'
-alias gsL='git-stash-dropped'
 alias gsd='git stash show --patch --stat'
 alias gsp='git stash pop'
-alias gsr='git-stash-recover'
 alias gss='git stash save --include-untracked'
 alias gsS='git stash save --patch --no-keep-index'
 alias gsw='git stash save --include-untracked --keep-index'
@@ -224,9 +218,6 @@ alias v='LANG=c f -t -e vim -b viminfo'
 
 # zmv
 alias zmv='noglob zmv'
-
-# Serves a directory via HTTP
-alias http-serve='python -m SimpleHTTPServer'
 
 # List Java versions available
 if [[ "$(uname)" == "Darwin" ]]; then
