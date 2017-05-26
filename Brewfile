@@ -36,7 +36,6 @@ brew 'homebrew/dupes/rsync'
 brew 'lesspipe', args: ['syntax-highlighting']
 brew 'markdown'
 brew 'ssh-copy-id'
-brew 'peco'
 brew 'jq'
 brew 'd12frosted/emacs-plus/emacs-plus'
 brew 'emacs'
