@@ -13,6 +13,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package better-defaults :ensure t)
+
 (use-package evil
   :ensure t
   :config
