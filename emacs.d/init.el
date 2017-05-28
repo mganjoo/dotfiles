@@ -83,8 +83,7 @@
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
   ;; Use C-z to list actions
   (define-key helm-map (kbd "C-z")  'helm-select-action)
-
-  ;; Bindings
+  ;; Use enhanced M-x.
   (global-set-key (kbd "M-x") 'helm-M-x)
 
   (use-package helm-descbinds
@@ -92,15 +91,16 @@
     :config
     (helm-descbinds-mode))
 
-  ;; Get rid of cursor in helm buffers.
-  (add-hook 'helm-after-initialize-hook
-            (lambda ()
-              ;; To fix error at compile:
-              ;; Forgot to expand macro with-helm-buffer in
-              ;; (with-helm-buffer (setq cursor-in-non-selected-windows nil))
-              (if (version< "26.0.50" emacs-version)
-                  (eval-when-compile (require 'helm-lib)))
-              (with-helm-buffer (setq cursor-in-non-selected-windows nil)))))
+  (defun mg--remove-cursor-in-helm-buffers ()
+    "Remove cursor in helm buffers."
+    (with-helm-buffer (setq cursor-in-non-selected-windows nil)))
+  (add-hook 'helm-after-initialize-hook 'mg--remove-cursor-in-helm-buffers))
+
+(use-package which-key
+  :ensure t
+  :diminish which-key-mode
+  :config
+  (which-key-mode))
 
 ;; Theme.
 (use-package leuven-theme
@@ -126,11 +126,24 @@
   :config
   (add-hook 'after-init-hook 'global-flycheck-mode))
 
-(use-package which-key
+(use-package exec-path-from-shell
   :ensure t
-  :diminish which-key-mode
   :config
-  (which-key-mode))
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
+(use-package nlinum-relative
+  :ensure t
+  :config
+  (nlinum-relative-setup-evil)
+  (setq nlinum-relative-redisplay-delay 0)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
+(defun mg--set-up-prog-mode ()
+  "Configure global `prog-mode' with basic defaults."
+  (setq-local comment-auto-fill-only-comments t)
+  (electric-pair-local-mode))
+(add-hook 'prog-mode-hook 'mg--set-up-prog-mode)
 
 (provide 'init)
 ;;; init.el ends here
