@@ -39,7 +39,7 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       ":"     'eval-expression
-      "<SPC>" 'execute-extended-command))
+      "<SPC>" 'helm-M-x))
 
   (evil-mode 1)
 
@@ -75,7 +75,17 @@
   :diminish helm-mode
   :config
   (helm-mode 1)
-  (define-key evil-ex-map "e" 'helm-find-files))
+  (define-key evil-ex-map "e" 'helm-find-files)
+
+  ;; Get rid of cursor in helm buffers.
+  (add-hook 'helm-after-initialize-hook
+            (lambda ()
+              ;; To fix error at compile:
+              ;; Forgot to expand macro with-helm-buffer in
+              ;; (with-helm-buffer (setq cursor-in-non-selected-windows nil))
+              (if (version< "26.0.50" emacs-version)
+                  (eval-when-compile (require 'helm-lib)))
+              (with-helm-buffer (setq cursor-in-non-selected-windows nil)))))
 
 ;; Theme.
 (use-package leuven-theme
