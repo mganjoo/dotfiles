@@ -1,4 +1,10 @@
-;; Don't litter the init file.
+;;; init.el --- My init file.
+;; -*- mode: emacs-lisp -*-
+
+;;; Commentary:
+
+;;; Code:
+
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
@@ -6,7 +12,7 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -50,3 +56,6 @@
   :ensure t
   :config
   (load-theme 'leuven t))
+
+(provide 'init)
+;;; init.el ends here
