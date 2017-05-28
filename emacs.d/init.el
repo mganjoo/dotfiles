@@ -37,4 +37,9 @@
   (use-package evil-visualstar
     :ensure t
     :config
-    (global-evil-visualstar-mode)))
+    (global-evil-visualstar-mode))
+
+  (use-package evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode)))
