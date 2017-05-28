@@ -45,7 +45,8 @@
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
       ":"     'eval-expression
-      "<SPC>" 'helm-M-x))
+      "<SPC>" 'helm-M-x
+      "e"     'flycheck-list-errors))
 
   (evil-mode 1)
 
