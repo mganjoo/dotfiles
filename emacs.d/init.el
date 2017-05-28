@@ -43,3 +43,8 @@
     :ensure t
     :config
     (evil-commentary-mode)))
+
+(use-package leuven-theme
+  :ensure t
+  :config
+  (load-theme 'leuven t))
