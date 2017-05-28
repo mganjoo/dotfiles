@@ -23,6 +23,7 @@
 ;; Basic configuration.
 (use-package better-defaults :ensure t)
 (setq inhibit-startup-screen t)
+(setq initial-scratch-message "")
 (setq vc-follow-symlinks t)
 ;; Don't show warnings for redefined functions.
 (setq ad-redefinition-action 'accept)
@@ -79,10 +80,6 @@
   :config
   (helm-mode 1)
 
-  ;; Use tab for tab completion
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  ;; Use C-z to list actions
-  (define-key helm-map (kbd "C-z")  'helm-select-action)
   ;; Use enhanced M-x.
   (global-set-key (kbd "M-x") 'helm-M-x)
 
