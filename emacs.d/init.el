@@ -24,6 +24,8 @@
 (use-package better-defaults :ensure t)
 (setq inhibit-startup-screen t)
 (setq vc-follow-symlinks t)
+;; Don't show warnings for redefined functions.
+(setq ad-redefinition-action 'accept)
 
 ;; Vimify.
 (use-package evil
@@ -58,6 +60,7 @@
     :config
     (evil-commentary-mode))
 
+  ;; Use emacs state in the following modes.
   (dolist (mode '(flycheck-error-list-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
@@ -75,7 +78,19 @@
   :diminish helm-mode
   :config
   (helm-mode 1)
-  (define-key evil-ex-map "e" 'helm-find-files)
+
+  ;; Use tab for tab completion
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  ;; Use C-z to list actions
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
+
+  ;; Bindings
+  (global-set-key (kbd "M-x") 'helm-M-x)
+
+  (use-package helm-descbinds
+    :ensure t
+    :config
+    (helm-descbinds-mode))
 
   ;; Get rid of cursor in helm buffers.
   (add-hook 'helm-after-initialize-hook
@@ -96,18 +111,24 @@
 ;; Code completion.
 (use-package company
   :ensure t
-  :defer t
+  :diminish company-mode
+  :defer 1
   :config
-  (global-company-mode))
+  (global-company-mode)
+
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previos))
 
 ;; Error checking.
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :config
   (add-hook 'after-init-hook 'global-flycheck-mode))
 
 (use-package which-key
   :ensure t
+  :diminish which-key-mode
   :config
   (which-key-mode))
 
