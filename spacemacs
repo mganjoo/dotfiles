@@ -2,7 +2,7 @@
 ;; -*- mode: emacs-lisp -*-
 
 (defun dotspacemacs/layers ()
-  "Configuration Layers declaration."
+  "Configuration layers declaration."
   (setq-default
    dotspacemacs-distribution 'spacemacs
    ;; Lazy install layers not in this file.
@@ -13,15 +13,13 @@
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     helm
+   '(helm
      auto-completion
      better-defaults
      emacs-lisp
      markdown
      org
-     themes-megapack
-     )
+     themes-megapack)
    ;; Additional, non-configured packages.
    dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
