@@ -28,6 +28,9 @@
 ;; Don't show warnings for redefined functions.
 (setq ad-redefinition-action 'accept)
 
+;; Font.
+(add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
+
 ;; Vimify.
 (use-package evil
   :ensure t
