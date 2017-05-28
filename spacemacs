@@ -45,8 +45,7 @@
    ;; Do not show a banner.
    dotspacemacs-startup-banner nil
    ;; List of items to show in startup buffer.
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists '()
    ;; Make the home buffer respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Use `text-mode' for scratch buffer.
