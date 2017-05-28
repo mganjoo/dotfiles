@@ -20,7 +20,10 @@
   (package-install 'use-package))
 (require 'diminish)
 
+;; Basic configuration.
 (use-package better-defaults :ensure t)
+(setq inhibit-startup-screen t)
+(setq vc-follow-symlinks t)
 
 ;; Vimify.
 (use-package evil
