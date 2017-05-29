@@ -28,6 +28,8 @@
 (setq
  inhibit-startup-screen t
  initial-scratch-message ""
+ visible-bell nil
+ ring-bell-function 'ignore
  column-number-mode t
  make-backup-files nil
  vc-follow-symlinks t
