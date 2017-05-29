@@ -36,6 +36,16 @@
  ad-redefinition-action 'accept ;; No warnings for redefined functions
  use-package-always-ensure t)   ;; Avoid having to do ":ensure t" everywhere
 
+;; Font.
+(add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
+
+;; Some good defaults for prog-mode.
+(defun mg--set-up-prog-mode ()
+  "Configure global `prog-mode' with basic defaults."
+  (setq-local comment-auto-fill-only-comments t)
+  (electric-pair-local-mode))
+(add-hook 'prog-mode-hook 'mg--set-up-prog-mode)
+
 ;; Some good defaults.
 (use-package better-defaults)
 
@@ -46,18 +56,25 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-;; Font.
-(add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
-
 ;; Theme.
 (use-package leuven-theme
   :config
-  (load-theme 'leuven t))
+  (load-theme 'leuven t)
+  (global-hl-line-mode 1)
+  (set-face-background 'hl-line "#ffffd7"))
+
+;; Modeline.
+(use-package powerline
+  :config
+  (use-package powerline-evil)
+  (setq powerline-default-separator 'nil)
+  (powerline-evil-center-color-theme)
+  ;; Diminish the built-in undo-tree mode from the modeline.
+  (diminish 'undo-tree-mode ))
 
 ;; Vimify.
 (use-package evil
   :config
-
   ;; Load `evil-leader' and enable mode before `evil-mode'
   ;; so it's available in every initial buffer.
   (use-package evil-leader
@@ -80,6 +97,7 @@
     (global-evil-visualstar-mode))
 
   (use-package evil-commentary
+    :diminish evil-commentary-mode
     :config
     (evil-commentary-mode))
 
@@ -111,7 +129,8 @@
   (defun mg--remove-cursor-in-helm-buffers ()
     "Remove cursor in helm buffers."
     (with-helm-buffer (setq cursor-in-non-selected-windows nil)))
-  (add-hook 'helm-after-initialize-hook 'mg--remove-cursor-in-helm-buffers))
+  (add-hook 'helm-after-initialize-hook
+            'mg--remove-cursor-in-helm-buffers))
 
 ;; Finding out what a specific binding is for.
 (use-package which-key
@@ -125,7 +144,6 @@
   :defer 1
   :config
   (global-company-mode)
-
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
@@ -142,12 +160,6 @@
   (setq nlinum-relative-redisplay-delay 0)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode))
 
-;; Some good defaults for prog-mode.
-(defun mg--set-up-prog-mode ()
-  "Configure global `prog-mode' with basic defaults."
-  (setq-local comment-auto-fill-only-comments t)
-  (electric-pair-local-mode))
-(add-hook 'prog-mode-hook 'mg--set-up-prog-mode)
 
 (provide 'init)
 ;;; init.el ends here
