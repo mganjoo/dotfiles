@@ -12,9 +12,11 @@
 ;; Package management.
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-             '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(eval-when-compile
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa-stable" . "https://stable.melpa.org/packages/")))
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -123,7 +125,7 @@
   (global-company-mode)
 
   (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previos))
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
 ;; Error checking.
 (use-package flycheck
