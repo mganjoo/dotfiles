@@ -48,8 +48,7 @@
 (defun mg/set-up-prog-mode ()
   "Configure global `prog-mode' with basic defaults."
   (setq-local comment-auto-fill-only-comments t)
-  (electric-pair-local-mode)
-  (hs-minor-mode))
+  (electric-pair-local-mode))
 (add-hook 'prog-mode-hook 'mg/set-up-prog-mode)
 
 ;; Some good defaults.
@@ -75,10 +74,7 @@
   :config
   (use-package powerline-evil)
   (setq powerline-default-separator 'nil)
-  (powerline-evil-center-color-theme)
-  ;; Diminish the built-in undo-tree mode from the modeline.
-  (diminish 'undo-tree-mode)
-  (diminish 'hs-minor-mode))
+  (powerline-evil-center-color-theme))
 
 ;; Vimify.
 (use-package evil
@@ -223,10 +219,22 @@
               (define-key deft-mode-map (kbd "C-c x")
                 'kill-this-buffer))))
 
-;; Fill column indicator
+;; Fill column indicator.
 (use-package fill-column-indicator
   :config
   (add-hook 'prog-mode-hook 'fci-mode))
+
+;; Allow folding of code blocks.
+(use-package hideshow
+  :diminish hs-minor-mode
+  :config
+  (add-hook 'prog-mode-hook 'hs-minor-mode))
+
+;; Undo tree.
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :config
+  (global-undo-tree-mode))
 
 (provide 'init)
 ;;; init.el ends here
