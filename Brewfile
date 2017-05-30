@@ -37,8 +37,8 @@ brew 'lesspipe', args: ['syntax-highlighting']
 brew 'markdown'
 brew 'ssh-copy-id'
 brew 'jq'
-brew 'd12frosted/emacs-plus/emacs-plus'
 brew 'emacs'
+brew 'd12frosted/emacs-plus/emacs-plus'
 
 # Terminal
 brew 'readline'
