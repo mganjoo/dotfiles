@@ -9,6 +9,9 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
+;; Add additional lisp packages to the load path.
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
 ;; Package management.
 (require 'package)
 (setq package-enable-at-startup nil)
