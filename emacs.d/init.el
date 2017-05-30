@@ -45,7 +45,8 @@
 (defun mg--set-up-prog-mode ()
   "Configure global `prog-mode' with basic defaults."
   (setq-local comment-auto-fill-only-comments t)
-  (electric-pair-local-mode))
+  (electric-pair-local-mode)
+  (hs-minor-mode))
 (add-hook 'prog-mode-hook 'mg--set-up-prog-mode)
 
 ;; Some good defaults.
@@ -73,7 +74,8 @@
   (setq powerline-default-separator 'nil)
   (powerline-evil-center-color-theme)
   ;; Diminish the built-in undo-tree mode from the modeline.
-  (diminish 'undo-tree-mode ))
+  (diminish 'undo-tree-mode)
+  (diminish 'hs-minor-mode))
 
 ;; Vimify.
 (use-package evil
