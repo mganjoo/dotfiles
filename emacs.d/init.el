@@ -42,12 +42,12 @@
 (add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
 
 ;; Some good defaults for prog-mode.
-(defun mg--set-up-prog-mode ()
+(defun mg/set-up-prog-mode ()
   "Configure global `prog-mode' with basic defaults."
   (setq-local comment-auto-fill-only-comments t)
   (electric-pair-local-mode)
   (hs-minor-mode))
-(add-hook 'prog-mode-hook 'mg--set-up-prog-mode)
+(add-hook 'prog-mode-hook 'mg/set-up-prog-mode)
 
 ;; Some good defaults.
 (use-package better-defaults)
@@ -92,7 +92,8 @@
       "e"     'flycheck-list-errors
       "d"     'deft
       "oa"    'org-agenda
-      "oc"    'org-capture))
+      "oc"    'org-capture
+      "ol"    'org-store-link))
 
   (evil-mode 1)
 
@@ -143,11 +144,11 @@
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-z")  'helm-select-action)
 
-  (defun mg--remove-cursor-in-helm-buffers ()
+  (defun mg/remove-cursor-in-helm-buffers ()
     "Remove cursor in helm buffers."
     (with-helm-buffer (setq cursor-in-non-selected-windows nil)))
   (add-hook 'helm-after-initialize-hook
-            'mg--remove-cursor-in-helm-buffers))
+            'mg/remove-cursor-in-helm-buffers))
 
 ;; Finding out what a specific binding is for.
 (use-package which-key
@@ -184,9 +185,21 @@
 ;; Org
 (use-package org
   :config
-  (setq org-todo-keywords
-        '((sequence "TODO" "|" "DONE")))
-  (setq org-agenda-files '("~/Dropbox/org/" "~/Dropbox/notes/")))
+  (setq
+   org-directory "~/Dropbox/org"
+   org-default-notes-file (concat org-directory "/notes.org")
+   org-todo-keywords
+   '((sequence "TODO" "|" "DONE")
+     (sequence "QUESTION" "|" "ANSWERED"))
+   org-agenda-files '("~/Dropbox/org/" "~/Dropbox/notes/")
+   org-log-done t)
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture))
+(use-package org-agenda
+  :config
+  (define-key org-agenda-mode-map "j" 'org-agenda-next-item)
+  (define-key org-agenda-mode-map "k" 'org-agenda-previous-item))
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
