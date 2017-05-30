@@ -14,6 +14,8 @@
 (setq package-enable-at-startup nil)
 (eval-when-compile
   (add-to-list 'package-archives
+               '("org" . "http://orgmode.org/elpa/") t)
+  (add-to-list 'package-archives
                '("melpa" . "https://melpa.org/packages/"))
   (add-to-list 'package-archives
                '("melpa-stable" . "https://stable.melpa.org/packages/")))
@@ -59,6 +61,7 @@
 ;; Theme.
 (use-package leuven-theme
   :config
+  (setq leuven-scale-outline-headlines nil)
   (load-theme 'leuven t)
   (global-hl-line-mode 1)
   (set-face-background 'hl-line "#ffffd7"))
@@ -84,9 +87,15 @@
     (evil-leader/set-key
       ":"     'eval-expression
       "<SPC>" 'helm-M-x
-      "e"     'flycheck-list-errors))
+      "e"     'flycheck-list-errors
+      "d"     'deft
+      "oa"    'org-agenda
+      "oc"    'org-capture))
 
   (evil-mode 1)
+
+  (evil-global-set-key 'normal "]b" 'next-buffer)
+  (evil-global-set-key 'normal "[b" 'previous-buffer)
 
   (use-package evil-surround
     :config
@@ -102,7 +111,8 @@
     (evil-commentary-mode))
 
   ;; Use emacs state in the following modes.
-  (dolist (mode '(flycheck-error-list-mode))
+  (dolist (mode '(flycheck-error-list-mode
+                  deft-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
   ;; Bindings for other packages.
@@ -125,6 +135,11 @@
   (use-package helm-descbinds
     :config
     (helm-descbinds-mode))
+
+  ;; Flip <tab> and C-z mappings
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
 
   (defun mg--remove-cursor-in-helm-buffers ()
     "Remove cursor in helm buffers."
@@ -158,8 +173,42 @@
   :config
   (nlinum-relative-setup-evil)
   (setq nlinum-relative-redisplay-delay 0)
-  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
+  (add-hook 'org-mode-hook 'nlinum-relative-mode))
 
+;; ENSIME
+(use-package ensime :pin melpa-stable)
+
+;; Org
+(use-package org
+  :config
+  (setq org-todo-keywords
+        '((sequence "TODO" "|" "DONE")))
+  (setq org-agenda-files '("~/Dropbox/org/" "~/Dropbox/notes/")))
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+(use-package org-evil)
+
+;; Deft
+(use-package deft
+  :commands (deft)
+  :config
+  (setq
+   deft-extensions '("org" "md")
+   deft-default-extension "org"
+   deft-directory "~/Dropbox/notes"
+   deft-use-filter-string-for-filename t
+   deft-use-filename-as-title t)
+  (add-hook 'deft-mode-hook
+            (lambda ()
+              (define-key deft-mode-map (kbd "C-c x")
+                'kill-this-buffer))))
+
+;; Fill column indicator
+(use-package fill-column-indicator
+  :config
+  (add-hook 'prog-mode-hook 'fci-mode))
 
 (provide 'init)
 ;;; init.el ends here
