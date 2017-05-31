@@ -96,9 +96,6 @@
 
   (evil-mode 1)
 
-  (evil-global-set-key 'normal "]b" 'next-buffer)
-  (evil-global-set-key 'normal "[b" 'previous-buffer)
-
   (use-package evil-surround
     :config
     (global-evil-surround-mode))
@@ -115,15 +112,7 @@
   ;; Use emacs state in the following modes.
   (dolist (mode '(flycheck-error-list-mode
                   deft-mode))
-    (add-to-list 'evil-emacs-state-modes mode))
-
-  ;; Bindings for other packages.
-  (add-hook 'flycheck-mode-hook
-            (lambda ()
-              (evil-define-key 'normal flycheck-mode-map
-                (kbd "]l") 'flycheck-next-error)
-              (evil-define-key 'normal flycheck-mode-map
-                (kbd "[l") 'flycheck-previous-error))))
+    (add-to-list 'evil-emacs-state-modes mode)))
 
 ;; Helm.
 (use-package helm
@@ -235,6 +224,10 @@
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode))
+
+;; Handy bracket mappings.
+(use-package evil-unimpaired
+  :ensure nil)
 
 (provide 'init)
 ;;; init.el ends here
