@@ -238,5 +238,14 @@
 (use-package evil-unimpaired
   :ensure nil)
 
+;; Projectile
+(use-package projectile
+  :defer 1
+  :config
+  (projectile-mode)
+  (setq
+   projectile-enable-caching t
+   projectile-completion-system 'helm))
+
 (provide 'init)
 ;;; init.el ends here
