@@ -172,6 +172,7 @@
 
 ;; Org
 (use-package org
+  :ensure org-plus-contrib
   :config
   (setq
    org-directory "~/Dropbox/org"
@@ -183,11 +184,19 @@
    org-log-done t)
   (global-set-key (kbd "C-c l") 'org-store-link)
   (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture))
-(use-package org-agenda
-  :config
-  (define-key org-agenda-mode-map "j" 'org-agenda-next-item)
-  (define-key org-agenda-mode-map "k" 'org-agenda-previous-item))
+  (global-set-key (kbd "C-c c") 'org-capture)
+
+  (use-package org-agenda
+    :ensure nil
+    :config
+    (add-hook 'org-agenda-mode-hook
+              (lambda ()
+                (define-key org-agenda-mode-map "j" 'org-agenda-next-item)
+                (define-key org-agenda-mode-map "k" 'org-agenda-previous-item))))
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((shell . t)
+                                 (emacs-lisp . t))))
+
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
