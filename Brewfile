@@ -38,7 +38,7 @@ brew 'markdown'
 brew 'ssh-copy-id'
 brew 'jq'
 brew 'emacs'
-brew 'd12frosted/emacs-plus/emacs-plus'
+brew 'd12frosted/emacs-plus/emacs-plus', args: ['without-spacemacs-icon']
 
 # Terminal
 brew 'readline'
