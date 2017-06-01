@@ -241,6 +241,7 @@
 ;; Projectile
 (use-package projectile
   :defer 1
+  :diminish projectile-mode
   :config
   (projectile-mode)
   (setq
