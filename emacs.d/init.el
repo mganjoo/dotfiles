@@ -217,7 +217,7 @@
               (define-key deft-mode-map (kbd "C-c x")
                 'kill-this-buffer))))
 
-;; Fill column indicator.
+;; Column indicator at right margin.
 (use-package fill-column-indicator
   :config
   (add-hook 'prog-mode-hook 'fci-mode))
@@ -228,7 +228,6 @@
   :config
   (add-hook 'prog-mode-hook 'hs-minor-mode))
 
-;; Undo tree.
 (use-package undo-tree
   :diminish undo-tree-mode
   :config
@@ -238,7 +237,6 @@
 (use-package evil-unimpaired
   :ensure nil)
 
-;; Projectile
 (use-package projectile
   :defer 1
   :diminish projectile-mode
@@ -247,6 +245,14 @@
   (setq
    projectile-enable-caching t
    projectile-completion-system 'helm))
+
+(use-package magit
+  :pin melpa-stable
+  :defer 1
+  :config
+  (global-magit-file-mode)
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup))
 
 (provide 'init)
 ;;; init.el ends here
