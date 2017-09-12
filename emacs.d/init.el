@@ -69,6 +69,9 @@
   (global-hl-line-mode 1)
   (set-face-background 'hl-line "#ffffd7"))
 
+;; Window management.
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+
 ;; Modeline.
 (use-package powerline
   :config

@@ -39,6 +39,7 @@ __pycache__/
 
 # R
 .Rdata
+.Rproj.user
 
 # Xcode
 build/
