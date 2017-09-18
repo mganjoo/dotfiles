@@ -217,6 +217,7 @@ hs.hotkey.bind(mash, "i", hs.itunes.displayCurrentTrack)
 -- == Machine-specific application list == {{{1
 
 local applist
+-- Note: see "applist_sample.lua" for an example of an applist
 local applistFn = loadfile("applist.lua")
 if applistFn then
   applist = applistFn()
