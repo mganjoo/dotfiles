@@ -13,9 +13,9 @@ if [ -d $HOME/bin/ ]; then
 fi
 
 # Add anaconda or virtualenv (must override homebrew/system python) {{{2
-if [[ -d "$HOME/anaconda3/bin" ]]; then
+if [[ -d "$(brew --prefix)/anaconda3/bin" ]]; then
   # anaconda
-  export PATH="$HOME/anaconda3/bin:$PATH"
+  export PATH="$(brew --prefix)/anaconda3/bin:$PATH"
 elif (( $+commands[virtualenvwrapper.sh] )); then
   # virtualenvwrapper
   export WORKON_HOME="$HOME/.virtualenvs"
