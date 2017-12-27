@@ -84,6 +84,11 @@ jqp() {
   jq -C "$@" | less -R
 }
 
+# Format stdin as JSON.
+json_escape() {
+  python -c 'import json, sys; print(json.dumps(sys.stdin.read()))'
+}
+
 # == zmv == {{{1
 
 autoload -U zmv
