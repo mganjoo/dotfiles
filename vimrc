@@ -162,7 +162,9 @@ let g:ctrlp_clear_cache_on_exit = 0                       " Don't clear cache on
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'             " Cache directory
 let g:ctrlp_by_filename = 1                               " Default to filename search
 let g:ctrlp_root_markers = ['.ci', '.git', '.svn', '.hg'] " .ci is useful
-let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' }   " cpsm is fast!
+if !has("gui_macvim")                                     " Macvim has Python version conflicts
+  let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' } " cpsm is fast!
+endif
 
 " Use ag for searching, if available; otherwise fall back to find
 if executable("ag")
