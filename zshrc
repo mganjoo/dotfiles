@@ -39,7 +39,7 @@ alias rm="rm -i"
 
 # Branch (b)
 alias gb='git branch'
-alias gbc='git checkout -b'
+alias gbc='git checkout -q -b'
 alias gbl='git branch -v'
 alias gbL='git branch -av'
 alias gbx='git branch -d'
