@@ -21,7 +21,6 @@ elif (( $+commands[virtualenvwrapper.sh] )); then
   export WORKON_HOME="$HOME/.virtualenvs"
   export PROJECT_HOME="$HOME/workspace"
   VIRTUAL_ENV_DISABLE_PROMPT=1
-  export VIRTUALENVWRAPPER_PYTHON=python2
   source $commands[virtualenvwrapper.sh]
 fi
 
