@@ -23,17 +23,12 @@ Plug 'justinmk/vim-sneak'
 Plug 'regedarek/ZoomWin'
 Plug 'tpope/vim-repeat'
 
-" Other dependencies
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
 " Appearance
-Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 
 " UI enhancements
-Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 
 " External program interaction
@@ -53,18 +48,20 @@ Plug 'tpope/vim-abolish'
 " Languages
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'rodjek/vim-puppet', { 'for': 'puppet' }
 Plug 'edma2/vim-pants'
 Plug 'mustache/vim-mustache-handlebars'
 
 " Autocompletion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
@@ -72,7 +69,6 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 
 " Organization
-Plug 'vimwiki/vimwiki'
 Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
@@ -201,13 +197,8 @@ let g:slime_target = "tmux"
 " == UltiSnips == {{{2
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnips"]
 
-" == neocomplete & deoplete == {{{2
-if has("nvim")
-  let g:deoplete#enable_at_startup = 1
-else
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-end
+" == deoplete == {{{2
+let g:deoplete#enable_at_startup = 1
 
 " == neomake == {{{2
 let g:neomake_python_enabled_makers = ['flake8']
