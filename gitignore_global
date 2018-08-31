@@ -36,6 +36,7 @@ Session.vim
 __pycache__/
 *.py[cod]
 .rope-project
+.ipynb_checkpoints/
 
 # R
 .Rdata
