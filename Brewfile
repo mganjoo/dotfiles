@@ -76,6 +76,7 @@ cask 'the-unarchiver'
 cask 'hammerspoon'
 cask 'popclip'
 cask 'ssh-tunnel-manager'
+cask 'slack'
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
 
