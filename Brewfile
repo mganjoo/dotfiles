@@ -74,7 +74,6 @@ cask 'daisydisk'
 cask 'textexpander'
 cask 'the-unarchiver'
 cask 'hammerspoon'
-cask 'shortcat'
 cask 'popclip'
 cask 'ssh-tunnel-manager'
 mas 'Noizio', id: 928871589
