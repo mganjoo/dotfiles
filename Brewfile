@@ -1,12 +1,14 @@
 cask_args appdir: '/Applications'
 tap 'homebrew/cask-fonts'
+tap 'thoughtbot/formulae'
 
 # Dotfiles sync tool
-brew 'thoughtbot/formulae/rcm'
+brew 'rcm'
 
 # Languages
 brew 'python'
 brew 'lua'
+brew 'cmake'
 
 # Programming tools
 brew 'git'
@@ -16,8 +18,6 @@ brew 'grep', args: ['with-default-names']
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'markdown'
 brew 'jq'
-brew 'emacs'
-brew 'd12frosted/emacs-plus/emacs-plus', args: ['without-spacemacs-icon']
 
 # Terminal
 brew 'bash'
@@ -50,20 +50,19 @@ cask 'google-chrome'
 cask 'alfred'
 cask 'appcleaner'
 cask 'bartender'
-cask 'daisydisk'
 cask 'textexpander'
 cask 'the-unarchiver'
 cask 'hammerspoon'
-cask 'popclip'
-cask 'ssh-tunnel-manager'
 cask 'slack'
 mas '1Password', id: 1333542190
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
 mas 'DaisyDisk', id: 411643860
+mas 'PopClip', id: 445189367
 
 # Developer
 cask 'macvim'
+cask 'emacs'
 cask 'dash'
 cask 'r-app'
 cask 'rstudio'
@@ -86,9 +85,6 @@ cask 'java' unless system '/usr/libexec/java_home --failfast'
 
 # Fonts
 cask 'font-fira-mono'
-
-# Keyboard
-cask 'karabiner-elements'
 
 # Anaconda
 cask 'anaconda'
