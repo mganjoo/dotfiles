@@ -1,4 +1,3 @@
-cask_args appdir: '/Applications'
 tap 'homebrew/cask-fonts'
 tap 'thoughtbot/formulae'
 
@@ -42,16 +41,12 @@ brew 'mas'
 
 ## == Casks ==
 
-# Essential
 cask 'dropbox'
 cask 'google-chrome'
-
-# Mac Utilities
 cask 'alfred'
 cask 'appcleaner'
 cask 'bartender'
 cask 'textexpander'
-cask 'the-unarchiver'
 cask 'hammerspoon'
 cask 'slack'
 mas '1Password', id: 1333542190
@@ -59,6 +54,7 @@ mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
 mas 'DaisyDisk', id: 411643860
 mas 'PopClip', id: 445189367
+mas 'The Unarchiver', id: 425424353
 
 # Developer
 cask 'macvim'
@@ -72,7 +68,6 @@ cask 'intellij-idea-ce'
 # Organizer
 cask 'omnifocus'
 cask 'fantastical'
-cask 'microsoft-office'
 
 # Media
 cask 'vlc'
