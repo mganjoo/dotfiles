@@ -32,6 +32,11 @@ My configuration files.
 
         RCRC=~/.dotfiles/rcrc rcup
 
+8. Update all packages:
+
+        cd ~/.dotfiles
+        ./update.sh
+
 # Post-installation
 
 1. Set ZSH as the default shell:
