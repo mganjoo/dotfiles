@@ -8,6 +8,7 @@ brew 'rcm'
 brew 'python'
 brew 'lua'
 brew 'cmake'
+brew 'sbt'
 
 # Programming tools
 brew 'git'
