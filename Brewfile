@@ -18,6 +18,7 @@ brew 'grep', args: ['with-default-names']
 brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'markdown'
 brew 'jq'
+brew 'boost'
 
 # Terminal
 brew 'bash'
