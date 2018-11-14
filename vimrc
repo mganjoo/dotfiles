@@ -53,15 +53,6 @@ Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'edma2/vim-pants'
 Plug 'mustache/vim-mustache-handlebars'
-
-" Autocompletion
-" if has('nvim')
-"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" else
-"   Plug 'Shougo/deoplete.nvim'
-"   Plug 'roxma/nvim-yarp'
-"   Plug 'roxma/vim-hug-neovim-rpc'
-" endif
 Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
@@ -158,9 +149,6 @@ let g:ctrlp_clear_cache_on_exit = 0                       " Don't clear cache on
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'             " Cache directory
 let g:ctrlp_by_filename = 1                               " Default to filename search
 let g:ctrlp_root_markers = ['.ci', '.git', '.svn', '.hg'] " .ci is useful
-if !has("gui_macvim")                                     " Macvim has Python version conflicts
-  let g:ctrlp_match_func = { 'match': 'cpsm#CtrlPMatch' } " cpsm is fast!
-endif
 
 " Use ag for searching, if available; otherwise fall back to find
 if executable("ag")
@@ -196,9 +184,6 @@ let g:slime_target = "tmux"
 
 " == UltiSnips == {{{2
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnips"]
-
-" == deoplete == {{{2
-let g:deoplete#enable_at_startup = 1
 
 " == neomake == {{{2
 let g:neomake_python_enabled_makers = ['flake8']
