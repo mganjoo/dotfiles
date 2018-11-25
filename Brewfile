@@ -43,14 +43,18 @@ brew 'mas'
 
 ## == Casks ==
 
-cask 'dropbox'
-cask 'google-chrome'
 cask 'alfred'
 cask 'appcleaner'
 cask 'bartender'
-cask 'textexpander'
+cask 'dropbox'
+cask 'fantastical'
+cask 'franz'
+cask 'google-chrome'
 cask 'hammerspoon'
+cask 'omnifocus'
 cask 'slack'
+cask 'textexpander'
+cask 'vlc'
 mas '1Password', id: 1333542190
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
@@ -59,33 +63,17 @@ mas 'PopClip', id: 445189367
 mas 'The Unarchiver', id: 425424353
 
 # Developer
-cask 'macvim'
-cask 'emacs'
+cask 'anaconda'
 cask 'dash'
+cask 'emacs'
+cask 'intellij-idea-ce'
+cask 'iterm2'
+cask 'java' unless system '/usr/libexec/java_home --failfast'
+cask 'mactex'
+cask 'macvim'
 cask 'r-app'
 cask 'rstudio'
-cask 'iterm2'
-cask 'intellij-idea-ce'
-
-# Organizer
-cask 'omnifocus'
-cask 'fantastical'
-
-# Media
-cask 'vlc'
-
-# Social
-cask 'franz'
-
-# Java
-cask 'java' unless system '/usr/libexec/java_home --failfast'
+cask 'skim'
 
 # Fonts
 cask 'font-fira-mono'
-
-# Anaconda
-cask 'anaconda'
-
-# TeX
-cask 'mactex'
-cask 'skim'
