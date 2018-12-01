@@ -12,51 +12,54 @@
 ;; Add custom lisp packages to the load path.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;; Package management.
+;; Package management: set up reposities.
 (require 'package)
 (setq package-enable-at-startup nil)
 (eval-when-compile
   (add-to-list 'package-archives
-               '("org" . "http://orgmode.org/elpa/") t)
+               '("melpa" . "https://melpa.org/packages/") t)
   (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/"))
-  (add-to-list 'package-archives
-               '("melpa-stable" . "https://stable.melpa.org/packages/")))
+               '("org" . "https://orgmode.org/elpa/") t))
 (package-initialize)
+
+;; Install and configure use-package for other packages in file.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-(require 'use-package)
-(require 'diminish)
+(eval-when-compile
+  (require 'use-package))
 
 ;; Basic configuration.
 (setq
- inhibit-startup-screen t
- initial-scratch-message ""
- visible-bell nil
- ring-bell-function 'ignore
- column-number-mode t
- make-backup-files nil
- vc-follow-symlinks t
- ad-redefinition-action 'accept ;; No warnings for redefined functions
+ inhibit-startup-screen t       ;; Disable startup screen.
+ initial-scratch-message ""     ;; Remove message from scratch buffer.
+ ring-bell-function 'ignore     ;; Disable the error bell
+ column-number-mode t           ;; Display current column in addition to line.
+ make-backup-files nil          ;; Disable all backup file creation.
+ vc-follow-symlinks t           ;; Don't confirm when opening symlinked files.
  use-package-always-ensure t)   ;; Avoid having to do ":ensure t" everywhere
 
 ;; Font.
 (add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
 
-;; Some good defaults for prog-mode.
+;; Configuration that uses packages.
+
+;; Add support for diminished minor modes (no modeline display).
+(use-package diminish)
+
+;; Some good defaults for programming-related major modes.
 (defun mg/set-up-prog-mode ()
   "Configure global `prog-mode' with basic defaults."
   (setq-local comment-auto-fill-only-comments t)
+  ;; Enable auto-closing matching parentheses
   (electric-pair-local-mode))
 (add-hook 'prog-mode-hook 'mg/set-up-prog-mode)
 
-;; Some good defaults.
+;; Some good defaults (https://github.com/technomancy/better-defaults).
 (use-package better-defaults)
 
 ;; Use PATH and other env variables from shell.
 (use-package exec-path-from-shell
-  :defer 1
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
@@ -150,7 +153,6 @@
 ;; Code completion.
 (use-package company
   :diminish company-mode
-  :defer 1
   :config
   (global-company-mode)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -171,7 +173,7 @@
   (add-hook 'org-mode-hook 'nlinum-relative-mode))
 
 ;; ENSIME
-(use-package ensime :pin melpa-stable)
+(use-package ensime)
 
 ;; Org
 (use-package org
@@ -241,7 +243,6 @@
   :ensure nil)
 
 (use-package projectile
-  :defer 1
   :diminish projectile-mode
   :config
   (projectile-mode)
@@ -250,8 +251,6 @@
    projectile-completion-system 'helm))
 
 (use-package magit
-  :pin melpa-stable
-  :defer 1
   :config
   (global-magit-file-mode)
   (global-set-key (kbd "C-x g") 'magit-status)
