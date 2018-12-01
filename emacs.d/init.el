@@ -5,11 +5,11 @@
 
 ;;; Code:
 
-;; Don't clutter init.el file with custom stuff.
+;; We won't use customizations, so save separately and ignore them.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; Add additional lisp packages to the load path.
+;; Add custom lisp packages to the load path.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; Package management.
