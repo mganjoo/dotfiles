@@ -12,7 +12,7 @@
 ;; Add custom lisp packages to the load path.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;; Package management: set up reposities.
+;; Package management: set up repositories.
 (require 'package)
 (setq package-enable-at-startup nil)
 (eval-when-compile
@@ -31,49 +31,45 @@
 
 ;; Basic configuration.
 (setq
- inhibit-startup-screen t       ;; Disable startup screen.
- initial-scratch-message ""     ;; Remove message from scratch buffer.
- ring-bell-function 'ignore     ;; Disable the error bell
- column-number-mode t           ;; Display current column in addition to line.
- make-backup-files nil          ;; Disable all backup file creation.
- vc-follow-symlinks t           ;; Don't confirm when opening symlinked files.
- use-package-always-ensure t)   ;; Avoid having to do ":ensure t" everywhere
+ inhibit-startup-screen t      ;; Disable startup screen
+ initial-scratch-message ""    ;; Remove message from scratch buffer
+ ring-bell-function 'ignore    ;; Disable the error bell
+ column-number-mode t          ;; Display current column in addition to line
+ make-backup-files nil         ;; Disable all backup file creation
+ vc-follow-symlinks t          ;; Don't confirm when opening symlinked files
+ use-package-always-ensure t)  ;; Avoid having to do ":ensure t" everywhere
 
-;; Font.
-(add-to-list 'default-frame-alist '(font . "Fira Mono-14"))
-
-;; Configuration that uses packages.
-
-;; Add support for diminished minor modes (no modeline display).
+;; Support for diminished minor modes (no modeline display).
 (use-package diminish)
 
-;; Some good defaults for programming-related major modes.
-(defun mg/set-up-prog-mode ()
-  "Configure global `prog-mode' with basic defaults."
-  (setq-local comment-auto-fill-only-comments t)
-  ;; Enable auto-closing matching parentheses
-  (electric-pair-local-mode))
-(add-hook 'prog-mode-hook 'mg/set-up-prog-mode)
+;; Appearance and theme.
+(use-package leuven-theme
+  :config
+  (setq leuven-scale-outline-headlines nil)
+  (load-theme 'leuven t))
+(global-hl-line-mode 1)                  ;; Highlight current line
+(set-face-background 'hl-line "#ffffd7") ;; ... with yellow
+(add-to-list 'default-frame-alist        ;; Default editor font
+             '(font . "Fira Mono-14"))
+
+;; Make <ctrl+cmd+f> work on Mac for fullscreen.
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
 ;; Some good defaults (https://github.com/technomancy/better-defaults).
+;; TODO: can we directly configure some of these?
 (use-package better-defaults)
+
+;; Default configuration for programming-related major modes.
+(defun mg/set-prog-mode-defaults ()
+  "Configure global `prog-mode' programming major mode."
+  (electric-pair-local-mode)) ;; Auto-closing matching parentheses
+(add-hook 'prog-mode-hook 'mg/set-prog-mode-defaults)
 
 ;; Use PATH and other env variables from shell.
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
-
-;; Theme.
-(use-package leuven-theme
-  :config
-  (setq leuven-scale-outline-headlines nil)
-  (load-theme 'leuven t)
-  (global-hl-line-mode 1)
-  (set-face-background 'hl-line "#ffffd7"))
-
-;; Window management.
-(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
 ;; Modeline.
 (use-package powerline
@@ -82,7 +78,7 @@
   (setq powerline-default-separator 'nil)
   (powerline-evil-center-color-theme))
 
-;; Vimify.
+;; Vimify using evil.
 (use-package evil
   :config
   ;; Load `evil-leader' and enable mode before `evil-mode'
@@ -238,7 +234,7 @@
   :config
   (global-undo-tree-mode))
 
-;; Handy bracket mappings.
+;; Handy bracket mappings (custom package).
 (use-package evil-unimpaired
   :ensure nil)
 
