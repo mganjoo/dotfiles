@@ -59,14 +59,9 @@
 ;; TODO: can we directly configure some of these?
 (use-package better-defaults)
 
-;; Default configuration for programming-related major modes.
-(defun mg/set-prog-mode-defaults ()
-  "Configure global `prog-mode' programming major mode."
-  (electric-pair-local-mode)) ;; Auto-closing matching parentheses
-(add-hook 'prog-mode-hook 'mg/set-prog-mode-defaults)
-
 ;; Use PATH and other env variables from shell.
 (use-package exec-path-from-shell
+  :defer 1  ;; deferring seems to get rid of warning message about zhsrc
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
@@ -75,8 +70,14 @@
 (use-package powerline
   :config
   (use-package powerline-evil)
-  (setq powerline-default-separator 'nil)
-  (powerline-evil-center-color-theme))
+  (setq powerline-default-separator 'nil) ;; no patching, no separator
+  (powerline-evil-center-color-theme))    ;; color-code evil state
+
+;; Display possible key bindings for an incomplete command.
+(use-package which-key
+  :diminish which-key-mode
+  :config
+  (which-key-mode))
 
 ;; Vimify using evil.
 (use-package evil
@@ -122,7 +123,7 @@
   :config
   (helm-mode 1)
 
-  ;; Use enhanced M-x.
+  ;; Use Helm-enhanced M-x.
   (global-set-key (kbd "M-x") 'helm-M-x)
 
   (use-package helm-descbinds
@@ -139,12 +140,6 @@
     (with-helm-buffer (setq cursor-in-non-selected-windows nil)))
   (add-hook 'helm-after-initialize-hook
             'mg/remove-cursor-in-helm-buffers))
-
-;; Finding out what a specific binding is for.
-(use-package which-key
-  :diminish which-key-mode
-  :config
-  (which-key-mode))
 
 ;; Code completion.
 (use-package company
@@ -196,12 +191,11 @@
                 (define-key org-agenda-mode-map "k" 'org-agenda-previous-item))))
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((shell . t)
-                                 (emacs-lisp . t))))
-
-(use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-(use-package org-evil)
+                                 (emacs-lisp . t)))
+  (use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (use-package org-evil))
 
 ;; Deft
 (use-package deft
@@ -234,7 +228,7 @@
   :config
   (global-undo-tree-mode))
 
-;; Handy bracket mappings (custom package).
+;; Handy bracket mappings (local package).
 (use-package evil-unimpaired
   :ensure nil)
 
@@ -251,6 +245,19 @@
   (global-magit-file-mode)
   (global-set-key (kbd "C-x g") 'magit-status)
   (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup))
+
+(use-package anaconda-mode
+  :config
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (use-package company-anaconda
+    :config
+    (add-to-list 'company-backends
+                 '(company-anaconda :with company-capf))))
+
+(defun mg/prog-mode-electric-pair ()
+  "Set up auto-closing of matching parentheses in `prog-mode'."
+  (electric-pair-local-mode)) ;; Auto-closing matching parentheses
+(add-hook 'prog-mode-hook 'mg/prog-mode-electric-pair)
 
 (provide 'init)
 ;;; init.el ends here
