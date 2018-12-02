@@ -101,11 +101,22 @@
     (evil-commentary-mode)))
 
 ;; Configure the mode line.
-(use-package powerline
+(use-package telephone-line
   :config
-  (use-package powerline-evil)
-  (setq powerline-default-separator 'nil) ;; no patching, no separator
-  (powerline-evil-center-color-theme))    ;; color-code evil state
+  (setq
+   telephone-line-lhs '((evil   . (telephone-line-evil-tag-segment))
+			(accent . (telephone-line-process-segment))
+			(nil    . (telephone-line-minor-mode-segment
+				   telephone-line-buffer-segment)))
+   telephone-line-rhs '((nil    . (telephone-line-misc-info-segment))
+			(accent . (telephone-line-major-mode-segment))
+			(evil   . (telephone-line-position-segment)))
+   telephone-line-primary-left-separator    'telephone-line-flat
+   telephone-line-secondary-left-separator  'telephone-line-nil
+   telephone-line-primary-right-separator   'telephone-line-flat
+   telephone-line-secondary-right-separator 'telephone-line-nil
+   telephone-line-evil-use-short-tag        t)
+  (telephone-line-mode 1))
 
 ;; Column indicator at right margin.
 (use-package fill-column-indicator
