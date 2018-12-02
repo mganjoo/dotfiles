@@ -1,4 +1,5 @@
 # Emacs packages
+anaconda-mode/
 auto-save-list/
 elpa/
 /custom.el
