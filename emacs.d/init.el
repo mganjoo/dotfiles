@@ -78,9 +78,19 @@
   (telephone-line-mode 1))
 
 ;; Disable all visual artifacts.
+(unless window-system
+  (menu-bar-mode -1))
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
+
+;; Configure mouse support (from https://www.iterm2.com/faq.html)
+(unless window-system
+ (require 'mouse)
+ (xterm-mouse-mode t)
+ ;; Enable natural scrolling (wheel up -> scroll down)
+ (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 3)))
+ (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 3))))
 
 ;; Use PATH and other env variables from shell in GUI environments.
 (use-package exec-path-from-shell
