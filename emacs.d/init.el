@@ -39,7 +39,6 @@
 (defun display-startup-echo-area-message () (message ""))
 
 ;; Disable all visual artifacts.
-(menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
