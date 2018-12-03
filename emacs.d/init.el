@@ -141,6 +141,9 @@
   (nlinum-relative-setup-evil)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode))
 
+(setq-default
+ indent-tabs-mode nil) ;; Never use tabs for indentation
+
 (evil-global-set-key 'normal (kbd "[ b") 'previous-buffer)
 (evil-global-set-key 'normal (kbd "] b") 'next-buffer)
 
