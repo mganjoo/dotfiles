@@ -135,6 +135,12 @@
   (electric-pair-local-mode)) ;; Auto-closing matching parentheses
 (add-hook 'prog-mode-hook 'mganjoo/prog-mode-electric-pair)
 
+;; Relative line numbers.
+(use-package nlinum-relative
+  :config
+  (nlinum-relative-setup-evil)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
 (evil-global-set-key 'normal (kbd "[ b") 'previous-buffer)
 (evil-global-set-key 'normal (kbd "] b") 'next-buffer)
 
