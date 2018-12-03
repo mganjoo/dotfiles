@@ -9,7 +9,9 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; Package management: set up repositories.
+;; Package management
+;; ==================
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (eval-when-compile
@@ -23,6 +25,9 @@
   (package-install 'use-package))
 (eval-when-compile
   (require 'use-package))
+
+;; Support for diminished minor modes (no modeline display).
+(use-package diminish)
 
 ;; Basic configuration.
 (setq
@@ -38,15 +43,13 @@
 ;; Remove annoying startup echo area message.
 (defun display-startup-echo-area-message () (message ""))
 
-;; Disable all visual artifacts.
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(horizontal-scroll-bar-mode -1)
+;; Make <ctrl+cmd+f> work on Mac for fullscreen.
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
-;; Support for diminished minor modes (no modeline display).
-(use-package diminish)
+;; Appearance
+;; ==========
 
-;; Appearance and theme.
+;; Theme
 (use-package leuven-theme
   :config
   (setq leuven-scale-outline-headlines nil)
@@ -56,8 +59,28 @@
 (add-to-list 'default-frame-alist        ;; Default editor font
              '(font . "Fira Mono-14"))
 
-;; Make <ctrl+cmd+f> work on Mac for fullscreen.
-(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+;; Mode line
+(use-package telephone-line
+  :config
+  (setq
+   telephone-line-lhs '((evil   . (telephone-line-evil-tag-segment))
+                        (accent . (telephone-line-process-segment))
+                        (nil    . (telephone-line-minor-mode-segment
+                                   telephone-line-buffer-segment)))
+   telephone-line-rhs '((nil    . (telephone-line-misc-info-segment))
+                        (accent . (telephone-line-major-mode-segment))
+                        (evil   . (telephone-line-position-segment)))
+   telephone-line-primary-left-separator    'telephone-line-flat
+   telephone-line-secondary-left-separator  'telephone-line-nil
+   telephone-line-primary-right-separator   'telephone-line-flat
+   telephone-line-secondary-right-separator 'telephone-line-nil
+   telephone-line-evil-use-short-tag        t)
+  (telephone-line-mode 1))
+
+;; Disable all visual artifacts.
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
 
 ;; Use PATH and other env variables from shell in GUI environments.
 (use-package exec-path-from-shell
@@ -97,24 +120,6 @@
     :diminish evil-commentary-mode
     :config
     (evil-commentary-mode)))
-
-;; Configure the mode line.
-(use-package telephone-line
-  :config
-  (setq
-   telephone-line-lhs '((evil   . (telephone-line-evil-tag-segment))
-			(accent . (telephone-line-process-segment))
-			(nil    . (telephone-line-minor-mode-segment
-				   telephone-line-buffer-segment)))
-   telephone-line-rhs '((nil    . (telephone-line-misc-info-segment))
-			(accent . (telephone-line-major-mode-segment))
-			(evil   . (telephone-line-position-segment)))
-   telephone-line-primary-left-separator    'telephone-line-flat
-   telephone-line-secondary-left-separator  'telephone-line-nil
-   telephone-line-primary-right-separator   'telephone-line-flat
-   telephone-line-secondary-right-separator 'telephone-line-nil
-   telephone-line-evil-use-short-tag        t)
-  (telephone-line-mode 1))
 
 ;; Column indicator at right margin.
 (use-package fill-column-indicator
