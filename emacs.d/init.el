@@ -130,10 +130,8 @@
 (use-package eldoc :diminish eldoc-mode)
 (use-package undo-tree :diminish undo-tree-mode)
 
-(defun mganjoo/prog-mode-electric-pair ()
-  "Set up auto-closing of matching parentheses in `prog-mode'."
-  (electric-pair-local-mode)) ;; Auto-closing matching parentheses
-(add-hook 'prog-mode-hook 'mganjoo/prog-mode-electric-pair)
+;; Auto-close matching parentheses in `prog-mode'.
+(add-hook 'prog-mode-hook (lambda () (electric-pair-local-mode)))
 
 ;; Relative line numbers.
 (use-package nlinum-relative
