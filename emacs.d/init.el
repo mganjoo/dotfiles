@@ -35,9 +35,8 @@
  use-package-always-ensure t   ;; Avoid having to do ":ensure t" everywhere
  require-final-newline t)      ;; Automatically add newlines at end of file
 
-;; Disable startup echo area message.
-(put 'inhibit-startup-echo-area-message 'saved-value t)
-(setq inhibit-startup-echo-area-message (user-login-name))
+;; Remove annoying startup echo area message.
+(defun display-startup-echo-area-message () (message ""))
 
 ;; Disable all visual artifacts.
 (menu-bar-mode -1)
