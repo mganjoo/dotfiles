@@ -213,6 +213,9 @@ alias tkt='tmux kill-session -t'
 alias txs='tmuxifier s'
 alias txes='tmuxifier es'
 
+# emacs
+alias cemacs='emacs -nw'
+
 # fasd
 alias v='LANG=c f -t -e vim -b viminfo'
 
