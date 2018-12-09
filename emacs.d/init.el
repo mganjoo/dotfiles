@@ -149,6 +149,13 @@
   (nlinum-relative-setup-evil)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode))
 
+;; ivy mode
+(use-package ivy
+  :diminish ivy-mode
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t))
+
 (setq-default
  indent-tabs-mode nil) ;; Never use tabs for indentation
 
