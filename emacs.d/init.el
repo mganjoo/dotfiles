@@ -156,6 +156,19 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t))
 
+;; Project management.
+(use-package projectile
+  :config
+  (setq
+   projectile-completion-system 'ivy
+   projectile-enable-caching t      ;; cache file lists
+   projectile-mode-line-function '(lambda ()
+                                    (format "[%s]"
+                                            (projectile-project-name))))
+  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
+  (projectile-mode))
+
+
 (setq-default
  indent-tabs-mode nil) ;; Never use tabs for indentation
 
