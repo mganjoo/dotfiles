@@ -26,9 +26,6 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Support for diminished minor modes (no modeline display).
-(use-package diminish)
-
 ;; Basic configuration.
 (setq
  inhibit-startup-screen t      ;; Disable startup screen
@@ -40,11 +37,8 @@
  use-package-always-ensure t   ;; Avoid having to do ":ensure t" everywhere
  require-final-newline t)      ;; Automatically add newlines at end of file
 
-;; Remove annoying startup echo area message.
-(defun display-startup-echo-area-message () (message ""))
-
-;; Make <ctrl+cmd+f> work on Mac for fullscreen.
-(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+;; Support for diminished minor modes (no modeline display).
+(use-package diminish)
 
 ;; Appearance
 ;; ==========
@@ -84,6 +78,9 @@
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
 
+;; Remove annoying startup echo area message.
+(defun display-startup-echo-area-message () (message ""))
+
 ;; Configure mouse support (from https://www.iterm2.com/faq.html)
 (unless window-system
  (require 'mouse)
@@ -91,6 +88,9 @@
  ;; Enable natural scrolling (wheel up -> scroll down)
  (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 3)))
  (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 3))))
+
+;; Make <ctrl+cmd+f> work on Mac for fullscreen.
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
 ;; Use PATH and other env variables from shell in GUI environments.
 (use-package exec-path-from-shell
@@ -150,11 +150,14 @@
   (add-hook 'prog-mode-hook 'nlinum-relative-mode))
 
 ;; ivy mode
-(use-package ivy
+(use-package counsel ;; brings ivy and swiper as deps
   :diminish ivy-mode
+  :diminish counsel-mode
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t))
+  (ivy-mode 1)       ;; use ivy for `completing-read-function'.
+  (counsel-mode 1)   ;; replace some built-in commands
+  (setq
+   ivy-use-virtual-buffers t)) ;; switch recent files and bookmarks also
 
 ;; Project management.
 (use-package projectile
