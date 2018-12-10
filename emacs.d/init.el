@@ -196,12 +196,12 @@
   :config
   (setq
    projectile-completion-system 'ivy
-   projectile-enable-caching t      ;; cache file lists
+   projectile-enable-caching t       ;; cache file lists
    projectile-mode-line-function '(lambda ()
                                     (format "[%s]"
                                             (projectile-project-name))))
-  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
-  (projectile-mode))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode 1))
 
 (provide 'init)
 ;;; init.el ends here
