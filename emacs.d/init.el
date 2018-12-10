@@ -98,7 +98,6 @@
 ;; Diminish some built-in minor modes.
 (use-package eldoc :diminish 'eldoc-mode)
 (use-package undo-tree :diminish 'undo-tree-mode)
-(use-package hideshow :diminish hs-minor-mode)
 
 ;; Keys and mouse
 ;; ==============
@@ -152,8 +151,7 @@
   :config
   (ivy-mode 1)       ;; use ivy for `completing-read-function'.
   (counsel-mode 1)   ;; replace some built-in commands
-  (setq
-   ivy-use-virtual-buffers t)) ;; switch recent files and bookmarks also
+  (setq ivy-use-virtual-buffers t)) ;; switch recent files and bookmarks also
 
 (evil-global-set-key 'normal (kbd "[ b") 'previous-buffer)
 (evil-global-set-key 'normal (kbd "] b") 'next-buffer)
@@ -179,17 +177,20 @@
 ;; Automatically add newlines at end of file.
 (setq require-final-newline t)
 
-;; Editor configuration for programming modes.
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (electric-pair-local-mode) ;; auto-close parentheses
-            (hs-minor-mode)))         ;; support hiding/showing blocks
+;; Auto-close parentheses in programming buffers.
+(add-hook 'prog-mode-hook 'electric-pair-local-mode)
 
 ;; Use relative line numbers during evil Normal mode.
 (use-package nlinum-relative
   :config
   (nlinum-relative-setup-evil)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
+;; Support hiding/showing code blocks.
+(use-package hideshow
+  :diminish hs-minor-mode
+  :config
+  (add-hook 'prog-mode-hook 'hs-minor-mode))
 
 ;; Project management.
 (use-package projectile
@@ -202,6 +203,12 @@
                                             (projectile-project-name))))
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode 1))
+
+;; Code completion.
+(use-package company
+  :diminish company-mode
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (provide 'init)
 ;;; init.el ends here
