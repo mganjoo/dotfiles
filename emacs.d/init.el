@@ -28,20 +28,39 @@
 
 ;; Basic configuration.
 (setq
- inhibit-startup-screen t      ;; Disable startup screen
- initial-scratch-message ""    ;; Remove message from scratch buffer
- ring-bell-function 'ignore    ;; Disable the error bell
- column-number-mode t          ;; Display current column in addition to line
- make-backup-files nil         ;; Don't make backups when first saving files
- vc-follow-symlinks t          ;; Don't confirm when opening symlinked files
- use-package-always-ensure t   ;; Avoid having to do ":ensure t" everywhere
- require-final-newline t)      ;; Automatically add newlines at end of file
+ use-package-always-ensure t ;; Avoid having to do ":ensure t" everywhere
+ ring-bell-function 'ignore  ;; Disable the error bell
+ make-backup-files nil       ;; Don't make backups when first saving files
+ vc-follow-symlinks t)       ;; Don't confirm when opening symlinked files
 
 ;; Support for diminished minor modes (no modeline display).
 (use-package diminish)
 
+;; Use PATH and other env variables from shell in GUI environments.
+(use-package exec-path-from-shell
+  :config
+   ;; Don't load interactive shell files
+  (setq exec-path-from-shell-arguments '("-l"))
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;; Appearance
 ;; ==========
+
+;; Disable all visual artifacts.
+(unless window-system
+  (menu-bar-mode -1))
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
+
+(setq
+ inhibit-startup-screen t   ;; Disable startup screen
+ initial-scratch-message "" ;; Remove message from scratch buffer
+ column-number-mode t)      ;; Display current column in addition to line
+
+;; Remove annoying startup echo area message.
+(defun display-startup-echo-area-message () (message ""))
 
 ;; Theme
 (use-package leuven-theme
@@ -71,15 +90,18 @@
    telephone-line-evil-use-short-tag        t)
   (telephone-line-mode 1))
 
-;; Disable all visual artifacts.
-(unless window-system
-  (menu-bar-mode -1))
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(horizontal-scroll-bar-mode -1)
+;; Column indicator at right margin.
+(use-package fill-column-indicator
+  :config
+  (add-hook 'prog-mode-hook 'fci-mode))
 
-;; Remove annoying startup echo area message.
-(defun display-startup-echo-area-message () (message ""))
+;; Diminish some built-in minor modes.
+(use-package eldoc :diminish 'eldoc-mode)
+(use-package undo-tree :diminish 'undo-tree-mode)
+(use-package hideshow :diminish hs-minor-mode)
+
+;; Keys and mouse
+;; ==============
 
 ;; Configure mouse support (from https://www.iterm2.com/faq.html)
 (unless window-system
@@ -88,17 +110,6 @@
  ;; Enable natural scrolling (wheel up -> scroll down)
  (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 3)))
  (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 3))))
-
-;; Make <ctrl+cmd+f> work on Mac for fullscreen.
-(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
-
-;; Use PATH and other env variables from shell in GUI environments.
-(use-package exec-path-from-shell
-  :config
-   ;; Don't load interactive shell files
-  (setq exec-path-from-shell-arguments '("-l"))
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
 
 ;; Display possible key bindings for an incomplete command.
 (use-package which-key
@@ -131,26 +142,11 @@
     :config
     (evil-commentary-mode)))
 
-;; Column indicator at right margin.
-(use-package fill-column-indicator
-  :config
-  (add-hook 'prog-mode-hook 'fci-mode))
-
-;; Diminish some built-in minor modes.
-(use-package eldoc :diminish eldoc-mode)
-(use-package undo-tree :diminish undo-tree-mode)
-
-;; Auto-close matching parentheses in `prog-mode'.
-(add-hook 'prog-mode-hook (lambda () (electric-pair-local-mode)))
-
-;; Relative line numbers.
-(use-package nlinum-relative
-  :config
-  (nlinum-relative-setup-evil)
-  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+;; Make <ctrl+cmd+f> work on Mac for fullscreen.
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
 ;; ivy mode
-(use-package counsel ;; brings ivy and swiper as deps
+(use-package counsel ;; brings ivy and swiper as dependencies
   :diminish ivy-mode
   :diminish counsel-mode
   :config
@@ -158,22 +154,6 @@
   (counsel-mode 1)   ;; replace some built-in commands
   (setq
    ivy-use-virtual-buffers t)) ;; switch recent files and bookmarks also
-
-;; Project management.
-(use-package projectile
-  :config
-  (setq
-   projectile-completion-system 'ivy
-   projectile-enable-caching t      ;; cache file lists
-   projectile-mode-line-function '(lambda ()
-                                    (format "[%s]"
-                                            (projectile-project-name))))
-  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
-  (projectile-mode))
-
-
-(setq-default
- indent-tabs-mode nil) ;; Never use tabs for indentation
 
 (evil-global-set-key 'normal (kbd "[ b") 'previous-buffer)
 (evil-global-set-key 'normal (kbd "] b") 'next-buffer)
@@ -189,6 +169,39 @@
   (interactive "p")
   (save-excursion (dotimes (_ count) (evil-insert-newline-below))))
 (evil-global-set-key 'normal (kbd "] SPC") 'mganjoo/insert-newline-below)
+
+;; IDE configuration
+;; =================
+
+;; Never use tabs for indentation.
+(setq-default indent-tabs-mode nil)
+
+;; Automatically add newlines at end of file.
+(setq require-final-newline t)
+
+;; Editor configuration for programming modes.
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (electric-pair-local-mode) ;; auto-close parentheses
+            (hs-minor-mode)))         ;; support hiding/showing blocks
+
+;; Use relative line numbers during evil Normal mode.
+(use-package nlinum-relative
+  :config
+  (nlinum-relative-setup-evil)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
+;; Project management.
+(use-package projectile
+  :config
+  (setq
+   projectile-completion-system 'ivy
+   projectile-enable-caching t      ;; cache file lists
+   projectile-mode-line-function '(lambda ()
+                                    (format "[%s]"
+                                            (projectile-project-name))))
+  (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
+  (projectile-mode))
 
 (provide 'init)
 ;;; init.el ends here
