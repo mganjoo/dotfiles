@@ -19,6 +19,7 @@ brew 'lesspipe', args: ['with-syntax-highlighting']
 brew 'markdown'
 brew 'jq'
 brew 'boost'
+brew 'cookiecutter'
 
 # Terminal
 brew 'bash'
@@ -63,7 +64,7 @@ mas 'PopClip', id: 445189367
 mas 'The Unarchiver', id: 425424353
 
 # Developer
-cask 'anaconda'
+cask 'miniconda'
 cask 'dash'
 cask 'emacs'
 cask 'intellij-idea-ce'
