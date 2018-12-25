@@ -16,6 +16,9 @@ fi
 if [[ -d "$(brew --prefix)/anaconda3/bin" ]]; then
   # anaconda
   export PATH="$(brew --prefix)/anaconda3/bin:$PATH"
+elif [[ -d "$(brew --prefix)/miniconda3/bin" ]]; then
+  # miniconda
+  export PATH="$(brew --prefix)/miniconda3/bin:$PATH"
 elif (( $+commands[virtualenvwrapper.sh] )); then
   # virtualenvwrapper
   export WORKON_HOME="$HOME/.virtualenvs"
