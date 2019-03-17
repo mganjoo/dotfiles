@@ -12,15 +12,21 @@ if [ -d $HOME/bin/ ]; then
   )
 fi
 
-# Add anaconda or virtualenv (must override homebrew/system python) {{{2
-if [[ -d "$(brew --prefix)/anaconda3/bin" ]]; then
-  # anaconda
-  export PATH="$(brew --prefix)/anaconda3/bin:$PATH"
-elif [[ -d "$(brew --prefix)/miniconda3/bin" ]]; then
-  # miniconda
-  export PATH="$(brew --prefix)/miniconda3/bin:$PATH"
-elif (( $+commands[virtualenvwrapper.sh] )); then
-  # virtualenvwrapper
+### Python ###
+
+# Add homebrew Python to PATH if exists
+if [[ -d "$(brew --prefix)/opt/python" ]]; then
+  export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+fi
+
+# Add option to load miniconda if it exists
+if [[ -d "$(brew --prefix)/miniconda3/bin" ]]; then
+  # Use new method at https://github.com/conda/conda/blob/master/CHANGELOG.md#440-2017-12-20
+  . $(brew --prefix)/miniconda3/etc/profile.d/conda.sh
+fi
+
+# Add support for virtualenvwrapper
+if (( $+commands[virtualenvwrapper.sh] )); then
   export WORKON_HOME="$HOME/.virtualenvs"
   export PROJECT_HOME="$HOME/workspace"
   VIRTUAL_ENV_DISABLE_PROMPT=1
