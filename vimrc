@@ -39,7 +39,8 @@ Plug 'epeli/slimux'
 Plug 'rizzatti/dash.vim'
 
 " Search and replace
-Plug 'ctrlpvim/ctrlp.vim' | Plug 'nixprime/cpsm', { 'do': './install.sh' }
+Plug '~/.external/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
