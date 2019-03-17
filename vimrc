@@ -23,25 +23,19 @@ Plug 'justinmk/vim-sneak'
 Plug 'regedarek/ZoomWin'
 Plug 'tpope/vim-repeat'
 
-" Appearance
+" UI enhancements
 Plug 'altercation/vim-colors-solarized'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
-
-" UI enhancements
 Plug 'milkypostman/vim-togglelist'
 
 " External program interaction
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dispatch' | Plug 'radenling/vim-dispatch-neovim'
 Plug 'benekastah/neomake'
-Plug 'epeli/slimux'
-Plug 'rizzatti/dash.vim'
 
 " Search and replace
 Plug '~/.external/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'rking/ag.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'tpope/vim-abolish'
@@ -217,7 +211,7 @@ let g:tmuxline_preset = {
 let g:localvimrc_persistent=2
 
 " == vim-sneak == {{{2
-let g:sneak#streak = 1
+let g:sneak#label = 1
 
 " == vimwiki == {{{2
 let b:personal_wiki = { 'path': '~/Dropbox/wiki/personal' }
@@ -283,14 +277,6 @@ nmap ga <Plug>(EasyAlign)
 
 " == CamelCaseMotion == {{{2
 call camelcasemotion#CreateMotionMappings('<leader>')
-
-" == vim-sneak == {{{2
-nmap gs <Plug>Sneak_s
-nmap gS <Plug>Sneak_S
-xmap gs <Plug>Sneak_s
-xmap gS <Plug>Sneak_S
-omap gs <Plug>Sneak_s
-omap gS <Plug>Sneak_S
 
 " }}}1
 " == Modeline == {{{1
