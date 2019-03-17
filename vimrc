@@ -51,13 +51,9 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'edma2/vim-pants'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" Source control
-Plug 'tpope/vim-fugitive'
 
 " Organization
 Plug 'edkolev/tmuxline.vim'
