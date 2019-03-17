@@ -281,7 +281,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " == CamelCaseMotion == {{{2
-call camelcasemotion#CreateMotionMappings(',')
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 " == vim-sneak == {{{2
 nmap gs <Plug>Sneak_s
