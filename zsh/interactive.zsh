@@ -195,8 +195,10 @@ fi
 
 # fzf {{{2
 export FZF_TMUX=0
+# The default command tries to find files using ls-tree, which ignores untracked files but is faster
 export FZF_DEFAULT_COMMAND='(git ls-tree -r --name-only HEAD ||
   find . -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
+# The CTRL-T command tries to find files using ls-files, which includes untracked files but is slower
 export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
