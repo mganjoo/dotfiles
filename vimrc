@@ -133,14 +133,6 @@ au BufRead,BufNewFile BUILD setlocal filetype=pants
 
 " == Plugin Settings == {{{1
 
-" == ctrlp.vim == {{{2
-let g:ctrlp_max_files = 0                                 " No file limit
-let g:ctrlp_use_caching = 1                               " Use caching
-let g:ctrlp_clear_cache_on_exit = 0                       " Don't clear cache on exit
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'             " Cache directory
-let g:ctrlp_by_filename = 1                               " Default to filename search
-let g:ctrlp_root_markers = ['.ci', '.git', '.svn', '.hg'] " .ci is useful
-
 " Use ag for searching, if available; otherwise fall back to find
 if executable("ag")
   let s:search_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -152,14 +144,6 @@ if executable("ag")
 else
   let s:search_command = 'find %s -type f'
 endif
-
-" Faster ctrlp population if in git repo
-let g:ctrlp_user_command = {
-  \ 'types': {
-    \ 1: ['.git', 'git --git-dir=%s/.git ls-files --exclude-standard -co'],
-    \ },
-  \ 'fallback': s:search_command
-  \ }
 
 " == delimitMate == {{{2
 let g:delimitMate_expand_cr = 1               " Create line break on enter
@@ -277,6 +261,10 @@ nmap ga <Plug>(EasyAlign)
 
 " == CamelCaseMotion == {{{2
 call camelcasemotion#CreateMotionMappings('<leader>')
+
+" == FZF == {{{2
+call camelcasemotion#CreateMotionMappings('<leader>')
+nnoremap <silent> <leader><Space> :Files<CR>
 
 " }}}1
 " == Modeline == {{{1

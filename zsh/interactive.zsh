@@ -195,6 +195,8 @@ fi
 
 # fzf {{{2
 export FZF_TMUX=0
+export FZF_DEFAULT_COMMAND='(git ls-tree -r --name-only HEAD ||
+  find . -path "*/\.*" -prune -o -type f -print -o -type l -print | sed s/^..//) 2>/dev/null'
 export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
   find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
