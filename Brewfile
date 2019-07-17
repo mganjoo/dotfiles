@@ -75,6 +75,7 @@ cask 'macvim'
 cask 'r-app'
 cask 'rstudio'
 cask 'skim'
+cask 'visual-studio-code'
 
 # Fonts
 cask 'font-fira-mono'
