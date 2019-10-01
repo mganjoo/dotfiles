@@ -79,4 +79,4 @@ cask 'skim'
 cask 'visual-studio-code'
 
 # Fonts
-cask 'font-fira-mono'
+cask 'font-fira-code'
