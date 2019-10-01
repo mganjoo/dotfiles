@@ -14,6 +14,7 @@ brew 'node'
 # Programming tools
 brew 'git'
 brew 'vim'
+brew 'nvim'
 brew 'the_silver_searcher'
 brew 'grep', args: ['with-default-names']
 brew 'lesspipe', args: ['with-syntax-highlighting']
@@ -67,12 +68,10 @@ mas 'The Unarchiver', id: 425424353
 # Developer
 cask 'miniconda'
 cask 'dash'
-cask 'emacs'
 cask 'intellij-idea-ce'
 cask 'iterm2'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'mactex'
-cask 'macvim'
 cask 'r-app'
 cask 'rstudio'
 cask 'skim'
