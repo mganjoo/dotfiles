@@ -73,8 +73,6 @@ cask 'intellij-idea-ce'
 cask 'iterm2'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'mactex'
-cask 'r-app'
-cask 'rstudio'
 cask 'skim'
 cask 'visual-studio-code'
 
