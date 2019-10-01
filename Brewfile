@@ -54,7 +54,6 @@ cask 'fantastical'
 cask 'franz'
 cask 'google-chrome'
 cask 'hammerspoon'
-cask 'omnifocus'
 cask 'slack'
 cask 'textexpander'
 cask 'vlc'
@@ -64,6 +63,8 @@ mas 'Yoink', id: 457622435
 mas 'DaisyDisk', id: 411643860
 mas 'PopClip', id: 445189367
 mas 'The Unarchiver', id: 425424353
+mas 'Things 3', id: 904280696
+mas 'Bear', id: 1091189122
 
 # Developer
 cask 'miniconda'
