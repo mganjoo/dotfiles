@@ -9,6 +9,7 @@ brew 'python'
 brew 'lua'
 brew 'cmake'
 brew 'sbt'
+brew 'node'
 
 # Programming tools
 brew 'git'
