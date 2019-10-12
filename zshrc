@@ -222,11 +222,6 @@ alias v='LANG=c f -t -e vim -b viminfo'
 # zmv
 alias zmv='noglob zmv'
 
-# List Java versions available
-if [[ "$(uname)" == "Darwin" ]]; then
-  alias java_ls='/usr/libexec/java_home -V 2>&1 | grep -P "\d.\d.\d_\d\d" | cut -d : -f 1 | colrm 1 4 | grep -v Home'
-fi
-
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 
 # == Settings == {{{1
