@@ -10,10 +10,10 @@ local function adjustFocusedWindowGrid(fn)
 end
 
 local function sortedScreens()
-  -- Sort screens by left x.
+  -- Sort screens in ascending order of size.
   local screens = hs.screen.allScreens()
   table.sort(screens, function(a, b)
-    return a:fullFrame().x < b:fullFrame().x
+    return a:fullFrame().h < b:fullFrame().h
   end)
   return screens
 end
