@@ -222,7 +222,11 @@ alias v='LANG=c f -t -e vim -b viminfo'
 # zmv
 alias zmv='noglob zmv'
 
+# rot
 alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
+
+# scala
+alias newscala="sbt new scala/scalatest-example.g8"
 
 # == Settings == {{{1
 
