@@ -1,4 +1,6 @@
 # vim: foldmethod=marker:fen
+#
+# whlskddfjlsk
 
 # == Aliases == {{{1
 
@@ -62,6 +64,8 @@ alias gcP='git cherry-pick --no-commit'
 alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcs='git show'
+alias gcrf='git commit --fixup=$(glg | fzf | cut -f 2 -d " ")'
+alias gcrs='git commit --squash=$(glg | fzf | cut -f 2 -d " ")'
 
 # Conflict (C)
 alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
