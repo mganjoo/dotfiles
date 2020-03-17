@@ -32,7 +32,7 @@
 	verbosity = 1
 	tool = fugitive
 [mergetool "fugitive"]
-	cmd = vim -f \"+Gdiff\" \"$MERGED\"
+	cmd = nvim -f \"+Gdiff\" \"$MERGED\"
 [apply]
 	whitespace = nowarn
 [branch]
@@ -41,7 +41,7 @@
 	default = tracking
 [core]
 	autocrlf = false
-	editor = vim
+	editor = nvim
 	quotepath = false
 	excludesfile = ~/.gitignore_global
 [advice]
