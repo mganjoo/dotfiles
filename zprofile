@@ -16,22 +16,13 @@ fi
 
 # Add homebrew Python to PATH if exists
 if [[ -d "$(brew --prefix)/opt/python" ]]; then
-  export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+  export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
 fi
 
-# Add option to load miniconda if it exists
-if [[ -d "$(brew --prefix)/miniconda3/bin" ]]; then
-  # Use new method at https://github.com/conda/conda/blob/master/CHANGELOG.md#440-2017-12-20
-  . $(brew --prefix)/miniconda3/etc/profile.d/conda.sh
-fi
+# Disable prompt in terminal
+VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Add support for virtualenvwrapper
-if (( $+commands[virtualenvwrapper.sh] )); then
-  export WORKON_HOME="$HOME/.virtualenvs"
-  export PROJECT_HOME="$HOME/workspace"
-  VIRTUAL_ENV_DISABLE_PROMPT=1
-  source $commands[virtualenvwrapper.sh]
-fi
+### Tmux ###
 
 # Add tmuxifier to PATH
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
