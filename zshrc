@@ -231,6 +231,10 @@ alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
 # scala
 alias newscala="sbt new scala/scalatest-example.g8"
 
+# virtualenvs
+alias mkvenv="python -m venv .venv"
+alias govenv="source .venv/bin/activate"
+
 # == Settings == {{{1
 
 # Changing directories {{{2
