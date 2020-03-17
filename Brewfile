@@ -67,7 +67,6 @@ mas 'Things 3', id: 904280696
 mas 'Bear', id: 1091189122
 
 # Developer
-cask 'miniconda'
 cask 'dash'
 cask 'intellij-idea-ce'
 cask 'iterm2'
