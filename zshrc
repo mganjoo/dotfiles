@@ -189,7 +189,7 @@ alias glb='git brief'
 alias glc='git shortlog --summary --numbered'
 
 # Fetch
-alias gup='git up'
+alias griom='git rebase --interactive origin/master'
 
 # Common shell functions
 alias less='less -r'
