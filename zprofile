@@ -19,8 +19,11 @@ if [[ -d "$(brew --prefix)/opt/python" ]]; then
   export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
 fi
 
-# Disable prompt in terminal
-VIRTUAL_ENV_DISABLE_PROMPT=1
+# Disable prompt in terminal (rely on our own terminal prompt)
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Always have pip virtualenvs be within the project directory
+export PIPENV_VENV_IN_PROJECT=1 
 
 ### Tmux ###
 

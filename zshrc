@@ -1,6 +1,4 @@
 # vim: foldmethod=marker:fen
-#
-# whlskddfjlsk
 
 # == Aliases == {{{1
 
