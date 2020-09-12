@@ -19,6 +19,11 @@ if [[ -d "$(brew --prefix)/opt/python" ]]; then
   export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
 fi
 
+### Pipx ###
+if [[ -d "$HOME/.local/bin" ]]; then
+  export PATH="$PATH:$HOME/.local/bin"
+fi
+
 # Disable prompt in terminal (rely on our own terminal prompt)
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
