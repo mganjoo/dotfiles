@@ -10,6 +10,7 @@ brew 'lua'
 brew 'cmake'
 brew 'sbt'
 brew 'node'
+brew 'pipx'
 
 # Programming tools
 brew 'git'
