@@ -35,3 +35,6 @@ export PIPENV_VENV_IN_PROJECT=1
 # Add tmuxifier to PATH
 export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
 eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
+
+### Poetry ###
+export PATH="$HOME/.poetry/bin:$PATH"
