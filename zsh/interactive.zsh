@@ -12,6 +12,7 @@ fi
 fpath=(
   "$HOME/.zsh/external/zsh-completions/src"
   "$HOME/.zsh/external/conda-zsh-completion"
+  "$HOME/.zfunc"
   $fpath
 )
 
