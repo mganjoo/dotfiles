@@ -32,6 +32,7 @@ Plug 'milkypostman/vim-togglelist'
 " External program interaction
 Plug 'tpope/vim-eunuch'
 Plug 'benekastah/neomake'
+Plug 'tpope/vim-fugitive'
 
 " Search and replace
 Plug '~/.external/fzf'
@@ -243,6 +244,7 @@ nnoremap <leader>gr :Gread<CR>
 nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :Gblame<CR>
 
 " == UltiSnips == {{{2
 let g:UltiSnipsExpandTrigger="<c-e>"
