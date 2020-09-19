@@ -50,7 +50,6 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Organization
 Plug 'edkolev/tmuxline.vim'
