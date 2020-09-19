@@ -61,6 +61,8 @@
 	keepTemporaries = false
 [log]
 	date = local
+[pull]
+	rebase = true
 [include]
 	path = ~/.gitconfig_local
 
