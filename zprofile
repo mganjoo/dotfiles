@@ -27,7 +27,7 @@ fi
 # Disable prompt in terminal (rely on our own terminal prompt)
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Always have pip virtualenvs be within the project directory
+# Always have pipenv virtualenvs be within the project directory
 export PIPENV_VENV_IN_PROJECT=1 
 
 ### Tmux ###
@@ -38,3 +38,5 @@ eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
 
 ### Poetry ###
 export PATH="$HOME/.poetry/bin:$PATH"
+
+export POETRY_VIRTUALENVS_IN_PROJECT="true"
