@@ -58,6 +58,7 @@ cask 'hammerspoon'
 cask 'slack'
 cask 'textexpander'
 cask 'vlc'
+cask 'bitbar'
 mas '1Password', id: 1333542190
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
