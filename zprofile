@@ -28,7 +28,7 @@ fi
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Always have pipenv virtualenvs be within the project directory
-export PIPENV_VENV_IN_PROJECT=1 
+export PIPENV_VENV_IN_PROJECT=1
 
 ### Tmux ###
 
@@ -40,3 +40,16 @@ eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
 export PATH="$HOME/.poetry/bin:$PATH"
 
 export POETRY_VIRTUALENVS_IN_PROJECT="true"
+
+### Google Cloud SDK ###
+
+# Google Cloud currently requires Python 3.8
+if [[ -d "$(brew --prefix)/opt/python@3.8" ]]; then
+  export CLOUDSDK_PYTHON="$(brew --prefix)/opt/python@3.8/libexec/bin/python"
+fi
+
+# Add completion and path information for Google Cloud SDK
+if [[ -d "$(brew --prefix)/Caskroom/google-cloud-sdk/latest" ]]; then
+  source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+  source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+fi

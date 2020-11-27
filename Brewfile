@@ -76,6 +76,7 @@ cask 'java' unless system '/usr/libexec/java_home --failfast'
 cask 'mactex'
 cask 'skim'
 cask 'visual-studio-code'
+cask 'google-cloud-sdk'
 
 # Fonts
 cask 'font-fira-code'
