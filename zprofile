@@ -4,10 +4,11 @@ if [ -e ~/.zprofile_local ]; then
   source ~/.zprofile_local
 fi
 
-# Add ~/bin to PATH
+# Add ~/bin and /usr/local/sbin to PATH
 if [ -d $HOME/bin/ ]; then
   path=(
     $HOME/bin
+    /usr/local/sbin
     $path
   )
 fi
