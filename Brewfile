@@ -11,6 +11,7 @@ brew 'cmake'
 brew 'sbt'
 brew 'node'
 brew 'pipx'
+brew 'pyenv'
 
 # Programming tools
 brew 'git'
