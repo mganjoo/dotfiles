@@ -22,6 +22,8 @@
 	up = pull --rebase --autostash
 [format]
 	pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ad (%ar)%C(reset)%n%+B
+[init]
+	defaultBranch = main
 [pretty]
 	shortlog = format:%C(yellow)%h%C(reset) %C(cyan)%cr%C(reset) %cn %Cgreen%s%Creset
 	simple = format: * %s
