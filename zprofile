@@ -42,12 +42,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-### Poetry ###
-if [[ -d "$HOME/.poetry/bin" ]]; then
-  export PATH="$HOME/.poetry/bin:$PATH"
-fi
-export POETRY_VIRTUALENVS_IN_PROJECT="true"
-
 ### Google Cloud SDK ###
 
 # Google Cloud currently requires Python 3.8
