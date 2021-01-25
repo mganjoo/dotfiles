@@ -12,6 +12,7 @@ brew 'sbt'
 brew 'node'
 brew 'pipx'
 brew 'pyenv'
+brew 'pipenv'
 
 # Programming tools
 brew 'git'
