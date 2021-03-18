@@ -25,6 +25,9 @@ if [[ -d "$HOME/.local/bin" ]]; then
   export PATH="$PATH:$HOME/.local/bin"
 fi
 
+### Poetry ###
+export POETRY_VIRTUALENVS_IN_PROJECT="true"
+
 # Disable prompt in terminal (rely on our own terminal prompt)
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
