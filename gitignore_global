@@ -37,6 +37,7 @@ __pycache__/
 *.py[cod]
 .rope-project
 .ipynb_checkpoints/
+.venv
 
 # R
 .Rdata
