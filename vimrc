@@ -116,9 +116,8 @@ set laststatus=2   " Always show the status line
 set listchars=tab:▸\ ,trail:·
 
 " == Theme == {{{1
-set background=light
 set t_Co=256
-silent! colorscheme solarized
+let g:auto_switch_colors_initial_load = 0
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 " == Enhancements == {{{1

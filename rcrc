@@ -1,5 +1,5 @@
 DOTFILES_DIRS="$HOME/.dotfiles_local $HOME/.dotfiles"
-EXCLUDES="fonts requirements README.md update.sh"
+EXCLUDES="fonts requirements README.md update.sh iTerm"
 SYMLINK_DIRS="external emacs.d spacemacs"
 UNDOTTED="bin spacemacs"
 

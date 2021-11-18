@@ -1,5 +1,3 @@
-let s:colors = "solarized"
-
 function! auto_switch_colors#isDarkMode()
   let l:result = get(systemlist("defaults read -g AppleInterfaceStyle 2>&1 | grep Dark"), 0, "light")
   if l:result == "dark"
@@ -10,7 +8,7 @@ function! auto_switch_colors#isDarkMode()
 endfunction
 
 function auto_switch_colors#updateUI()
-  silent! colorscheme s:colors
+  silent! colorscheme solarized
 endfunction
 
 function! auto_switch_colors#setDarkMode()
@@ -47,5 +45,14 @@ command! SetLightMode call auto_switch_colors#setLightMode()
 augroup auto_switch_colors
   autocmd!
   autocmd ColorScheme * nested call auto_switch_colors#colorschemeChanged()
-  autocmd CursorMoved,CursorHold,CursorHoldI,WinEnter,WinLeave,FocusLost,FocusGained,VimResized,ShellCmdPost * nested call auto_switch_colors#autoChange()
+  autocmd CursorHold,CursorHoldI,FocusGained,FocusLost * nested call auto_switch_colors#autoChange()
 augroup END
+
+if !g:auto_switch_colors_initial_load
+  if auto_switch_colors#isDarkMode()
+    call auto_switch_colors#setDarkMode()
+  else
+    call auto_switch_colors#setLightMode()
+  endif
+  let g:auto_switch_colors_initial_load = 1
+endif
