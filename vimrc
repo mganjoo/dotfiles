@@ -179,7 +179,7 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
 " == lightline == {{{2
-let g:lightline = { 'colorscheme': 'powerlineish' }
+let g:lightline = { 'colorscheme': 'solarized' }
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0

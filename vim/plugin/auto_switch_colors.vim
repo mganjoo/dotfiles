@@ -1,3 +1,5 @@
+let s:lightlineThemeFiles = globpath(&rtp, "autoload/lightline/colorscheme/solarized.vim", 1, 1)
+
 function! auto_switch_colors#isDarkMode()
   let l:result = get(systemlist("defaults read -g AppleInterfaceStyle 2>&1 | grep Dark"), 0, "light")
   if l:result == "dark"
@@ -9,6 +11,12 @@ endfunction
 
 function auto_switch_colors#updateUI()
   silent! colorscheme solarized
+  for l:f in s:lightlineThemeFiles
+    execute "source" l:f
+  endfor
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
 endfunction
 
 function! auto_switch_colors#setDarkMode()
@@ -23,9 +31,10 @@ endfunction
 
 function auto_switch_colors#switch()
   let l:isDark = auto_switch_colors#isDarkMode()
-  if l:isDark
+  let l:currentBackground = &background
+  if l:isDark && l:currentBackground != "dark"
     call auto_switch_colors#setDarkMode()
-  else
+  elseif !l:isDark && l:currentBackground != "light"
     call auto_switch_colors#setLightMode()
   endif
 endfunction
