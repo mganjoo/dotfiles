@@ -75,3 +75,6 @@ DerivedData
 
 # Arcanist
 .arclint
+
+# VS Code
+.metals/
