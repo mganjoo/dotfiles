@@ -57,3 +57,9 @@ if [[ -d "$(brew --prefix)/Caskroom/google-cloud-sdk/latest" ]]; then
   source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
   source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 fi
+
+### Appearance ###
+
+if [[ -d "$HOME/.vim/external/gruvbox" ]]; then
+  source "$HOME/.vim/external/gruvbox/gruvbox_256palette.sh"
+fi

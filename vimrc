@@ -24,7 +24,7 @@ Plug 'regedarek/ZoomWin'
 Plug 'tpope/vim-repeat'
 
 " UI enhancements
-Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'milkypostman/vim-togglelist'
@@ -117,8 +117,9 @@ set listchars=tab:▸\ ,trail:·
 
 " == Theme == {{{1
 set t_Co=256
-let g:auto_switch_colors_initial_load = 0
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+set background=dark
+autocmd vimenter * ++nested colorscheme gruvbox
 
 " == Enhancements == {{{1
 " Use ag instead of grep, if available
@@ -179,7 +180,10 @@ let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
 " == lightline == {{{2
-let g:lightline = { 'colorscheme': 'solarized' }
+let g:lightline = { 'colorscheme': 'jellybeans' }
+call lightline#init()
+call lightline#colorscheme()
+call lightline#update()
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
