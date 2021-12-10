@@ -13,7 +13,7 @@ My configuration files.
 
 3. Install Homebrew (on Mac OS X):
 
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 4. Clone the repository into the home directory:
 
