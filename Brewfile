@@ -71,14 +71,10 @@ mas 'Things 3', id: 904280696
 mas 'Bear', id: 1091189122
 
 # Developer
-cask 'dash'
-cask 'intellij-idea-ce'
 cask 'iterm2'
 cask 'java' unless system '/usr/libexec/java_home --failfast'
-cask 'mactex'
-cask 'skim'
 cask 'visual-studio-code'
-cask 'google-cloud-sdk'
+cask 'google-cloud-sdk' unless system 'gcloud --version'
 
 # Fonts
 cask 'font-fira-code'
