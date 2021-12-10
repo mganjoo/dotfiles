@@ -214,6 +214,17 @@ end)
 
 hs.hotkey.bind(mash, "i", hs.itunes.displayCurrentTrack)
 
+-- == GlobalProtect == {{{1
+hs.hotkey.bind(mash, "v", function()
+  hs.applescript([[
+  tell application "System Events" to tell process "GlobalProtect"
+    click menu bar item 1 of menu bar 2
+    click button 2 of window 1 -- Either Connect or Disconnect
+    click menu bar item 1 of menu bar 2 -- Close the window (optional).
+  end tell
+  ]])
+end)
+
 -- == Machine-specific application list == {{{1
 
 local applist
