@@ -56,6 +56,8 @@ cask 'franz'
 cask 'google-chrome'
 cask 'google-drive'
 cask 'hammerspoon'
+cask 'karabiner-elements'
+cask 'keepingyouawake'
 cask 'slack'
 cask 'textexpander'
 cask 'scroll-reverser'
@@ -69,6 +71,7 @@ mas 'PopClip', id: 445189367
 mas 'The Unarchiver', id: 425424353
 mas 'Things 3', id: 904280696
 mas 'Bear', id: 1091189122
+mas 'Be Focused Pro - Focus Timer', id: 961632517
 
 # Developer
 cask 'iterm2'
