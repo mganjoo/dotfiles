@@ -172,7 +172,7 @@ end)
 hs.hotkey.bind(mash, '8', function()
   adjustFocusedWindowGrid(
     function(g)
-      g.x = 0; g.y = GRID_WIDTH / 2
+      g.x = GRID_WIDTH / 2; g.y = GRID_HEIGHT / 2
       g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT / 2
     end
   )
@@ -182,7 +182,7 @@ end)
 hs.hotkey.bind(mash, '9', function()
   adjustFocusedWindowGrid(
     function(g)
-      g.x = GRID_WIDTH / 2; g.y = GRID_HEIGHT / 2
+      g.x = 0; g.y = GRID_HEIGHT / 2
       g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT / 2
     end
   )
