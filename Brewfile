@@ -16,6 +16,7 @@ brew 'pipenv'
 
 # Programming tools
 brew 'git'
+brew 'gh'
 brew 'vim'
 brew 'nvim'
 brew 'the_silver_searcher'
