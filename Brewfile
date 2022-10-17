@@ -12,7 +12,6 @@ brew 'sbt'
 brew 'node'
 brew 'pipx'
 brew 'pyenv'
-brew 'pipenv'
 
 # Programming tools
 brew 'git'
@@ -59,8 +58,9 @@ cask 'karabiner-elements'
 cask 'keepingyouawake'
 cask 'slack'
 cask 'textexpander'
-cask 'scroll-reverser'
 cask 'vlc'
+cask 'logi-options-plus'
+cask 'logitech-g-hub'
 mas '1Password', id: 1333542190
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
