@@ -1,4 +1,6 @@
 tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
+tap 'homebrew/cask-drivers'
 
 # Basic stuff
 brew 'rcm'
@@ -14,12 +16,10 @@ brew 'lesspipe'
 brew 'mypy'
 brew 'neovim'
 brew 'node'
-brew 'nvim'
 brew 'pipenv'
 brew 'pipx'
 brew 'pyenv'
 brew 'the_silver_searcher'
-brew 'vim'
 brew 'yapf'
 
 # Terminal
@@ -34,8 +34,6 @@ brew 'tree'
 brew 'watch'
 brew 'wdiff'
 brew 'wget'
-brew 'zsh'
-brew 'zsh-completions'
 
 # Other tools
 brew 'mas'
@@ -43,7 +41,6 @@ brew 'mas'
 ## == Casks ==
 
 cask '1password'
-cask 'alfred'
 cask 'anylist'
 cask 'appcleaner'
 cask 'bartender'
@@ -58,7 +55,6 @@ cask 'iterm2'
 cask 'karabiner-elements'
 cask 'keepingyouawake'
 cask 'logi-options-plus'
-cask 'logitech-g-hub'
 cask 'mullvadvpn'
 cask 'notion'
 cask 'popclip'
