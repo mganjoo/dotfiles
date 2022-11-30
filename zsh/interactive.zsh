@@ -17,7 +17,7 @@ fpath=(
 )
 
 autoload -Uz compinit
-compinit -i
+compinit
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on

@@ -13,6 +13,10 @@ if [ -d $HOME/bin/ ]; then
   )
 fi
 
+### Homebrew ###
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
 ### Python ###
 
 # Add homebrew Python to PATH if exists
