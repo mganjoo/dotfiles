@@ -305,6 +305,11 @@ if (( $+commands[fasd] )); then
   eval "$(fasd --init auto)"
 fi
 
+# iTerm shell integration
+if [ -e ~/.iterm2_shell_integration.zsh ]; then
+  source ~/.iterm2_shell_integration.zsh
+fi
+
 # == Source .zshrc_local file == {{{1
 
 if [ -e ~/.zshrc_local ]; then
