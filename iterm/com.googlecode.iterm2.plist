@@ -18,10 +18,6 @@
 	<true/>
 	<key>Control</key>
 	<integer>1</integer>
-	<key>Coprocess MRU</key>
-	<array>
-		<string>osascript ~/.scripts/iTermColors.scpt</string>
-	</array>
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopySelection</key>
