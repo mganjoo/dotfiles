@@ -17,7 +17,11 @@ My configuration files.
 
 4. Clone the repository into the home directory:
 
-        git clone git://github.com/mganjoo/dotfiles.git ~/.dotfiles
+        git clone https://github.com/mganjoo/dotfiles.git ~/.dotfiles
+
+5. Temporarily add Homebrew to path:
+
+        eval "$(/opt/homebrew/bin/brew shellenv)"
 
 5. Install Homebrew packages:
 
