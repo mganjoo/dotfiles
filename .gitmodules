@@ -13,9 +13,6 @@
 [submodule "external/tmuxifier"]
 	path = external/tmuxifier
 	url = https://github.com/jimeh/tmuxifier.git
-[submodule "tmux/external/copycat"]
-	path = tmux/external/copycat
-	url = https://github.com/tmux-plugins/tmux-copycat
 [submodule "zsh/external/conda-zsh-completion"]
 	path = zsh/external/conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion.git
