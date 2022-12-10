@@ -7,7 +7,6 @@ brew 'rcm'
 brew 'python'
 
 brew 'cookiecutter'
-brew 'flake8'
 brew 'gh'
 brew 'git'
 brew 'grep'
@@ -20,7 +19,7 @@ brew 'pipenv'
 brew 'pipx'
 brew 'pyenv'
 brew 'the_silver_searcher'
-brew 'yapf'
+brew 'black'
 
 # Terminal
 brew 'bash'
@@ -55,9 +54,9 @@ cask 'iterm2'
 cask 'karabiner-elements'
 cask 'keepingyouawake'
 cask 'logi-options-plus'
+cask 'microsoft-office'
 cask 'mullvadvpn'
 cask 'notion'
-cask 'popclip'
 cask 'slack'
 cask 'textexpander'
 cask 'the-unarchiver'
@@ -69,6 +68,7 @@ mas 'Yoink', id: 457622435
 mas 'Things 3', id: 904280696
 mas 'Bear', id: 1091189122
 mas 'Be Focused Pro - Focus Timer', id: 961632517
+mas 'PopClip', id: 445189367
 
 # Fonts
 cask 'font-fira-code'
