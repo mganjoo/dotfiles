@@ -1,6 +1,4 @@
 changeps1: false
 channels:
-  - anaconda-fusion
   - conda-forge
   - defaults
-ssl_verify: true
