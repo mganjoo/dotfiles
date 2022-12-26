@@ -9,4 +9,4 @@ mkdir -p ~/.tmuxifier-layouts
 # Neovim configuration
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -fs ~/.vim $XDG_CONFIG_HOME/nvim
-ln -fs ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+ln -fs ~/.vimrc $XDG_CONFIG_HOME/nvim/vimrc.vim

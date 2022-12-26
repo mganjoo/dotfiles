@@ -25,9 +25,11 @@ Plug 'tpope/vim-repeat'
 
 " UI enhancements
 Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'f-person/auto-dark-mode.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'milkypostman/vim-togglelist'
+Plug 'edkolev/tmuxline.vim'
 
 " External program interaction
 Plug 'tpope/vim-eunuch'
@@ -50,9 +52,6 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" Organization
-Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -116,9 +115,6 @@ set laststatus=2   " Always show the status line
 set listchars=tab:▸\ ,trail:·
 
 " == Theme == {{{1
-set t_Co=256
-let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-set background=dark
 autocmd vimenter * ++nested colorscheme gruvbox
 
 " == Enhancements == {{{1
@@ -155,9 +151,6 @@ let g:delimitMate_nesting_quotes = ['"', '`'] " Allows for triple quotes
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_sign_overwrite = 1
 
-" == Slimux == {{{2
-let g:slime_target = "tmux"
-
 " == UltiSnips == {{{2
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnips"]
 
@@ -179,11 +172,6 @@ let g:tmuxcomplete#trigger = ''
 let g:vimtex_view_general_viewer = 'displayline'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 
-" == lightline == {{{2
-let g:lightline = { 'colorscheme': 'jellybeans' }
-call lightline#init()
-call lightline#colorscheme()
-call lightline#update()
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
@@ -255,9 +243,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " == Dash == {{{2
 nmap <silent> gK <Plug>DashSearch
 
-" == Slimux == {{{2
-nmap <C-c><C-c> :SlimuxREPLSendLine<CR>
-vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
 
 " == vim-easy-align == {{{2
 vmap <Enter> <Plug>(EasyAlign)
