@@ -16,6 +16,13 @@ fpath=(
   $fpath
 )
 
+if [[ -d "$(brew --prefix)/share/zsh/site-functions" ]]; then
+  fpath=(
+    "$(brew --prefix)/share/zsh/site-functions"
+    $fpath
+  )
+fi
+
 autoload -Uz compinit
 compinit
 
