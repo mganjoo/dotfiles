@@ -16,3 +16,6 @@
 [submodule "zsh/external/conda-zsh-completion"]
 	path = zsh/external/conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion.git
+[submodule "tmux/external/tpm"]
+	path = tmux/external/tpm
+	url = https://github.com/tmux-plugins/tpm
