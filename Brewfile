@@ -66,7 +66,6 @@ cask 'zoom'
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
 mas 'Things 3', id: 904280696
-mas 'Bear', id: 1091189122
 mas 'Be Focused Pro - Focus Timer', id: 961632517
 mas 'PopClip', id: 445189367
 
