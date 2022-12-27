@@ -50,7 +50,6 @@
 	statusHints = false
 [diff]
 	mnemonicprefix = true
-	tool = vimdiff
 [rerere]
 	enabled = true
 [difftool]

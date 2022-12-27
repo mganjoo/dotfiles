@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 echo "Removing nvim config..."
-rm -f ${XDG_CONFIG_HOME:=$HOME/.config}/nvim/vimrc.vim
 rm -f $XDG_CONFIG_HOME/nvim
 
 echo "Removing fzf files..."
