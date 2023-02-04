@@ -3,7 +3,6 @@ tap 'homebrew/cask-versions'
 tap 'homebrew/cask-drivers'
 
 # Basic stuff
-brew 'rcm'
 brew 'python'
 
 brew 'cookiecutter'
@@ -58,10 +57,12 @@ cask 'microsoft-office'
 cask 'mullvadvpn'
 cask 'notion'
 cask 'slack'
+cask 'signal'
 cask 'textexpander'
 cask 'the-unarchiver'
 cask 'visual-studio-code'
 cask 'vlc'
+cask 'wd-security'
 cask 'zoom'
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435

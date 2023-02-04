@@ -1,7 +1,0 @@
--- Use vi key bindings
-editMode: Vi
-
--- Large history
-maxHistorySize: Just 1000
-
--- vim: ft=haskell

@@ -17,7 +17,7 @@ My configuration files.
 
 4. Clone the repository into the home directory:
 
-        git clone https://github.com/mganjoo/dotfiles.git ~/.dotfiles
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply mganjoo
 
 5. Temporarily add Homebrew to path:
 
