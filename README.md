@@ -1,7 +1,7 @@
 Milind Ganjoo's dotfiles
 ========================
 
-My configuration files.
+My configuration files, managed with [`chezmoi`](https://github.com/twpayne/chezmoi).
 
 ## Requirements
 
@@ -15,7 +15,7 @@ My configuration files.
 
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-4. Clone the repository into the home directory:
+4. Clone the repository into the home directory and install:
 
         sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply mganjoo
 
@@ -25,21 +25,10 @@ My configuration files.
 
 5. Install Homebrew packages:
 
-        cd ~/.dotfiles
-        brew bundle
+        brew bundle --file ~/.Brewfile
 
-6. Install Git submodules for repository:
+6. Update all packages:
 
-        git submodule update --init --recursive
-
-7. Install the dotfiles (which also runs the associated hooks):
-
-        RCRC=~/.dotfiles/rcrc rcup
-
-8. Update all packages:
-
-        cd ~/.dotfiles
-        ./update.sh
         $(brew --prefix)/opt/fzf/install --completion --key-bindings --no-update-rc
 
 # Post-installation
