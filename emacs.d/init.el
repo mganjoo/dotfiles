@@ -9,17 +9,20 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; Package management
-;; ==================
+;; Add custom lisp packages to the load path.
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+;; Package management: set up repositories.
 (require 'package)
 (setq package-enable-at-startup nil)
 (eval-when-compile
   (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/") t))
+               '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives
+               '("org" . "https://orgmode.org/elpa/") t))
 (package-initialize)
 
-;; Install and configure `use-package' for other packages in file.
+;; Install and configure use-package for other packages in file.
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -28,41 +31,18 @@
 
 ;; Basic configuration.
 (setq
- use-package-always-ensure t ;; Avoid having to do ":ensure t" everywhere
- ring-bell-function 'ignore  ;; Disable the error bell
- make-backup-files nil       ;; Don't make backups when first saving files
- vc-follow-symlinks t)       ;; Don't confirm when opening symlinked files
+ inhibit-startup-screen t      ;; Disable startup screen
+ initial-scratch-message ""    ;; Remove message from scratch buffer
+ ring-bell-function 'ignore    ;; Disable the error bell
+ column-number-mode t          ;; Display current column in addition to line
+ make-backup-files nil         ;; Disable all backup file creation
+ vc-follow-symlinks t          ;; Don't confirm when opening symlinked files
+ use-package-always-ensure t)  ;; Avoid having to do ":ensure t" everywhere
 
 ;; Support for diminished minor modes (no modeline display).
 (use-package diminish)
 
-;; Use PATH and other env variables from shell in GUI environments.
-(use-package exec-path-from-shell
-  :config
-   ;; Don't load interactive shell files
-  (setq exec-path-from-shell-arguments '("-l"))
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
-
-;; Appearance
-;; ==========
-
-;; Disable all visual artifacts.
-(unless window-system
-  (menu-bar-mode -1))
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(horizontal-scroll-bar-mode -1)
-
-(setq
- inhibit-startup-screen t   ;; Disable startup screen
- initial-scratch-message "" ;; Remove message from scratch buffer
- column-number-mode t)      ;; Display current column in addition to line
-
-;; Remove annoying startup echo area message.
-(defun display-startup-echo-area-message () (message ""))
-
-;; Theme
+;; Appearance and theme.
 (use-package leuven-theme
   :config
   (setq leuven-scale-outline-headlines nil)
@@ -72,43 +52,26 @@
 (add-to-list 'default-frame-alist        ;; Default editor font
              '(font . "Fira Mono-14"))
 
-;; Mode line
-(use-package telephone-line
+;; Make <ctrl+cmd+f> work on Mac for fullscreen.
+(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+
+;; Some good defaults (https://github.com/technomancy/better-defaults).
+;; TODO: can we directly configure some of these?
+(use-package better-defaults)
+
+;; Use PATH and other env variables from shell.
+(use-package exec-path-from-shell
+  :defer 1  ;; deferring seems to get rid of warning message about zhsrc
   :config
-  (setq
-   telephone-line-lhs '((evil   . (telephone-line-evil-tag-segment))
-                        (accent . (telephone-line-process-segment))
-                        (nil    . (telephone-line-minor-mode-segment
-                                   telephone-line-buffer-segment)))
-   telephone-line-rhs '((nil    . (telephone-line-misc-info-segment))
-                        (accent . (telephone-line-major-mode-segment))
-                        (evil   . (telephone-line-position-segment)))
-   telephone-line-primary-left-separator    'telephone-line-flat
-   telephone-line-secondary-left-separator  'telephone-line-nil
-   telephone-line-primary-right-separator   'telephone-line-flat
-   telephone-line-secondary-right-separator 'telephone-line-nil
-   telephone-line-evil-use-short-tag        t)
-  (telephone-line-mode 1))
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
-;; Column indicator at right margin.
-(use-package fill-column-indicator
+;; Modeline.
+(use-package powerline
   :config
-  (add-hook 'prog-mode-hook 'fci-mode))
-
-;; Diminish some built-in minor modes.
-(use-package eldoc :diminish 'eldoc-mode)
-(use-package undo-tree :diminish 'undo-tree-mode)
-
-;; Keys and mouse
-;; ==============
-
-;; Configure mouse support (from https://www.iterm2.com/faq.html)
-(unless window-system
- (require 'mouse)
- (xterm-mouse-mode t)
- ;; Enable natural scrolling (wheel up -> scroll down)
- (global-set-key [mouse-4] (lambda () (interactive) (scroll-down 3)))
- (global-set-key [mouse-5] (lambda () (interactive) (scroll-up 3))))
+  (use-package powerline-evil)
+  (setq powerline-default-separator 'nil) ;; no patching, no separator
+  (powerline-evil-center-color-theme))    ;; color-code evil state
 
 ;; Display possible key bindings for an incomplete command.
 (use-package which-key
@@ -116,7 +79,7 @@
   :config
   (which-key-mode))
 
-;; Vim-ify using evil.
+;; Vimify using evil.
 (use-package evil
   :config
   ;; Load `evil-leader' and enable mode before `evil-mode'
@@ -124,7 +87,15 @@
   (use-package evil-leader
     :config
     (global-evil-leader-mode)
-    (evil-leader/set-leader "<SPC>"))
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      ":"     'eval-expression
+      "<SPC>" 'helm-M-x
+      "e"     'flycheck-list-errors
+      "d"     'deft
+      "oa"    'org-agenda
+      "oc"    'org-capture
+      "ol"    'org-store-link))
 
   (evil-mode 1)
 
@@ -139,76 +110,154 @@
   (use-package evil-commentary
     :diminish evil-commentary-mode
     :config
-    (evil-commentary-mode)))
+    (evil-commentary-mode))
 
-;; Make <ctrl+cmd+f> work on Mac for fullscreen.
-(global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+  ;; Use emacs state in the following modes.
+  (dolist (mode '(flycheck-error-list-mode
+                  deft-mode))
+    (add-to-list 'evil-emacs-state-modes mode)))
 
-;; ivy mode
-(use-package counsel ;; brings ivy and swiper as dependencies
-  :diminish ivy-mode
-  :diminish counsel-mode
+;; Helm.
+(use-package helm
+  :diminish helm-mode
   :config
-  (ivy-mode 1)       ;; use ivy for `completing-read-function'.
-  (counsel-mode 1)   ;; replace some built-in commands
-  (setq ivy-use-virtual-buffers t)) ;; switch recent files and bookmarks also
+  (helm-mode 1)
 
-(evil-global-set-key 'normal (kbd "[ b") 'previous-buffer)
-(evil-global-set-key 'normal (kbd "] b") 'next-buffer)
+  ;; Use Helm-enhanced M-x.
+  (global-set-key (kbd "M-x") 'helm-M-x)
 
-(defun mganjoo/insert-newline-above (count)
-  "Insert COUNT new lines above point and place point in the top line."
-  (interactive "p")
-  (save-excursion (dotimes (_ count) (evil-insert-newline-above))))
-(evil-global-set-key 'normal (kbd "[ SPC") 'mganjoo/insert-newline-above)
+  (use-package helm-descbinds
+    :config
+    (helm-descbinds-mode))
 
-(defun mganjoo/insert-newline-below (count)
-  "Insert COUNT new lines below point and leave point at same position."
-  (interactive "p")
-  (save-excursion (dotimes (_ count) (evil-insert-newline-below))))
-(evil-global-set-key 'normal (kbd "] SPC") 'mganjoo/insert-newline-below)
+  ;; Flip <tab> and C-z mappings
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
 
-;; IDE configuration
-;; =================
-
-;; Never use tabs for indentation.
-(setq-default indent-tabs-mode nil)
-
-;; Automatically add newlines at end of file.
-(setq require-final-newline t)
-
-;; Auto-close parentheses in programming buffers.
-(add-hook 'prog-mode-hook 'electric-pair-local-mode)
-
-;; Use relative line numbers during evil Normal mode.
-(use-package nlinum-relative
-  :config
-  (nlinum-relative-setup-evil)
-  (add-hook 'prog-mode-hook 'nlinum-relative-mode))
-
-;; Support hiding/showing code blocks.
-(use-package hideshow
-  :diminish hs-minor-mode
-  :config
-  (add-hook 'prog-mode-hook 'hs-minor-mode))
-
-;; Project management.
-(use-package projectile
-  :config
-  (setq
-   projectile-completion-system 'ivy
-   projectile-enable-caching t       ;; cache file lists
-   projectile-mode-line-function '(lambda ()
-                                    (format "[%s]"
-                                            (projectile-project-name))))
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode 1))
+  (defun mg/remove-cursor-in-helm-buffers ()
+    "Remove cursor in helm buffers."
+    (with-helm-buffer (setq cursor-in-non-selected-windows nil)))
+  (add-hook 'helm-after-initialize-hook
+            'mg/remove-cursor-in-helm-buffers))
 
 ;; Code completion.
 (use-package company
   :diminish company-mode
   :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  (global-company-mode)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+
+;; Error checking.
+(use-package flycheck
+  :diminish flycheck-mode
+  :config
+  (add-hook 'after-init-hook 'global-flycheck-mode))
+
+;; Relative line numbering.
+(use-package nlinum-relative
+  :config
+  (nlinum-relative-setup-evil)
+  (setq nlinum-relative-redisplay-delay 0)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
+  (add-hook 'org-mode-hook 'nlinum-relative-mode))
+
+;; ENSIME
+(use-package ensime)
+
+;; Org
+(use-package org
+  :ensure org-plus-contrib
+  :config
+  (setq
+   org-directory "~/Dropbox/org"
+   org-default-notes-file (concat org-directory "/notes.org")
+   org-todo-keywords
+   '((sequence "TODO" "|" "DONE")
+     (sequence "QUESTION" "|" "ANSWERED"))
+   org-agenda-files '("~/Dropbox/org/" "~/Dropbox/notes/")
+   org-log-done t)
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+
+  (use-package org-agenda
+    :ensure nil
+    :config
+    (add-hook 'org-agenda-mode-hook
+              (lambda ()
+                (define-key org-agenda-mode-map "j" 'org-agenda-next-item)
+                (define-key org-agenda-mode-map "k" 'org-agenda-previous-item))))
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((shell . t)
+                                 (emacs-lisp . t)))
+  (use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (use-package org-evil))
+
+;; Deft
+(use-package deft
+  :commands (deft)
+  :config
+  (setq
+   deft-extensions '("org" "md")
+   deft-default-extension "org"
+   deft-directory "~/Dropbox/notes"
+   deft-use-filter-string-for-filename t
+   deft-use-filename-as-title t)
+  (add-hook 'deft-mode-hook
+            (lambda ()
+              (define-key deft-mode-map (kbd "C-c x")
+                'kill-this-buffer))))
+
+;; Column indicator at right margin.
+(use-package fill-column-indicator
+  :config
+  (add-hook 'prog-mode-hook 'fci-mode))
+
+;; Allow folding of code blocks.
+(use-package hideshow
+  :diminish hs-minor-mode
+  :config
+  (add-hook 'prog-mode-hook 'hs-minor-mode))
+
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :config
+  (global-undo-tree-mode))
+
+;; Handy bracket mappings (local package).
+(use-package evil-unimpaired
+  :ensure nil)
+
+(use-package projectile
+  :diminish projectile-mode
+  :config
+  (projectile-mode)
+  (setq
+   projectile-enable-caching t
+   projectile-completion-system 'helm))
+
+(use-package magit
+  :config
+  (global-magit-file-mode)
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup))
+
+(use-package anaconda-mode
+  :config
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (use-package company-anaconda
+    :config
+    (add-to-list 'company-backends
+                 '(company-anaconda :with company-capf))))
+
+(defun mg/prog-mode-electric-pair ()
+  "Set up auto-closing of matching parentheses in `prog-mode'."
+  (electric-pair-local-mode)) ;; Auto-closing matching parentheses
+(add-hook 'prog-mode-hook 'mg/prog-mode-electric-pair)
 
 (provide 'init)
 ;;; init.el ends here
