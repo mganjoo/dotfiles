@@ -3,9 +3,6 @@
 # Make vim backup directory
 mkdir -p ~/.vim-backup ~/.vim-swap
 
-# Make empty directory for tmuxifier layouts
-mkdir -p ~/.tmuxifier-layouts
-
 # Neovim configuration
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -fs ~/.vim $XDG_CONFIG_HOME/nvim
