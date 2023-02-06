@@ -4,15 +4,9 @@
 [submodule "zsh/external/zsh-history-substring-search"]
 	path = zsh/external/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "external/fzf"]
-	path = external/fzf
-	url = https://github.com/junegunn/fzf.git
 [submodule "zsh/external/zsh-completions"]
 	path = zsh/external/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "external/tmuxifier"]
-	path = external/tmuxifier
-	url = https://github.com/jimeh/tmuxifier.git
 [submodule "zsh/external/conda-zsh-completion"]
 	path = zsh/external/conda-zsh-completion
 	url = https://github.com/esc/conda-zsh-completion.git
