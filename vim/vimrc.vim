@@ -44,7 +44,7 @@ Plug 'benekastah/neomake'
 Plug 'tpope/vim-fugitive'
 
 " Search and replace
-Plug '~/.external/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
