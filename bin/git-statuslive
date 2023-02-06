@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-GIT_DISABLE_STATS=1 watch -ctn 2 "git -c color.status=always --no-pager status -sb $*"

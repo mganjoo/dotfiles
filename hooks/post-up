@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# Make vim backup directory
-mkdir -p ~/.vim-backup ~/.vim-swap
-
-# Neovim configuration
-mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-ln -fs ~/.vim $XDG_CONFIG_HOME/nvim

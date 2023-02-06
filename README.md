@@ -40,6 +40,7 @@ My configuration files.
 
         cd ~/.dotfiles
         ./update.sh
+        $(brew --prefix)/opt/fzf/install --completion --key-bindings --no-update-rc
 
 # Post-installation
 

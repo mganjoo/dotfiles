@@ -1,0 +1,15 @@
+[".zsh/external/zsh-syntax-highlighting"]
+  type = "git-repo"
+  url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+[".zsh/external/zsh-history-substring-search"]
+  type = "git-repo"
+  url = "https://github.com/zsh-users/zsh-history-substring-search.git"
+[".zsh/external/zsh-completions"]
+  type = "git-repo"
+  url = "https://github.com/zsh-users/zsh-completions.git"
+[".zsh/external/conda-zsh-completion"]
+  type = "git-repo"
+  url = "https://github.com/esc/conda-zsh-completion.git"
+[".tmux/external/tpm"]
+  type = "git-repo"
+  url = "https://github.com/tmux-plugins/tpm"
