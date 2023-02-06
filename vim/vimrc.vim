@@ -151,9 +151,6 @@ let g:delimitMate_nesting_quotes = ['"', '`'] " Allows for triple quotes
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_sign_overwrite = 1
 
-" == UltiSnips == {{{2
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "MySnips"]
-
 " == neomake == {{{2
 let g:neomake_python_enabled_makers = ['flake8']
 au BufWritePost *.py Neomake
