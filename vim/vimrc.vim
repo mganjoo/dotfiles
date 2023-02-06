@@ -126,7 +126,6 @@ endif
 " == Filetype-specific settings == {{{1
 au BufRead,BufNewFile *.mesos set filetype=python
 au BufRead,BufNewFile *.aurora set filetype=python
-au BufRead,BufNewFile BUILD setlocal filetype=pants
 
 " == Plugin Settings == {{{1
 
@@ -136,7 +135,6 @@ if executable("ag")
       \ --ignore .git
       \ --ignore .svn
       \ --ignore .hg
-      \ --ignore .pants.d
       \ -g ""'
 else
   let s:search_command = 'find %s -type f'
