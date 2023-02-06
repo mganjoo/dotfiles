@@ -64,7 +64,8 @@
 	date = local
 [pull]
 	rebase = true
-[include]
-	path = ~/.gitconfig_local
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
 
 # vim: ft=gitconfig
