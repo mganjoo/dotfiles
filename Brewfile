@@ -4,8 +4,8 @@ tap 'homebrew/cask-drivers'
 
 # Basic stuff
 brew 'python'
-
 brew 'cookiecutter'
+brew 'fzf'
 brew 'gh'
 brew 'git'
 brew 'grep'
