@@ -42,12 +42,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # Always have pipenv virtualenvs be within the project directory
 export PIPENV_VENV_IN_PROJECT=1
 
-### Tmux ###
-
-# Add tmuxifier to PATH
-export TMUXIFIER_LAYOUT_PATH="$HOME/.tmuxifier-layouts"
-eval "$($HOME/.external/tmuxifier/bin/tmuxifier init -)"
-
 ### Pyenv ###
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
