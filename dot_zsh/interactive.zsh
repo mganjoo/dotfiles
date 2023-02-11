@@ -2,25 +2,16 @@
 # Settings for interactive features (not for dumb terminals)
 
 # == Guard == {{{1
-
 if [[ "$TERM" == 'dumb' || ! $- =~ i  ]]; then
   return
 fi
 
 # == Completion == {{{1
 
-fpath=(
-  "$HOME/.zsh/external/zsh-completions/src"
-  "$HOME/.zsh/external/conda-zsh-completion"
-  "$HOME/.zfunc"
-  $fpath
-)
+fpath+=("$HOME/.zsh/external/zsh-completions/src")
 
-if [[ -d "$(brew --prefix)/share/zsh/site-functions" ]]; then
-  fpath=(
-    "$(brew --prefix)/share/zsh/site-functions"
-    $fpath
-  )
+if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
+  fpath+=("/opt/homebrew/share/zsh/site-functions")
 fi
 
 autoload -Uz compinit
@@ -127,22 +118,14 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' l
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^[-[:alnum:]]##(.[-[:alnum:]]##)##' '*@*'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,3))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
 
-if command -v brew > /dev/null 2>&1; then
-  local aws_completion_file=$(brew --prefix)/share/zsh/site-functions/_aws
-  if [[ -f "$aws_completion_file" ]]; then
-    source $aws_completion_file
-  fi
-  unset aws_completion_file
-fi
-
-
 # == Appearance == {{{1
 
 # Prompt {{{2
-fpath=( ~/.zsh/prompt $fpath )
-autoload -Uz promptinit
-promptinit
-prompt 'mganjoo'
+
+source ~/.zsh/external/powerlevel10k/powerlevel10k.zsh-theme
+if [[ -f ~/.p10k.zsh ]]; then
+  source ~/.p10k.zsh
+fi
 
 # Colors {{{2
 
@@ -173,7 +156,6 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 fi
 
-# }}}1
 # == Set up bindings (before plugins) == {{{1
 
 bindkey -d  # Reset to default key bindings.
@@ -196,39 +178,12 @@ keycode=(
 
 # == Interactive plugins == {{{1
 
-# lesspipe.sh {{{2
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-fi
-
-# fzf {{{2
-export FZF_TMUX=0
-# The default command tries to find files using ls-tree, which ignores untracked files but is faster
-export FZF_DEFAULT_COMMAND='(git ls-tree -r --name-only HEAD ||
-  find . -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
-# The CTRL-T command tries to find files using ls-files, which includes untracked files but is slower
-export FZF_CTRL_T_COMMAND='(git ls-files --exclude-standard -co ||
-  find * -name ".*" -prune -o -type f -print -o -type l -print) 2>/dev/null'
+# fzf
+export FZF_DEFAULT_COMMAND='(fd --type f --strip-cwd-prefix --hidden --follow --exclude .git) 2>/dev/null'
+export FZF_CTRL_T_COMMAND='(fd --type f --strip-cwd-prefix --hidden --follow --exclude .git) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# run-help {{{2
-autoload run-help
-if command -v brew > /dev/null 2>&1; then
-  HELPDIR=$(brew --prefix)/share/zsh/help
-fi
-
-# zsh-users plugins (order of loading matters) {{{2
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'  # Case insensitive.
-
-source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-# }}}1
-# == Widgets and bindings == {{{1
+# == Widgets == {{{1
 
 # Enable command line editing through an external editor.
 autoload -Uz edit-command-line
@@ -237,72 +192,6 @@ zle -N edit-command-line
 # Activate url-quote-magic on all entries.
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
-
-# == editor-info and update to default ZLE widgets == {{{2
-
-# Set indicators depending on the current editor state.
-# We insert a call to editor-info in all the basic widgets.
-function editor-info {
-  unset editor_info
-  typeset -gA editor_info
-
-  if [[ "$KEYMAP" == 'vicmd' ]]; then
-    zstyle -s ':prompt:indicator:keymap:command' format 'REPLY'
-    editor_info[keymap]="$REPLY"
-  else
-    zstyle -s ':prompt:indicator:keymap:insert' format 'REPLY'
-    editor_info[keymap]="$REPLY"
-  fi
-  unset REPLY
-
-  # Cause prompt to be redisplayed using new styles.
-  zle reset-prompt
-  zle -R
-}
-zle -N editor-info
-
-zle-keymap-select() {
-  zle editor-info
-}
-zle -N zle-keymap-select
-
-zle-line-init() {
-  echoti smkx
-  zle editor-info
-}
-zle -N zle-line-init
-
-zle-line-finish() {
-  echoti rmkx
-  zle editor-info
-}
-zle -N zle-line-finish
-
-overwrite-mode() {
-  zle .overwrite-mode
-  zle editor-info
-}
-zle -N overwrite-mode
-
-vi-insert() {
-  zle .vi-insert
-  zle editor-info
-}
-zle -N vi-insert
-
-vi-insert-bol() {
-  zle .vi-insert-bol
-  zle editor-info
-}
-zle -N vi-insert-bol
-
-vi-replace() {
-  zle .vi-replace
-  zle editor-info
-}
-zle -N vi-replace
-
-# == Custom widgets == {{{2
 
 # Expand ... to ../..
 expand-dot-to-parent-directory-path() {
@@ -364,7 +253,7 @@ pb-yank-whole-line() {
 }
 zle -N pb-yank-whole-line
 
-# == Key bindings == {{{2
+# == Key bindings == {{{1
 
 # Motion keys.
 bindkey -M viins "$keycode[Home]" beginning-of-line
@@ -433,9 +322,17 @@ bindkey -M viins '^b' fzf-branch-widget
 bindkey -M viins "^x^l" insert-last-command-output
 
 # run-help
+autoload run-help
 bindkey -M viins '^x^h' run-help
 
+# == ZSH plugins == {{{1
+
 # zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'  # Case insensitive.
+source ~/.zsh/external/zsh-history-substring-search/zsh-history-substring-search.zsh
+
 bindkey -M viins "^p" history-substring-search-up
 bindkey -M viins "^n" history-substring-search-down
 bindkey -M vicmd "k" history-substring-search-up
@@ -443,4 +340,9 @@ bindkey -M vicmd "j" history-substring-search-down
 bindkey -M viins "$keycode[Up]" history-substring-search-up
 bindkey -M viins "$keycode[Down]" history-substring-search-down
 
-# }}}1
+# zsh-autosuggestions
+source ~/.zsh/external/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# zsh-syntax-highlighting (must be last thing to be sourced)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
+source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

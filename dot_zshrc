@@ -1,14 +1,19 @@
 # vim: foldmethod=marker:fen
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # == Aliases == {{{1
 
-# Add noglob so we use references like ^foo
-alias git='noglob git'
-
-# Viewing processes
+# Processes
 alias psa="ps aux | less"
 alias psg="ps aux | grep "
 alias psf="ps aux | fzf -m"
+alias k9='kill -9'
 
 # Moving around
 alias ..='cd ..'
@@ -36,6 +41,8 @@ alias cp="cp -i"
 alias ln="ln -i"
 alias mv="mv -i"
 alias rm="rm -i"
+
+# git {{{2
 
 # Branch (b)
 alias gb='git branch'
@@ -186,56 +193,35 @@ alias glo='git oneline'
 alias glb='git brief'
 alias glc='git shortlog --summary --numbered'
 
-# Fetch
-alias griom='git rebase --interactive origin/master'
-
-# Common shell functions
-alias less='less -r'
-
-# Archive files
-alias guz='tar -zxvf'
-alias gz='tar -zcvf'
-alias buz='tar -jxvf'
-alias bz='tar -jcvf'
-
-# Kill
-alias k9='kill -9'
-
-# Tmux aliases
-alias tn='tmux new'
-alias tns='tmux new -s'
-alias tls='tmux ls'
-alias ta='tmux attach'
-alias tat='tmux attach -t'
-alias tk='tmux kill-session'
-alias tkt='tmux kill-session -t'
-
-# tmuxifier
-alias txs='tmuxifier s'
-alias txes='tmuxifier es'
-
-# emacs
-alias cemacs='emacs -nw'
-
-# fasd
-alias v='LANG=c f -t -e vim -b viminfo'
-
-# zmv
-alias zmv='noglob zmv'
-
-# rot
-alias rot13="tr 'A-Za-z' 'N-ZA-Mn-za-m'"
-
-# scala
-alias newscala="sbt new scala/scalatest-example.g8"
+# }}}2
 
 # virtualenvs
 alias mkvenv="python -m venv .venv"
 alias govenv="source .venv/bin/activate"
 
+# Generalized diff with colors
+diff() {
+  if (( $+commands[colordiff] )); then
+    command colordiff --unified "$@"
+  else
+    command diff --unified "$@"
+  fi
+}
+
 # == Settings == {{{1
 
-# Changing directories {{{2
+# History parameters
+HISTFILE="$HOME/.zhistory"  # Path to the history file.
+HISTSIZE=10000              # Max number of events to store in session.
+SAVEHIST=10000              # Max number of history events to save.
+
+# Editor and visual
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+export LESS='-F -g -i -M -R -S -w -X -z-4'
+
+# Changing directories
 setopt AUTO_CD            # Change to directory when just the name is specified.
 setopt AUTO_PUSHD         # Make cd push the old directory onto the stack.
 setopt PUSHD_IGNORE_DUPS  # Do not push duplicates onto the stack.
@@ -243,7 +229,7 @@ setopt PUSHD_SILENT       # Do not print the directory stack after pushd or popd
 setopt PUSHD_TO_HOME      # Have pushd with no arguments act like `pushd $HOME'.
 setopt CDABLE_VARS        # Treat `cd var' as `cd ~var' when var is a variable.
 
-# Completion {{{2
+# Completion
 setopt AUTO_NAME_DIRS     # Automatically create named directories for vars.
 setopt COMPLETE_IN_WORD   # Complete from both ends of a word.
 setopt ALWAYS_TO_END      # Move cursor to the end of a completed word.
@@ -252,26 +238,27 @@ setopt AUTO_LIST          # Automatically list choices on ambiguous completion.
 setopt AUTO_PARAM_SLASH   # If completed parameter is a directory, add a trailing slash.
 setopt NO_MENU_COMPLETE   # Do not autoselect the first completion entry.
 
-# Scripts and functions {{{2
+# Scripts and functions
 setopt MULTIOS            # Allow multiple input and output redirections.
 
-# Expansion and globbing {{{2
+# Expansion and globbing
 setopt EXTENDED_GLOB      # Enable extended glob matching.
 setopt BRACE_CCL          # Allow brace character class list expansion.
 setopt NO_CASE_GLOB       # Make globbing case insensitive.
 
-# ZLE {{{2
-setopt COMBINING_CHARS    # Handle combining characters specially.
-setopt BEEP               # Beep on error in line editor.
+# ZLE
+setopt COMBINING_CHARS            # Handle combining characters specially.
+setopt BEEP                       # Beep on error in line editor.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # Do not treat / and = as part of a word.
 
-# Input/output {{{2
+# Input/output
 setopt NO_CLOBBER         # Don't truncate existing files with '>'.
 setopt RC_QUOTES          # Allow '' to represent ' in single-quoted strings.
 setopt NO_FLOW_CONTROL    # Disable start/stop characters (^s and ^q).
 setopt PATH_DIRS          # Perform path search even on command names with slashes.
 setopt CORRECT            # Correct commands.
 
-# Job control {{{2
+# Job control
 setopt LONG_LIST_JOBS     # List jobs in the long format by default.
 setopt AUTO_RESUME        # Attempt to resume existing jobs first.
 setopt NOTIFY             # Report status of background jobs immediately.
@@ -279,7 +266,7 @@ setopt NO_BG_NICE         # Don't run all background jobs at a lower priority.
 setopt NO_HUP             # Don't kill jobs on shell exit.
 setopt NO_CHECK_JOBS      # Don't report on jobs when shell exits.
 
-# History {{{2
+# History
 setopt BANG_HIST               # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY        # Write the history file in the ':start:elapsed;command' format.
 setopt INC_APPEND_HISTORY      # Write to the history file immediately, not when the shell exits.
@@ -293,25 +280,39 @@ setopt HIST_SAVE_NO_DUPS       # Do not write a duplicate event to the history f
 setopt HIST_VERIFY             # Do not execute immediately upon history expansion.
 setopt HIST_BEEP               # Beep when accessing non-existent history.
 
-# }}}1
-# == Interactive (not for dumb terminals) == {{{1
+# Make poetry and pipenv create virtualenvs in project directory
+export POETRY_VIRTUALENVS_IN_PROJECT=1
+export PIPENV_VENV_IN_PROJECT=1
 
-source ~/.zsh/interactive.zsh
+# == New tools == {{{1
 
-# == Additional plugins == {{{1
-
-# fasd
-if (( $+commands[fasd] )); then
-  eval "$(fasd --init auto)"
+# Homebrew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# iTerm shell integration
-if [ -e ~/.iterm2_shell_integration.zsh ]; then
+# Pyenv
+if (( $+commands[pyenv] )); then
+  eval "$(pyenv init -)"
+fi
+
+# == iTerm shell integration == {{{1
+if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
   source ~/.iterm2_shell_integration.zsh
 fi
 
-# == Source .zshrc_local file == {{{1
+# == Secrets == {{{1
+if [[ -f ~/.secrets ]]; then
+  source ~/.secrets
+fi
 
-if [ -e ~/.zshrc_local ]; then
+# == Source .zshrc_local file == {{{1
+if [[ -f ~/.zshrc_local ]]; then
   source ~/.zshrc_local
 fi
+
+# == Interactive stuff: should be last line because we load ZSH highlighting == {{{1
+source ~/.zsh/interactive.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

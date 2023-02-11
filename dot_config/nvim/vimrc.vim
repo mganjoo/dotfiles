@@ -31,7 +31,6 @@ Plug 'regedarek/ZoomWin'
 Plug 'tpope/vim-repeat'
 
 " UI enhancements
-Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'f-person/auto-dark-mode.nvim'
 Plug 'airblade/vim-gitgutter'
@@ -120,9 +119,6 @@ set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
 " Note: 'scriptencoding utf-8' must be called for this to work (see top)
 set listchars=tab:▸\ ,trail:·
-
-" == Theme == {{{1
-autocmd vimenter * ++nested colorscheme gruvbox
 
 " == Enhancements == {{{1
 " Use ag instead of grep, if available
