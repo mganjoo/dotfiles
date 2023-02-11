@@ -211,9 +211,9 @@ diff() {
 # == Settings == {{{1
 
 # History parameters
-HISTFILE="$HOME/.zhistory"  # Path to the history file.
-HISTSIZE=10000              # Max number of events to store in session.
-SAVEHIST=10000              # Max number of history events to save.
+HISTFILE="$HOME/.zsh_history"  # Path to the history file.
+HISTSIZE=10000                 # Max number of events to store in session.
+SAVEHIST=10000                 # Max number of history events to save.
 
 # Editor and visual
 export EDITOR='nvim'
@@ -225,7 +225,7 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 setopt AUTO_CD            # Change to directory when just the name is specified.
 setopt AUTO_PUSHD         # Make cd push the old directory onto the stack.
 setopt PUSHD_IGNORE_DUPS  # Do not push duplicates onto the stack.
-setopt PUSHD_SILENT       # Do not print the directory stack after pushd or popd.
+setopt PUSHD_SILENT       # Do not print directory stack after pushd or popd.
 setopt PUSHD_TO_HOME      # Have pushd with no arguments act like `pushd $HOME'.
 setopt CDABLE_VARS        # Treat `cd var' as `cd ~var' when var is a variable.
 
@@ -313,6 +313,3 @@ fi
 
 # == Interactive stuff: should be last line because we load ZSH highlighting == {{{1
 source ~/.zsh/interactive.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

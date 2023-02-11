@@ -265,7 +265,7 @@ bindkey -M viins "$keycode[Backspace]" backward-delete-char
 bindkey -M viins "$keycode[Left]" backward-char
 bindkey -M viins "$keycode[Right]" forward-char
 
-# Kill till start of line (don't use annoying vi-equivalent).
+# Kill till start of line.
 bindkey -M viins '^u' backward-kill-line
 
 # Expand history on space.
@@ -312,16 +312,16 @@ bindkey -M vicmd '^r' redo
 bindkey -M vicmd '?' history-incremental-pattern-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-forward
 
-# Copy line
+# Copy line.
 bindkey -M vicmd 'Y' pb-yank-whole-line
 
-# Paste the selected branches into the command line
+# Paste the selected branches into the command line.
 bindkey -M viins '^b' fzf-branch-widget
 
 # Output of last command.
 bindkey -M viins "^x^l" insert-last-command-output
 
-# run-help
+# run-help.
 autoload run-help
 bindkey -M viins '^x^h' run-help
 
