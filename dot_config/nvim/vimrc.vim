@@ -19,8 +19,6 @@ call plug#begin()
 
 " Motion enhancements
 Plug 'Raimondi/delimitMate'
-Plug 'bkad/CamelCaseMotion'
-Plug 'junegunn/vim-easy-align'
 Plug 'qpkorr/vim-bufkill'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
@@ -31,6 +29,7 @@ Plug 'regedarek/ZoomWin'
 Plug 'tpope/vim-repeat'
 
 " UI enhancements
+Plug 'projekt0n/github-nvim-theme', { 'tag': 'v0.0.7' }
 Plug 'vim-airline/vim-airline'
 Plug 'f-person/auto-dark-mode.nvim'
 Plug 'airblade/vim-gitgutter'
@@ -39,7 +38,6 @@ Plug 'edkolev/tmuxline.vim'
 
 " External program interaction
 Plug 'tpope/vim-eunuch'
-Plug 'benekastah/neomake'
 Plug 'tpope/vim-fugitive'
 
 " Search and replace
@@ -47,17 +45,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'tpope/vim-abolish'
-
-" Languages
-Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'wellle/tmux-complete.vim'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -121,55 +108,21 @@ set laststatus=2   " Always show the status line
 set listchars=tab:▸\ ,trail:·
 
 " == Enhancements == {{{1
-" Use ag instead of grep, if available
-if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor
+" Use rg instead of grep, if available
+if executable("rg")
+  set grepprg=rg\ --vimgrep
 endif
-
-" == Filetype-specific settings == {{{1
-au BufRead,BufNewFile *.mesos set filetype=python
-au BufRead,BufNewFile *.aurora set filetype=python
 
 " == Plugin Settings == {{{1
-
-" Use ag for searching, if available; otherwise fall back to find
-if executable("ag")
-  let s:search_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ -g ""'
-else
-  let s:search_command = 'find %s -type f'
-endif
 
 " == delimitMate == {{{2
 let g:delimitMate_expand_cr = 1               " Create line break on enter
 let g:delimitMate_expand_space = 1            " Expand spaces inside delimiters
 let g:delimitMate_nesting_quotes = ['"', '`'] " Allows for triple quotes
 
-" == vim-signify == {{{2
-let g:signify_vcs_list = [ 'git', 'hg' ]
-let g:signify_sign_overwrite = 1
-
-" == neomake == {{{2
-let g:neomake_python_enabled_makers = ['flake8']
-au BufWritePost *.py Neomake
-
-" == markdown == {{{2
-let g:vim_markdown_folding_disabled = 1
-
 " == python (neovim) == {{{2
 let b:brew_prefix = substitute(system("brew --prefix"), '\n\+$', '', '')
 let g:python3_host_prog = b:brew_prefix . "/bin/python3"
-
-" == tmux-complete.vim == {{{2
-let g:tmuxcomplete#trigger = ''
-
-" == vimtex == {{{2
-let g:vimtex_view_general_viewer = 'displayline'
-let g:vimtex_view_general_options = '@line @pdf @tex'
-
 
 " == tmuxline.vim == {{{2
 let g:tmuxline_powerline_separators = 0
@@ -180,16 +133,8 @@ let g:tmuxline_preset = {
   \'x': '#I.#P',
   \'y': ['%a', '%Y-%m-%d', '%R']}
 
-" == localvimrc == {{{2
-let g:localvimrc_persistent=2
-
 " == vim-sneak == {{{2
 let g:sneak#label = 1
-
-" == vimwiki == {{{2
-let b:personal_wiki = { 'path': '~/Dropbox/wiki/personal' }
-let g:vimwiki_list = [b:personal_wiki]
-au BufRead,BufNewFile *.wiki setlocal textwidth=80
 
 " }}}1
 " == Keymaps == {{{1
@@ -213,17 +158,8 @@ set pastetoggle=<F6>
 " == Bindings to source vim files == {{{2
 nnoremap <silent> <Leader>vv :source ~/.vimrc<CR>
 
-" == Bindings to show panels == {{{2
-nnoremap <silent> <Leader>t :TagbarToggle<CR>
-
 " == Bindings to enable/disable plugins == {{{2
 nnoremap co. :DelimitMateSwitch<CR>
-
-" == vim-signify bindings == {{{2
-let g:signify_mapping_next_hunk = '<leader>cj'
-let g:signify_mapping_prev_hunk = '<leader>ck'
-let g:signify_mapping_toggle = '<leader>ct'
-let g:signify_mapping_toggle_highlight = '<leader>ch'
 
 " == fugitive == {{{2
 nnoremap <leader>gw :Gwrite<CR>
@@ -233,24 +169,7 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gb :Gblame<CR>
 
-" == UltiSnips == {{{2
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" == Dash == {{{2
-nmap <silent> gK <Plug>DashSearch
-
-
-" == vim-easy-align == {{{2
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-" == CamelCaseMotion == {{{2
-call camelcasemotion#CreateMotionMappings('<leader>')
-
 " == FZF == {{{2
-call camelcasemotion#CreateMotionMappings('<leader>')
 nnoremap <silent> <leader><Space> :Files<CR>
 
 " }}}1

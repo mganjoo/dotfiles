@@ -13,7 +13,7 @@ url = "https://github.com/zsh-users/zsh-autosuggestions.git"
 [".zsh/external/conda-zsh-completion"]
 type = "git-repo"
 url = "https://github.com/esc/conda-zsh-completion.git"
-[".tmux/external/tpm"]
+[".tmux/plugins/tpm"]
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tpm"
 [".zsh/external/powerlevel10k"]
