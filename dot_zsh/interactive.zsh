@@ -341,6 +341,8 @@ bindkey -M viins "$keycode[Up]" history-substring-search-up
 bindkey -M viins "$keycode[Down]" history-substring-search-down
 
 # zsh-autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 source ~/.zsh/external/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh-syntax-highlighting (must be last thing to be sourced)
