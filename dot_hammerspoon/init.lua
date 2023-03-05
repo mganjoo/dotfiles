@@ -123,6 +123,11 @@ end)
 
 hs.hotkey.bind(mash, "i", hs.itunes.displayCurrentTrack)
 
+-- == Litra Glow == {{{1
+
+hs.hotkey.bind(mash, "[", function() hs.execute("light", true) end)
+hs.hotkey.bind(mash, "]", function() hs.execute("dark", true) end)
+
 -- == Final == {{{1
 
 hs.alert.show("Window manager started.", 2)
