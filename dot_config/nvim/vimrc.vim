@@ -74,6 +74,7 @@ set shortmess+=I         " Disable startup message
 set mouse=a              " Enable mouse mode
 set timeoutlen=600       " Shorten the timeout for multi-key commands
 set clipboard=unnamed    " Sync clipboard
+set modeline=5           " Check for modelines in files
 
 " == Search Settings {{{1
 set incsearch   " Find the next match as we type the search
