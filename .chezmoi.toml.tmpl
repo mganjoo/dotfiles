@@ -1,6 +1,8 @@
 {{- $name := promptStringOnce . "email" "Name" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $publicKey := promptStringOnce . "publicKey" "SSH public key (from 1Password)"}}
 
 [data]
   name = {{ $name | quote }}
   email = {{ $email | quote }}
+  publicKey = {{ $publicKey | quote }}
