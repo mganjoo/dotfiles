@@ -1,4 +1,6 @@
 # vim: foldmethod=marker:fen
+#
+# == Very top == {{{1
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -351,6 +353,10 @@ fi
 # == Secrets == {{{1
 if [[ -f ~/.secrets ]]; then
   source ~/.secrets
+fi
+
+if [[ -f ~/.config/op/plugins.sh ]]; then
+  source ~/.config/op/plugins.sh
 fi
 
 # == Source .zshrc_local file == {{{1
