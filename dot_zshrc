@@ -351,13 +351,12 @@ if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
 fi
 
 # == Secrets == {{{1
-if [[ -f ~/.secrets ]]; then
-  source ~/.secrets
-fi
+source ~/.zsh/secrets.zsh
 
 if [[ -f ~/.config/op/plugins.sh ]]; then
   source ~/.config/op/plugins.sh
 fi
+
 
 # == Source .zshrc_local file == {{{1
 if [[ -f ~/.zshrc_local ]]; then
