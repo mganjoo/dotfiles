@@ -29,12 +29,12 @@ Plug 'regedarek/ZoomWin'
 Plug 'tpope/vim-repeat'
 
 " UI enhancements
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'projekt0n/github-nvim-theme', { 'tag': 'v0.0.7' }
 Plug 'vim-airline/vim-airline'
 Plug 'f-person/auto-dark-mode.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'milkypostman/vim-togglelist'
-Plug 'edkolev/tmuxline.vim'
 
 " External program interaction
 Plug 'tpope/vim-eunuch'
@@ -49,7 +49,7 @@ Plug 'nelstrom/vim-visual-star-search'
 call plug#end()
 
 " == Syntax & Indentation == {{{1
-syntax on                  " Syntax highlighting
+syntax enable              " Syntax highlighting
 filetype plugin indent on  " Enable file-specific indentation and other settings
 set sw=2 sts=2 ts=2        " Tab and shift sizes
 set expandtab              " Expand tab to spaces
@@ -107,6 +107,7 @@ set colorcolumn=80 " Show column at 80 characters
 set laststatus=2   " Always show the status line
 " Note: 'scriptencoding utf-8' must be called for this to work (see top)
 set listchars=tab:▸\ ,trail:·
+colorscheme dracula
 
 " == Enhancements == {{{1
 " Use rg instead of grep, if available
