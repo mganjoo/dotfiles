@@ -1,21 +1,38 @@
 [".zsh/external/zsh-syntax-highlighting"]
 type = "git-repo"
 url = "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+refreshPeriod = "168h"
 [".zsh/external/zsh-history-substring-search"]
 type = "git-repo"
 url = "https://github.com/zsh-users/zsh-history-substring-search.git"
+refreshPeriod = "168h"
 [".zsh/external/zsh-completions"]
 type = "git-repo"
 url = "https://github.com/zsh-users/zsh-completions.git"
+refreshPeriod = "168h"
 [".zsh/external/zsh-autosuggestions"]
 type = "git-repo"
 url = "https://github.com/zsh-users/zsh-autosuggestions.git"
+refreshPeriod = "168h"
 [".zsh/external/conda-zsh-completion"]
 type = "git-repo"
-url = "https://github.com/esc/conda-zsh-completion.git"
+url = "https://github.com/conda-incubator/conda-zsh-completion.git"
+refreshPeriod = "168h"
 [".tmux/plugins/tpm"]
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tpm"
+refreshPeriod = "168h"
 [".zsh/external/powerlevel10k"]
 type = "git-repo"
 url = "https://github.com/romkatv/powerlevel10k.git"
+refreshPeriod = "168h"
+[".hammerspoon/Spoons/SpoonInstall.spoon"]
+type = "archive"
+url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/SpoonInstall.spoon.zip"
+exact = true
+stripComponents = 1
+refreshPeriod = "168h"
+[".hammerspoon/Spoons/VimMode.spoon"]
+type = "git-repo"
+url = "https://github.com/dbalatero/VimMode.spoon.git"
+refreshPeriod = "168h"

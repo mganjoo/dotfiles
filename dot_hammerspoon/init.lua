@@ -1,120 +1,36 @@
 local mash = {"cmd", "ctrl", "alt"}
+hs.logger.defaultLogLevel = "info"
+hs.loadSpoon("SpoonInstall")
 
 -- == Literal paste (paste as if you are typing out the characters) == {{{1
 hs.hotkey.bind({"cmd", "alt"}, "v", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 -- == Grid arrangement == {{{1
 
-GRID_WIDTH = 4
-GRID_HEIGHT = 4
-hs.grid.setGrid(hs.geometry.size(GRID_WIDTH, GRID_HEIGHT))
-
-local function adjustFocusedWindowGrid(fn)
-  local win = hs.window.focusedWindow()
-  hs.grid.adjustWindow(fn, win)
-end
-
--- Maximize window
-hs.hotkey.bind(mash, '1', hs.grid.maximizeWindow)
-
--- Left half
-hs.hotkey.bind(mash, '2', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = 0; g.y = 0
-      g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT
-    end
-  )
-end)
-
--- Top half
-hs.hotkey.bind(mash, '3', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = 0; g.y = 0
-      g.w = GRID_WIDTH; g.h = GRID_HEIGHT / 2
-    end
-  )
-end)
-
--- Right half
-hs.hotkey.bind(mash, '4', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = GRID_WIDTH / 2; g.y = 0
-      g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT
-    end
-  )
-end)
-
--- Bottom half
-hs.hotkey.bind(mash, '5', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = 0; g.y = GRID_HEIGHT / 2
-      g.w = GRID_WIDTH; g.h = GRID_HEIGHT / 2
-    end
-  )
-end)
-
--- Top left quarter
-hs.hotkey.bind(mash, '6', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = 0; g.y = 0
-      g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT / 2
-    end
-  )
-end)
-
--- Top right quarter
-hs.hotkey.bind(mash, '7', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = GRID_WIDTH / 2; g.y = 0
-      g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT / 2
-    end
-  )
-end)
-
--- Bottom right quarter
-hs.hotkey.bind(mash, '8', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = GRID_WIDTH / 2; g.y = GRID_HEIGHT / 2
-      g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT / 2
-    end
-  )
-end)
-
--- Bottom left quarter
-hs.hotkey.bind(mash, '9', function()
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = 0; g.y = GRID_HEIGHT / 2
-      g.w = GRID_WIDTH / 2; g.h = GRID_HEIGHT / 2
-    end
-  )
-end)
+spoon.SpoonInstall:andUse("WindowHalfsAndThirds",
+  {
+    config = {
+      use_frame_correctness = false
+    },
+    hotkeys = {
+      max = {mash, "1"},
+      left_half = {mash, "2"},
+      top_half = {mash, "3"},
+      right_half = {mash, "4"},
+      bottom_half = {mash, "5"},
+      top_left = {mash, "6"},
+      top_right = {mash, "7"},
+      bottom_right = {mash, "8"},
+      bottom_left = {mash, "9"},
+      center = {mash, "-"},
+    }
+  }
+)
 
 -- Push to next screen
 hs.hotkey.bind(mash, '0', function()
   local win = hs.window.focusedWindow()
-  local grid = hs.grid.get(win)
-  hs.grid.set(win, grid, win:screen():next())
-end)
-
--- Center
-hs.hotkey.bind(mash, '-', function()
-  local borderW = GRID_WIDTH / 8
-  local borderH = GRID_HEIGHT / 8
-  adjustFocusedWindowGrid(
-    function(g)
-      g.x = borderW; g.y = borderH
-      g.w = GRID_WIDTH - borderW * 2
-      g.h = GRID_HEIGHT - borderH * 2
-    end
-  )
+  win:moveToScreen(win:screen():next())
 end)
 
 -- }}}2
@@ -127,6 +43,37 @@ hs.hotkey.bind(mash, "i", hs.itunes.displayCurrentTrack)
 
 hs.hotkey.bind(mash, "[", function() hs.execute("light", true) end)
 hs.hotkey.bind(mash, "]", function() hs.execute("dark", true) end)
+
+-- == VimMode == {{{1
+
+local VimMode = hs.loadSpoon("VimMode")
+local vim = VimMode:new()
+
+-- Apps for which we don't want VimMode
+vim
+  :disableForApp("Code")
+  :disableForApp("zoom.us")
+  :disableForApp("iTerm")
+  :disableForApp("iTerm2")
+  :disableForApp("Terminal")
+
+-- Fallback mode (bind to built-in text shortcuts)
+-- Only Chrome and Safari (not Firefox)
+vim:setFallbackOnlyUrlPatterns({
+  "docs.google.com",
+})
+
+-- Dim when we enter normal mode?
+vim:shouldDimScreenInNormalMode(false)
+
+-- Show on-screen alert when we enter normal mode?
+vim:shouldShowAlertInNormalMode(true)
+
+-- You can configure your on-screen alert font
+vim:setAlertFont("Courier New")
+
+-- Enter normal mode by typing a key sequence
+vim:bindHotKeys({ enter = {mash, ";"} })
 
 -- == Final == {{{1
 
