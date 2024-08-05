@@ -31,6 +31,7 @@ brew 'wget'
 
 # Other tools
 brew 'mas'
+brew 'gmailctl'
 
 ## == Casks ==
 
