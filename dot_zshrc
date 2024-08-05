@@ -91,6 +91,9 @@ function coldest() {
   _hid 0x11,0xff,0x04,0x9c,25,100
 }
 
+# Private chezmoi
+alias pchezmoi="chezmoi -S ~/.local/share/chezmoi_private"
+
 # git {{{2
 
 # Branch (b)
