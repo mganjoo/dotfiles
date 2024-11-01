@@ -46,6 +46,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'benjifisher/matchit.zip'
 Plug 'nelstrom/vim-visual-star-search'
 
+" Syntax
+Plug 'google/vim-jsonnet'
+
 call plug#end()
 
 " == Syntax & Indentation == {{{1
