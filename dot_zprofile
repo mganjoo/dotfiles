@@ -9,3 +9,8 @@
 if [[ -d "/opt/homebrew/opt/python" ]]; then
   path+=("/opt/homebrew/opt/python/libexec/bin")
 fi
+
+# Add windsurf to PATH if it exists
+if [[ -d "$HOME/.codeium/windsurf/bin" ]];
+  export PATH="$HOME/.codeium/windsurf/bin:$PATH"
+fi
