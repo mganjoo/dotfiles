@@ -157,8 +157,6 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " Show number of matches made by a recent search
 nnoremap <silent> <Leader>s :%s///gn<CR>
 
-" == Paste toggle == {{{2
-set pastetoggle=<F6>
 
 " == Bindings to source vim files == {{{2
 nnoremap <silent> <Leader>vv :source ~/.vimrc<CR>
