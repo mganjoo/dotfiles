@@ -91,7 +91,12 @@ function coldest() {
   _hid 0x11,0xff,0x04,0x9c,25,100
 }
 
-# Private chezmoi
+# Chezmoi
+alias ccd="chezmoi cd"
+alias cea="chezmoi edit --apply"
+alias cup="chezmoi update"
+
+# Private copy of chezmoi that applies to local machine-specific files
 alias pchezmoi="chezmoi -S ~/.local/share/chezmoi_private"
 
 # git {{{2
