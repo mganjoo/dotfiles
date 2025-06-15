@@ -13,10 +13,9 @@ brew 'jq'
 brew 'mypy'
 brew 'neovim'
 brew 'node'
-brew 'pipx'
-brew 'pyenv'
 brew 'fd'
 brew 'ripgrep'
+brew 'uv'
 
 # Terminal
 brew 'bash'

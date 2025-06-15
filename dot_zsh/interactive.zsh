@@ -348,3 +348,18 @@ source ~/.zsh/external/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-syntax-highlighting (must be last thing to be sourced)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets pattern cursor )
 source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# == Command completion for special apps == {{{1
+
+# Homebrew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+if (( $+commands[uv] )); then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+
+if (( $+commands[uvx] )); then
+  eval "$(uvx --generate-shell-completion zsh)"
+fi

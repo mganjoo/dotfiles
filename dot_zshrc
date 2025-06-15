@@ -252,10 +252,6 @@ alias glc='git shortlog --summary --numbered'
 
 # }}}2
 
-# virtualenvs
-alias mkvenv="python -m venv .venv"
-alias govenv="source .venv/bin/activate"
-
 # Generalized diff with colors
 diff() {
   if (( $+commands[colordiff] )); then
@@ -337,21 +333,6 @@ setopt HIST_SAVE_NO_DUPS       # Do not write a duplicate event to the history f
 setopt HIST_VERIFY             # Do not execute immediately upon history expansion.
 setopt HIST_BEEP               # Beep when accessing non-existent history.
 
-# Make poetry and pipenv create virtualenvs in project directory
-export POETRY_VIRTUALENVS_IN_PROJECT=1
-export PIPENV_VENV_IN_PROJECT=1
-
-# == New tools == {{{1
-
-# Homebrew
-if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Pyenv
-if (( $+commands[pyenv] )); then
-  eval "$(pyenv init -)"
-fi
 
 # == iTerm shell integration == {{{1
 if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
