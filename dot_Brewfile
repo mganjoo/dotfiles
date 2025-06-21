@@ -13,6 +13,7 @@ brew 'node'
 brew 'python'
 brew 'ripgrep'
 brew 'sd'
+brew 'starship'
 brew 'uv'
 brew 'zoxide'
 

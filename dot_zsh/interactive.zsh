@@ -122,10 +122,6 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 
 # Prompt {{{2
 
-source ~/.zsh/external/powerlevel10k/powerlevel10k.zsh-theme
-if [[ -f ~/.p10k.zsh ]]; then
-  source ~/.p10k.zsh
-fi
 
 # Colors {{{2
 
@@ -366,4 +362,11 @@ fi
 
 if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
+fi
+
+
+# == Prompt == {{{1
+
+if [[ -f /opt/homebrew/bin/starship ]]; then
+  eval "$(starship init zsh)"
 fi
