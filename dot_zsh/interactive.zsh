@@ -363,3 +363,7 @@ fi
 if (( $+commands[uvx] )); then
   eval "$(uvx --generate-shell-completion zsh)"
 fi
+
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi

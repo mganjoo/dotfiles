@@ -14,6 +14,7 @@ brew 'python'
 brew 'ripgrep'
 brew 'sd'
 brew 'uv'
+brew 'zoxide'
 
 # Terminal
 brew 'bash'
