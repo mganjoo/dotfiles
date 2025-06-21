@@ -4,11 +4,6 @@
 	current = yellow reverse
 	local = yellow
 	remote = green
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
 [alias]
 	amend = commit --amend
 	last = diff HEAD^
@@ -33,6 +28,7 @@
 	summary = true
 	verbosity = 1
 	tool = fugitive
+	confictstyle = zdiff3
 [mergetool "fugitive"]
 	cmd = nvim -f \"+Gdiff\" \"$MERGED\"
 [apply]
@@ -44,12 +40,18 @@
 [core]
 	autocrlf = false
 	editor = nvim
+	pager = delta
 	quotepath = false
 	excludesfile = ~/.gitignore_global
 [advice]
 	statusHints = false
 [diff]
 	mnemonicprefix = true
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true # use n and N to move betweetn diff sections
+	line-numbers = true
 [rerere]
 	enabled = true
 [difftool]

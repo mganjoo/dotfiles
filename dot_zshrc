@@ -30,9 +30,11 @@ alias df='df -h'
 alias ls='ls -h'
 alias du='du -h -d 2'
 
-# Long form ls with hidden info
-alias ll="ls -lh"
-alias la="ls -lah"
+# Modern ls
+alias ls="eza --icons"
+alias ll="eza -l --icons --git"
+alias la="eza -la --icons --git"
+alias tree="eza --tree"
 
 # show me files matching "ls grep"
 alias lsg='ll | grep '
@@ -251,15 +253,6 @@ alias glb='git brief'
 alias glc='git shortlog --summary --numbered'
 
 # }}}2
-
-# Generalized diff with colors
-diff() {
-  if (( $+commands[colordiff] )); then
-    command colordiff --unified "$@"
-  else
-    command diff --unified "$@"
-  fi
-}
 
 # == Settings == {{{1
 
