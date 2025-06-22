@@ -37,7 +37,8 @@
 [branch]
 	autosetupmerge = true
 [push]
-	default = tracking
+	default = simple
+	autoSetupRemote = true
 [core]
 	autocrlf = false
 	editor = nvim
@@ -60,6 +61,7 @@
 	prompt = false
 [rebase]
 	autosquash = true
+	updateRefs = true
 [mergetool]
 	prompt = false
 	keepBackup = false
@@ -68,6 +70,10 @@
 	date = local
 [pull]
 	rebase = true
+[fetch]
+	prune = true
+	prunereflogexpire = 30.days
+	prunetags = true
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
