@@ -26,6 +26,17 @@ alias ll="eza -l --icons=always --git"
 alias la="eza -la --icons=always --git"
 alias tree="eza --tree"
 
+# Modern cat and grep
+if (( $+commands[bat] )); then
+  alias cat="bat --paging=never"
+  alias ccat="\cat"
+fi
+
+if (( $+commands[rg] )); then
+  alias grep="rg"
+  alias ggrep="\grep"
+fi
+
 # show me files matching "ls grep"
 alias lsg='ll | grep '
 alias lsp='ll | fzf -m'
@@ -248,8 +259,8 @@ alias glc='git shortlog --summary --numbered'
 
 # History parameters
 HISTFILE="$HOME/.zsh_history"  # Path to the history file.
-HISTSIZE=10000                 # Max number of events to store in session.
-SAVEHIST=10000                 # Max number of history events to save.
+HISTSIZE=100000                # Max number of events to store in session.
+SAVEHIST=100000                # Max number of history events to save.
 
 # Editor and visual
 export EDITOR='nvim'
@@ -293,6 +304,7 @@ setopt RC_QUOTES          # Allow '' to represent ' in single-quoted strings.
 setopt NO_FLOW_CONTROL    # Disable start/stop characters (^s and ^q).
 setopt PATH_DIRS          # Perform path search even on command names with slashes.
 setopt CORRECT            # Correct commands.
+setopt INTERACTIVECOMMENTS # Allow comments in interactive shells.
 
 # Job control
 setopt LONG_LIST_JOBS     # List jobs in the long format by default.

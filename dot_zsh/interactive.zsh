@@ -17,9 +17,12 @@ fi
 autoload -Uz compinit
 compinit
 
-# Use caching to make completion for cammands such as dpkg and apt usable.
+# Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$HOME/.zcompcache"
+
+# Rehash automatically when new executables are found
+zstyle ':completion:*' rehash true
 
 # Case-insensitive (all), partial-word, and then substring completion.
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -305,6 +308,8 @@ bindkey -M viins "$keycode[Down]" history-substring-search-down
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 source ~/.zsh/external/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh-syntax-highlighting (must be last thing to be sourced)
@@ -330,6 +335,10 @@ if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
 fi
 
+# fd completion
+if (( $+commands[fd] )); then
+  eval "$(fd --gen-completions zsh)"
+fi
 
 # == Prompt == {{{1
 
