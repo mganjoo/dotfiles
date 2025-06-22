@@ -18,7 +18,6 @@ alias :q='exit'
 
 # Show human friendly numbers
 alias df='df -h'
-alias ls='ls -h'
 alias du='du -h -d 2'
 
 # Modern ls

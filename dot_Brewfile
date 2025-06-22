@@ -1,3 +1,6 @@
+# Taps
+tap 'jesseduffield/lazygit'
+
 # Basic stuff
 brew 'bat'
 brew 'eza'
@@ -20,15 +23,20 @@ brew 'zoxide'
 # Terminal
 brew 'bash'
 brew 'hyperfine'
-brew 'lazygit'
+brew 'jesseduffield/lazygit/lazygit'
 brew 'terminal-notifier'
 brew 'tmux'
-brew 'tree'
 brew 'watch'
 brew 'wget'
-tap 'jesseduffield/lazygit'
-brew 'jesseduffield/lazygit/lazygit'
-#
+
+# Additional tools
+brew 'tokei'         # Code statistics
+brew 'entr'          # File watcher for running commands
+brew 'miller'        # CSV/JSON processing
+brew 'yq'            # YAML processor (like jq for YAML)
+brew 'atuin'         # Better shell history
+brew 'gum'           # Better shell scripting
+
 # Other tools
 brew 'gmailctl'
 
