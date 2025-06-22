@@ -19,14 +19,16 @@ brew 'zoxide'
 # Terminal
 brew 'bash'
 brew 'hyperfine'
+brew 'lazygit'
 brew 'terminal-notifier'
 brew 'tmux'
 brew 'tree'
 brew 'watch'
 brew 'wget'
-
+tap 'jesseduffield/lazygit'
+brew 'jesseduffield/lazygit/lazygit'
+#
 # Other tools
-brew 'mas'
 brew 'gmailctl'
 
 ## == Casks ==
