@@ -22,9 +22,9 @@ alias ls='ls -h'
 alias du='du -h -d 2'
 
 # Modern ls
-alias ls="eza --icons"
-alias ll="eza -l --icons --git"
-alias la="eza -la --icons --git"
+alias ls="eza --icons=always"
+alias ll="eza -l --icons=always --git"
+alias la="eza -la --icons=always --git"
 alias tree="eza --tree"
 
 # show me files matching "ls grep"
