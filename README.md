@@ -15,6 +15,10 @@ My configuration files, managed with [`chezmoi`](https://github.com/twpayne/chez
 
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+4. Install 1Passsword (has some secrets for configuration of dotfiles):
+
+        brew install 1password 1password-cli
+
 4. Clone the repository into the home directory and install:
 
         sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply mganjoo
