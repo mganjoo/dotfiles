@@ -2,11 +2,11 @@
 
 # == Aliases == {{{1
 
+# General {{{2
+
 # Processes
-alias psa="ps aux | less"
-alias psg="ps aux | grep "
-alias psf="ps aux | fzf -m"
-alias k9='kill -9'
+alias psg="procs | rg "
+alias psf="procs | fzf -m"
 
 # Moving around
 alias ..='cd ..'
@@ -27,18 +27,13 @@ alias la="eza -la --icons=always --git"
 alias tree="eza --tree"
 
 # Modern cat and grep
-if (( $+commands[bat] )); then
-  alias cat="bat --paging=never"
-  alias ccat="\cat"
-fi
+alias cat="bat --paging=never"
+alias ccat="\cat"
+alias grep="rg"
+alias ggrep="\grep"
 
-if (( $+commands[rg] )); then
-  alias grep="rg"
-  alias ggrep="\grep"
-fi
-
-# show me files matching "ls grep"
-alias lsg='ll | grep '
+# Show me files matching "ls grep"
+alias lsg='ll | rg '
 alias lsp='ll | fzf -m'
 
 # Being careful on most commands
@@ -47,53 +42,6 @@ alias ln="ln -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
-# Litra Glow control
-# https://ultracrepidarian.phfactor.net/2022/03/09/controlling-the-logitech-litra-on-macos/
-function _hid() {
-  if (( $+commands[hidapitester] )); then
-    hidapitester --vidpid 046D/C900 --open --length 20 --send-output $1
-  fi
-}
-# 2/17/22 Litra Glow aliases from https://github.com/kharyam/litra-driver/issues/13
-function light() {
-  _hid 0x11,0xff,0x04,0x1c,0x01
-}
-function dark() {
-  _hid 0x11,0xff,0x04,0x1c
-}
-# ~10%
-function glow(){
-  _hid 0x11,0xff,0x04,0x4c,0x00,20
-}
-# ~20%
-function dim(){
-  _hid 0x11,0xff,0x04,0x4c,0x00,50
-}
-# tweaking by hand - less than 50%
-function normal() {
-  _hid 0x11,0xff,0x04,0x4c,0x00,70
-}
-# ~50%
-function medium() {
-  _hid 0x11,0xff,0x04,0x4c,0x00,100
-}
-# 90%
-function bright(){
-  _hid 0x11,0xff,0x04,0x4c,0x00,204
-}
-# 2700K
-function warmest() {
-  _hid 0x11,0xff,0x04,0x9c,10,140
-}
-# 3200K
-function warm() {
-  _hid 0x11,0xff,0x04,0x9c,12,128
-}
-# 6500K
-function coldest() {
-  _hid 0x11,0xff,0x04,0x9c,25,100
-}
-
 # Chezmoi
 alias ccd="chezmoi cd"
 alias cea="chezmoi edit --apply"
@@ -101,6 +49,8 @@ alias cup="chezmoi update"
 
 # Private copy of chezmoi that applies to local machine-specific files
 alias pchezmoi="chezmoi -S ~/.local/share/chezmoi_private"
+
+# }}}2
 
 # git {{{2
 
@@ -255,6 +205,54 @@ alias glc='git shortlog --summary --numbered'
 
 # }}}2
 
+# Litra Glow control {{{2
+# https://ultracrepidarian.phfactor.net/2022/03/09/controlling-the-logitech-litra-on-macos/
+function _hid() {
+  if (( $+commands[hidapitester] )); then
+    hidapitester --vidpid 046D/C900 --open --length 20 --send-output $1
+  fi
+}
+# 2/17/22 Litra Glow aliases from https://github.com/kharyam/litra-driver/issues/13
+function light() {
+  _hid 0x11,0xff,0x04,0x1c,0x01
+}
+function dark() {
+  _hid 0x11,0xff,0x04,0x1c
+}
+# ~10%
+function glow(){
+  _hid 0x11,0xff,0x04,0x4c,0x00,20
+}
+# ~20%
+function dim(){
+  _hid 0x11,0xff,0x04,0x4c,0x00,50
+}
+# tweaking by hand - less than 50%
+function normal() {
+  _hid 0x11,0xff,0x04,0x4c,0x00,70
+}
+# ~50%
+function medium() {
+  _hid 0x11,0xff,0x04,0x4c,0x00,100
+}
+# 90%
+function bright(){
+  _hid 0x11,0xff,0x04,0x4c,0x00,204
+}
+# 2700K
+function warmest() {
+  _hid 0x11,0xff,0x04,0x9c,10,140
+}
+# 3200K
+function warm() {
+  _hid 0x11,0xff,0x04,0x9c,12,128
+}
+# 6500K
+function coldest() {
+  _hid 0x11,0xff,0x04,0x9c,25,100
+}
+# }}}2
+
 # == Settings == {{{1
 
 # History parameters
@@ -328,24 +326,23 @@ setopt HIST_SAVE_NO_DUPS       # Do not write a duplicate event to the history f
 setopt HIST_VERIFY             # Do not execute immediately upon history expansion.
 setopt HIST_BEEP               # Beep when accessing non-existent history.
 
-
-# == iTerm shell integration == {{{1
-if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
-  source ~/.iterm2_shell_integration.zsh
-fi
-
 # == Secrets == {{{1
 source ~/.zsh/secrets.zsh
-
-if [[ -f ~/.config/op/plugins.sh ]]; then
-  source ~/.config/op/plugins.sh
-fi
-
 
 # == Source .zshrc_local file == {{{1
 if [[ -f ~/.zshrc_local ]]; then
   source ~/.zshrc_local
 fi
 
-# == Interactive stuff: should be last line because we load ZSH highlighting == {{{1
+# == iTerm shell integration == {{{1
+if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
+  source ~/.iterm2_shell_integration.zsh
+fi
+
+# == 1Password plugins == {{{1
+if [[ -f ~/.config/op/plugins.sh ]]; then
+  source ~/.config/op/plugins.sh
+fi
+
+# == Interactive stuff: should be last line == {{{1
 source ~/.zsh/interactive.zsh
