@@ -2,6 +2,9 @@
 
 # Git aliases and functions
 
+# Git
+alias g='git'
+
 # Branch (b)
 alias gb='git branch'
 alias gbc='git checkout -q -b'
@@ -131,8 +134,8 @@ alias gSu='git submodule foreach git pull origin master'
 alias gSx='git-submodule-remove'
 
 # Working Copy (w)
-alias gws='git status --ignore-submodules=none --short'
-alias gwS='git status --ignore-submodules=none'
+alias gws='git status --ignore-submodules=dirty --short'
+alias gwS='git status --ignore-submodules=dirty'
 alias gwd='git diff --no-ext-diff'
 alias gwD='git diff --no-ext-diff --word-diff'
 alias gwr='git reset --soft'
