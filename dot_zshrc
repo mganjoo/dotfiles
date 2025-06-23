@@ -1,5 +1,5 @@
-# vim: foldmethod=marker:fen
-#
+# vim: foldmethod=marker:fen ft=zsh
+
 # == Aliases == {{{1
 
 # Processes

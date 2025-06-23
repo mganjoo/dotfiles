@@ -1,43 +1,57 @@
-brew 'bat'
-brew 'eza'
-brew 'fd'
-brew 'fzf'
-brew 'gh'
-brew 'git'
-brew 'git-absorb'
-brew 'git-delta'
-brew 'jq'
-brew 'neovim'
-brew 'node'
-brew 'python'
-brew 'ripgrep'
-brew 'sd'
-brew 'starship'
-brew 'uv'
-brew 'zoxide'
-brew 'bash'
-brew 'hyperfine'
-tap 'jesseduffield/lazygit'
-brew 'jesseduffield/lazygit/lazygit'
-brew 'terminal-notifier'
+# Modern utilities for common shell tasks
+brew 'bat'     # Nicer cat
+brew 'eza'     # Nicer ls
+brew 'fd'      # Nicer find
+brew 'procs'   # Nicer ps
+brew 'ripgrep' # Nicer grep
+brew 'sd'      # Nicer sed
+brew 'zoxide'  # Nicer cd
+
+# Shell enhancements
+brew 'starship' # Prompt
+brew 'fzf'      # Another fuzzy finder
 brew 'tmux'
-brew 'watch'
-brew 'wget'
-brew 'tokei'         # Code statistics
-brew 'entr'          # File watcher for running commands
-brew 'miller'        # CSV/JSON processing
-brew 'yq'            # YAML processor (like jq for YAML)
-brew 'gum'           # Better shell scripting
-brew 'gmailctl'
 
-## == Casks ==
+# Git
+brew 'git'
+brew 'gh'                   # GitHub
+brew 'git-absorb'           # Automatic git commit --fixup
+brew 'git-delta'            # Nicer diff view for git
+brew 'jesseduffield/lazygit/lazygit'
+tap 'jesseduffield/lazygit' # TUI for git
 
-cask '1password'
+# Filter processors for various file types
+brew 'jq'     # JSON processor
+brew 'yq'     # YAML processor
+brew 'miller' # CSV/JSON processor
+
+# Vim
+brew 'neovim'
+
+# Node
+brew 'node'
+
+# Python
+brew 'python'
+brew 'uv'
+
+# Scripting tools
+brew 'entr'               # File watcher for running commands
+brew 'gum'                # Better shell script inputs and TUI
+brew 'hyperfine'          # Better benchmarking
+brew 'terminal-notifier'  # Send macOS notifications from the terminal
+
+# Misc
+brew 'gmailctl' # Gmail filter management
+brew 'tokei'    # Code statistics
+
+# Casks and App Store apps
 cask '1password-cli'
+cask '1password'
 cask 'anylist'
 cask 'appcleaner'
-cask 'cleanshot'
 cask 'claude'
+cask 'cleanshot'
 cask 'daisydisk'
 cask 'docker'
 cask 'espanso'
@@ -49,17 +63,19 @@ cask 'iterm2'
 cask 'jordanbaird-ice'
 cask 'logi-options-plus'
 cask 'obsidian'
-cask 'slack'
 cask 'signal'
+cask 'slack'
 cask 'the-unarchiver'
 cask 'visual-studio-code'
 cask 'vlc'
 cask 'wd-security'
 cask 'zoom'
 mas 'Noizio', id: 928871589
-mas 'Yoink', id: 457622435
 mas 'Things 3', id: 904280696
+mas 'Yoink', id: 457622435
 
 # Fonts
 cask 'font-monaspace'
 cask 'font-victor-mono-nerd-font'
+
+# vim: ft=ruby
