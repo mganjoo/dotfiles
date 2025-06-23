@@ -1,4 +1,5 @@
 # vim: foldmethod=marker:fen ft=zsh
+
 # Git aliases and functions
 
 # Branch (b)
