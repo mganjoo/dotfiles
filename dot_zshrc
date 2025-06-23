@@ -14,15 +14,5 @@ if [[ -f ~/.zshrc_local ]]; then
   source ~/.zshrc_local
 fi
 
-# == iTerm shell integration == {{{1
-if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
-  source ~/.iterm2_shell_integration.zsh
-fi
-
-# == 1Password plugins == {{{1
-if [[ -f ~/.config/op/plugins.sh ]]; then
-  source ~/.config/op/plugins.sh
-fi
-
 # == Interactive stuff: should be last line == {{{1
 source ~/.zsh/interactive.zsh

@@ -8,6 +8,16 @@ export FZF_DEFAULT_COMMAND='(fd --type f --strip-cwd-prefix --hidden --follow --
 export FZF_CTRL_T_COMMAND='(fd --type f --strip-cwd-prefix --hidden --follow --exclude .git) 2>/dev/null'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# == iTerm shell integration == {{{1
+if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
+  source ~/.iterm2_shell_integration.zsh
+fi
+
+# == 1Password plugins == {{{1
+if [[ -f ~/.config/op/plugins.sh ]]; then
+  source ~/.config/op/plugins.sh
+fi
+
 # == ZSH plugins == {{{1
 
 # zsh-history-substring-search
@@ -44,11 +54,6 @@ source ~/.zsh/external/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # == Command completion for special apps == {{{1
 
-# Homebrew
-if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 if (( $+commands[uv] )); then
   eval "$(uv generate-shell-completion zsh)"
 fi
@@ -61,7 +66,6 @@ if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
 fi
 
-# fd completion
 if (( $+commands[fd] )); then
   eval "$(fd --gen-completions zsh)"
 fi
