@@ -15,9 +15,11 @@ My configuration files, managed with [`chezmoi`](https://github.com/twpayne/chez
 
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-4. Install 1Passsword (has some secrets for configuration of dotfiles):
+4. Install 1Password (has some secrets for configuration of dotfiles):
 
         brew install 1password 1password-cli
+
+   and [set up as an SSH agent](https://developer.1password.com/docs/ssh/get-started/#step-3-turn-on-the-1password-ssh-agent).
 
 4. Clone the repository into the home directory and install:
 
