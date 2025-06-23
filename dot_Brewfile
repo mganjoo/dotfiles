@@ -1,7 +1,3 @@
-# Taps
-tap 'jesseduffield/lazygit'
-
-# Basic stuff
 brew 'bat'
 brew 'eza'
 brew 'fd'
@@ -19,25 +15,19 @@ brew 'sd'
 brew 'starship'
 brew 'uv'
 brew 'zoxide'
-
-# Terminal
 brew 'bash'
 brew 'hyperfine'
+tap 'jesseduffield/lazygit'
 brew 'jesseduffield/lazygit/lazygit'
 brew 'terminal-notifier'
 brew 'tmux'
 brew 'watch'
 brew 'wget'
-
-# Additional tools
 brew 'tokei'         # Code statistics
 brew 'entr'          # File watcher for running commands
 brew 'miller'        # CSV/JSON processing
 brew 'yq'            # YAML processor (like jq for YAML)
-brew 'atuin'         # Better shell history
 brew 'gum'           # Better shell scripting
-
-# Other tools
 brew 'gmailctl'
 
 ## == Casks ==
@@ -46,18 +36,17 @@ cask '1password'
 cask '1password-cli'
 cask 'anylist'
 cask 'appcleaner'
-cask 'bartender'
 cask 'cleanshot'
+cask 'claude'
 cask 'daisydisk'
-cask 'dash'
+cask 'docker'
 cask 'espanso'
 cask 'firefox-developer-edition'
 cask 'google-chrome'
 cask 'google-drive'
 cask 'hammerspoon'
 cask 'iterm2'
-cask 'karabiner-elements'
-cask 'keepingyouawake'
+cask 'jordanbaird-ice'
 cask 'logi-options-plus'
 cask 'obsidian'
 cask 'slack'
@@ -70,8 +59,6 @@ cask 'zoom'
 mas 'Noizio', id: 928871589
 mas 'Yoink', id: 457622435
 mas 'Things 3', id: 904280696
-mas 'Be Focused Pro - Focus Timer', id: 961632517
-mas 'PopClip', id: 445189367
 
 # Fonts
 cask 'font-fira-code'
