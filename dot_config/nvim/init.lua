@@ -45,9 +45,8 @@ vim.opt.directory = SWAP_DIR
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.isdirectory(BACKUP_DIR) == 0 then
-      vim.fn.mkdir(SWAP_DIR, 'p')
+      vim.fn.mkdir(BACKUP_DIR, 'p')
     end
-    
     if vim.fn.isdirectory(SWAP_DIR) == 0 then
       vim.fn.mkdir(SWAP_DIR, 'p')
     end
