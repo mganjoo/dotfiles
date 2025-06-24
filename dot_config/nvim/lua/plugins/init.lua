@@ -31,8 +31,7 @@ return {
     end
   },
   {
-    'kylechui/nvim-surround',
-    event = 'VeryLazy'
+    'tpope/vim-surround'
   },
   { 'Mofiqul/dracula.nvim' },
   {
@@ -104,4 +103,17 @@ return {
   { 'tpope/vim-repeat' },
   { 'tpope/vim-eunuch' },
   { 'google/vim-jsonnet' },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    keys = {
+      {
+        '<leader>?',
+        function()
+          require('which-key').show({ global = false })
+        end,
+        desc = 'Buffer Local Keymaps (which-key)',
+      },
+    },
+  }
 }
