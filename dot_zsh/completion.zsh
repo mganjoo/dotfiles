@@ -1,6 +1,3 @@
-# vim: foldmethod=marker:fen ft=zsh
-# Completion configuration
-
 fpath+=("$HOME/.zsh/external/zsh-completions/src")
 
 setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
@@ -13,22 +10,42 @@ setopt EXTENDED_GLOB        # Needed for file modification glob modifiers with c
 unsetopt MENU_COMPLETE      # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
 
-if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
-  fpath+=("/opt/homebrew/share/zsh/site-functions")
+# Initialize completion system
+autoload -Uz compinit
+_comp_path="$HOME/.cache/zcompdump"
+
+# (#q..) applies glob expansion to the conditional expression
+# N = NULL_GLOB, i.e. don't expand to anything if no files match
+# m = sort by modification time (newest first)
+# h-20 = select files modified in last 20 hours
+# In other words, load and initialize the completion system ignoring
+# insecure directories with a cache time of 20 hours, so it should almost
+# always regenerate the first time a shell is opened each day.
+if [[ $_comp_path(#qNmh-20) ]]; then
+  # -C (skip check for rebuilding the dump file and implies -i skip security check)
+  compinit -C -d "$_comp_path"
+else
+  # make parent directory of comp path
+  mkdir -p "$_comp_path:h"
+  compinit -i -d "$_comp_path"
+  # Keep $_comp_path younger than cache time even if it isn't regenerated.
+  touch "$_comp_path"
 fi
 
-autoload -Uz compinit
-compinit
+# Colorize the listings, and also show number of matches in the prompt.
+LS_COLORS=${LS_COLORS:-'di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'}
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$HOME/.zcompcache"
+zstyle ':completion::complete:*' cache-path "$HOME/.cache/zcompcache"
 
 # Rehash automatically when new executables are found
 zstyle ':completion:*' rehash true
 
 # Case-insensitive (all), partial-word, and then substring completion.
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'm:{[:upper:]}={[:lower:]}'  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # Group matches and describe.
 zstyle ':completion:*:*:*:*:*' menu select
@@ -48,8 +65,9 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-# Increase the number of errors based on the length of the typed word.
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+# Increase the number of errors based on the length of the typed word. But make
+# sure to cap (at 7) the max-errors to avoid hanging.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
@@ -58,7 +76,6 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # Directories
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'

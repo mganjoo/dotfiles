@@ -1,6 +1,7 @@
 # vim: foldmethod=marker:fen ft=zsh
 
-# Git aliases and functions
+# run-help function for git
+autoload -Uz run-help-git
 
 # Git
 alias g='git'
@@ -128,10 +129,8 @@ alias gSf='git submodule foreach'
 alias gSi='git submodule init'
 alias gSI='git submodule update --init --recursive'
 alias gSl='git submodule status'
-alias gSm='git-submodule-move'
 alias gSs='git submodule sync'
 alias gSu='git submodule foreach git pull origin master'
-alias gSx='git-submodule-remove'
 
 # Working Copy (w)
 alias gws='git status --ignore-submodules=dirty --short'

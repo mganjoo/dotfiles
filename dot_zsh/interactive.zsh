@@ -1,18 +1,23 @@
 # vim: foldmethod=marker:fen
-# Settings for interactive features (not for dumb terminals)
 
-# == Guard == {{{1
-if [[ "$TERM" == 'dumb' || ! $- =~ i  ]]; then
+# The following script is run only in interactive terminals.
+if [[ "$TERM" == 'dumb' ]]; then
   return
 fi
 
-# == Load interactive modules == {{{1
-# Homebrew
-if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+interactive_modules=(
+  completion
+  editor
+  # BEGIN: the next three plugins must be loaded in order!
+  syntax-highlighting
+  history-substring-search
+  autosuggestions
+  # END
+  fzf
+  apps
+  prompt
+)
 
-source ~/.zsh/completion.zsh
-source ~/.zsh/keybindings.zsh
-source ~/.zsh/plugins.zsh
-source ~/.zsh/prompt.zsh
+for m in $interactive_modules; do
+  source "$HOME/.zsh/${m}.zsh"
+done

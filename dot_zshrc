@@ -1,18 +1,21 @@
 # vim: foldmethod=marker:fen ft=zsh
 
-# == Load configuration modules == {{{1
-source ~/.zsh/settings.zsh
-source ~/.zsh/aliases.zsh
-source ~/.zsh/git.zsh
-source ~/.zsh/litra.zsh
+zsh_modules=(
+  settings
+  aliases
+  git
+  litra
+  secrets
+  custom-functions
+  # This should be the last module loaded
+  interactive
+)
 
-# == Secrets == {{{1
-source ~/.zsh/secrets.zsh
+for m in $zsh_modules; do
+  source "$HOME/.zsh/${m}.zsh"
+done
 
-# == Source .zshrc_local file == {{{1
+# Source .zshrc_local file
 if [[ -f ~/.zshrc_local ]]; then
   source ~/.zshrc_local
 fi
-
-# == Interactive stuff: should be last line == {{{1
-source ~/.zsh/interactive.zsh

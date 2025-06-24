@@ -1,14 +1,11 @@
 # vim: foldmethod=marker:fen ft=zsh
-# Key bindings and custom widgets
 
-# == Set up bindings (before plugins) == {{{1
-
-bindkey -d  # Reset to default key bindings.
-bindkey -v  # Set to vi mode.
+# == Options and variables {{{1
+setopt BEEP                       # Beep on error in line editor.
+WORDCHARS='*?_-.[]~&;!#$%^(){}<>' # Do not treat / and = as part of a word.
 
 # Load terminfo to get key codes for special keys
 zmodload zsh/terminfo
-
 typeset -A keycode
 keycode=(
   'Backspace' "^?"
@@ -21,18 +18,30 @@ keycode=(
   'Right'     "$terminfo[kcuf1]"
 )
 
-# == Widgets == {{{1
-
 # Enable command line editing through an external editor.
 autoload -Uz edit-command-line
 zle -N edit-command-line
 
-# Activate url-quote-magic on all entries.
+# Better handling of URLs.
+autoload -Uz bracketed-paste-url-magic
+zle -N bracketed-paste bracketed-paste-url-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
+# == Functions {{{1
+
+# Runs bindkey but for all of the keymaps. Running it with no arguments
+# will print out the mappings for all of the keymaps.
+function bindkey-all {
+  local keymap=''
+  for keymap in $(bindkey -l); do
+    [[ "$#" -eq 0 ]] && printf "#### %s\n" "${keymap}" 1>&2
+    bindkey -M "${keymap}" "$@"
+  done
+}
+
 # Expand ... to ../..
-expand-dot-to-parent-directory-path() {
+function expand-dot-to-parent-directory-path() {
   if [[ $LBUFFER = *.. ]]; then
     LBUFFER+='/..'
   else
@@ -42,9 +51,17 @@ expand-dot-to-parent-directory-path() {
 zle -N expand-dot-to-parent-directory-path
 
 # Displays an indicator when completing.
-expand-or-complete-with-indicator() {
+function expand-or-complete-with-indicator() {
   local indicator
   zstyle -s ':editor:info:completing' format 'indicator'
+
+  # This is included to work around a bug in zsh which shows up when interacting
+  # with multi-line prompts.
+  if [[ -z "$indicator" ]]; then
+    zle expand-or-complete
+    return
+  fi
+
   print -Pn "$indicator"
   zle expand-or-complete
   zle redisplay
@@ -52,7 +69,7 @@ expand-or-complete-with-indicator() {
 zle -N expand-or-complete-with-indicator
 
 # Inserts 'sudo ' at the beginning of the line.
-prepend-sudo() {
+function prepend-sudo() {
   if [[ "$BUFFER" != su(do|)\ * ]]; then
     BUFFER="sudo $BUFFER"
     (( CURSOR += 5 ))
@@ -61,7 +78,7 @@ prepend-sudo() {
 zle -N prepend-sudo
 
 # Inserts 'echo ' at the beginning of the line.
-prepend-echo() {
+functin prepend-echo() {
   if [[ "$BUFFER" != echo\ * ]]; then
     BUFFER="echo $BUFFER"
     (( CURSOR += 5 ))
@@ -69,29 +86,32 @@ prepend-echo() {
 }
 zle -N prepend-echo
 
-# Branch widget.
-__bsel() {
-  git for-each-ref --format='%(refname:short)' refs/heads/ 2>/dev/null | fzf -m | tr "\n" " "
-}
-fzf-branch-widget() {
-  LBUFFER="${LBUFFER}$(__bsel)"
-  zle redisplay
-}
-zle -N fzf-branch-widget
-
+# Insert the output of the last command (note that it re-executes).
 zmodload -i zsh/parameter
-insert-last-command-output() {
+function insert-last-command-output() {
   LBUFFER+="$(eval $history[$((HISTCMD-1))])"
 }
 zle -N insert-last-command-output
 
-pb-yank-whole-line() {
+# Expand aliases.
+function glob-alias {
+  zle _expand_alias
+  zle expand-word
+  zle magic-space
+}
+zle -N glob-alias
+
+function pb-yank-whole-line() {
   zle vi-yank-whole-line
   print -rn $CUTBUFFER | pbcopy
 }
 zle -N pb-yank-whole-line
 
 # == Key bindings == {{{1
+
+# Layout
+bindkey -d  # Reset to default key bindings.
+bindkey -v  # Set to vi mode.
 
 # Motion keys.
 bindkey -M viins "$keycode[Home]" beginning-of-line
@@ -131,6 +151,9 @@ bindkey -M viins '^i' expand-or-complete-with-indicator
 bindkey -M viins '^x^s' prepend-sudo
 bindkey -M viins '^x^o' prepend-echo
 
+# Expand all aliases, including global
+bindkey -M viins '^ ' glob-alias
+
 # Expand ... to ../.., but not during incremental search.
 bindkey -M viins '.' expand-dot-to-parent-directory-path
 bindkey -M isearch '.' self-insert
@@ -144,7 +167,7 @@ bindkey -M viins '^x^e' edit-command-line
 
 # Undo and redo.
 bindkey -M vicmd 'u' undo
-bindkey -M vicmd '^r' redo
+bindkey -M vicmd '\er' redo
 
 # History search.
 bindkey -M vicmd '?' history-incremental-pattern-search-backward
@@ -152,9 +175,6 @@ bindkey -M vicmd '/' history-incremental-pattern-search-forward
 
 # Copy line.
 bindkey -M vicmd 'Y' pb-yank-whole-line
-
-# Paste the selected branches into the command line.
-bindkey -M viins '^b' fzf-branch-widget
 
 # Output of last command.
 bindkey -M viins "^x^l" insert-last-command-output

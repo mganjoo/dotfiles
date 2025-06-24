@@ -14,17 +14,9 @@ refreshPeriod = "168h"
 type = "git-repo"
 url = "https://github.com/zsh-users/zsh-autosuggestions.git"
 refreshPeriod = "168h"
-[".zsh/external/conda-zsh-completion"]
-type = "git-repo"
-url = "https://github.com/conda-incubator/conda-zsh-completion.git"
-refreshPeriod = "168h"
 [".tmux/plugins/tpm"]
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tpm"
-refreshPeriod = "168h"
-[".zsh/external/powerlevel10k"]
-type = "git-repo"
-url = "https://github.com/romkatv/powerlevel10k.git"
 refreshPeriod = "168h"
 [".hammerspoon/Spoons/SpoonInstall.spoon"]
 type = "archive"
