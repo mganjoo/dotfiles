@@ -12,6 +12,12 @@ if ! is-true "$(command git rev-parse --is-inside-work-tree 2> /dev/null)"; then
   return 1
 fi
 
+if [[ $# -eq 0 ]]; then
+  print "$0: no commit hashes provided" >&2
+  print "Usage: $0 <commit-hash> [<commit-hash> ...]" >&2
+  return 1
+fi
+
 local commit
 
 for commit in "$@"; do
