@@ -34,6 +34,7 @@ return {
     'tpope/vim-surround'
   },
   { 'Mofiqul/dracula.nvim' },
+  { 'nvim-tree/nvim-tree.lua' },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -58,7 +59,7 @@ return {
       require('telescope').load_extension('fzf')
     end,
     keys = {
-      { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
+      { '<leader> ', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
       { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
       { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
       { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = 'Help tags' },

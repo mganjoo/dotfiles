@@ -27,6 +27,7 @@ vim.opt.relativenumber = true -- Use relative numbers by default
 vim.opt.shortmess:append('I') -- Disable startup message
 vim.opt.mouse = 'a'           -- Enable mouse mode
 vim.opt.clipboard = 'unnamed' -- Sync clipboard
+vim.opt.showmode = false      -- Don't set current status on the last line
 
 -- Search Settings
 vim.opt.ignorecase = true     -- Case insensitive searches
@@ -35,6 +36,17 @@ vim.opt.smartcase = true      -- Ignore sensitivity setting with uppercase patte
 -- Backup
 vim.opt.backup = true         -- Create backups
 vim.opt.writebackup = true    -- Create backup before writing
+
+-- netrw
+vim.g.loaded_netrw = 1        -- Pretend netrw is enabled because we will use
+vim.g.loaded_netrwPlugin = 1  -- vim-tree
+
+-- LSP
+vim.lsp.inlay_hint.enable(true) -- Enable inlay hints for LSP
+--
+-- Persist undo (persists undo history between sessions)
+vim.opt.undodir = vim.fn.stdpath('cache') .. '/undo'
+vim.opt.undofile = true
 
 local BACKUP_DIR = vim.fn.expand("~/.vim-backup//")
 local SWAP_DIR = vim.fn.expand("~/.vim-swap//")
@@ -68,6 +80,7 @@ vim.opt.laststatus = 2        -- Always show the status line
 vim.opt.listchars = { tab = '▸ ', trail = '·' }
 
 -- Color scheme
+vim.opt.termguicolors = true  -- Enable 24-bit color
 vim.cmd[[colorscheme dracula]]
 
 -- == Enhancements == {{{1
