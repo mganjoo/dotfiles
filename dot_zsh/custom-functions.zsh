@@ -1,6 +1,7 @@
 
 fpath=(~/.zsh/functions(-/FN) $fpath)
 
+# Some common helper functions
 function is-true {
   [[ -n "$1" && "$1" == (1|[Yy]([Ee][Ss]|)|[Tt]([Rr][Uu][Ee]|)|[Oo]([Nn]|)) ]]
 }

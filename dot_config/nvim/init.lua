@@ -65,12 +65,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
--- Folds
-vim.opt.foldmethod = 'indent' -- Fold based on indent
-vim.opt.foldnestmax = 4       -- Set conservative fold limit
-vim.opt.foldenable = false    -- Don't show fold by default
-vim.opt.foldcolumn = '1'      -- Show a single fold column
-
 -- Appearance
 vim.opt.wrap = false          -- Don't wrap lines
 vim.opt.linebreak = true      -- Break lines at useful points

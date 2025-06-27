@@ -27,6 +27,7 @@ brew 'miller' # CSV/JSON processor
 
 # Vim
 brew 'neovim'
+brew 'tree-sitter'
 
 # Node
 brew 'node'
