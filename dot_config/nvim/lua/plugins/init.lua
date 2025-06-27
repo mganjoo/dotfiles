@@ -28,15 +28,11 @@ return {
     'tpope/vim-surround'
   },
   {
-    'ellisonleao/gruvbox.nvim',
+    'catppuccin/nvim',
     priority = 1000 ,
     config = function()
-      require('gruvbox').setup({
-        italic = {
-          strings = false,
-        }
-      })
-      vim.cmd[[colorscheme gruvbox]]
+      require('catppuccin').setup({})
+      vim.cmd[[colorscheme catppuccin]]
     end
   },
   {
@@ -49,7 +45,7 @@ return {
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'gruvbox'
+          theme = 'catppuccin'
         }
       })
     end
