@@ -19,12 +19,6 @@ return {
     end
   },
   {
-    'ggandor/leap.nvim',
-    config = function()
-      require('leap').set_default_mappings()
-    end,
-  },
-  {
     'andymass/vim-matchup',
     init = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
@@ -33,12 +27,15 @@ return {
   {
     'tpope/vim-surround'
   },
-  -- { 'Mofiqul/dracula.nvim' },
-  -- vim.cmd[[colorscheme dracula]]
   {
     'ellisonleao/gruvbox.nvim',
     priority = 1000 ,
     config = function()
+      require('gruvbox').setup({
+        italic = {
+          strings = false,
+        }
+      })
       vim.cmd[[colorscheme gruvbox]]
     end
   },
