@@ -33,7 +33,15 @@ return {
   {
     'tpope/vim-surround'
   },
-  { 'Mofiqul/dracula.nvim' },
+  -- { 'Mofiqul/dracula.nvim' },
+  -- vim.cmd[[colorscheme dracula]]
+  {
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000 ,
+    config = function()
+      vim.cmd[[colorscheme gruvbox]]
+    end
+  },
   {
     'nvim-tree/nvim-tree.lua',
     config = true
@@ -44,12 +52,15 @@ return {
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'dracula'
+          theme = 'gruvbox'
         }
       })
     end
   },
-  { 'f-person/auto-dark-mode.nvim' },
+  {
+    'f-person/auto-dark-mode.nvim',
+    config = true,
+  },
   { 'lewis6991/gitsigns.nvim' },
   {
     'nvim-telescope/telescope.nvim',

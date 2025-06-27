@@ -75,7 +75,6 @@ vim.opt.listchars = { tab = '▸ ', trail = '·' }
 
 -- Color scheme
 vim.opt.termguicolors = true  -- Enable 24-bit color
-vim.cmd[[colorscheme dracula]]
 
 -- == Enhancements == {{{1
 
