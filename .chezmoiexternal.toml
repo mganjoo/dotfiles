@@ -29,7 +29,7 @@ type = "git-repo"
 url = "https://github.com/dbalatero/VimMode.spoon.git"
 refreshPeriod = "168h"
 # Manually install catppuccin because of name conflict issues with tpm
-[".tmux/plugins/catppuccin"]
+[".tmux/catppuccin"]
 type = "git-repo"
 url = "https://github.com/catppuccin/tmux.git"
 refreshPeriod = "168h"

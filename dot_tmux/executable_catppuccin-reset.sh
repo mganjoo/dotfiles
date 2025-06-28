@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-CATPPUCCIN_PLUGIN_DIR="$HOME/.tmux/plugins/catppuccin"
+CATPPUCCIN_PLUGIN_DIR="$HOME/.tmux/catppuccin"
 
 # Unset all catppuccin options (tmux options that begin with @)
 rg -Io 'set\s+-[aFgopqsuUw]+\s+"?@([^\s]+(\w|_))"?' -r '@$1' $CATPPUCCIN_PLUGIN_DIR/**/*.conf | uniq | xargs -n1 -P0 tmux set -Ugq
