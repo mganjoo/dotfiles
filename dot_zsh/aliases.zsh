@@ -42,7 +42,15 @@ alias rm="rm -i"
 # Chezmoi
 alias ccd="chezmoi cd"
 alias cea="chezmoi edit --apply"
-alias cup="chezmoi update"
+alias ca="chezmoi apply -v"
+alias cra="chezmoi re-add"
 
 # Private copy of chezmoi that applies to local machine-specific files
 alias pchezmoi="chezmoi -S ~/.local/share/chezmoi_private"
+alias pccd="pchezmoi cd"
+alias pcea="pchezmoi edit --apply"
+alias pca="pchezmoi apply -v"
+alias pcra="pchezmoi re-add"
+
+# Tmux
+alias ta="tmux attach"
