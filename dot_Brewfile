@@ -11,14 +11,16 @@ brew 'zoxide'  # Nicer cd
 brew 'starship' # Prompt
 brew 'fzf'      # Another fuzzy finder
 brew 'tmux'
+tap 'cormacrelf/tap'
+brew 'cormacrelf/tap/dark-notify'
 
 # Git
 brew 'git'
 brew 'gh'                   # GitHub
 brew 'git-absorb'           # Automatic git commit --fixup
 brew 'git-delta'            # Nicer diff view for git
-brew 'jesseduffield/lazygit/lazygit'
 tap 'jesseduffield/lazygit' # TUI for git
+brew 'jesseduffield/lazygit/lazygit'
 
 # Filter processors for various file types
 brew 'jq'     # JSON processor
