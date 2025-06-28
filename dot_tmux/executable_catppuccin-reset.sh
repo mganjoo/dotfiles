@@ -1,4 +1,5 @@
 #!/bin/bash
+# From https://github.com/catppuccin/tmux/issues/426#issuecomment-2770107301
 
 set -euo pipefail
 
