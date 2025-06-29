@@ -3,6 +3,15 @@
 
 set -euo pipefail
 
+# Get flavor from first argument (required)
+if [[ $# -eq 0 ]]; then
+  echo "Usage: $0 <flavor>"
+  echo "Available flavors: latte, frappe, macchiato, mocha"
+  exit 1
+fi
+
+flavor="$1"
+
 CATPPUCCIN_PLUGIN_DIR="$HOME/.tmux/catppuccin"
 
 status_dir="$CATPPUCCIN_PLUGIN_DIR/status"
@@ -35,7 +44,6 @@ collect_theme_options() {
   done < <(read_theme_options "$@")
 }
 
-# Collect all options to unset
 all_options=()
 
 # Get options from all conf files
@@ -59,3 +67,13 @@ done
 # Unset all collected options
 printf '%s\n' "${all_options[@]}" | sort -u | \
   xargs -n1 -P0 tmux set -Ugq
+
+# Set up catppuccin with specified flavor
+tmux set -g @catppuccin_flavor "$flavor"
+tmux run "$CATPPUCCIN_PLUGIN_DIR/catppuccin.tmux"
+
+# Source all custom status configuration files AFTER catpuccin is loaded
+for conf_file in "$custom_status_dir"/*.conf; do
+  [ -e "$conf_file" ] || continue
+  tmux source "$conf_file"
+done
