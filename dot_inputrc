@@ -32,6 +32,10 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
+# Allow colored completions
+set colored-completion-prefix on
+set colored-stats on
+
 # == Key bindings ==
 
 # Search for completions using currently typed prefix
