@@ -17,6 +17,9 @@
 	brief = log --topo-order --pretty=brief
 	up = pull --rebase --autostash
 	sxs = -c delta.features=side-by-side diff
+	ddiff = -c diff.external=difft diff
+	dshow = -c diff.external=difft show --ext-diff
+	dlog = -c diff.external=difft log --ext-diff
 [format]
 	pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ad (%ar)%C(reset)%n%+B
 [init]
