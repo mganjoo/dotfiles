@@ -19,6 +19,7 @@ brew 'git'
 brew 'gh'                   # GitHub
 brew 'git-absorb'           # Automatic git commit --fixup
 brew 'git-delta'            # Nicer diff view for git
+brew 'difftastic'           # Structural diffing
 tap 'jesseduffield/lazygit' # TUI for git
 brew 'jesseduffield/lazygit/lazygit'
 
