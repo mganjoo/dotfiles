@@ -51,7 +51,13 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
     },
     config = function()
-      require('telescope').setup()
+      require('telescope').setup({
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+        },
+      })
       require('telescope').load_extension('fzf')
     end,
     keys = {
@@ -59,6 +65,7 @@ return {
       { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
       { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
       { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = 'Help tags' },
+      { '<leader>fc', '<cmd>Telescope commands<cr>' desc = 'Commands' },
     },
   },
   {
@@ -120,16 +127,4 @@ return {
     config = true,
     dependencies = 'nvim-tree/nvim-web-devicons',
   },
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-    keys = {
-      { '<leader>m', '<plug>MarkdownPreviewToggle', ft = 'markdown' }
-    },
-  }
 }
