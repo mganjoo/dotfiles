@@ -1,11 +1,15 @@
-{{- $name := promptStringOnce . "email" "Name" -}}
+{{- $name := promptStringOnce . "name" "Name" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $publicSigningKey := promptStringOnce . "publicSigningKey" "GitHub SSH public key for signing (from 1Password)"}}
+{{- $espansoPersonalEmail := promptStringOnce . "espanso.personal_email" "Personal email address (for Espanso)"  }}
+{{- $espansoWorkEmail := promptStringOnce . "espanso.work_email"  "Work email address (for Espanso)" }}
 
 [data]
   name = {{ $name | quote }}
   email = {{ $email | quote }}
   publicSigningKey = {{ $publicSigningKey | quote }}
+  espansoPersonalEmail = {{ $espansoPersonalEmail | quote }}
+  espansoWorkEmail = {{ $espansoWorkEmail | quote }}
 
 [git]
   autoCommit = true
