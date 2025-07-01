@@ -143,5 +143,11 @@ return {
         desc = 'Buffer Local Keymaps (which-key)',
       },
     },
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = true
   }
 }

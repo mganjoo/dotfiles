@@ -30,12 +30,15 @@
 	one = format:%C(yellow)%h%C(reset) %s %Cgreen(%cr) %C(auto)%d%C(reset)
 	brief = format:%C(yellow)%h%C(reset) %s%n%C(blue)(%ar%C(reset) by %C(cyan)%an)%C(auto)%d%C(reset)%n
 [merge]
-	summary = true
 	verbosity = 1
-	tool = fugitive
-	conflictstyle = zdiff3
-[mergetool "fugitive"]
-	cmd = nvim -f \"+Gdiff\" \"$MERGED\"
+	tool = nvimdiff
+	conflictStyle = zdiff3
+[mergetool]
+	prompt = false
+	keepBackup = false
+	keepTemporaries = false
+[mergetool "nvimdiff"]
+	layout = "LOCAL,BASE,REMOTE / MERGED"
 [apply]
 	whitespace = nowarn
 [branch]
@@ -65,10 +68,6 @@
 [rebase]
 	autosquash = true
 	updateRefs = true
-[mergetool]
-	prompt = false
-	keepBackup = false
-	keepTemporaries = false
 [log]
 	date = local
 [pull]

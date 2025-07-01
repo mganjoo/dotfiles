@@ -98,19 +98,28 @@ vim.g.python3_host_prog = get_brew_prefix() .. "/bin/python3"
 
 -- == Keymaps == {{{1
 
-vim.keymap.set('n', '[W', ':tabfirst<CR>', { silent = true })
-vim.keymap.set('n', ']W', ':tabnext<CR>', { silent = true })
-vim.keymap.set('n', '[w', ':tabprevious<CR>', { silent = true })
-vim.keymap.set('n', ']w', ':tabnext<CR>', { silent = true })
-vim.keymap.set('n', '<Leader>wx', ':tabclose<CR>', { silent = true })
+-- Tab manipulation
+vim.keymap.set('n', '[W', ':tabfirst<cr>', { silent = true })
+vim.keymap.set('n', ']W', ':tabnext<cr>', { silent = true })
+vim.keymap.set('n', '[w', ':tabprevious<cr>', { silent = true })
+vim.keymap.set('n', ']w', ':tabnext<cr>', { silent = true })
+vim.keymap.set('n', '<leader>wx', ':tabclose<cr>', { silent = true })
+
 -- Mute highlighting temporarily
-vim.keymap.set('n', '<C-l>', ':<C-u>nohlsearch<CR><C-l>', { silent = true })
+vim.keymap.set('n', '<C-l>', ':<C-u>nohlsearch<cr><C-l>', { silent = true })
 -- Show number of matches made by a recent search
-vim.keymap.set('n', '<Leader>s', ':%s///gn<CR>', { silent = true })
-vim.keymap.set('n', '<Leader>vv', function()
+vim.keymap.set('n', '<leader>s', ':%s///gn<cr>', { silent = true })
+-- Reload vim config after edits
+vim.keymap.set('n', '<leader>vv', function()
   vim.cmd('source ' .. vim.fn.stdpath('config') .. '/init.lua')
   print('Configuration reloaded!')
 end, { silent = true })
+-- Shortcuts for nvimdiff mode
+if vim.opt.diff:get() then
+  vim.keymap.set('n', '<leader>1', ':diffget LOCAL<cr>')
+  vim.keymap.set('n', '<leader>2', ':diffget BASE<cr>')
+  vim.keymap.set('n', '<leader>3', ':diffget REMOTE<cr>')
+end
 
 -- == Modeline == {{{1
 -- vim: foldmethod=marker:fen
