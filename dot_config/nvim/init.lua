@@ -90,9 +90,6 @@ local function get_brew_prefix()
   return "/usr/local" -- fallback
 end
 
--- Hardcode python interpreter for performance (especially with virtualenvs)
-vim.g.python3_host_prog = get_brew_prefix() .. "/bin/python3"
-
 -- == Keymaps == {{{1
 
 -- Mute highlighting temporarily
