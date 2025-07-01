@@ -1,29 +1,27 @@
 return {
   {
-    'windwp/nvim-autopairs', -- auto-closing quotes and brackets
+    -- auto-closing quotes and brackets
+    'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = function()
-      require('nvim-autopairs').setup({
-        check_ts = true,
-      })
+      require('nvim-autopairs').setup({ check_ts = true })
     end,
   },
   {
+    -- shows the corresponding closing paren for an opening paren
     'andymass/vim-matchup',
     init = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end
+    end,
   },
-  {
-    'tpope/vim-surround'
-  },
+  { 'tpope/vim-surround' },
   {
     'catppuccin/nvim',
-    priority = 1000 ,
+    priority = 1000,
     config = function()
       require('catppuccin').setup({})
       vim.cmd[[colorscheme catppuccin]]
-    end
+    end,
   },
   {
     'nvim-tree/nvim-tree.lua',
@@ -37,11 +35,9 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup({
-        options = {
-          theme = 'catppuccin'
-        }
+        options = { theme = 'catppuccin' }
       })
-    end
+    end,
   },
   {
     'f-person/auto-dark-mode.nvim',
@@ -84,34 +80,18 @@ return {
         sync_install = false,
         highlight = { enable = true },
         indent = { enable = true },
+        matchup = { enable = true },
       })
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
       vim.opt.foldlevel = 99
-    end
+    end,
   },
+  { 'neovim/nvim-lspconfig' },
   {
-    'mason-org/mason-lspconfig.nvim', -- Links the two above
-    dependencies = {
-      { 'mason-org/mason.nvim', config = true },
-      'neovim/nvim-lspconfig',
-    },
-  },
-  {
-    'stevearc/conform.nvim', -- For LSPs that don't support formatting
-    opts = {
-      default_format_opts = { lsp_format = "fallback" },
-    }
-  },
-  {
-    -- Autocomplete engine (LSP, snippets etc)
-    -- keymap: https://cmp.saghen.dev/configuration/keymap.html#default
-    'saghen/blink.cmp',
-    version = '1.*',
-    opts_extend = { "sources.default" },
-  },  {
-    'stevearc/oil.nvim', -- Allows editing directories like a buffer
-    opts = {},
+    -- Allows editing directories like a buffer
+    'stevearc/oil.nvim',
+    config = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     lazy = false,
   },
@@ -137,8 +117,8 @@ return {
   {
     'akinsho/bufferline.nvim',
     version = "*",
+    config = true,
     dependencies = 'nvim-tree/nvim-web-devicons',
-    opts = {}
   },
   {
     "iamcco/markdown-preview.nvim",
