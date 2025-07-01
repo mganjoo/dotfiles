@@ -37,23 +37,22 @@ vim.opt.smartcase = true      -- Ignore sensitivity setting with uppercase patte
 vim.opt.backup = true         -- Create backups
 vim.opt.writebackup = true    -- Create backup before writing
 
--- netrw
-vim.g.loaded_netrw = 1        -- Pretend netrw is enabled because we will use
-vim.g.loaded_netrwPlugin = 1  -- vim-tree
+-- Disable netrw because we use vim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- LSP
 vim.lsp.inlay_hint.enable(true) -- Enable inlay hints for LSP
---
+
 -- Persist undo (persists undo history between sessions)
 vim.opt.undodir = vim.fn.stdpath('cache') .. '/undo'
 vim.opt.undofile = true
 
+-- Auto-create backup and swap directories
 local BACKUP_DIR = vim.fn.expand("~/.vim-backup//")
 local SWAP_DIR = vim.fn.expand("~/.vim-swap//")
-
 vim.opt.backupdir = BACKUP_DIR
 vim.opt.directory = SWAP_DIR
-
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.isdirectory(BACKUP_DIR) == 0 then
@@ -72,8 +71,6 @@ vim.opt.list = true           -- Show auxiliary characters
 vim.opt.colorcolumn = '80'    -- Show column at 80 characters
 vim.opt.laststatus = 2        -- Always show the status line
 vim.opt.listchars = { tab = '▸ ', trail = '·' }
-
--- Color scheme
 vim.opt.termguicolors = true  -- Enable 24-bit color
 
 -- == Enhancements == {{{1
@@ -83,7 +80,6 @@ if vim.fn.executable("rg") == 1 then
   vim.opt.grepprg = "rg --vimgrep"
 end
 
--- == python (neovim) == {{{2
 local function get_brew_prefix()
   local handle = io.popen("brew --prefix")
   if handle then
@@ -94,16 +90,10 @@ local function get_brew_prefix()
   return "/usr/local" -- fallback
 end
 
+-- Hardcode python interpreter for performance (especially with virtualenvs)
 vim.g.python3_host_prog = get_brew_prefix() .. "/bin/python3"
 
 -- == Keymaps == {{{1
-
--- Tab manipulation
-vim.keymap.set('n', '[W', ':tabfirst<cr>', { silent = true })
-vim.keymap.set('n', ']W', ':tabnext<cr>', { silent = true })
-vim.keymap.set('n', '[w', ':tabprevious<cr>', { silent = true })
-vim.keymap.set('n', ']w', ':tabnext<cr>', { silent = true })
-vim.keymap.set('n', '<leader>wx', ':tabclose<cr>', { silent = true })
 
 -- Mute highlighting temporarily
 vim.keymap.set('n', '<C-l>', ':<C-u>nohlsearch<cr><C-l>', { silent = true })

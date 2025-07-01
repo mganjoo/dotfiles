@@ -39,7 +39,7 @@ return {
     'nvim-tree/nvim-tree.lua',
     config = true,
     keys = {
-      { '<leader>t', '<cmd>NvimTreeToggle<cr>', desc = 'Open nvim-tree' },
+      { '<leader>t', '<cmd>NvimTreeFindFileToggle<cr>', desc = 'Open nvim-tree' },
     },
   },
   {
@@ -148,6 +148,18 @@ return {
     'akinsho/bufferline.nvim',
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = true
+    opts = {}
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+    keys = {
+      { '<leader>m', '<plug>MarkdownPreviewToggle', ft = 'markdown' }
+    },
   }
 }
