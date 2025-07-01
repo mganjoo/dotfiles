@@ -9,16 +9,6 @@ return {
     end,
   },
   {
-    'numToStr/Comment.nvim', -- auto-commenting
-    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
-    config = function()
-      require('Comment').setup {
-        -- Allows mixing of comment types (e.g. // and <!-- --> types in a JSX file)
-        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-      }
-    end
-  },
-  {
     'andymass/vim-matchup',
     init = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
