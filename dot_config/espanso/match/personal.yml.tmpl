@@ -1,4 +1,7 @@
 matches:
-  # Simple text replacement
-  - trigger: ":espanso"
-    replace: "Hi there!"
+  - trigger: ";name"
+    replace: "{{ .name }}"
+  - trigger: ";emp"
+    replace: "{{ .espansoPersonalEmail }}"
+  - trigger: ";emw"
+    replace: "{{ .espansoWorkEmail }}"
