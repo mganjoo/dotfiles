@@ -65,7 +65,7 @@ return {
       { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
       { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
       { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = 'Help tags' },
-      { '<leader>fc', '<cmd>Telescope commands<cr>' desc = 'Commands' },
+      { '<leader>fc', '<cmd>Telescope commands<cr>', desc = 'Commands' },
     },
   },
   {
