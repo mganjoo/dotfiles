@@ -136,26 +136,12 @@ return {
     config = function()
       require('mason-lspconfig').setup({
         ensure_installed = {
+          'basedpyright',
           'lua_ls',
+          'ruff',
+          'ts_ls',
         },
       })
-      vim.lsp.config('lua_ls', {
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              globals = {'vim'},
-            },
-            workspace = {
-              library = {
-                vim.env.VIMRUNTIME,
-              },
-            },
-          },
-        },
-      })
-    end
+    end,
   },
 }
