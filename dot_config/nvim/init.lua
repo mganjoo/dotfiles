@@ -108,5 +108,21 @@ if vim.opt.diff:get() then
   vim.keymap.set('n', '<leader>3', ':diffget REMOTE<cr>')
 end
 
+-- == LSP === {{{1
+
+-- Set up folding, default to treesitter unless LSP supports it
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter#foldexpr()"
+vim.opt.foldlevel = 99
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client:supports_method('textDocument/foldingRange') then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+  end,
+})
+
 -- == Modeline == {{{1
 -- vim: foldmethod=marker:fen

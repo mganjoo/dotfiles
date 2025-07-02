@@ -89,9 +89,6 @@ return {
         indent = { enable = true },
         matchup = { enable = true },
       })
-      vim.opt.foldmethod = "expr"
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-      vim.opt.foldlevel = 99
     end,
   },
   { 'neovim/nvim-lspconfig' },
@@ -180,5 +177,21 @@ return {
         desc = "Quickfix list (Trouble)",
       },
     }
-  }
+  },
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      default_format_opts = { lsp_format = 'fallback' },
+      formatters_by_ft = {
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        json = { 'prettier' },
+      },
+    },
+  },
+  {
+    'saghen/blink.cmp',
+    version = '1.*',
+    opts_extend = { "sources.default" },
+  },
 }
