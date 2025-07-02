@@ -133,10 +133,29 @@ return {
       { 'mason-org/mason.nvim', config = true },
       'neovim/nvim-lspconfig',
     },
-    opts = {
-      ensure_installed = {
-        'lua_ls',
-      }
-    },
+    config = function()
+      require('mason-lspconfig').setup({
+        ensure_installed = {
+          'lua_ls',
+        },
+      })
+      vim.lsp.config('lua_ls', {
+        settings = {
+          Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              globals = {'vim'},
+            },
+            workspace = {
+              library = {
+                vim.env.VIMRUNTIME,
+              },
+            },
+          },
+        },
+      })
+    end
   },
 }
