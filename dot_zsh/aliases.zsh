@@ -51,6 +51,3 @@ alias pccd="pchezmoi cd"
 alias pcea="pchezmoi edit --apply"
 alias pca="pchezmoi apply -v"
 alias pcra="pchezmoi re-add"
-
-# Tmux
-alias ta="tmux attach"

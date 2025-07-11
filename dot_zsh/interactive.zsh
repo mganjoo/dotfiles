@@ -16,6 +16,7 @@ interactive_modules=(
   fzf
   apps
   prompt
+  tmux
 )
 
 for m in $interactive_modules; do
