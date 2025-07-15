@@ -28,3 +28,6 @@ fi
 if (( $+commands[fd] )); then
   eval "$(fd --gen-completions zsh)"
 fi
+
+# llm
+export LLM_USER_PATH=$HOME/.config/io.datasette.llm
