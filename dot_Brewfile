@@ -45,6 +45,7 @@ brew 'watch'              # For running commands on a regular interval
 brew 'gum'                # Better shell script inputs and TUI
 brew 'hyperfine'          # Better benchmarking
 brew 'terminal-notifier'  # Send macOS notifications from the terminal
+brew 'llm'                # Interacting with LLMs on the command line
 
 # Misc
 brew 'gmailctl' # Gmail filter management
@@ -64,7 +65,7 @@ cask 'firefox@developer-edition'
 cask 'google-chrome'
 cask 'google-drive'
 cask 'hammerspoon'
-cask 'iterm2'
+cask 'ghostty'
 cask 'jordanbaird-ice'
 cask 'logi-options+'
 cask 'obsidian'

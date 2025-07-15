@@ -1,4 +1,7 @@
-fpath+=("$HOME/.zsh/external/zsh-completions/src")
+fpath+=(
+  "$HOME/.zsh/external/zsh-completions/src"
+  "$HOME/.zsh/completions"
+)
 
 setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
 setopt ALWAYS_TO_END        # Move cursor to the end of a completed word.
