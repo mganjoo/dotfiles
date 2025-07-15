@@ -6,11 +6,6 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
   export HOMEBREW_NO_ENV_HINTS=1
 fi
 
-# iTerm shell integration
-if [[ -f ~/.iterm2_shell_integration.zsh ]]; then
-  source ~/.iterm2_shell_integration.zsh
-fi
-
 # 1Password plugins
 if [[ -f ~/.config/op/plugins.sh ]]; then
   source ~/.config/op/plugins.sh

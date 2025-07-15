@@ -51,3 +51,7 @@ alias pccd="pchezmoi cd"
 alias pcea="pchezmoi edit --apply"
 alias pca="pchezmoi apply -v"
 alias pcra="pchezmoi re-add"
+
+# tmux
+alias ta="tmuxa attach"
+alias tt="tmux new-session -A -s ${USER}"
