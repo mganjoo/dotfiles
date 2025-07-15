@@ -1,0 +1,12 @@
+# vim: set ft=conf
+
+theme = "light:catppuccin-latte.conf,dark:catppuccin-mocha.conf"
+
+font-size = 14
+font-family = "VictorMono NFM"
+# The script-style italic font looks off when combined with bold
+font-family-bold-italic = "VictorMono NFM Bold Oblique"
+
+# Fix issue where Ctrl+[ on terminal vi mode clears screen
+# https://github.com/ghostty-org/ghostty/discussions/7373#discussioncomment-13176453
+keybind = ctrl+[=text:\x1b
