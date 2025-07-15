@@ -6,6 +6,7 @@ font-size = 14
 font-family = "VictorMono NFM"
 # The script-style italic font looks off when combined with bold
 font-family-bold-italic = "VictorMono NFM Bold Oblique"
+macos-titlebar-style = "tabs"
 
 ################
 # Key bindings #
