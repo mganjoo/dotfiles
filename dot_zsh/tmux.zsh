@@ -1,7 +1,7 @@
 # Aliases
 alias ta="tmuxa attach"
 # Create or attach to a session named "username" by default
-alias tt="exec tmux new-session -A -s ${jSER} >/dev/null 2>&1"
+alias tt="tmux new-session -A -s ${jSER}"
 
 # if [[ -x "$(command -v tmux)" ]] && \
 #   [[ -z "${TMUX}" ]] && \
