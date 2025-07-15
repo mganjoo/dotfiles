@@ -53,8 +53,7 @@ local vim = VimMode:new()
 vim
   :disableForApp("Code")
   :disableForApp("zoom.us")
-  :disableForApp("iTerm")
-  :disableForApp("iTerm2")
+  :disableForApp("Ghostty")
   :disableForApp("Terminal")
 
 -- Fallback mode (bind to built-in text shortcuts)
