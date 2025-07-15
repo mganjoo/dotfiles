@@ -7,6 +7,37 @@ font-family = "VictorMono NFM"
 # The script-style italic font looks off when combined with bold
 font-family-bold-italic = "VictorMono NFM Bold Oblique"
 
+################
+# Key bindings #
+################
+
 # Fix issue where Ctrl+[ on terminal vi mode clears screen
-# https://github.com/ghostty-org/ghostty/discussions/7373#discussioncomment-13176453
+# ghostty-org/ghostty/discussions/7373#discussioncomment-13176453
 keybind = ctrl+[=text:\x1b
+
+# Split window vertically (like tmux prefix+v)
+keybind = ctrl+g>v=new_split:right
+keybind = ctrl+g>ctrl+v=new_split:right
+
+# Split window horizontally (like tmux prefix+s) 
+keybind = ctrl+g>s=new_split:down
+keybind = ctrl+g>ctrl+s=new_split:down
+
+# Navigate splits with vi keys (like tmux prefix+hjkl)
+keybind = ctrl+g>h=goto_split:left
+keybind = ctrl+g>j=goto_split:down
+keybind = ctrl+g>k=goto_split:up
+keybind = ctrl+g>l=goto_split:right
+
+# Cycle through splits (like tmux prefix+o)
+keybind = ctrl+g>o=goto_split:next
+
+# Resize splits (like tmux prefix+HJKL)
+keybind = ctrl+g>shift+h=resize_split:left,10
+keybind = ctrl+g>shift+j=resize_split:down,5
+keybind = ctrl+g>shift+k=resize_split:up,5
+keybind = ctrl+g>shift+l=resize_split:right,10
+keybind = ctrl+g>equal=equalize_splits
+
+# Zoom split (like tmux prefix+z)
+keybind = ctrl+g>z=toggle_split_zoom
