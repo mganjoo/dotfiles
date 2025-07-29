@@ -3,6 +3,7 @@
 {{- $publicSigningKey := promptStringOnce . "publicSigningKey" "GitHub SSH public key for signing (from 1Password)"}}
 {{- $espansoPersonalEmail := promptStringOnce . "espansoPersonalEmail" "Personal email address (for Espanso)"  }}
 {{- $espansoWorkEmail := promptStringOnce . "espansoWorkEmail"  "Work email address (for Espanso)" }}
+{{- $shouldPopulateSecrets := promptBoolOnce . "shouldPopulateSecrets" "Should secrets be copied?" }}
 
 [data]
   name = {{ $name | quote }}
@@ -10,6 +11,7 @@
   publicSigningKey = {{ $publicSigningKey | quote }}
   espansoPersonalEmail = {{ $espansoPersonalEmail | quote }}
   espansoWorkEmail = {{ $espansoWorkEmail | quote }}
+  shouldPopulateSecrets = {{ $shouldPopulateSecrets }}
 
 [git]
   autoCommit = true
