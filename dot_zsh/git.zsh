@@ -154,3 +154,6 @@ alias glD='git -c diff.external=difft log --topo-order --stat --patch --full-dif
 alias glo='git oneline'
 alias glb='git brief'
 alias glc='git shortlog --summary --numbered'
+
+# Misc
+alias gcl='git cleanup'
