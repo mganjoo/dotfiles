@@ -7,26 +7,6 @@ hs.hotkey.bind({"cmd", "alt"}, "v", function() hs.eventtap.keyStrokes(hs.pastebo
 
 -- == Grid arrangement == {{{1
 
-spoon.SpoonInstall:andUse("WindowHalfsAndThirds",
-  {
-    config = {
-      use_frame_correctness = false
-    },
-    hotkeys = {
-      max = {mash, "1"},
-      left_half = {mash, "2"},
-      top_half = {mash, "3"},
-      right_half = {mash, "4"},
-      bottom_half = {mash, "5"},
-      top_left = {mash, "6"},
-      top_right = {mash, "7"},
-      bottom_right = {mash, "8"},
-      bottom_left = {mash, "9"},
-      center = {mash, "-"},
-    }
-  }
-)
-
 -- Push to next screen
 hs.hotkey.bind(mash, '0', function()
   local win = hs.window.focusedWindow()
