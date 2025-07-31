@@ -1,96 +1,95 @@
 [color]
-	ui = true
+  ui = true
 [color "branch"]
-	current = magenta reverse
-	local = magenta
-	remote = yellow
+  current = magenta reverse
+  local = magenta
+  remote = yellow
 [alias]
-	amend = commit --amend
-	current = branch --show-current
-	last = diff HEAD^
-	uncommit = reset --soft HEAD^
-	filelog = log -u
-	changes = log --pretty=shortf --name-status
-	shortlog = log --pretty=shortlog
-	simple = log --pretty=simple
-	oneline = log --topo-order --pretty=one
-	brief = log --topo-order --pretty=brief
-	up = pull --rebase --autostash
-	sxs = -c delta.features=side-by-side diff
-	ddiff = -c diff.external=difft diff
-	dshow = -c diff.external=difft show --ext-diff
-	dlog = -c diff.external=difft log --ext-diff
+  amend = commit --amend
+  current = branch --show-current
+  last = diff HEAD^
+  uncommit = reset --soft HEAD^
+  filelog = log -u
+  changes = log --pretty=shortf --name-status
+  shortlog = log --pretty=shortlog
+  simple = log --pretty=simple
+  oneline = log --topo-order --pretty=one
+  brief = log --topo-order --pretty=brief
+  up = pull --rebase --autostash
+  sxs = -c delta.features=side-by-side diff
+  ddiff = -c diff.external=difft diff
+  dshow = -c diff.external=difft show --ext-diff
+  dlog = -c diff.external=difft log --ext-diff
 [format]
-	pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ad (%ar)%C(reset)%n%+B
+  pretty = format:%C(bold)Commit:%C(reset) %C(yellow)%H%C(auto)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ad (%ar)%C(reset)%n%+B
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [pretty]
-	shortlog = format:%C(yellow)%h%C(reset) %C(cyan)%cr%C(reset) %cn %Cgreen%s%Creset
-	simple = format: * %s
-	one = format:%C(yellow)%h%C(reset) %s %Cgreen(%cr) %C(auto)%d%C(reset)
-	brief = format:%C(yellow)%h%C(reset) %s%n%C(blue)(%ar%C(reset) by %C(cyan)%an)%C(auto)%d%C(reset)%n
+  shortlog = format:%C(yellow)%h%C(reset) %C(cyan)%cr%C(reset) %cn %Cgreen%s%Creset
+  simple = format: * %s
+  one = format:%C(yellow)%h%C(reset) %s %Cgreen(%cr) %C(auto)%d%C(reset)
+  brief = format:%C(yellow)%h%C(reset) %s%n%C(blue)(%ar%C(reset) by %C(cyan)%an)%C(auto)%d%C(reset)%n
 [merge]
-	verbosity = 1
-	tool = nvimdiff
-	conflictStyle = zdiff3
+  verbosity = 1
+  tool = nvimdiff
+  conflictStyle = zdiff3
 [mergetool]
-	prompt = false
-	keepBackup = false
-	keepTemporaries = false
+  prompt = false
+  keepBackup = false
+  keepTemporaries = false
 [mergetool "nvimdiff"]
-	layout = "LOCAL,BASE,REMOTE / MERGED"
+  layout = "LOCAL,BASE,REMOTE / MERGED"
 [apply]
-	whitespace = nowarn
+  whitespace = nowarn
 [branch]
-	autosetupmerge = true
+  autosetupmerge = true
 [push]
-	default = simple
-	autoSetupRemote = true
+  default = simple
+  autoSetupRemote = true
 [core]
-	autocrlf = false
-	editor = nvim
-	pager = delta
-	quotepath = false
-	excludesfile = ~/.gitignore_global
+  autocrlf = false
+  editor = nvim
+  pager = delta
+  quotepath = false
+  excludesfile = ~/.gitignore_global
 [advice]
-	statusHints = false
+  statusHints = false
 [diff]
-	mnemonicprefix = true
+  mnemonicprefix = true
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [delta]
-	navigate = true # use n and N to move betweetn diff sections
-	line-numbers = true
+  navigate = true # use n and N to move betweetn diff sections
+  line-numbers = true
 [rerere]
-	enabled = true
+  enabled = true
 [difftool]
-	prompt = false
+  prompt = false
 [rebase]
-	autosquash = true
-	updateRefs = true
+  autosquash = true
+  updateRefs = true
 [log]
-	date = local
+  date = local
 [pull]
-	rebase = true
+  rebase = true
 [fetch]
-	prune = true
-	prunereflogexpire = 30.days
-	prunetags = true
+  prune = true
+  prunereflogexpire = 30.days
+  prunetags = true
 [user]
-	name = {{ .name }}
-	email = {{ .email }}
+  name = {{ .name }}
+  email = {{ .email }}
 {{- if eq .chezmoi.os "darwin" }}
-
 # GPG signing (Mac only for now)
 [gpg]
-	format = ssh
+  format = ssh
 [gpg "ssh"]
-	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-	allowedSignersFile = "~/.ssh/allowed_signers"
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  allowedSignersFile = "~/.ssh/allowed_signers"
 [commit]
-	gpgsign = true
+  gpgsign = true
 [user]
-	signingkey = {{ .publicSigningKey }}
+  signingkey = {{ .publicSigningKey }}
 {{- end }}
 
 # vim: ft=gitconfig
