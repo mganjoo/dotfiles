@@ -10,11 +10,11 @@ TEMP_CONFIG="/tmp/claude-config-$$.json"
 
 # Function to get current macOS appearance
 get_current_theme() {
-    # dark-notify sets DARKMODE environment variable
-    if [[ "${DARKMODE:-}" == "1" ]]; then
-        echo "dark"
+    # Use dark-notify to get current theme state
+    if command -v dark-notify >/dev/null 2>&1; then
+        dark-notify -e
     else
-        echo "light" 
+        echo "light"  # fallback
     fi
 }
 
@@ -33,14 +33,22 @@ update_claude_theme() {
 
     # Use jq to update the theme field
     if command -v jq >/dev/null 2>&1; then
+        # Add debugging
+        echo "DEBUG: Updating theme to $new_theme" >&2
+        echo "DEBUG: Config file size before: $(wc -c < "$CLAUDE_CONFIG")" >&2
+        
         jq --arg theme "$new_theme" '.theme = $theme' "$CLAUDE_CONFIG" > "$TEMP_CONFIG"
+        
+        echo "DEBUG: Temp file size: $(wc -c < "$TEMP_CONFIG" 2>/dev/null || echo "0")" >&2
         
         # Atomic move to prevent corruption
         if [[ -s "$TEMP_CONFIG" ]]; then
             mv "$TEMP_CONFIG" "$CLAUDE_CONFIG"
+            echo "DEBUG: Config file size after: $(wc -c < "$CLAUDE_CONFIG")" >&2
             echo "Updated Claude theme to: $new_theme" >&2
         else
             echo "Error: Failed to update Claude config - jq produced empty output" >&2
+            echo "DEBUG: Temp file contents: $(cat "$TEMP_CONFIG" 2>/dev/null || echo "EMPTY")" >&2
             rm -f "$TEMP_CONFIG"
             return 1
         fi
