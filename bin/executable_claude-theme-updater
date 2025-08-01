@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# claude-theme-updater: Updates Claude theme based on macOS appearance
+# This script is called by dark-notify when the system theme changes
+
+set -euo pipefail
+
+CLAUDE_CONFIG="$HOME/.claude.json"
+TEMP_CONFIG="/tmp/claude-config-$$.json"
+
+# Function to get current macOS appearance
+get_current_theme() {
+    # dark-notify sets DARKMODE environment variable
+    if [[ "${DARKMODE:-}" == "1" ]]; then
+        echo "dark"
+    else
+        echo "light" 
+    fi
+}
+
+# Function to update theme in Claude config
+update_claude_theme() {
+    local new_theme="$1"
+
+    # Check if config file exists
+    if [[ ! -f "$CLAUDE_CONFIG" ]]; then
+        echo "Warning: Claude config file not found at $CLAUDE_CONFIG" >&2
+        return 1
+    fi
+
+    # Create backup
+    cp "$CLAUDE_CONFIG" "$CLAUDE_CONFIG.backup.$(date +%s)"
+
+    # Use jq to update the theme field
+    if command -v jq >/dev/null 2>&1; then
+        jq --arg theme "$new_theme" '.theme = $theme' "$CLAUDE_CONFIG" > "$TEMP_CONFIG"
+        
+        # Atomic move to prevent corruption
+        if [[ -s "$TEMP_CONFIG" ]]; then
+            mv "$TEMP_CONFIG" "$CLAUDE_CONFIG"
+            echo "Updated Claude theme to: $new_theme" >&2
+        else
+            echo "Error: Failed to update Claude config - jq produced empty output" >&2
+            rm -f "$TEMP_CONFIG"
+            return 1
+        fi
+    else
+        # Fallback to sed if jq is not available (less robust)
+        echo "Warning: jq not found, using sed as fallback" >&2
+        sed -E "s/\"theme\": \"(light|dark)\"/\"theme\": \"$new_theme\"/" "$CLAUDE_CONFIG" > "$TEMP_CONFIG"
+        
+        if [[ -s "$TEMP_CONFIG" ]]; then
+            mv "$TEMP_CONFIG" "$CLAUDE_CONFIG"
+            echo "Updated Claude theme to: $new_theme (using sed)" >&2
+        else
+            echo "Error: Failed to update Claude config - sed produced empty output" >&2
+            rm -f "$TEMP_CONFIG"
+            return 1
+        fi
+    fi
+}
+
+# Function to log theme changes
+log_theme_change() {
+    local new_theme="$1"
+    local log_file="$HOME/.claude-theme.log"
+    echo "$(date '+%Y-%m-%d %H:%M:%S'): Theme changed to $new_theme" >> "$log_file"
+}
+
+# Main function
+main() {
+    local current_theme
+    current_theme=$(get_current_theme)
+
+    # Update Claude theme
+    if update_claude_theme "$current_theme"; then
+        log_theme_change "$current_theme"
+    else
+        echo "Failed to update Claude theme" >&2
+        exit 1
+    fi
+}
+
+main "$@"

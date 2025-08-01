@@ -1,0 +1,181 @@
+#!/bin/bash
+
+# claude-autotheme: A wrapper around Claude CLI that automatically switches themes based on macOS appearance
+
+set -euo pipefail
+
+# Configuration
+CLAUDE_CONFIG="$HOME/.claude.json"
+DAEMON_PID_FILE="/tmp/claude-theme-daemon.pid"
+THEME_UPDATER_SCRIPT="$(dirname "$(readlink -f "$0" || echo "$0")")/claude-theme-updater"
+
+# Function to start the theme monitoring daemon
+start_daemon() {
+    if [[ -f "$DAEMON_PID_FILE" ]] && kill -0 "$(cat "$DAEMON_PID_FILE")" 2>/dev/null; then
+        # Daemon is already running
+        return 0
+    fi
+    
+    # Start daemon in background, detached from this process
+    (
+        # Double fork to fully detach daemon
+        if dark-notify -c "$THEME_UPDATER_SCRIPT" & then
+            echo $! > "$DAEMON_PID_FILE"
+            # Set up cleanup when daemon process exits
+            wait $!
+            rm -f "$DAEMON_PID_FILE"
+        fi
+    ) </dev/null >/dev/null 2>&1 &
+
+    # Wait a moment to ensure daemon started
+    sleep 0.5
+}
+
+# Function to stop the daemon
+stop_daemon() {
+    if [[ -f "$DAEMON_PID_FILE" ]]; then
+        if kill -0 "$(cat "$DAEMON_PID_FILE")" 2>/dev/null; then
+            kill "$(cat "$DAEMON_PID_FILE")" 2>/dev/null || true
+        fi
+        rm -f "$DAEMON_PID_FILE"
+    fi
+}
+
+# Function to check if dark-notify is available
+check_dark_notify() {
+    if ! command -v dark-notify >/dev/null 2>&1; then
+        echo "Error: dark-notify is not installed. Install with: brew install cormacrelf/tap/dark-notify" >&2
+        exit 1
+    fi
+}
+
+# Function to check if theme updater script exists
+check_theme_updater() {
+    if [[ ! -x "$THEME_UPDATER_SCRIPT" ]]; then
+        echo "Error: Theme updater script not found at $THEME_UPDATER_SCRIPT" >&2
+        echo "Make sure claude-theme-updater is in the same directory as this script and is executable." >&2
+        exit 1
+    fi
+}
+
+# Main function
+main() {
+    # Parse arguments to check for special cases
+    if [[ $# -gt 0 ]]; then
+        case "$1" in
+            --stop-theme-daemon)
+                stop_daemon
+                echo "Theme monitoring daemon stopped."
+                exit 0
+                ;;
+            --start-theme-daemon)
+                check_dark_notify
+                check_theme_updater
+                start_daemon
+                echo "Theme monitoring daemon started."
+                exit 0
+                ;;
+            --theme-daemon-status)
+                if [[ -f "$DAEMON_PID_FILE" ]] && kill -0 "$(cat "$DAEMON_PID_FILE")" 2>/dev/null; then
+                    echo "Theme monitoring daemon is running (PID: $(cat "$DAEMON_PID_FILE"))"
+                else
+                    echo "Theme monitoring daemon is not running"
+                fi
+                exit 0
+                ;;
+        esac
+    fi
+
+    # Check dependencies
+    check_dark_notify
+    check_theme_updater
+
+    # Start daemon if not running
+    start_daemon
+    
+# Function to find the real Claude binary
+find_real_claude() {
+    local claude_path
+    local this_script="$(readlink -f "$0" || echo "$0")"
+    
+    # Get the path from which command
+    if claude_path=$(which claude 2>/dev/null); then
+        # Handle shell aliases (e.g., "claude: aliased to /path/to/claude")
+        if [[ "$claude_path" =~ :\s*aliased\ to\s+(.+)$ ]]; then
+            claude_path="${BASH_REMATCH[1]}"
+        fi
+        
+        # If it's this script, we need to find the real one
+        local resolved_path="$(readlink -f "$claude_path" 2>/dev/null || echo "$claude_path")"
+        if [[ "$resolved_path" == "$this_script" ]]; then
+            # Look for the real claude in common locations, excluding our own path
+            for path in /usr/local/bin/claude /opt/homebrew/bin/claude ~/.local/bin/claude; do
+                if [[ -x "$path" ]] && [[ "$(readlink -f "$path" 2>/dev/null || echo "$path")" != "$this_script" ]]; then
+                    echo "$path"
+                    return 0
+                fi
+            done
+            
+            # Also check if it's a bash wrapper and extract the real path
+            if [[ -f "$claude_path" ]]; then
+                local content
+                if content=$(cat "$claude_path" 2>/dev/null); then
+                    if [[ "$content" =~ exec[[:space:]]+\"([^\"]+)\" ]] || [[ "$content" =~ exec[[:space:]]+([^[:space:]]+) ]]; then
+                        local exec_path="${BASH_REMATCH[1]}"
+                        if [[ -x "$exec_path" ]] && [[ "$(readlink -f "$exec_path" 2>/dev/null || echo "$exec_path")" != "$this_script" ]]; then
+                            echo "$exec_path"
+                            return 0
+                        fi
+                    fi
+                fi
+            fi
+        else
+            echo "$claude_path"
+            return 0
+        fi
+    fi
+    
+    # Fallback: check local Claude installation
+    local local_claude_wrapper="$HOME/.claude/local/claude"
+    if [[ -f "$local_claude_wrapper" ]]; then
+        local content
+        if content=$(cat "$local_claude_wrapper" 2>/dev/null); then
+            if [[ "$content" =~ exec[[:space:]]+\"([^\"]+)\" ]]; then
+                local exec_path="${BASH_REMATCH[1]}"
+                if [[ -x "$exec_path" ]]; then
+                    echo "$exec_path"
+                    return 0
+                fi
+            fi
+        fi
+    fi
+    
+    # Check node_modules/.bin path
+    local local_claude_path="$HOME/.claude/local/node_modules/.bin/claude"
+    if [[ -x "$local_claude_path" ]] && [[ "$(readlink -f "$local_claude_path" 2>/dev/null || echo "$local_claude_path")" != "$this_script" ]]; then
+        echo "$local_claude_path"
+        return 0
+    fi
+    
+    return 1
+}
+
+    # Find the real Claude binary
+    if ! REAL_CLAUDE=$(find_real_claude); then
+        echo "Error: Could not find the real claude binary. Make sure claude is installed." >&2
+        exit 1
+    fi
+
+    # Execute the real Claude with all passed arguments
+    exec "$REAL_CLAUDE" "$@"
+}
+
+# Handle cleanup on script exit
+cleanup() {
+    # Don't stop daemon on normal exit - let it keep running for future claude-theme invocations
+    :
+}
+
+trap cleanup EXIT
+
+main "$@"
