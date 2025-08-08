@@ -133,14 +133,19 @@ case "$cmd" in
     git rev-parse --verify "$BASE" >/dev/null 2>&1 || die "base branch '$BASE' not found"
     need_clean
 
+    # Fetch base but DO NOT switch branches
     if git ls-remote --exit-code --heads origin "$BASE" >/dev/null 2>&1; then
       git fetch origin "$BASE"
-      git checkout -B "$BASE" "origin/$BASE"
+      base_target="origin/$BASE"
+    else
+      base_target="$BASE"
     fi
 
-    commits_all=$(revlist_rev "$BASE")
-    [[ -n "${commits_all}" ]] || die "no commits to stack (nothing on $BASE..HEAD)"
+    # Commits to stack are from base_target..HEAD on your CURRENT branch
+    commits_all=$(git rev-list --reverse "$base_target"..HEAD)
+    [[ -n "${commits_all}" ]] || die "no commits to stack (nothing on $BASE..HEAD) — are you on your feature branch?"
 
+    # Append-only: count existing PREFIX-* branches and continue numbering
     existing_branches=$(branches_for_prefix "$PREFIX" || true)
     count_existing=$(echo "${existing_branches}" | grep -E "^$PREFIX-[0-9]+$" | wc -l | tr -d ' ')
     start=$((count_existing + 1))
@@ -154,7 +159,9 @@ case "$cmd" in
       i=$((i+1))
     done
 
+    # Save prefix for convenience next time
     git config stack.prefix "$PREFIX" >/dev/null 2>&1 || true
+
     if [[ $i -eq $start ]]; then
       echo "No new commits to branch."
     else
