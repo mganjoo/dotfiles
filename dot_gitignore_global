@@ -79,3 +79,5 @@ DerivedData
 
 # VS Code
 .metals/
+
+.claude-trace/

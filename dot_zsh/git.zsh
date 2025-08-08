@@ -32,8 +32,10 @@ alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcs='git show'
 alias gcS='git dshow'
-alias gcrf='git commit --fixup=$(glg | fzf | cut -f 2 -d " ")'
-alias gcrs='git commit --squash=$(glg | fzf | cut -f 2 -d " ")'
+
+# Fixup and squash with an interactive menu
+alias gcrf='git commit --fixup=$(git oneline | fzf --no-sort --reverse | cut -f 2 -d " ")'
+alias gcrs='git commit --squash=$(git oneline | fzf --no-sort --reverse | cut -f 2 -d " ")'
 
 # Conflict (C)
 alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
