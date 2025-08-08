@@ -2,7 +2,7 @@
 # stack.sh — stacked PR helper with smart defaults, guard rails, status/ship
 #
 # Commands:
-#   create [<BASE>] [<PREFIX>]       Create <PREFIX>-N branches for commits on BASE..HEAD (append-only); saves prefix
+#   create [<BASE>] [<PREFIX>]       Create/update <PREFIX>-N branches for commits on BASE..HEAD; saves prefix
 #   rebase [<BASE>]                  Rebase current branch onto origin/BASE; auto-clean merged branches
 #   push [<PREFIX>]                  Delete merged <PREFIX>-* branches, push remaining with --force-with-lease
 #   pr [<PREFIX>] [<BASE>] [--ready] Push & create/update PRs stacked on BASE → each other (draft by default)
@@ -108,18 +108,69 @@ ensure_gh() {
   gh auth status >/dev/null 2>&1 || die "gh not authenticated. Run: gh auth login"
 }
 
-# Guard rail: warn if a branch has != 1 commit vs its intended base
-warn_if_not_one_commit() {
-  local prev_base="$1"; shift
-  for br in "$@"; do
-    local counts left right
-    counts=$(git rev-list --left-right --count "origin/$prev_base...$br" 2>/dev/null || echo "0 0")
-    read -r left right <<< "$counts"
-    if [[ "${right:-0}" -ne 1 ]]; then
-      warn "branch '$br' has $right commits vs base '$prev_base' (expected 1)"
+# Guard rail: warn if stack structure has real problems (not just reordering)
+warn_if_stack_problems() {
+  local base="$1"; shift
+  local branches=("$@")
+  
+  # Get all commits in the current stack
+  local stack_commits
+  stack_commits=$(git rev-list --reverse "origin/$base"..HEAD)
+  local expected_count
+  expected_count=$(echo "$stack_commits" | wc -l | tr -d ' ')
+  
+  # Check if we have the right number of branches
+  if [[ ${#branches[@]} -ne $expected_count ]]; then
+    warn "Expected $expected_count branches but found ${#branches[@]} for current stack"
+    return
+  fi
+  
+  # Get commits from all stack branches
+  local branch_commits=()
+  for br in "${branches[@]}"; do
+    if git rev-parse --verify "$br" >/dev/null 2>&1; then
+      branch_commits+=($(git rev-parse "$br"))
+    else
+      warn "Branch '$br' does not exist"
+      return
     fi
-    prev_base="$br"
   done
+  
+  # Convert stack commits to array for comparison
+  local stack_commit_array=()
+  while IFS= read -r commit; do
+    [[ -n "$commit" ]] && stack_commit_array+=("$commit")
+  done <<< "$stack_commits"
+  
+  # Check if all stack commits are covered by branches (allowing reordering)
+  local missing_commits=()
+  for stack_commit in "${stack_commit_array[@]}"; do
+    local found=false
+    for branch_commit in "${branch_commits[@]}"; do
+      if [[ "$stack_commit" == "$branch_commit" ]]; then
+        found=true
+        break
+      fi
+    done
+    if [[ "$found" != true ]]; then
+      missing_commits+=("$stack_commit")
+    fi
+  done
+  
+  # Report any real problems
+  if [[ ${#missing_commits[@]} -gt 0 ]]; then
+    warn "Stack branches are missing commits:"
+    for commit in "${missing_commits[@]}"; do
+      warn "  Missing: $(git rev-parse --short "$commit") $(git log -1 --pretty=%s "$commit")"
+    done
+  fi
+  
+  # Check for duplicate commits
+  local sorted_branch_commits=($(printf '%s\n' "${branch_commits[@]}" | sort))
+  local sorted_unique=($(printf '%s\n' "${branch_commits[@]}" | sort -u))
+  if [[ ${#sorted_branch_commits[@]} -ne ${#sorted_unique[@]} ]]; then
+    warn "Stack has duplicate commits across branches"
+  fi
 }
 
 cmd=${1:-}
@@ -146,7 +197,6 @@ case "$cmd" in
     [[ -n "${commits_all}" ]] || die "no commits to stack (nothing on $BASE..HEAD) — are you on your feature branch?"
 
     # Smart update: compare existing branches with current stack and update as needed
-    existing_branches=$(branches_for_prefix "$PREFIX" || true)
     
     # Convert commits to array for easier processing
     readarray -t commits_array <<< "$commits_all"
@@ -220,10 +270,10 @@ case "$cmd" in
     git fetch origin "$BASE_REMOTE" >/dev/null 2>&1 || true
     cleanup_merged_branches "$PREFIX" "origin/$BASE_REMOTE"
 
-    # Guard rail: warn if not one commit per PR (vs stacking base chain)
+    # Guard rail: warn if stack has structural problems
     mapfile -t brs < <(branches_for_prefix "$PREFIX")
     if ((${#brs[@]})); then
-      warn_if_not_one_commit "$BASE_REMOTE" "${brs[@]}"
+      warn_if_stack_problems "$BASE_REMOTE" "${brs[@]}"
     fi
 
     any=false
@@ -260,31 +310,28 @@ case "$cmd" in
 
     prev_base="$BASE"
     for br in $(branches_for_prefix "$PREFIX"); do
-      counts=$(git rev-list --left-right --count "origin/$prev_base...$br" || echo "0 0")
+      # Skip branches with no commits (shouldn't happen with proper stacking)
+      counts=$(git rev-list --left-right --count "origin/$BASE...$br" || echo "0 0")
       read -r left right <<< "$counts"
       if [[ "${right:-0}" -eq 0 ]]; then
-        echo "⏭  skipping $br: no commits vs $prev_base"
-        prev_base="$br"; continue
-      fi
-      if [[ "${right:-0}" -ne 1 ]]; then
-        warn "PR '$br' has $right commits vs base '$prev_base' (expected 1)"
+        echo "⏭  skipping $br: no commits vs $BASE"
+        continue
       fi
 
       title=$(commit_subject "$br"); body=$(commit_body "$br")
       echo "PR for $br → base: $prev_base"
       if gh pr view "$br" >/dev/null 2>&1; then
         echo "  updating existing PR…"
+        gh pr edit "$br" --title "$title" --body "$body" --base "$prev_base"
         if $READY; then
-          gh pr edit "$br" --title "$title" --body "$body" --base "$prev_base" --ready
-        else
-          gh pr edit "$br" --title "$title" --body "$body" --base "$prev_base" --draft
+          gh pr ready "$br" 2>/dev/null || echo "    (ready status not changed)"
         fi
       else
         echo "  creating $( $READY && echo 'ready' || echo 'draft') PR…"
+        gh pr create --head "$br" --base "$prev_base" --title "$title" --body "$body"
+        # PRs are created as draft by default, mark ready if requested
         if $READY; then
-          gh pr create --head "$br" --base "$prev_base" --title "$title" --body "$body"
-        else
-          gh pr create --head "$br" --base "$prev_base" --title "$title" --body "$body" --draft
+          gh pr ready "$br" 2>/dev/null || echo "    (ready status not changed)"
         fi
       fi
       prev_base="$br"
@@ -367,7 +414,7 @@ case "$cmd" in
   *)
     cat <<'USAGE'
 stack.sh — commands:
-  create [<BASE>] [<PREFIX>]       Create <PREFIX>-N branches for commits on BASE..HEAD (append-only); saves prefix
+  create [<BASE>] [<PREFIX>]       Create/update <PREFIX>-N branches for commits on BASE..HEAD; saves prefix
   rebase [<BASE>]                  Rebase current branch onto origin/BASE, update refs, and clean merged branches
   push [<PREFIX>]                  Delete merged <PREFIX>-* branches, push remaining with --force-with-lease
   pr [<PREFIX>] [<BASE>] [--ready] Push & create/update PRs stacked on BASE, then each other (draft by default)
