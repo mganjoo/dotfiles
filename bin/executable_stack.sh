@@ -78,7 +78,21 @@ branches_for_prefix() {
 
 is_merged_patch() {
   local branch="$1" base="$2"
-  git cherry "$base" "$branch" | grep -q '^-' && return 0 || return 1
+  # Use merge-base to check if the branch is actually merged
+  local merge_base
+  merge_base=$(git merge-base "$base" "$branch" 2>/dev/null || echo "")
+  local base_commit
+  base_commit=$(git rev-parse "$base" 2>/dev/null || echo "")
+  
+  # If merge-base equals the base, the branch is merged
+  [[ -n "$merge_base" && -n "$base_commit" && "$merge_base" == "$base_commit" ]] && return 0
+  
+  # Fallback to git cherry, but only if the branch has no unique commits
+  local cherry_output
+  cherry_output=$(git cherry "$base" "$branch" 2>/dev/null || echo "+")
+  [[ "$cherry_output" == "" ]] && return 0
+  
+  return 1
 }
 
 cleanup_merged_branches() {
