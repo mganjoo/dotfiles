@@ -114,7 +114,7 @@ warn_if_not_one_commit() {
   for br in "$@"; do
     local counts left right
     counts=$(git rev-list --left-right --count "origin/$prev_base...$br" 2>/dev/null || echo "0 0")
-    left=${counts% *}; right=${counts#* }
+    read -r left right <<< "$counts"
     if [[ "${right:-0}" -ne 1 ]]; then
       warn "branch '$br' has $right commits vs base '$prev_base' (expected 1)"
     fi
@@ -145,27 +145,51 @@ case "$cmd" in
     commits_all=$(git rev-list --reverse "$base_target"..HEAD)
     [[ -n "${commits_all}" ]] || die "no commits to stack (nothing on $BASE..HEAD) — are you on your feature branch?"
 
-    # Append-only: count existing PREFIX-* branches and continue numbering
+    # Smart update: compare existing branches with current stack and update as needed
     existing_branches=$(branches_for_prefix "$PREFIX" || true)
-    count_existing=$(echo "${existing_branches}" | grep -E "^$PREFIX-[0-9]+$" | wc -l | tr -d ' ')
-    start=$((count_existing + 1))
-
-    i=$start
-    echo "$commits_all" | tail -n +$((count_existing + 1)) | while read -r c; do
-      [[ -z "$c" ]] && continue
+    
+    # Convert commits to array for easier processing
+    readarray -t commits_array <<< "$commits_all"
+    
+    i=1
+    updated_count=0
+    created_count=0
+    
+    for commit in "${commits_array[@]}"; do
+      [[ -z "$commit" ]] && continue
       br="$PREFIX-$i"
-      git branch -f "$br" "$c"
-      echo "created: $br -> $(git rev-parse --short "$c")"
+      
+      if git rev-parse --verify "$br" >/dev/null 2>&1; then
+        # Branch exists, check if commit has changed
+        existing_commit=$(git rev-parse "$br")
+        if [[ "$existing_commit" != "$commit" ]]; then
+          git branch -f "$br" "$commit"
+          echo "updated: $br -> $(git rev-parse --short "$commit") (was $(git rev-parse --short "$existing_commit"))"
+          updated_count=$((updated_count + 1))
+        else
+          echo "unchanged: $br -> $(git rev-parse --short "$commit")"
+        fi
+      else
+        # Branch doesn't exist, create it
+        git branch -f "$br" "$commit"
+        echo "created: $br -> $(git rev-parse --short "$commit")"
+        created_count=$((created_count + 1))
+      fi
+      
       i=$((i+1))
     done
 
     # Save prefix for convenience next time
     git config stack.prefix "$PREFIX" >/dev/null 2>&1 || true
 
-    if [[ $i -eq $start ]]; then
-      echo "No new commits to branch."
+    if [[ $updated_count -eq 0 && $created_count -eq 0 ]]; then
+      echo "No changes to stack."
     else
-      echo "Done. Use './stack.sh pr' to publish PRs."
+      summary=""
+      [[ $created_count -gt 0 ]] && summary="$created_count created"
+      [[ $updated_count -gt 0 ]] && [[ -n "$summary" ]] && summary="$summary, "
+      [[ $updated_count -gt 0 ]] && summary="${summary}${updated_count} updated"
+      echo "Done. $summary. Use './stack.sh pr' to publish PRs."
     fi
     ;;
 
@@ -232,12 +256,12 @@ case "$cmd" in
       die "base branch '$BASE' not found on origin"
     fi
 
-    "$0" push "$PREFIX"   # also runs cleanup + guard rails
+    bash "$0" push "$PREFIX"   # also runs cleanup + guard rails
 
     prev_base="$BASE"
     for br in $(branches_for_prefix "$PREFIX"); do
       counts=$(git rev-list --left-right --count "origin/$prev_base...$br" || echo "0 0")
-      right=${counts#* }
+      read -r left right <<< "$counts"
       if [[ "${right:-0}" -eq 0 ]]; then
         echo "⏭  skipping $br: no commits vs $prev_base"
         prev_base="$br"; continue
@@ -248,12 +272,12 @@ case "$cmd" in
 
       title=$(commit_subject "$br"); body=$(commit_body "$br")
       echo "PR for $br → base: $prev_base"
-      if gh pr view --head "$br" >/dev/null 2>&1; then
+      if gh pr view "$br" >/dev/null 2>&1; then
         echo "  updating existing PR…"
         if $READY; then
-          gh pr edit --head "$br" --title "$title" --body "$body" --base "$prev_base" --ready
+          gh pr edit "$br" --title "$title" --body "$body" --base "$prev_base" --ready
         else
-          gh pr edit --head "$br" --title "$title" --body "$body" --base "$prev_base" --draft
+          gh pr edit "$br" --title "$title" --body "$body" --base "$prev_base" --draft
         fi
       else
         echo "  creating $( $READY && echo 'ready' || echo 'draft') PR…"
@@ -284,12 +308,14 @@ case "$cmd" in
     ensure_gh || true
     for br in "${brs[@]}"; do
       # Try to get PR info; don't fail if gh unavailable
-      pr_url=$(gh pr view --head "$br" --json url -q .url 2>/dev/null || echo "-")
-      base_ref=$(gh pr view --head "$br" --json baseRefName -q .baseRefName 2>/dev/null || echo "-")
-      ci=$(gh pr checks "$br" 2>/dev/null | tail -n1 || echo "-")
+      pr_url=$(gh pr view "$br" --json url -q .url 2>/dev/null || echo "-")
+      base_ref=$(gh pr view "$br" --json baseRefName -q .baseRefName 2>/dev/null || echo "-")
+      ci=$(gh pr checks "$br" 2>/dev/null | awk 'NR>1 {print $1 ":" $2}' | paste -sd',' - || echo "-")
       base_show=${base_ref:-$BASE}
       behind_ahead=$(git rev-list --left-right --count "origin/$base_show...$br" 2>/dev/null || echo "0 0")
-      echo "  $br  base:$base_show  PR:${pr_url}  Δ:${behind_ahead}  CI:${ci}"
+      read -r behind ahead <<< "$behind_ahead"
+      delta_formatted="-${behind}/+${ahead}"
+      echo "  $br  base:$base_show  PR:${pr_url}  Δ:${delta_formatted}  CI:${ci}"
     done
     ;;
 
@@ -298,9 +324,9 @@ case "$cmd" in
     ensure_not_detached
     PREFIX=$(get_prefix "${2:-}")
     ensure_gh; ensure_origin_github_if_needed
-    first=$(branches_for_prefix "$PREFIX" | head -n1)
+    first=$(branches_for_prefix "$PREFIX" | head -n1 || true)
     [[ -n "$first" ]] || die "no branches for prefix '$PREFIX'"
-    echo "Enabling auto-merge (squash) for PR of $first…"
+    echo "Enabling auto-merge (squash) for PR of $first..."
     gh pr merge "$first" --squash --auto
     echo "Auto-merge enabled. After it lands: ./stack.sh rebase && ./stack.sh pr"
     ;;
