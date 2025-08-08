@@ -159,5 +159,3 @@ alias glc='git shortlog --summary --numbered'
 
 # Misc
 alias gcl='git cleanup'
-# My custom git PR stacking script
-alias st='stack.sh'
