@@ -117,7 +117,7 @@ warn_if_not_one_commit() {
     left=${counts% *}; right=${counts#* }
     if [[ "${right:-0}" -ne 1 ]]; then
       warn "branch '$br' has $right commits vs base '$prev_base' (expected 1)"
-    end
+    fi
     prev_base="$br"
   done
 }
@@ -280,8 +280,9 @@ case "$cmd" in
       pr_url=$(gh pr view --head "$br" --json url -q .url 2>/dev/null || echo "-")
       base_ref=$(gh pr view --head "$br" --json baseRefName -q .baseRefName 2>/dev/null || echo "-")
       ci=$(gh pr checks "$br" 2>/dev/null | tail -n1 || echo "-")
-      behind_ahead=$(git rev-list --left-right --count "origin/${base_ref:-$BASE}...$br" 2>/dev/null || echo "0 0")
-      echo "  $br  base:${base_ref/-/$BASE}  PR:${pr_url}  Δ:${behind_ahead}  CI:${ci}"
+      base_show=${base_ref:-$BASE}
+      behind_ahead=$(git rev-list --left-right --count "origin/$base_show...$br" 2>/dev/null || echo "0 0")
+      echo "  $br  base:$base_show  PR:${pr_url}  Δ:${behind_ahead}  CI:${ci}"
     done
     ;;
 
