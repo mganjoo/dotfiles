@@ -21,3 +21,6 @@ if [[ -f ~/.zshrc_local ]]; then
 fi
 
 
+
+
+alias claude="/Users/milind/.claude/local/claude"
