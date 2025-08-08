@@ -34,8 +34,8 @@ alias gcs='git show'
 alias gcS='git dshow'
 
 # Fixup and squash with an interactive menu
-alias gcrf='git commit --fixup=$(git oneline | fzf --no-sort --reverse | cut -f 2 -d " ")'
-alias gcrs='git commit --squash=$(git oneline | fzf --no-sort --reverse | cut -f 2 -d " ")'
+alias gcrf='git commit --fixup=$(git oneline | fzf --no-sort --reverse --ansi | cut -f 1 -d " ")'
+alias gcrs='git commit --squash=$(git oneline | fzf --no-sort --reverse --ansi | cut -f 1 -d " ")'
 
 # Conflict (C)
 alias gCl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
