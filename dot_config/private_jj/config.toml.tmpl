@@ -6,3 +6,6 @@ email = "{{ .email }}"
 
 [ui]
 conflict-marker-style = "git"
+
+[revset-aliases]
+"immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
