@@ -18,9 +18,6 @@ macos-titlebar-style = "tabs"
 # ghostty-org/ghostty/discussions/7373#discussioncomment-13176453
 keybind = ctrl+[=text:\x1b
 
-# Shift+Enter correction for Claude Code
-keybind = shift+enter=text:\n
-
 # Split window vertically (like tmux prefix+v)
 keybind = ctrl+g>v=new_split:right
 keybind = ctrl+g>ctrl+v=new_split:right
@@ -47,3 +44,6 @@ keybind = ctrl+g>equal=equalize_splits
 
 # Zoom split (like tmux prefix+z)
 keybind = ctrl+g>z=toggle_split_zoom
+
+# Binding for Claude Code
+keybind = shift+enter=text:\n
