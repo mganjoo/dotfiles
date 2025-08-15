@@ -15,5 +15,5 @@
   },
   "env": {
     "RIPGREP_CONFIG_PATH": "dummy"
-  },
+  }
 }
