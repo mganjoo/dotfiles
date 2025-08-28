@@ -1,19 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {},
   "hooks": {
     "Notification": [
       {
-        "matcher": "",
         "hooks": [
           {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'Claude Code is awaiting your input' -activate 'com.mitchellh.ghostty'"
+            "command": "terminal-notifier -title 'Claude Code' -message 'Claude Code is awaiting your input' -activate 'com.mitchellh.ghostty'",
+            "type": "command"
           }
-        ]
+        ],
+        "matcher": ""
       }
     ]
   },
-  "env": {
-    "RIPGREP_CONFIG_PATH": "dummy"
+  "includeCoAuthoredBy": false,
+  "model": "opusplan",
+  "permissions": {
+    "allow": [],
+    "deny": []
+  },
+  "statusLine": {
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0,
+    "type": "command"
   }
 }

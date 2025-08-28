@@ -28,3 +28,8 @@ fi
 if (( $+commands[fd] )); then
   eval "$(fd --gen-completions zsh)"
 fi
+
+# jujutsu vcs
+if (( $+commands[jj] )); then
+  source <(jj util completion zsh)
+fi
