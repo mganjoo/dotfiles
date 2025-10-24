@@ -80,4 +80,6 @@ DerivedData
 # VS Code
 .metals/
 
+# Coding
 .claude-trace/
+.beads/
