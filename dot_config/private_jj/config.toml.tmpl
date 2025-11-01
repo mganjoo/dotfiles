@@ -19,6 +19,7 @@ diff-args = ["--color=always", "$left", "$right"]
 
 [revset-aliases]
 "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
+"local_root()" = "roots(trunk()..(visible_heads() & mine()))"
 
 [templates]
 git_push_bookmark = '"{{ .chezmoi.username }}/push-" ++ change_id.short()'
