@@ -11,7 +11,10 @@ diff-formatter = "difft"
 
 [aliases]
 nt = ["new", "trunk()"]
-retrunk = ["rebase", "-d", "trunk()"]
+# rt = "retrunk". Rebase onto trunk (can specify source with -s)
+rt = ["rebase", "-d", "trunk()"]
+# rta = "retrunk all". Rebase all local branch roots onto latest trunk
+rta = ["retrunk", "-s", "local_roots()"]
 
 [merge-tools.difft]
 program = "difft"
