@@ -15,6 +15,8 @@ nt = ["new", "trunk()"]
 rt = ["rebase", "-d", "trunk()"]
 # rta = "retrunk all". Rebase all local branch roots onto latest trunk
 rta = ["rebase", "-d", "trunk()", "-s", "local_roots()"]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
+tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 
 [merge-tools.difft]
 program = "difft"
@@ -24,7 +26,7 @@ diff-args = ["--color=always", "$left", "$right"]
 # Redefine immutable_heads() to prevent rewriting others' commits
 "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
 # All local branch roots that are not in main(). Rebase these all together
-"local_roots()" = "roots(trunk()..(visible_heads() & mine()))"
+"local_roots()" = "roots(trunk()..(visible_heads() & mine() & ~immutable_heads()))"
 
 [templates]
 git_push_bookmark = '"{{ .chezmoi.username }}/push-" ++ change_id.short()'
