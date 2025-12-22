@@ -14,7 +14,7 @@ nt = ["new", "trunk()"]
 # rt = "retrunk". Rebase onto trunk (can specify source with -s)
 rt = ["rebase", "-d", "trunk()"]
 # rta = "retrunk all". Rebase all local branch roots onto latest trunk
-rta = ["rebase", "-d", "trunk()", "-s", "local_roots()"]
+rta = ["rebase", "-d", "trunk()", "-s", "local_roots"]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@"]
 tug- = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 
@@ -26,7 +26,9 @@ diff-args = ["--color=always", "$left", "$right"]
 # Redefine immutable_heads() to prevent rewriting others' commits
 "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
 # All local branch roots that are not in main(). Rebase these all together
-"local_roots()" = "roots(trunk()..(visible_heads() & mine() & ~immutable_heads()))"
+"local_roots" = "roots(trunk()..(visible_heads() & mine() & ~immutable_heads()))"
+# Root commits of all changes between trunk and the current commit
+"stack_roots" = "roots(trunk()..@)"
 
 [templates]
 git_push_bookmark = '"{{ .chezmoi.username }}/push-" ++ change_id.short()'
