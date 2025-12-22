@@ -1,28 +1,34 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {},
-  "hooks": {
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "command": "terminal-notifier -title 'Claude Code' -message 'Claude Code is awaiting your input' -activate 'com.mitchellh.ghostty'",
-            "type": "command"
-          }
-        ],
-        "matcher": ""
-      }
-    ]
-  },
   "includeCoAuthoredBy": false,
-  "model": "opusplan",
   "permissions": {
     "allow": [],
     "deny": []
   },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message 'Claude Code is awaiting your input' -activate 'com.mitchellh.ghostty'"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
+    "type": "command",
     "command": "npx -y ccstatusline@latest",
-    "padding": 0,
-    "type": "command"
-  }
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-code-plugins": true,
+    "feature-dev@claude-plugins-official": true,
+    "ralph-wiggum@claude-plugins-official": true,
+    "linear@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true
 }
