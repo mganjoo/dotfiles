@@ -29,6 +29,8 @@ diff-args = ["--color=always", "$left", "$right"]
 "local_roots" = "roots(trunk()..(visible_heads() & mine() & ~immutable_heads()))"
 # Root commits of all changes between trunk and the current commit
 "stack_roots" = "roots(trunk()..@)"
+# Local auto bookmarks associated with commits that are descended from trunk() (can be pushed together)
+"local_auto_bookmarks" = "trunk().. & bookmarks(glob:'{{ .chezmoi.username }}/push-*') & mine()"
 
 [templates]
 git_push_bookmark = '"{{ .chezmoi.username }}/push-" ++ change_id.short()'
