@@ -46,6 +46,7 @@ brew 'gum'                # Better shell script inputs and TUI
 brew 'hyperfine'          # Better benchmarking
 brew 'terminal-notifier'  # Send macOS notifications from the terminal
 brew 'llm'                # Interacting with LLMs on the command line
+brew 'pdfgrep'            # Searching in PDFs
 
 # Misc
 brew 'gmailctl' # Gmail filter management
