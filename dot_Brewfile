@@ -47,6 +47,8 @@ brew 'hyperfine'          # Better benchmarking
 brew 'terminal-notifier'  # Send macOS notifications from the terminal
 brew 'llm'                # Interacting with LLMs on the command line
 brew 'pdfgrep'            # Searching in PDFs
+tap 'steipete/tap'
+brew 'steipete/tap/oracle'
 
 # Misc
 brew 'gmailctl' # Gmail filter management
