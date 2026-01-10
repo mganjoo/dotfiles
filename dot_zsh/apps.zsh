@@ -29,6 +29,9 @@ if (( $+commands[fd] )); then
   eval "$(fd --gen-completions zsh)"
 fi
 
+# ripgrep
+RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
 # jujutsu vcs
 if (( $+commands[jj] )); then
   source <(jj util completion zsh)
