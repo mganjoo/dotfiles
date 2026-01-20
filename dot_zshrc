@@ -4,6 +4,7 @@ zsh_modules=(
   settings
   aliases
   git
+  jj
   litra
   secrets
   custom-functions
