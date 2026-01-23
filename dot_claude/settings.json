@@ -7,6 +7,17 @@
     "deny": []
   },
   "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/hooks/extract-memories.mjs",
+            "timeout": 120000
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "matcher": "",
@@ -25,10 +36,12 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "frontend-design@claude-code-plugins": true,
     "feature-dev@claude-plugins-official": true,
-    "ralph-wiggum@claude-plugins-official": true,
-    "linear@claude-plugins-official": true
+    "linear@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "stable",
+  "minimumVersion": "2.1.3"
 }
