@@ -25,7 +25,12 @@ function debug(msg, data = null) {
 }
 
 // Configuration
-const MEMORY_FILENAME = "AGENTS.override.md";
+const MEMORY_FILES = [
+  "AGENTS.override.md",
+  "CLAUDE.local.md",
+  "AGENTS.md",
+  "CLAUDE.md",
+];
 const MODEL = "claude-opus-4-5-20251101";
 const MAX_TRANSCRIPT_CHARS = 100000; // Limit transcript size to control costs
 const MIN_TRANSCRIPT_CHARS = 500; // Skip very short conversations
@@ -58,9 +63,6 @@ async function main() {
       process.exit(0);
     }
 
-    // Find the memory file in the project root
-    const memoryFile = join(cwd, MEMORY_FILENAME);
-
     // Read and parse transcript (JSONL format)
     const transcriptContent = readFileSync(transcript_path, "utf-8");
     const messages = transcriptContent
@@ -92,10 +94,20 @@ async function main() {
     }
     debug("Formatted transcript", { length: formattedTranscript.length });
 
-    // Read current memory file (if it exists)
-    const currentMemories = existsSync(memoryFile)
-      ? readFileSync(memoryFile, "utf-8")
-      : "";
+    // Read all available memory files and combine them
+    const currentMemories = MEMORY_FILES.map((filename) => {
+      const filePath = join(cwd, filename);
+      if (existsSync(filePath)) {
+        const content = readFileSync(filePath, "utf-8");
+        return `## ${filename}\n${content}`;
+      }
+      return null;
+    })
+      .filter(Boolean)
+      .join("\n\n---\n\n");
+    debug("Loaded memory files", {
+      files: MEMORY_FILES.filter((f) => existsSync(join(cwd, f))),
+    });
 
     // Analyze with Opus
     debug("Calling Anthropic API");
@@ -109,16 +121,17 @@ async function main() {
     });
 
     if (suggestions && suggestions.trim()) {
-      debug("Outputting suggestions");
-      // Output suggestion to user via hook output
-      console.log(
-        JSON.stringify({
-          systemMessage: `\n📝 **Memory Suggestions** (from transcript analysis):\n\n${suggestions}\n\nTo add these to ${MEMORY_FILENAME}, say "update my memories" or manually add them.`,
-        }),
-      );
+      debug("Outputting suggestions via exit code 2");
+      // Use exit code 2 to block stoppage and show message to Claude
+      // This ensures Claude sees the suggestions and can act on them
+      const preferredFile =
+        MEMORY_FILES.find((f) => existsSync(join(cwd, f))) || MEMORY_FILES[0];
+      const message = `**Memory Suggestions** (from transcript analysis):\n\n${suggestions}\n\n---\n\nAsk if this memory should be added to the agent memory file, preferring ${preferredFile}.`;
+      console.error(message);
+      process.exit(2);
     }
 
-    debug("Hook completed");
+    debug("Hook completed - no suggestions");
     process.exit(0);
   } catch (error) {
     debug("ERROR", { message: error.message });
@@ -195,13 +208,13 @@ Your task: Extract actionable, reusable knowledge that would help in future codi
 - Verbose explanations - be concise
 - Anything that was just a quick question/answer without lasting value
 
-## Current ${MEMORY_FILENAME} contents:
-${currentMemories || "(empty)"}
+## Current memory file contents (combined from available files):
+${currentMemories || "(no memory files found)"}
 
 CRITICAL: Before suggesting any memory, check if it duplicates or overlaps with existing content above. Only suggest genuinely NEW insights not already captured.
 
 ## Output format:
-If there are memories worth adding, output ONLY the markdown content ready to append to ${MEMORY_FILENAME}.
+If there are memories worth adding, output ONLY the markdown content ready to append to the agent memory file.
 Use appropriate headers (## or ###) that fit the existing structure.
 Do NOT include any explanation or preamble - just the raw markdown to append.
 If nothing is worth remembering, output ONLY the word: NO_MEMORIES
