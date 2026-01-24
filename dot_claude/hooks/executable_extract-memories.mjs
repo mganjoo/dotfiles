@@ -31,7 +31,7 @@ const MEMORY_FILES = [
   "AGENTS.md",
   "CLAUDE.md",
 ];
-const MODEL = "claude-opus-4-5-20251101";
+const MODEL = "claude-opus-4-5";
 const MAX_TRANSCRIPT_CHARS = 100000; // Limit transcript size to control costs
 const MIN_TRANSCRIPT_CHARS = 500; // Skip very short conversations
 
