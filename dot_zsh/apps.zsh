@@ -30,7 +30,7 @@ if (( $+commands[fd] )); then
 fi
 
 # ripgrep
-RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # jujutsu vcs
 if (( $+commands[jj] )); then
