@@ -36,3 +36,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 if (( $+commands[jj] )); then
   source <(jj util completion zsh)
 fi
+
+# claude code
+# Load CLAUDE.md from additional directories when using --add-dir
+CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1
