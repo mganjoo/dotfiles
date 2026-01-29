@@ -7,17 +7,6 @@
     "deny": []
   },
   "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ~/.claude/hooks/extract-memories.mjs",
-            "timeout": 120000
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "",
@@ -25,6 +14,39 @@
           {
             "type": "command",
             "command": "terminal-notifier -title 'Claude Code' -message 'Claude Code is awaiting your input' -activate 'com.mitchellh.ghostty'"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/hooks/extract-memories.mjs",
+            "timeout": 120000
           }
         ]
       }
@@ -37,9 +59,10 @@
   },
   "enabledPlugins": {
     "feature-dev@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
     "linear@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true
+    "playwright@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "autoUpdatesChannel": "stable",

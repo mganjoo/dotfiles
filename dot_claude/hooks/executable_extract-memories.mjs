@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * Claude Code Stop hook that analyzes transcripts for memory-worthy content.
+ * Uses Opus for analysis.
  * Runs after each Claude response and suggests additions to AGENTS.override.md
  *
  * Usage: Configured as a Stop hook in ~/.claude/settings.json
@@ -207,6 +208,7 @@ Your task: Extract actionable, reusable knowledge that would help in future codi
 - Obvious facts about well-known libraries
 - Verbose explanations - be concise
 - Anything that was just a quick question/answer without lasting value
+- Anything that is substantially similar to memory suggestions that were previously rejected by the user in the same session
 
 ## Current memory file contents (combined from available files):
 ${currentMemories || "(no memory files found)"}
