@@ -38,6 +38,11 @@ const MIN_TRANSCRIPT_CHARS = 500; // Skip very short conversations
 
 async function main() {
   try {
+    // Skip if disabled (e.g., project has its own hook)
+    if (process.env.DISABLE_MEMORY_HOOK === "1") {
+      process.exit(0);
+    }
+
     // Read hook input from stdin
     const input = readFileSync(0, "utf-8");
     const hookData = JSON.parse(input);

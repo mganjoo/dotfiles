@@ -83,3 +83,4 @@ DerivedData
 # Coding
 .claude-trace/
 .beads/
+.playwright-mcp/
