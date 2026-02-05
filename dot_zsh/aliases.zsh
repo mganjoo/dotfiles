@@ -55,3 +55,9 @@ alias pcra="pchezmoi re-add"
 # tmux
 alias ta="tmux attach"
 alias tt="tmux new-session -A -s ${USER}"
+
+# Directories
+function in_dir {
+  pushd "$1" > /dev/null && eval "${@:2}" && popd > /dev/null
+}
+alias in_home="in_dir ${HOME}"
