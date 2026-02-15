@@ -65,6 +65,5 @@
     "playwright@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "autoUpdatesChannel": "stable",
-  "minimumVersion": "2.1.3"
+  "autoUpdatesChannel": "latest"
 }
