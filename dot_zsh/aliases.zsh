@@ -2,8 +2,10 @@
 # General aliases
 
 # Processes
-alias psg="procs | rg "
-alias psf="procs | fzf -m"
+if (( $+commands[procs] )); then
+  alias psg="procs | rg "
+  alias psf="procs | fzf -m"
+fi
 
 # Moving around
 alias ..='cd ..'
@@ -17,11 +19,13 @@ alias :q='exit'
 alias df='df -h'
 alias du='du -h -d 2'
 
-# Modern ls
-alias ls="eza --icons=always"
-alias ll="eza -l --icons=always --git"
-alias la="eza -la --icons=always --git"
-alias tree="eza --tree"
+# Modern ls (only when eza is installed; on Linux without it, plain ls stays)
+if (( $+commands[eza] )); then
+  alias ls="eza --icons=always"
+  alias ll="eza -l --icons=always --git"
+  alias la="eza -la --icons=always --git"
+  alias tree="eza --tree"
+fi
 
 # Modern cat and grep
 alias cat="bat --paging=never"
