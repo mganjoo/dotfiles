@@ -4,6 +4,9 @@
 name = "{{ .name }}"
 email = "{{ .email }}"
 
+[git]
+fetch-tags = "none"
+
 [ui]
 conflict-marker-style = "git"
 default-command = "log"
@@ -24,6 +27,7 @@ program = "difft"
 diff-args = ["--color=always", "$left", "$right"]
 
 [revset-aliases]
+'trunk()' = 'main@origin'
 # Redefine immutable_heads() to prevent rewriting others' commits
 "immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
 # All local branch roots that are not in main(). Rebase these all together
