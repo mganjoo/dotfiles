@@ -18,6 +18,13 @@ refreshPeriod = "168h"
 type = "git-repo"
 url = "https://github.com/tmux-plugins/tpm"
 refreshPeriod = "168h"
+# Manually install catppuccin because of name conflict issues with tpm
+[".tmux/catppuccin"]
+type = "git-repo"
+url = "https://github.com/catppuccin/tmux.git"
+refreshPeriod = "168h"
+
+{{ if eq .chezmoi.os "darwin" -}}
 [".hammerspoon/Spoons/SpoonInstall.spoon"]
 type = "archive"
 url = "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/SpoonInstall.spoon.zip"
@@ -28,8 +35,4 @@ refreshPeriod = "168h"
 type = "git-repo"
 url = "https://github.com/dbalatero/VimMode.spoon.git"
 refreshPeriod = "168h"
-# Manually install catppuccin because of name conflict issues with tpm
-[".tmux/catppuccin"]
-type = "git-repo"
-url = "https://github.com/catppuccin/tmux.git"
-refreshPeriod = "168h"
+{{- end }}

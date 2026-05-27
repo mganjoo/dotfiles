@@ -1,6 +1,11 @@
 # vim: set ft=conf
 
 shell-integration = zsh
+{{- if eq .chezmoi.os "linux" }}
+# Snap-confined ghostty doesn't load NSS modules so it can't see the sssd
+# loginShell override on AD-joined hosts; pin the shell explicitly.
+command = /usr/bin/zsh
+{{- end }}
 
 theme = "light:catppuccin-latte.conf,dark:catppuccin-mocha.conf"
 
@@ -8,7 +13,9 @@ font-size = 14
 font-family = "VictorMono NFM"
 # The script-style italic font looks off when combined with bold
 font-family-bold-italic = "VictorMono NFM Bold Oblique"
+{{- if eq .chezmoi.os "darwin" }}
 macos-titlebar-style = "tabs"
+{{- end }}
 
 ################
 # Key bindings #
@@ -22,7 +29,7 @@ keybind = ctrl+[=text:\x1b
 keybind = ctrl+g>v=new_split:right
 keybind = ctrl+g>ctrl+v=new_split:right
 
-# Split window horizontally (like tmux prefix+s) 
+# Split window horizontally (like tmux prefix+s)
 keybind = ctrl+g>s=new_split:down
 keybind = ctrl+g>ctrl+s=new_split:down
 

@@ -1,3 +1,4 @@
+{{- /* chezmoi:template:left-delimiter=[[ right-delimiter=]] */ -}}
 # == General configuration == {{{1
 
 # Use screen key combination
@@ -90,9 +91,16 @@ bind-key r source-file ~/.tmux.conf \; display "Reloaded tmux configuration."
 
 # Simulate "visual" and "yank" key bindings
 bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+[[- if eq .chezmoi.os "darwin" ]]
 bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'pbcopy'
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'pbcopy'
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'pbcopy'
+[[- else if eq .chezmoi.os "linux" ]]
+# X11 clipboard (WorkSpaces session is X11). Swap to wl-copy on Wayland.
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard'
+[[- end ]]
 
 # == Appearance == {{{1
 

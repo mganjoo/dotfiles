@@ -103,7 +103,14 @@ zle -N glob-alias
 
 function pb-yank-whole-line() {
   zle vi-yank-whole-line
-  print -rn $CUTBUFFER | pbcopy
+  # Cross-platform clipboard: macOS pbcopy, Wayland wl-copy, X11 xclip.
+  if (( $+commands[pbcopy] )); then
+    print -rn $CUTBUFFER | pbcopy
+  elif [[ -n "$WAYLAND_DISPLAY" ]] && (( $+commands[wl-copy] )); then
+    print -rn $CUTBUFFER | wl-copy
+  elif (( $+commands[xclip] )); then
+    print -rn $CUTBUFFER | xclip -selection clipboard
+  fi
 }
 zle -N pb-yank-whole-line
 

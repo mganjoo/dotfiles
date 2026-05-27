@@ -86,12 +86,16 @@
 [user]
   name = {{ .name }}
   email = {{ .email }}
-{{- if eq .chezmoi.os "darwin" }}
-# GPG signing (Mac only for now)
+{{- if .publicSigningKey }}
+# Commit signing via 1Password's SSH agent. Path to op-ssh-sign varies by OS.
 [gpg]
   format = ssh
 [gpg "ssh"]
+{{- if eq .chezmoi.os "darwin" }}
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{- else if eq .chezmoi.os "linux" }}
+  program = "/opt/1Password/op-ssh-sign"
+{{- end }}
   allowedSignersFile = "~/.ssh/allowed_signers"
 [commit]
   gpgsign = true

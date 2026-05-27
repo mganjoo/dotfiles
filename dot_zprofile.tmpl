@@ -5,10 +5,12 @@
 [ -d $HOME/.local/bin ] && path+=("$HOME/.local/bin")
 [ -d $HOME/bin ] && path+=("$HOME/bin")
 
+{{ if eq .chezmoi.os "darwin" -}}
 # Add homebrew Python to PATH if exists
 if [[ -d "/opt/homebrew/opt/python" ]]; then
   path+=("/opt/homebrew/opt/python/libexec/bin")
 fi
+{{- end }}
 
 # Editor and visual
 export EDITOR='nvim'

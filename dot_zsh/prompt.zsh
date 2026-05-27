@@ -1,3 +1,3 @@
-if [[ -f /opt/homebrew/bin/starship ]]; then
+if (( $+commands[starship] )); then
   eval "$(starship init zsh)"
 fi

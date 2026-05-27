@@ -1,1 +1,11 @@
 README.md
+bootstrap
+bootstrap/**
+
+{{ if ne .chezmoi.os "darwin" -}}
+.Brewfile
+.hammerspoon
+.hammerspoon/**
+bin/claude-theme
+bin/claude-theme-updater
+{{- end }}
